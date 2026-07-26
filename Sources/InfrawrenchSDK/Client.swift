@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.2.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.3.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.2.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.3.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -68,6 +68,8 @@ public final class APIV1Client: Sendable {
     public let search: SearchNamespace
     /// `client.sftp`
     public let sftp: SftpNamespace
+    /// `client.slack`
+    public let slack: SlackNamespace
     /// `client.sql`
     public let sql: SqlNamespace
     /// `client.sshKeys`
@@ -103,6 +105,7 @@ public final class APIV1Client: Sendable {
         self.resources = ResourcesNamespace(transport: transport)
         self.search = SearchNamespace(transport: transport)
         self.sftp = SftpNamespace(transport: transport)
+        self.slack = SlackNamespace(transport: transport)
         self.sql = SqlNamespace(transport: transport)
         self.sshKeys = SshKeysNamespace(transport: transport)
         self.sshTunnels = SshTunnelsNamespace(transport: transport)
