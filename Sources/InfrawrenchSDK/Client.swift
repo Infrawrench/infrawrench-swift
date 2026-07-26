@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.3.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.4.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.3.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.4.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -58,6 +58,8 @@ public final class APIV1Client: Sendable {
     public let invitations: InvitationsNamespace
     /// `client.kv`
     public let kv: KvNamespace
+    /// `client.msteams`
+    public let msteams: MsteamsNamespace
     /// `client.orgs`
     public let orgs: OrgsNamespace
     /// `client.profile`
@@ -100,6 +102,7 @@ public final class APIV1Client: Sendable {
         self.docker = DockerNamespace(transport: transport)
         self.invitations = InvitationsNamespace(transport: transport)
         self.kv = KvNamespace(transport: transport)
+        self.msteams = MsteamsNamespace(transport: transport)
         self.orgs = OrgsNamespace(transport: transport)
         self.profile = ProfileNamespace(transport: transport)
         self.resources = ResourcesNamespace(transport: transport)
