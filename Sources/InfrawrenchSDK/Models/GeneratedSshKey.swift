@@ -1,0 +1,40 @@
+/*
+ * InfrawrenchSDK v0.1.1 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * https://github.com/Infrawrench/Infrawrench
+ *
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.1.1).
+ *
+ * DO NOT EDIT. Regenerate with:
+ *   pnpm --filter @infrawrench/web generate:sdk
+ *
+ * Internal routes are absent by construction: the generator consumes the same
+ * published spec that /openapi.json serves, which drops every operation
+ * marked x-internal.
+ */
+import Foundation
+
+public struct GeneratedSshKey: Codable, Hashable, Sendable {
+    public var id: String
+    public var name: String
+    public var keyType: SshKeyType
+    public var fingerprint: String
+    public var publicKey: String
+    /// Returned once. Not persisted in plaintext.
+    public var privateKey: String
+
+    public init(
+        id: String,
+        name: String,
+        keyType: SshKeyType,
+        fingerprint: String,
+        publicKey: String,
+        privateKey: String
+    ) {
+        self.id = id
+        self.name = name
+        self.keyType = keyType
+        self.fingerprint = fingerprint
+        self.publicKey = publicKey
+        self.privateKey = privateKey
+    }
+}
