@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.7.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.8.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.7.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.8.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -141,6 +141,56 @@ public final class ProfileNamespace: Sendable {
         self.emailChange = ProfileEmailChangeNamespace(transport: transport)
         self.mfa = ProfileMfaNamespace(transport: transport)
         self.sessions = ProfileSessionsNamespace(transport: transport)
+    }
+
+    /// Delete the signed-in user's account
+    ///
+    /// Irreversible. Organizations where the caller is the only member are
+    /// deleted and their subscriptions cancelled; other memberships are simply
+    /// removed. Refuses with `transfer_ownership_required` while the caller is
+    /// the only owner of an organization other people belong to.
+    ///
+    /// DELETE /api/profile
+    ///
+    /// Raises on 401: Unauthenticated
+    ///
+    /// Raises on 403: Recent sign-in required. Send the user through sign-in
+    /// again and retry; the request itself was well-formed.
+    ///
+    /// Raises on 409: The caller still solely owns a shared organization; nothing
+    /// was deleted.
+    ///
+    /// Raises on 502: A subscription could not be cancelled; nothing was deleted.
+    public func delete(
+        options: RequestOptions? = nil
+    ) async throws -> AccountDeleted {
+        return try await transport.send(
+            RequestSpec(
+                method: "DELETE",
+                path: "/api/profile"
+            ),
+            options: options
+        )
+    }
+
+    /// What deleting this account would do
+    ///
+    /// Read-only. Lets a confirmation screen name the organizations that go with
+    /// the account, and the ones that must be handed over first.
+    ///
+    /// GET /api/profile/deletion-preview
+    ///
+    /// Raises on 401: Unauthenticated
+    public func deletionPreview(
+        options: RequestOptions? = nil
+    ) async throws -> AccountDeletionPreview {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/profile/deletion-preview"
+            ),
+            options: options
+        )
     }
 
     /// The signed-in user's account profile
