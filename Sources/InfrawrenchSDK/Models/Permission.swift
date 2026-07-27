@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.5.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.6.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.5.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.6.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -30,6 +30,7 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
     case dashboardsRead
     case dashboardsWrite
     case costsRead
+    case costsWrite
     case budgetsRead
     case budgetsWrite
     case auditRead
@@ -47,6 +48,7 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
     case bastionsWrite
     case chatRead
     case chatWrite
+    case pagesWrite
     case orgSettingsWrite
     /// A value the API added after this SDK was generated. Kept rather than
     /// rejected, so a new server-side value cannot break decoding.
@@ -68,6 +70,7 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case "dashboards:read": self = .dashboardsRead
         case "dashboards:write": self = .dashboardsWrite
         case "costs:read": self = .costsRead
+        case "costs:write": self = .costsWrite
         case "budgets:read": self = .budgetsRead
         case "budgets:write": self = .budgetsWrite
         case "audit:read": self = .auditRead
@@ -85,6 +88,7 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case "bastions:write": self = .bastionsWrite
         case "chat:read": self = .chatRead
         case "chat:write": self = .chatWrite
+        case "pages:write": self = .pagesWrite
         case "org:settings:write": self = .orgSettingsWrite
         default: self = .unrecognized(rawValue)
         }
@@ -106,6 +110,7 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case .dashboardsRead: return "dashboards:read"
         case .dashboardsWrite: return "dashboards:write"
         case .costsRead: return "costs:read"
+        case .costsWrite: return "costs:write"
         case .budgetsRead: return "budgets:read"
         case .budgetsWrite: return "budgets:write"
         case .auditRead: return "audit:read"
@@ -123,6 +128,7 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case .bastionsWrite: return "bastions:write"
         case .chatRead: return "chat:read"
         case .chatWrite: return "chat:write"
+        case .pagesWrite: return "pages:write"
         case .orgSettingsWrite: return "org:settings:write"
         case .unrecognized(let value): return value
         }
@@ -144,6 +150,7 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         .dashboardsRead,
         .dashboardsWrite,
         .costsRead,
+        .costsWrite,
         .budgetsRead,
         .budgetsWrite,
         .auditRead,
@@ -161,6 +168,7 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         .bastionsWrite,
         .chatRead,
         .chatWrite,
+        .pagesWrite,
         .orgSettingsWrite,
     ]
 

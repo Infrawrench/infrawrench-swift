@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.5.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.6.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.5.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.6.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -37,6 +37,8 @@ public final class CostsNamespace: Sendable {
     /// Feeds the filter and group-by pickers. Pass dimension=tag-keys for tag
     /// keys; dimension=tag requires tagKey.
     ///
+    /// _Requires permission: `costs:read`._
+    ///
     /// GET /api/org/{orgId}/costs/dimensions
     ///
     /// Raises on 400: Bad request
@@ -70,6 +72,8 @@ public final class CostsNamespace: Sendable {
     /// series per currency. Optionally returns a previous-period comparison and a
     /// trend forecast.
     ///
+    /// _Requires permission: `costs:read`._
+    ///
     /// POST /api/org/{orgId}/costs/query
     ///
     /// Raises on 400: Bad request
@@ -92,10 +96,52 @@ public final class CostsNamespace: Sendable {
         )
     }
 
+    /// Push cost rows from your own systems
+    ///
+    /// Reports spend Infrawrench has no provider plugin for — a parsed SaaS
+    /// invoice, an internal chargeback, a colo bill — into the same store the
+    /// provider collectors write to, so it appears in cost graphs, dimension
+    /// filters, and budgets alongside everything else.
+    ///
+    /// Rows are grouped under a caller-chosen `source`. Writes are idempotent per
+    /// `(source, day, service, region, resourceId, tags, currency)`: pushing the
+    /// same day again restates that day rather than adding to it, so a nightly
+    /// job can safely re-push a trailing window. Rows pushed under a source can
+    /// never overwrite rows a provider collector wrote.
+    ///
+    /// The whole batch is validated before anything is stored, so a 400 means
+    /// nothing was written.
+    ///
+    /// _Requires permission: `costs:write`._
+    ///
+    /// POST /api/org/{orgId}/costs/rows
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func rows(
+        orgId: String? = nil,
+        body: CostPushRequest,
+        options: RequestOptions? = nil
+    ) async throws -> CostPushResponse {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/costs/rows",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+
     /// Per-account cost collection status
     ///
     /// Which accounts support cost collection, whether their history backfill has
     /// completed, and the ingested date coverage.
+    ///
+    /// _Requires permission: `costs:read`._
     ///
     /// GET /api/org/{orgId}/costs/status
     ///

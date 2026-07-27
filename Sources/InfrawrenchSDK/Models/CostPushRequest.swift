@@ -1,0 +1,31 @@
+/*
+ * InfrawrenchSDK v0.6.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * https://github.com/Infrawrench/Infrawrench
+ *
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.6.0).
+ *
+ * DO NOT EDIT. Regenerate with:
+ *   pnpm --filter @infrawrench/web generate:sdk
+ *
+ * Internal routes are absent by construction: the generator consumes the same
+ * published spec that /openapi.json serves, which drops every operation
+ * marked x-internal.
+ */
+import Foundation
+
+public struct CostPushRequest: Codable, Hashable, Sendable {
+    /// Stable slug naming the system that owns these rows: letters, digits, `.`,
+    /// `_` and `-`. It groups the rows under an `External` provider and an
+    /// `external:<source>` account, and re-pushing the same source over the same
+    /// days restates only its own rows.
+    public var source: String
+    public var rows: [PushedCostRow]
+
+    public init(
+        source: String,
+        rows: [PushedCostRow]
+    ) {
+        self.source = source
+        self.rows = rows
+    }
+}
