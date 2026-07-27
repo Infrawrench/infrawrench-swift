@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.4.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.5.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.4.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.5.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -72,6 +72,22 @@ public struct BudgetWithStatus: Codable, Hashable, Sendable {
         }
     }
 
+    public struct Placement: Codable, Hashable, Sendable {
+        public var widgetId: String
+        public var dashboardId: String
+        public var dashboardName: String
+
+        public init(
+            widgetId: String,
+            dashboardId: String,
+            dashboardName: String
+        ) {
+            self.widgetId = widgetId
+            self.dashboardId = dashboardId
+            self.dashboardName = dashboardName
+        }
+    }
+
     public var id: String
     public var name: String
     public var amountCents: Int
@@ -82,6 +98,7 @@ public struct BudgetWithStatus: Codable, Hashable, Sendable {
     public var actualCents: Int
     public var forecastCents: Int?
     public var currentMonthEvents: [CurrentMonthEvent]
+    public var placements: [Placement]
 
     public init(
         id: String,
@@ -93,7 +110,8 @@ public struct BudgetWithStatus: Codable, Hashable, Sendable {
         month: String,
         actualCents: Int,
         forecastCents: Int? = nil,
-        currentMonthEvents: [CurrentMonthEvent]
+        currentMonthEvents: [CurrentMonthEvent],
+        placements: [Placement]
     ) {
         self.id = id
         self.name = name
@@ -105,5 +123,6 @@ public struct BudgetWithStatus: Codable, Hashable, Sendable {
         self.actualCents = actualCents
         self.forecastCents = forecastCents
         self.currentMonthEvents = currentMonthEvents
+        self.placements = placements
     }
 }
