@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.6.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.7.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.6.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.7.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -20,6 +20,7 @@ public struct ChildResourceRef: Codable, Hashable, Sendable {
     public var pluginId: String
     public var accountId: String
     public var status: StatusDot?
+    public var fields: JsonObject?
 
     public init(
         id: ResourceId,
@@ -27,7 +28,8 @@ public struct ChildResourceRef: Codable, Hashable, Sendable {
         resourceTypeId: String,
         pluginId: String,
         accountId: String,
-        status: StatusDot? = nil
+        status: StatusDot? = nil,
+        fields: JsonObject? = nil
     ) {
         self.id = id
         self.displayName = displayName
@@ -35,5 +37,6 @@ public struct ChildResourceRef: Codable, Hashable, Sendable {
         self.pluginId = pluginId
         self.accountId = accountId
         self.status = status
+        self.fields = fields
     }
 }

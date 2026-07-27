@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.6.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.7.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.6.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.7.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -33,14 +33,17 @@ public struct PickerResourcesRequest: Codable, Hashable, Sendable {
     public var sources: [Source]
     public var accountId: String
     public var regionHint: String?
+    public var crossAccount: Bool?
 
     public init(
         sources: [Source],
         accountId: String,
-        regionHint: String? = nil
+        regionHint: String? = nil,
+        crossAccount: Bool? = nil
     ) {
         self.sources = sources
         self.accountId = accountId
         self.regionHint = regionHint
+        self.crossAccount = crossAccount
     }
 }

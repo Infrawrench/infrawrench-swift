@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.6.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.7.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.6.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.7.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -14,17 +14,36 @@
 import Foundation
 
 public struct CredentialExport: Codable, Hashable, Sendable {
+    public struct Field: Codable, Hashable, Sendable {
+        public var label: String
+        public var value: String
+        public var sensitive: Bool?
+        public var hint: String?
+
+        public init(
+            label: String,
+            value: String,
+            sensitive: Bool? = nil,
+            hint: String? = nil
+        ) {
+            self.label = label
+            self.value = value
+            self.sensitive = sensitive
+            self.hint = hint
+        }
+    }
+
     public var content: String
     public var filename: String
     public var mimeType: String
-    public var fields: [String: String]?
+    public var fields: [Field]?
     public var warning: String?
 
     public init(
         content: String,
         filename: String,
         mimeType: String,
-        fields: [String: String]? = nil,
+        fields: [Field]? = nil,
         warning: String? = nil
     ) {
         self.content = content

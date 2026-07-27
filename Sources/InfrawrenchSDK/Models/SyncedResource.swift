@@ -13,26 +13,33 @@
  */
 import Foundation
 
-public struct Account: Codable, Hashable, Sendable {
-    public var id: String
+public struct SyncedResource: Codable, Hashable, Sendable {
+    public var id: ResourceId
     public var pluginId: String
+    public var resourceTypeId: String
     public var displayName: String
-    /// Bastion this account's cloud-API egress is routed through. `null` ⇒ direct
-    /// egress.
-    public var bastionId: String?
-    public var createdAt: String
+    public var externalId: String?
+    public var fieldsJson: JsonObject
+    public var outputsJson: JsonObject
+    public var parentResourceId: ResourceId?
 
     public init(
-        id: String,
+        id: ResourceId,
         pluginId: String,
+        resourceTypeId: String,
         displayName: String,
-        bastionId: String? = nil,
-        createdAt: String
+        externalId: String? = nil,
+        fieldsJson: JsonObject,
+        outputsJson: JsonObject,
+        parentResourceId: ResourceId? = nil
     ) {
         self.id = id
         self.pluginId = pluginId
+        self.resourceTypeId = resourceTypeId
         self.displayName = displayName
-        self.bastionId = bastionId
-        self.createdAt = createdAt
+        self.externalId = externalId
+        self.fieldsJson = fieldsJson
+        self.outputsJson = outputsJson
+        self.parentResourceId = parentResourceId
     }
 }

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.6.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.7.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.6.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.7.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -24,18 +24,18 @@ public struct SecretVersion: Codable, Hashable, Sendable {
 
         public init(rawValue: String) {
             switch rawValue {
-            case "ENABLED": self = .enabled
-            case "DISABLED": self = .disabled
-            case "DESTROYED": self = .destroyed
+            case "enabled": self = .enabled
+            case "disabled": self = .disabled
+            case "destroyed": self = .destroyed
             default: self = .unrecognized(rawValue)
             }
         }
 
         public var rawValue: String {
             switch self {
-            case .enabled: return "ENABLED"
-            case .disabled: return "DISABLED"
-            case .destroyed: return "DESTROYED"
+            case .enabled: return "enabled"
+            case .disabled: return "disabled"
+            case .destroyed: return "destroyed"
             case .unrecognized(let value): return value
             }
         }
@@ -59,15 +59,23 @@ public struct SecretVersion: Codable, Hashable, Sendable {
 
     public var id: String
     public var state: State
+    /// ISO-8601.
     public var createdAt: String
+    /// Set only when destroyed.
+    public var destroyedAt: String?
+    public var isLatest: Bool?
 
     public init(
         id: String,
         state: State,
-        createdAt: String
+        createdAt: String,
+        destroyedAt: String? = nil,
+        isLatest: Bool? = nil
     ) {
         self.id = id
         self.state = state
         self.createdAt = createdAt
+        self.destroyedAt = destroyedAt
+        self.isLatest = isLatest
     }
 }

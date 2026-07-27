@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.6.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.7.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.6.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.7.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -18,16 +18,19 @@ public struct ChildTypeRef: Codable, Hashable, Sendable {
     public var displayName: String
     public var pluralDisplayName: String?
     public var supportsCreate: Bool
+    public var fields: [JsonObject]?
 
     public init(
         id: String,
         displayName: String,
         pluralDisplayName: String? = nil,
-        supportsCreate: Bool
+        supportsCreate: Bool,
+        fields: [JsonObject]? = nil
     ) {
         self.id = id
         self.displayName = displayName
         self.pluralDisplayName = pluralDisplayName
         self.supportsCreate = supportsCreate
+        self.fields = fields
     }
 }

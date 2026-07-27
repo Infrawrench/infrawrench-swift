@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.6.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.7.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.6.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.7.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -14,17 +14,20 @@
 import Foundation
 
 public struct LogsResponse: Codable, Hashable, Sendable {
-    public var lines: [String]
-    public var nextPageToken: String?
-    public var truncated: Bool?
+    /// Raw log text; each entry keeps its trailing newline.
+    public var text: String
+    /// Container names available for this resource — drives the container picker.
+    public var containers: [String]
+    /// Container `text` was read from.
+    public var activeContainer: String
 
     public init(
-        lines: [String],
-        nextPageToken: String? = nil,
-        truncated: Bool? = nil
+        text: String,
+        containers: [String],
+        activeContainer: String
     ) {
-        self.lines = lines
-        self.nextPageToken = nextPageToken
-        self.truncated = truncated
+        self.text = text
+        self.containers = containers
+        self.activeContainer = activeContainer
     }
 }

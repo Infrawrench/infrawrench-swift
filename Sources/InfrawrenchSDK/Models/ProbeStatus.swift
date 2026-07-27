@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.6.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.7.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.6.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.7.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -16,7 +16,6 @@ import Foundation
 public struct ProbeStatus: Codable, Hashable, Sendable {
     public enum Phase: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
         case ok
-        case loading
         case error
         /// A value the API added after this SDK was generated. Kept rather than
         /// rejected, so a new server-side value cannot break decoding.
@@ -25,7 +24,6 @@ public struct ProbeStatus: Codable, Hashable, Sendable {
         public init(rawValue: String) {
             switch rawValue {
             case "ok": self = .ok
-            case "loading": self = .loading
             case "error": self = .error
             default: self = .unrecognized(rawValue)
             }
@@ -34,7 +32,6 @@ public struct ProbeStatus: Codable, Hashable, Sendable {
         public var rawValue: String {
             switch self {
             case .ok: return "ok"
-            case .loading: return "loading"
             case .error: return "error"
             case .unrecognized(let value): return value
             }
@@ -43,7 +40,6 @@ public struct ProbeStatus: Codable, Hashable, Sendable {
         /// Every value the spec declares. `unrecognized` is deliberately absent.
         public static let allKnownCases: [Phase] = [
             .ok,
-            .loading,
             .error,
         ]
 
@@ -58,27 +54,28 @@ public struct ProbeStatus: Codable, Hashable, Sendable {
     }
 
     public struct Sparkline: Codable, Hashable, Sendable {
-        public var ts: Double
+        /// Unix epoch milliseconds.
+        public var timestamp: Double
         public var value: Double
 
         public init(
-            ts: Double,
+            timestamp: Double,
             value: Double
         ) {
-            self.ts = ts
+            self.timestamp = timestamp
             self.value = value
         }
     }
 
     public struct ResourceCount: Codable, Hashable, Sendable {
-        public var typeId: String
+        public var typeLabel: String
         public var count: Int
 
         public init(
-            typeId: String,
+            typeLabel: String,
             count: Int
         ) {
-            self.typeId = typeId
+            self.typeLabel = typeLabel
             self.count = count
         }
     }

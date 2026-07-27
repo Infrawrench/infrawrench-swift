@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.6.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.7.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.6.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.7.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -16,11 +16,11 @@ import Foundation
 /// Normalized status reported by a plugin's renderSidebarItem/renderDetail.
 public enum ResourceStatus: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
     case healthy
-    case warning
+    case degraded
     case error
     case unknown
-    case pending
-    case stopped
+    case provisioning
+    case info
     /// A value the API added after this SDK was generated. Kept rather than
     /// rejected, so a new server-side value cannot break decoding.
     case unrecognized(String)
@@ -28,11 +28,11 @@ public enum ResourceStatus: RawRepresentable, Codable, Hashable, Sendable, Param
     public init(rawValue: String) {
         switch rawValue {
         case "healthy": self = .healthy
-        case "warning": self = .warning
+        case "degraded": self = .degraded
         case "error": self = .error
         case "unknown": self = .unknown
-        case "pending": self = .pending
-        case "stopped": self = .stopped
+        case "provisioning": self = .provisioning
+        case "info": self = .info
         default: self = .unrecognized(rawValue)
         }
     }
@@ -40,11 +40,11 @@ public enum ResourceStatus: RawRepresentable, Codable, Hashable, Sendable, Param
     public var rawValue: String {
         switch self {
         case .healthy: return "healthy"
-        case .warning: return "warning"
+        case .degraded: return "degraded"
         case .error: return "error"
         case .unknown: return "unknown"
-        case .pending: return "pending"
-        case .stopped: return "stopped"
+        case .provisioning: return "provisioning"
+        case .info: return "info"
         case .unrecognized(let value): return value
         }
     }
@@ -52,11 +52,11 @@ public enum ResourceStatus: RawRepresentable, Codable, Hashable, Sendable, Param
     /// Every value the spec declares. `unrecognized` is deliberately absent.
     public static let allKnownCases: [ResourceStatus] = [
         .healthy,
-        .warning,
+        .degraded,
         .error,
         .unknown,
-        .pending,
-        .stopped,
+        .provisioning,
+        .info,
     ]
 
     public init(from decoder: any Decoder) throws {

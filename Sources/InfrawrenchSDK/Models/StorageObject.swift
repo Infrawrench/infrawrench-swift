@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.6.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.7.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.6.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.7.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -14,20 +14,28 @@
 import Foundation
 
 public struct StorageObject: Codable, Hashable, Sendable {
+    /// Full path within the bucket.
     public var key: String
-    public var size: Int?
-    public var isFolder: Bool?
-    public var lastModified: String?
+    /// Last path segment — what the browser renders.
+    public var name: String
+    public var size: Double
+    public var lastModified: String
+    public var isDirectory: Bool
+    public var contentType: String?
 
     public init(
         key: String,
-        size: Int? = nil,
-        isFolder: Bool? = nil,
-        lastModified: String? = nil
+        name: String,
+        size: Double,
+        lastModified: String,
+        isDirectory: Bool,
+        contentType: String? = nil
     ) {
         self.key = key
+        self.name = name
         self.size = size
-        self.isFolder = isFolder
         self.lastModified = lastModified
+        self.isDirectory = isDirectory
+        self.contentType = contentType
     }
 }

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.6.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.7.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.6.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.7.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -14,20 +14,27 @@
 import Foundation
 
 public struct SftpEntry: Codable, Hashable, Sendable {
+    /// Absolute remote path.
+    public var key: String
     public var name: String
-    public var isDir: Bool
-    public var size: Int?
-    public var modifiedAt: String?
+    public var size: Double
+    public var lastModified: String
+    public var isDirectory: Bool
+    public var contentType: String?
 
     public init(
+        key: String,
         name: String,
-        isDir: Bool,
-        size: Int? = nil,
-        modifiedAt: String? = nil
+        size: Double,
+        lastModified: String,
+        isDirectory: Bool,
+        contentType: String? = nil
     ) {
+        self.key = key
         self.name = name
-        self.isDir = isDir
         self.size = size
-        self.modifiedAt = modifiedAt
+        self.lastModified = lastModified
+        self.isDirectory = isDirectory
+        self.contentType = contentType
     }
 }
