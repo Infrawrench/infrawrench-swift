@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.11.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.12.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.11.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.12.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -17,14 +17,19 @@ public struct InviteRequest: Codable, Hashable, Sendable {
     public var email: String
     public var role: OrganizationRole?
     public var roleId: String?
+    /// When the paid plan is full (409 seat_limit_reached), retry with this set
+    /// to buy one more seat and send the invitation. Requires billing:write.
+    public var addSeat: Bool?
 
     public init(
         email: String,
         role: OrganizationRole? = nil,
-        roleId: String? = nil
+        roleId: String? = nil,
+        addSeat: Bool? = nil
     ) {
         self.email = email
         self.role = role
         self.roleId = roleId
+        self.addSeat = addSeat
     }
 }

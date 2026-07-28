@@ -13,38 +13,30 @@
  */
 import Foundation
 
-public struct AuthFactor: Codable, Hashable, Sendable {
-    public enum Type2: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
-        case totp
-        case sms
-        case genericOtp
+public struct SeatLimitResponse: Codable, Hashable, Sendable {
+    public enum Code: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
+        case seatLimitReached
         /// A value the API added after this SDK was generated. Kept rather than
         /// rejected, so a new server-side value cannot break decoding.
         case unrecognized(String)
 
         public init(rawValue: String) {
             switch rawValue {
-            case "totp": self = .totp
-            case "sms": self = .sms
-            case "generic_otp": self = .genericOtp
+            case "seat_limit_reached": self = .seatLimitReached
             default: self = .unrecognized(rawValue)
             }
         }
 
         public var rawValue: String {
             switch self {
-            case .totp: return "totp"
-            case .sms: return "sms"
-            case .genericOtp: return "generic_otp"
+            case .seatLimitReached: return "seat_limit_reached"
             case .unrecognized(let value): return value
             }
         }
 
         /// Every value the spec declares. `unrecognized` is deliberately absent.
-        public static let allKnownCases: [Type2] = [
-            .totp,
-            .sms,
-            .genericOtp,
+        public static let allKnownCases: [Code] = [
+            .seatLimitReached,
         ]
 
         public init(from decoder: any Decoder) throws {
@@ -57,26 +49,22 @@ public struct AuthFactor: Codable, Hashable, Sendable {
         }
     }
 
-    public var id: String
-    public var type: Type2
-    public var createdAt: String
-    public var updatedAt: String
-    public var totpIssuer: String?
-    public var totpUser: String?
+    public var error: String
+    public var code: Code
+    /// Seats on the plan
+    public var seatCount: Int
+    /// Members plus pending unexpired invitations
+    public var seatsUsed: Int
 
     public init(
-        id: String,
-        type: Type2,
-        createdAt: String,
-        updatedAt: String,
-        totpIssuer: String? = nil,
-        totpUser: String? = nil
+        error: String,
+        code: Code,
+        seatCount: Int,
+        seatsUsed: Int
     ) {
-        self.id = id
-        self.type = type
-        self.createdAt = createdAt
-        self.updatedAt = updatedAt
-        self.totpIssuer = totpIssuer
-        self.totpUser = totpUser
+        self.error = error
+        self.code = code
+        self.seatCount = seatCount
+        self.seatsUsed = seatsUsed
     }
 }
