@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.9.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.11.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.9.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.11.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -29,6 +29,9 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
     case storageWrite
     case dashboardsRead
     case dashboardsWrite
+    case deploymentsRead
+    case deploymentsPlan
+    case deploymentsWrite
     case costsRead
     case costsWrite
     case budgetsRead
@@ -69,6 +72,9 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case "storage:write": self = .storageWrite
         case "dashboards:read": self = .dashboardsRead
         case "dashboards:write": self = .dashboardsWrite
+        case "deployments:read": self = .deploymentsRead
+        case "deployments:plan": self = .deploymentsPlan
+        case "deployments:write": self = .deploymentsWrite
         case "costs:read": self = .costsRead
         case "costs:write": self = .costsWrite
         case "budgets:read": self = .budgetsRead
@@ -109,6 +115,9 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case .storageWrite: return "storage:write"
         case .dashboardsRead: return "dashboards:read"
         case .dashboardsWrite: return "dashboards:write"
+        case .deploymentsRead: return "deployments:read"
+        case .deploymentsPlan: return "deployments:plan"
+        case .deploymentsWrite: return "deployments:write"
         case .costsRead: return "costs:read"
         case .costsWrite: return "costs:write"
         case .budgetsRead: return "budgets:read"
@@ -149,6 +158,9 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         .storageWrite,
         .dashboardsRead,
         .dashboardsWrite,
+        .deploymentsRead,
+        .deploymentsPlan,
+        .deploymentsWrite,
         .costsRead,
         .costsWrite,
         .budgetsRead,
