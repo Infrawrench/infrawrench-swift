@@ -13,18 +13,12 @@
  */
 import Foundation
 
-public struct OrgMembership: Codable, Hashable, Sendable {
-    public var id: String
-    public var displayName: String
-    public var role: OrganizationRole
+public struct DeployRollbackInput: Codable, Hashable, Sendable {
+    public var deleteCreated: Bool?
 
     public init(
-        id: String,
-        displayName: String,
-        role: OrganizationRole
+        deleteCreated: Bool? = nil
     ) {
-        self.id = id
-        self.displayName = displayName
-        self.role = role
+        self.deleteCreated = deleteCreated
     }
 }

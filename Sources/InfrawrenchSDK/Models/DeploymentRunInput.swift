@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.14.1 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.15.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.14.1).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.15.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -32,6 +32,9 @@ public struct DeploymentRunInput: Codable, Hashable, Sendable {
     public var image: String?
     public var stage: DeployStage?
     public var notes: [String]?
+    public var output: JSONValue?
+    public var plan: JSONValue?
+    public var createdResources: [DeployCreatedResource]?
     public var durationMs: Int?
     public var error: Error2?
 
@@ -44,6 +47,9 @@ public struct DeploymentRunInput: Codable, Hashable, Sendable {
         image: String? = nil,
         stage: DeployStage? = nil,
         notes: [String]? = nil,
+        output: JSONValue? = nil,
+        plan: JSONValue? = nil,
+        createdResources: [DeployCreatedResource]? = nil,
         durationMs: Int? = nil,
         error: Error2? = nil
     ) {
@@ -55,6 +61,9 @@ public struct DeploymentRunInput: Codable, Hashable, Sendable {
         self.image = image
         self.stage = stage
         self.notes = notes
+        self.output = output
+        self.plan = plan
+        self.createdResources = createdResources
         self.durationMs = durationMs
         self.error = error
     }

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.14.1 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.15.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.14.1).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.15.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -253,7 +253,11 @@ public final class DeploymentsRunsNamespace: Sendable {
     /// Re-runs that run's `deploy()` with the image and plan it recorded,
     /// building nothing — the exact artifact that was known good ships again. The
     /// Infrafile is read at the commit that run deployed, not at the branch head.
-    /// Only a successful run that produced an image can be rolled back to.
+    /// Only a successful run that produced an image can be rolled back to. With
+    /// `deleteCreated`, resources that runs after the target created through
+    /// `infra.accounts` are deleted once the rollback has succeeded — undoing the
+    /// provisioning, not just the shipping. Deletions are best-effort and
+    /// reported in the result's notes.
     ///
     /// _Requires permission: `deployments:write`._
     ///
@@ -277,13 +281,15 @@ public final class DeploymentsRunsNamespace: Sendable {
     public func rollback(
         orgId: String? = nil,
         id: String,
+        body: DeployRollbackInput? = nil,
         options: RequestOptions? = nil
     ) async throws -> DeployPlanResult {
         return try await transport.send(
             RequestSpec(
                 method: "POST",
                 path: "/api/org/{orgId}/deployments/runs/{id}/rollback",
-                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue]
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue],
+                body: body.map { AnyEncodable($0) }
             ),
             options: options
         )

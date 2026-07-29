@@ -13,27 +13,43 @@
  */
 import Foundation
 
-public struct InvokeActionRequest: Codable, Hashable, Sendable {
+public struct DeployCreatedResource: Codable, Hashable, Sendable {
+    public struct Sidecar: Codable, Hashable, Sendable {
+        public var pluginId: String
+        public var parentResourceId: String
+
+        public init(
+            pluginId: String,
+            parentResourceId: String
+        ) {
+            self.pluginId = pluginId
+            self.parentResourceId = parentResourceId
+        }
+    }
+
     public var pluginId: String
     public var accountId: String
     public var resourceTypeId: String
-    public var resourceId: ResourceId
-    public var actionId: String
-    public var parentResourceId: ResourceId?
+    public var resourceId: String
+    public var externalId: String?
+    public var displayName: String
+    public var sidecar: Sidecar?
 
     public init(
         pluginId: String,
         accountId: String,
         resourceTypeId: String,
-        resourceId: ResourceId,
-        actionId: String,
-        parentResourceId: ResourceId? = nil
+        resourceId: String,
+        externalId: String? = nil,
+        displayName: String,
+        sidecar: Sidecar? = nil
     ) {
         self.pluginId = pluginId
         self.accountId = accountId
         self.resourceTypeId = resourceTypeId
         self.resourceId = resourceId
-        self.actionId = actionId
-        self.parentResourceId = parentResourceId
+        self.externalId = externalId
+        self.displayName = displayName
+        self.sidecar = sidecar
     }
 }

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.14.1 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.15.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.14.1).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.15.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -18,6 +18,7 @@ public enum DeployStage: RawRepresentable, Codable, Hashable, Sendable, Paramete
     case dockerfile
     case build
     case deploy
+    case destroy
     /// A value the API added after this SDK was generated. Kept rather than
     /// rejected, so a new server-side value cannot break decoding.
     case unrecognized(String)
@@ -28,6 +29,7 @@ public enum DeployStage: RawRepresentable, Codable, Hashable, Sendable, Paramete
         case "dockerfile": self = .dockerfile
         case "build": self = .build
         case "deploy": self = .deploy
+        case "destroy": self = .destroy
         default: self = .unrecognized(rawValue)
         }
     }
@@ -38,6 +40,7 @@ public enum DeployStage: RawRepresentable, Codable, Hashable, Sendable, Paramete
         case .dockerfile: return "dockerfile"
         case .build: return "build"
         case .deploy: return "deploy"
+        case .destroy: return "destroy"
         case .unrecognized(let value): return value
         }
     }
@@ -48,6 +51,7 @@ public enum DeployStage: RawRepresentable, Codable, Hashable, Sendable, Paramete
         .dockerfile,
         .build,
         .deploy,
+        .destroy,
     ]
 
     public init(from decoder: any Decoder) throws {

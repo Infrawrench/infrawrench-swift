@@ -13,36 +13,38 @@
  */
 import Foundation
 
-/// The API may send `null` in place of this, which is why references to it are
-/// optional.
-public struct AgentSettings: Codable, Hashable, Sendable {
-    public enum Tool: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
-        case codex
-        case claudeCode
+public struct DeployPlannedChange: Codable, Hashable, Sendable {
+    public enum Action: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
+        case create
+        case update
+        case delete
         /// A value the API added after this SDK was generated. Kept rather than
         /// rejected, so a new server-side value cannot break decoding.
         case unrecognized(String)
 
         public init(rawValue: String) {
             switch rawValue {
-            case "codex": self = .codex
-            case "claude-code": self = .claudeCode
+            case "create": self = .create
+            case "update": self = .update
+            case "delete": self = .delete
             default: self = .unrecognized(rawValue)
             }
         }
 
         public var rawValue: String {
             switch self {
-            case .codex: return "codex"
-            case .claudeCode: return "claude-code"
+            case .create: return "create"
+            case .update: return "update"
+            case .delete: return "delete"
             case .unrecognized(let value): return value
             }
         }
 
         /// Every value the spec declares. `unrecognized` is deliberately absent.
-        public static let allKnownCases: [Tool] = [
-            .codex,
-            .claudeCode,
+        public static let allKnownCases: [Action] = [
+            .create,
+            .update,
+            .delete,
         ]
 
         public init(from decoder: any Decoder) throws {
@@ -55,23 +57,42 @@ public struct AgentSettings: Codable, Hashable, Sendable {
         }
     }
 
+    public struct Sidecar: Codable, Hashable, Sendable {
+        public var pluginId: String
+        public var parentResourceId: String
+
+        public init(
+            pluginId: String,
+            parentResourceId: String
+        ) {
+            self.pluginId = pluginId
+            self.parentResourceId = parentResourceId
+        }
+    }
+
+    public var action: Action
     public var accountId: String
-    public var pluginId: String
     public var resourceTypeId: String
-    public var tool: Tool
-    public var fields: [String: String]
+    public var resourceId: String?
+    public var displayName: String
+    public var fields: [String: String]?
+    public var sidecar: Sidecar?
 
     public init(
+        action: Action,
         accountId: String,
-        pluginId: String,
         resourceTypeId: String,
-        tool: Tool,
-        fields: [String: String]
+        resourceId: String? = nil,
+        displayName: String,
+        fields: [String: String]? = nil,
+        sidecar: Sidecar? = nil
     ) {
+        self.action = action
         self.accountId = accountId
-        self.pluginId = pluginId
         self.resourceTypeId = resourceTypeId
-        self.tool = tool
+        self.resourceId = resourceId
+        self.displayName = displayName
         self.fields = fields
+        self.sidecar = sidecar
     }
 }

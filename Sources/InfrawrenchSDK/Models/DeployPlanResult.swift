@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.14.1 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.15.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.14.1).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.15.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -34,6 +34,8 @@ public struct DeployPlanResult: Codable, Hashable, Sendable {
         public var dockerfile: String?
         public var image: String?
         public var notes: [String]
+        public var createdResources: [DeployCreatedResource]
+        public var plannedChanges: [DeployPlannedChange]
         public var logs: [DeployRunLog]
         public var reachedStage: DeployStage?
         public var error: Error2?
@@ -46,6 +48,8 @@ public struct DeployPlanResult: Codable, Hashable, Sendable {
             dockerfile: String? = nil,
             image: String? = nil,
             notes: [String],
+            createdResources: [DeployCreatedResource],
+            plannedChanges: [DeployPlannedChange],
             logs: [DeployRunLog],
             reachedStage: DeployStage? = nil,
             error: Error2? = nil,
@@ -57,6 +61,8 @@ public struct DeployPlanResult: Codable, Hashable, Sendable {
             self.dockerfile = dockerfile
             self.image = image
             self.notes = notes
+            self.createdResources = createdResources
+            self.plannedChanges = plannedChanges
             self.logs = logs
             self.reachedStage = reachedStage
             self.error = error

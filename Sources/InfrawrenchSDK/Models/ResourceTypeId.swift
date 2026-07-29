@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.14.1 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.15.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.14.1).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.15.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -176,6 +176,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case gateway
     case gceDisk
     case gceInstance
+    case gcpProject
     case gcpServiceAccount
     case gcsBucket
     case genAiAgent
@@ -543,6 +544,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "gateway": self = .gateway
         case "gce-disk": self = .gceDisk
         case "gce-instance": self = .gceInstance
+        case "gcp-project": self = .gcpProject
         case "gcp-service-account": self = .gcpServiceAccount
         case "gcs-bucket": self = .gcsBucket
         case "gen-ai-agent": self = .genAiAgent
@@ -910,6 +912,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .gateway: return "gateway"
         case .gceDisk: return "gce-disk"
         case .gceInstance: return "gce-instance"
+        case .gcpProject: return "gcp-project"
         case .gcpServiceAccount: return "gcp-service-account"
         case .gcsBucket: return "gcs-bucket"
         case .genAiAgent: return "gen-ai-agent"
@@ -1277,6 +1280,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .gateway,
         .gceDisk,
         .gceInstance,
+        .gcpProject,
         .gcpServiceAccount,
         .gcsBucket,
         .genAiAgent,
