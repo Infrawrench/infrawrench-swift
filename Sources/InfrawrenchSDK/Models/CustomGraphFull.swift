@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.16.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.17.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.16.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.17.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -20,6 +20,7 @@ public struct CustomGraphFull: Codable, Hashable, Sendable {
     public var description: String?
     public var source: String
     public var createdByUserId: String?
+    public var sourceAuthorUserId: String?
     public var deletedAt: String?
     public var createdAt: String
     public var updatedAt: String
@@ -31,6 +32,7 @@ public struct CustomGraphFull: Codable, Hashable, Sendable {
         description: String? = nil,
         source: String,
         createdByUserId: String? = nil,
+        sourceAuthorUserId: String? = nil,
         deletedAt: String? = nil,
         createdAt: String,
         updatedAt: String
@@ -41,6 +43,7 @@ public struct CustomGraphFull: Codable, Hashable, Sendable {
         self.description = description
         self.source = source
         self.createdByUserId = createdByUserId
+        self.sourceAuthorUserId = sourceAuthorUserId
         self.deletedAt = deletedAt
         self.createdAt = createdAt
         self.updatedAt = updatedAt
