@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.15.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.16.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.15.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.16.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -105,6 +105,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case collection
     case composerEnvironment
     case container
+    case containerRegistry
     case customHostname
     case customVoice
     case d1Database
@@ -213,6 +214,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case k8sIngress
     case k8sJob
     case k8sNamespace
+    case k8sNode
     case k8sPod
     case k8sSecret
     case k8sService
@@ -473,6 +475,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "collection": self = .collection
         case "composer-environment": self = .composerEnvironment
         case "container": self = .container
+        case "container-registry": self = .containerRegistry
         case "custom-hostname": self = .customHostname
         case "custom-voice": self = .customVoice
         case "d1-database": self = .d1Database
@@ -581,6 +584,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "k8s-ingress": self = .k8sIngress
         case "k8s-job": self = .k8sJob
         case "k8s-namespace": self = .k8sNamespace
+        case "k8s-node": self = .k8sNode
         case "k8s-pod": self = .k8sPod
         case "k8s-secret": self = .k8sSecret
         case "k8s-service": self = .k8sService
@@ -841,6 +845,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .collection: return "collection"
         case .composerEnvironment: return "composer-environment"
         case .container: return "container"
+        case .containerRegistry: return "container-registry"
         case .customHostname: return "custom-hostname"
         case .customVoice: return "custom-voice"
         case .d1Database: return "d1-database"
@@ -949,6 +954,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .k8sIngress: return "k8s-ingress"
         case .k8sJob: return "k8s-job"
         case .k8sNamespace: return "k8s-namespace"
+        case .k8sNode: return "k8s-node"
         case .k8sPod: return "k8s-pod"
         case .k8sSecret: return "k8s-secret"
         case .k8sService: return "k8s-service"
@@ -1209,6 +1215,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .collection,
         .composerEnvironment,
         .container,
+        .containerRegistry,
         .customHostname,
         .customVoice,
         .d1Database,
@@ -1317,6 +1324,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .k8sIngress,
         .k8sJob,
         .k8sNamespace,
+        .k8sNode,
         .k8sPod,
         .k8sSecret,
         .k8sService,
