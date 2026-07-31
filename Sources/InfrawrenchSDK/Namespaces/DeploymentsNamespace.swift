@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.22.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.23.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.22.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.23.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -275,6 +275,10 @@ public final class DeploymentsRunsNamespace: Sendable {
     /// Raises on 404: Not found
     ///
     /// Raises on 409: Conflict
+    ///
+    /// Raises on 423: Blocked by an active change freeze. Retry with the
+    /// `x-change-freeze-override: true` header if you hold `freezes:override`;
+    /// both blocks and overrides are audit-logged.
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.

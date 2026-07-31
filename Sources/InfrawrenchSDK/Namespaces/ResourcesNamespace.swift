@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.22.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.23.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.22.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.23.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -193,6 +193,10 @@ public final class ResourcesNamespace: Sendable {
     ///
     /// Raises on 404: Not found
     ///
+    /// Raises on 423: Blocked by an active change freeze. Retry with the
+    /// `x-change-freeze-override: true` header if you hold `freezes:override`;
+    /// both blocks and overrides are audit-logged.
+    ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
     public func delete(
@@ -376,6 +380,9 @@ public final class ResourcesNamespace: Sendable {
 
     /// Invoke a plugin-defined action on a resource
     ///
+    /// Actions the plugin marks `destructive: true` in its detail schema are
+    /// blocked with `423` while an org change freeze is in effect.
+    ///
     /// _Requires permission: `resources:write`._
     ///
     /// POST /api/org/{orgId}/resources/invoke-action
@@ -383,6 +390,10 @@ public final class ResourcesNamespace: Sendable {
     /// Raises on 400: Bad request
     ///
     /// Raises on 404: Not found
+    ///
+    /// Raises on 423: Blocked by an active change freeze. Retry with the
+    /// `x-change-freeze-override: true` header if you hold `freezes:override`;
+    /// both blocks and overrides are audit-logged.
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -759,6 +770,10 @@ public final class ResourcesSecretVersionsNamespace: Sendable {
     /// Raises on 400: Bad request
     ///
     /// Raises on 404: Not found
+    ///
+    /// Raises on 423: Blocked by an active change freeze. Retry with the
+    /// `x-change-freeze-override: true` header if you hold `freezes:override`;
+    /// both blocks and overrides are audit-logged.
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.

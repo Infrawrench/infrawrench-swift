@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.22.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.23.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.22.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.23.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -36,6 +36,9 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
     case costsWrite
     case budgetsRead
     case budgetsWrite
+    case freezesRead
+    case freezesWrite
+    case freezesOverride
     case auditRead
     case teamRead
     case teamInvite
@@ -79,6 +82,9 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case "costs:write": self = .costsWrite
         case "budgets:read": self = .budgetsRead
         case "budgets:write": self = .budgetsWrite
+        case "freezes:read": self = .freezesRead
+        case "freezes:write": self = .freezesWrite
+        case "freezes:override": self = .freezesOverride
         case "audit:read": self = .auditRead
         case "team:read": self = .teamRead
         case "team:invite": self = .teamInvite
@@ -122,6 +128,9 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case .costsWrite: return "costs:write"
         case .budgetsRead: return "budgets:read"
         case .budgetsWrite: return "budgets:write"
+        case .freezesRead: return "freezes:read"
+        case .freezesWrite: return "freezes:write"
+        case .freezesOverride: return "freezes:override"
         case .auditRead: return "audit:read"
         case .teamRead: return "team:read"
         case .teamInvite: return "team:invite"
@@ -165,6 +174,9 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         .costsWrite,
         .budgetsRead,
         .budgetsWrite,
+        .freezesRead,
+        .freezesWrite,
+        .freezesOverride,
         .auditRead,
         .teamRead,
         .teamInvite,
