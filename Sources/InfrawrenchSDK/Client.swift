@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.24.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.25.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.24.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.25.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -58,6 +58,8 @@ public final class APIV1Client: Sendable {
     public let customGraphs: CustomGraphsNamespace
     /// `client.dashboards`
     public let dashboards: DashboardsNamespace
+    /// `client.dependencyGraph`
+    public let dependencyGraph: DependencyGraphNamespace
     /// `client.deployments`
     public let deployments: DeploymentsNamespace
     /// `client.digest`
@@ -118,6 +120,7 @@ public final class APIV1Client: Sendable {
         self.costs = CostsNamespace(transport: transport)
         self.customGraphs = CustomGraphsNamespace(transport: transport)
         self.dashboards = DashboardsNamespace(transport: transport)
+        self.dependencyGraph = DependencyGraphNamespace(transport: transport)
         self.deployments = DeploymentsNamespace(transport: transport)
         self.digest = DigestNamespace(transport: transport)
         self.docker = DockerNamespace(transport: transport)
