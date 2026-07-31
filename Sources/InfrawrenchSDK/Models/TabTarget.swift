@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.18.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.19.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.18.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.19.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -20,6 +20,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
         case resource
         case agents
         case costs
+        case savings
         case workflows
         case deployments
         case chat
@@ -34,6 +35,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case "resource": self = .resource
             case "agents": self = .agents
             case "costs": self = .costs
+            case "savings": self = .savings
             case "workflows": self = .workflows
             case "deployments": self = .deployments
             case "chat": self = .chat
@@ -48,6 +50,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case .resource: return "resource"
             case .agents: return "agents"
             case .costs: return "costs"
+            case .savings: return "savings"
             case .workflows: return "workflows"
             case .deployments: return "deployments"
             case .chat: return "chat"
@@ -62,6 +65,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             .resource,
             .agents,
             .costs,
+            .savings,
             .workflows,
             .deployments,
             .chat,
