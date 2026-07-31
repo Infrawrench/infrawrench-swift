@@ -13,49 +13,41 @@
  */
 import Foundation
 
-public enum CostDimension: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
-    case provider
-    case account
-    case service
-    case region
-    case resource
-    case tag
+public enum WorkflowApprovalStatus: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
+    case pending
+    case approved
+    case denied
+    case expired
     /// A value the API added after this SDK was generated. Kept rather than
     /// rejected, so a new server-side value cannot break decoding.
     case unrecognized(String)
 
     public init(rawValue: String) {
         switch rawValue {
-        case "provider": self = .provider
-        case "account": self = .account
-        case "service": self = .service
-        case "region": self = .region
-        case "resource": self = .resource
-        case "tag": self = .tag
+        case "pending": self = .pending
+        case "approved": self = .approved
+        case "denied": self = .denied
+        case "expired": self = .expired
         default: self = .unrecognized(rawValue)
         }
     }
 
     public var rawValue: String {
         switch self {
-        case .provider: return "provider"
-        case .account: return "account"
-        case .service: return "service"
-        case .region: return "region"
-        case .resource: return "resource"
-        case .tag: return "tag"
+        case .pending: return "pending"
+        case .approved: return "approved"
+        case .denied: return "denied"
+        case .expired: return "expired"
         case .unrecognized(let value): return value
         }
     }
 
     /// Every value the spec declares. `unrecognized` is deliberately absent.
-    public static let allKnownCases: [CostDimension] = [
-        .provider,
-        .account,
-        .service,
-        .region,
-        .resource,
-        .tag,
+    public static let allKnownCases: [WorkflowApprovalStatus] = [
+        .pending,
+        .approved,
+        .denied,
+        .expired,
     ]
 
     public init(from decoder: any Decoder) throws {
