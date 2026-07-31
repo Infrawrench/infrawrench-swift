@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.23.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.24.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.23.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.24.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -12,6 +12,16 @@
  * marked x-internal.
  */
 import Foundation
+
+public struct CostsAnomaliesResult: Codable, Hashable, Sendable {
+    public var anomalies: [CostAnomaly]
+
+    public init(
+        anomalies: [CostAnomaly]
+    ) {
+        self.anomalies = anomalies
+    }
+}
 
 public struct CostsStatusResult: Codable, Hashable, Sendable {
     public var accounts: [CostAccountStatus]
@@ -30,6 +40,38 @@ public final class CostsNamespace: Sendable {
 
     init(transport: ApiTransport) {
         self.transport = transport
+    }
+
+    /// List recently detected cost anomalies
+    ///
+    /// Spend anomalies detected by the daily background pass: days where a
+    /// provider's or service's spend exceeded its trailing 28-day baseline by a
+    /// statistical threshold (mean + N·stddev, with an absolute floor to ignore
+    /// penny-scale noise). Newest day first, capped at 200 rows.
+    ///
+    /// GET /api/org/{orgId}/costs/anomalies
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter days: Window in days over anomalous days, 1-90. Defaults to
+    /// 30.
+    public func anomalies(
+        orgId: String? = nil,
+        days: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> CostsAnomaliesResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/costs/anomalies",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                query: [QueryParameter("days", days)]
+            ),
+            options: options
+        )
     }
 
     /// List distinct values for a cost dimension

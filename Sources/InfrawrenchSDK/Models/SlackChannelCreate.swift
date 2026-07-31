@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.23.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.24.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.23.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.24.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -20,6 +20,7 @@ public struct SlackChannelCreate: Codable, Hashable, Sendable {
     public var isPrivate: Bool?
     public var syncIncidents: Bool?
     public var budgetAlerts: Bool?
+    public var anomalyAlerts: Bool?
     public var workflowPages: Bool?
     public var weeklyDigest: Bool?
 
@@ -30,6 +31,7 @@ public struct SlackChannelCreate: Codable, Hashable, Sendable {
         isPrivate: Bool? = nil,
         syncIncidents: Bool? = nil,
         budgetAlerts: Bool? = nil,
+        anomalyAlerts: Bool? = nil,
         workflowPages: Bool? = nil,
         weeklyDigest: Bool? = nil
     ) {
@@ -39,6 +41,7 @@ public struct SlackChannelCreate: Codable, Hashable, Sendable {
         self.isPrivate = isPrivate
         self.syncIncidents = syncIncidents
         self.budgetAlerts = budgetAlerts
+        self.anomalyAlerts = anomalyAlerts
         self.workflowPages = workflowPages
         self.weeklyDigest = weeklyDigest
     }
