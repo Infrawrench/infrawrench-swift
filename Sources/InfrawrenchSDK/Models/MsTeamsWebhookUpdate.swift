@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.26.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.27.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.26.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.27.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -18,6 +18,7 @@ public struct MsTeamsWebhookUpdate: Codable, Hashable, Sendable {
     public var syncIncidents: Bool?
     public var budgetAlerts: Bool?
     public var anomalyAlerts: Bool?
+    public var resourceDrift: Bool?
     public var workflowPages: Bool?
     public var weeklyDigest: Bool?
 
@@ -26,6 +27,7 @@ public struct MsTeamsWebhookUpdate: Codable, Hashable, Sendable {
         syncIncidents: Bool? = nil,
         budgetAlerts: Bool? = nil,
         anomalyAlerts: Bool? = nil,
+        resourceDrift: Bool? = nil,
         workflowPages: Bool? = nil,
         weeklyDigest: Bool? = nil
     ) {
@@ -33,6 +35,7 @@ public struct MsTeamsWebhookUpdate: Codable, Hashable, Sendable {
         self.syncIncidents = syncIncidents
         self.budgetAlerts = budgetAlerts
         self.anomalyAlerts = anomalyAlerts
+        self.resourceDrift = resourceDrift
         self.workflowPages = workflowPages
         self.weeklyDigest = weeklyDigest
     }

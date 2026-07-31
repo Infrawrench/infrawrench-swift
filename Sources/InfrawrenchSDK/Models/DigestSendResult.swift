@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.26.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.27.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.26.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.27.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -15,17 +15,27 @@ import Foundation
 
 public struct DigestSendResult: Codable, Hashable, Sendable {
     public var ok: Bool
-    /// Deliveries attempted across Slack channels and Teams webhooks.
+    /// Deliveries attempted across Slack channels, Teams webhooks and email
+    /// recipients.
     public var attempted: Int
     public var succeeded: Int
+    public var slack: DigestTransportResult
+    public var teams: DigestTransportResult
+    public var email: DigestTransportResult
 
     public init(
         ok: Bool,
         attempted: Int,
-        succeeded: Int
+        succeeded: Int,
+        slack: DigestTransportResult,
+        teams: DigestTransportResult,
+        email: DigestTransportResult
     ) {
         self.ok = ok
         self.attempted = attempted
         self.succeeded = succeeded
+        self.slack = slack
+        self.teams = teams
+        self.email = email
     }
 }

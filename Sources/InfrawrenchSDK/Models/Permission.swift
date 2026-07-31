@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.26.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.27.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.26.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.27.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -29,6 +29,9 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
     case storageWrite
     case dashboardsRead
     case dashboardsWrite
+    case workflowsRead
+    case workflowsWrite
+    case workflowsApprove
     case deploymentsRead
     case deploymentsPlan
     case deploymentsWrite
@@ -75,6 +78,9 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case "storage:write": self = .storageWrite
         case "dashboards:read": self = .dashboardsRead
         case "dashboards:write": self = .dashboardsWrite
+        case "workflows:read": self = .workflowsRead
+        case "workflows:write": self = .workflowsWrite
+        case "workflows:approve": self = .workflowsApprove
         case "deployments:read": self = .deploymentsRead
         case "deployments:plan": self = .deploymentsPlan
         case "deployments:write": self = .deploymentsWrite
@@ -121,6 +127,9 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case .storageWrite: return "storage:write"
         case .dashboardsRead: return "dashboards:read"
         case .dashboardsWrite: return "dashboards:write"
+        case .workflowsRead: return "workflows:read"
+        case .workflowsWrite: return "workflows:write"
+        case .workflowsApprove: return "workflows:approve"
         case .deploymentsRead: return "deployments:read"
         case .deploymentsPlan: return "deployments:plan"
         case .deploymentsWrite: return "deployments:write"
@@ -167,6 +176,9 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         .storageWrite,
         .dashboardsRead,
         .dashboardsWrite,
+        .workflowsRead,
+        .workflowsWrite,
+        .workflowsApprove,
         .deploymentsRead,
         .deploymentsPlan,
         .deploymentsWrite,

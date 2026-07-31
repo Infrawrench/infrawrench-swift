@@ -1,6 +1,6 @@
 # InfrawrenchSDK
 
-Generated Swift client for the Infrawrench API (API version `0.26.0`).
+Generated Swift client for the Infrawrench API (API version `0.27.0`).
 
 **Do not edit this package by hand** — it is regenerated from `openapi.json` and
 is not checked into the repository. Run
@@ -14,7 +14,7 @@ nowhere to record which API this code matches. It is recorded in the code
 instead:
 
 ```swift
-InfrawrenchSDKInfo.apiVersion      // "0.26.0"
+InfrawrenchSDKInfo.apiVersion      // "0.27.0"
 InfrawrenchSDKInfo.defaultBaseURL  // "https://app.infrawrench.com"
 ```
 

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.26.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.27.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.26.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.27.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -17,9 +17,12 @@ import Foundation
 public final class ChangesNamespace: Sendable {
     /// Shared request plumbing.
     let transport: ApiTransport
+    /// `client.changes.alertSettings`
+    public let alertSettings: ChangesAlertSettingsNamespace
 
     init(transport: ApiTransport) {
         self.transport = transport
+        self.alertSettings = ChangesAlertSettingsNamespace(transport: transport)
     }
 
     /// Org-wide change timeline (paginated, filterable)
@@ -86,6 +89,71 @@ public final class ChangesNamespace: Sendable {
                 path: "/api/org/{orgId}/changes/resource",
                 pathParameters: ["orgId": orgId?.parameterValue],
                 query: [QueryParameter("resourceId", resourceId), QueryParameter("limit", limit)]
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.changes.alertSettings`
+public final class ChangesAlertSettingsNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// Get the organization's resource-drift alert filter
+    ///
+    /// Drift notifications are batched: at most one message per organization per
+    /// `cooldownMinutes`, covering every change since the previous one. These
+    /// settings decide which changes count and how often a message may go out.
+    /// Who receives it is the `resourceDrift` opt-in on push preferences, Slack
+    /// channels and Teams webhooks — off by default on all three.
+    ///
+    /// GET /api/org/{orgId}/changes/alert-settings
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func get(
+        orgId: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> DriftAlertSettings {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/changes/alert-settings",
+                pathParameters: ["orgId": orgId?.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Update the organization's resource-drift alert filter
+    ///
+    /// Every field is optional so a single toggle can be saved on its own.
+    /// `cooldownMinutes` is floored at 5: below the poller's own cycle the
+    /// notification rate would follow the sync rate again, which is what the
+    /// batching exists to prevent.
+    ///
+    /// PUT /api/org/{orgId}/changes/alert-settings
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func update(
+        orgId: String? = nil,
+        body: DriftAlertSettingsUpdate? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> DriftAlertSettings {
+        return try await transport.send(
+            RequestSpec(
+                method: "PUT",
+                path: "/api/org/{orgId}/changes/alert-settings",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: body.map { AnyEncodable($0) }
             ),
             options: options
         )

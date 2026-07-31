@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.26.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.27.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.26.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.27.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -25,7 +25,12 @@ public struct SlackChannel: Codable, Hashable, Sendable {
     public var budgetAlerts: Bool
     /// Statistical spend-spike (cost anomaly) alerts
     public var anomalyAlerts: Bool
-    /// Alerts raised by a workflow calling infra.page(...)
+    /// Batched resource-drift digests from the change timeline. Defaults to false
+    /// when a channel is added — drift is continuous where the other triggers are
+    /// exceptional.
+    public var resourceDrift: Bool
+    /// Pages and approval requests raised by a workflow (infra.page /
+    /// infra.waitForApproval) or by POST /pages
     public var workflowPages: Bool
     /// The Monday-morning weekly digest. Only sends when the organization has
     /// enabled the digest (see /digest).
@@ -40,6 +45,7 @@ public struct SlackChannel: Codable, Hashable, Sendable {
         syncIncidents: Bool,
         budgetAlerts: Bool,
         anomalyAlerts: Bool,
+        resourceDrift: Bool,
         workflowPages: Bool,
         weeklyDigest: Bool
     ) {
@@ -51,6 +57,7 @@ public struct SlackChannel: Codable, Hashable, Sendable {
         self.syncIncidents = syncIncidents
         self.budgetAlerts = budgetAlerts
         self.anomalyAlerts = anomalyAlerts
+        self.resourceDrift = resourceDrift
         self.workflowPages = workflowPages
         self.weeklyDigest = weeklyDigest
     }

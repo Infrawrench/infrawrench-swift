@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.26.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.27.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.26.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.27.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -37,17 +37,25 @@ public struct CostsStatusResult: Codable, Hashable, Sendable {
 public final class CostsNamespace: Sendable {
     /// Shared request plumbing.
     let transport: ApiTransport
+    /// `client.costs.anomalySettings`
+    public let anomalySettings: CostsAnomalySettingsNamespace
 
     init(transport: ApiTransport) {
         self.transport = transport
+        self.anomalySettings = CostsAnomalySettingsNamespace(transport: transport)
     }
 
     /// List recently detected cost anomalies
     ///
-    /// Spend anomalies detected by the daily background pass: days where a
-    /// provider's or service's spend exceeded its trailing 28-day baseline by a
-    /// statistical threshold (mean + N·stddev, with an absolute floor to ignore
-    /// penny-scale noise). Newest day first, capped at 200 rows.
+    /// Spend anomalies detected by the daily background pass. Two kinds share the
+    /// list: a `spike`, where a provider's or service's spend exceeded its
+    /// trailing 28-day baseline by a statistical threshold (mean + N·stddev, with
+    /// an absolute floor to ignore penny-scale noise), and a `new_source`, where
+    /// a provider or service with no spend at all across that window suddenly
+    /// billed a material amount. Thresholds are per organization — see GET
+    /// /costs/anomaly-settings. Newest day first, capped at 200 rows.
+    ///
+    /// _Requires permission: `costs:read`._
     ///
     /// GET /api/org/{orgId}/costs/anomalies
     ///
@@ -198,6 +206,77 @@ public final class CostsNamespace: Sendable {
                 method: "GET",
                 path: "/api/org/{orgId}/costs/status",
                 pathParameters: ["orgId": orgId?.parameterValue]
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.costs.anomalySettings`
+public final class CostsAnomalySettingsNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// Get the organization's anomaly detection thresholds
+    ///
+    /// The tunable part of cost anomaly detection. Everything else about the
+    /// model — the 28-day baseline, the 7-day notification cooldown, the minimum
+    /// history a baseline needs — is fixed. An organization that has never
+    /// changed a threshold reads back the defaults. The response also carries the
+    /// derived, read-only `smsConfigured`.
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// GET /api/org/{orgId}/costs/anomaly-settings
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func get(
+        orgId: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> CostAnomalySettingsView {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/costs/anomaly-settings",
+                pathParameters: ["orgId": orgId?.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Update the organization's anomaly detection thresholds
+    ///
+    /// Takes effect on the next detection pass (which runs after each cost
+    /// collection). Anomalies already stored are not re-judged. All four fields
+    /// are required — this is a PUT of the whole settings object, not a patch —
+    /// and `smsAlerts` deliberately has no server-side default, so a client that
+    /// omits it is rejected rather than silently switching an organization's SMS
+    /// paging back off. `smsConfigured` is derived and is not accepted here.
+    ///
+    /// _Requires permission: `costs:write`._
+    ///
+    /// PUT /api/org/{orgId}/costs/anomaly-settings
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func update(
+        orgId: String? = nil,
+        body: CostAnomalySettings,
+        options: RequestOptions? = nil
+    ) async throws -> CostAnomalySettingsView {
+        return try await transport.send(
+            RequestSpec(
+                method: "PUT",
+                path: "/api/org/{orgId}/costs/anomaly-settings",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: AnyEncodable(body)
             ),
             options: options
         )

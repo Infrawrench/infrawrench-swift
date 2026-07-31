@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.26.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.27.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.26.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.27.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -14,6 +14,45 @@
 import Foundation
 
 public struct CostAnomaly: Codable, Hashable, Sendable {
+    public enum Kind: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
+        case spike
+        case newSource
+        /// A value the API added after this SDK was generated. Kept rather than
+        /// rejected, so a new server-side value cannot break decoding.
+        case unrecognized(String)
+
+        public init(rawValue: String) {
+            switch rawValue {
+            case "spike": self = .spike
+            case "new_source": self = .newSource
+            default: self = .unrecognized(rawValue)
+            }
+        }
+
+        public var rawValue: String {
+            switch self {
+            case .spike: return "spike"
+            case .newSource: return "new_source"
+            case .unrecognized(let value): return value
+            }
+        }
+
+        /// Every value the spec declares. `unrecognized` is deliberately absent.
+        public static let allKnownCases: [Kind] = [
+            .spike,
+            .newSource,
+        ]
+
+        public init(from decoder: any Decoder) throws {
+            self.init(rawValue: try decoder.singleValueContainer().decode(String.self))
+        }
+
+        public func encode(to encoder: any Encoder) throws {
+            var container = encoder.singleValueContainer()
+            try container.encode(rawValue)
+        }
+    }
+
     public enum Dimension: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
         case provider
         case service
@@ -56,14 +95,23 @@ public struct CostAnomaly: Codable, Hashable, Sendable {
     public var id: String
     /// The anomalous UTC day.
     public var day: String
+    /// Which detection produced the row. `spike` is spend far above the key's own
+    /// trailing baseline; `new_source` is a provider or service with no spend at
+    /// all across the trailing window that suddenly has material spend — it can
+    /// never be a `spike`, since a zero baseline has no mean or deviation to
+    /// exceed. Rows written before new-source detection existed read as `spike`.
+    public var kind: Kind
     public var dimension: Dimension
     /// The dimension's value — a plugin id or a service name.
     public var dimensionKey: String
     public var currency: String
     public var actualCents: Int
-    /// Mean daily spend over the trailing 28-day baseline, in cents.
+    /// Mean daily spend over the trailing 28-day baseline, in cents. Zero, or
+    /// near it, for a `new_source` — clients must not compute a percentage change
+    /// from it.
     public var baselineCents: Int
-    /// The detection bar the day cleared (baseline mean + N·stddev), in cents.
+    /// The detection bar the day cleared, in cents: baseline mean + N·stddev for
+    /// a `spike`, the new-source floor for a `new_source`.
     public var thresholdCents: Int
     public var detectedAt: String
     /// When the anomaly was delivered to a notification channel; null when
@@ -73,6 +121,7 @@ public struct CostAnomaly: Codable, Hashable, Sendable {
     public init(
         id: String,
         day: String,
+        kind: Kind,
         dimension: Dimension,
         dimensionKey: String,
         currency: String,
@@ -84,6 +133,7 @@ public struct CostAnomaly: Codable, Hashable, Sendable {
     ) {
         self.id = id
         self.day = day
+        self.kind = kind
         self.dimension = dimension
         self.dimensionKey = dimensionKey
         self.currency = currency

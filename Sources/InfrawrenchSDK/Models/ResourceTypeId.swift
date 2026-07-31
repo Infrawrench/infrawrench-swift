@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.26.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.27.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.26.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.27.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -317,6 +317,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case redirectRule
     case redisInstance
     case redshiftCluster
+    case reservedIp
     case routeTable
     case route53HealthCheck
     case route53HostedZone
@@ -689,6 +690,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "redirect-rule": self = .redirectRule
         case "redis-instance": self = .redisInstance
         case "redshift-cluster": self = .redshiftCluster
+        case "reserved-ip": self = .reservedIp
         case "route-table": self = .routeTable
         case "route53-health-check": self = .route53HealthCheck
         case "route53-hosted-zone": self = .route53HostedZone
@@ -1061,6 +1063,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .redirectRule: return "redirect-rule"
         case .redisInstance: return "redis-instance"
         case .redshiftCluster: return "redshift-cluster"
+        case .reservedIp: return "reserved-ip"
         case .routeTable: return "route-table"
         case .route53HealthCheck: return "route53-health-check"
         case .route53HostedZone: return "route53-hosted-zone"
@@ -1433,6 +1436,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .redirectRule,
         .redisInstance,
         .redshiftCluster,
+        .reservedIp,
         .routeTable,
         .route53HealthCheck,
         .route53HostedZone,
