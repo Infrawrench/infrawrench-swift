@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.25.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.26.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.25.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.26.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -39,6 +39,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case azureAppGateway
     case azureAppRegistration
     case azureAppService
+    case azureAppServicePlan
     case azureContainerInstance
     case azureContainerRegistry
     case azureCosmosDb
@@ -133,6 +134,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case databricksWorkspaceObject
     case dataflowJob
     case dataset
+    case dbSubnetGroup
     case dbUser
     case dedicatedInference
     case deployedModel
@@ -409,6 +411,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "azure-app-gateway": self = .azureAppGateway
         case "azure-app-registration": self = .azureAppRegistration
         case "azure-app-service": self = .azureAppService
+        case "azure-app-service-plan": self = .azureAppServicePlan
         case "azure-container-instance": self = .azureContainerInstance
         case "azure-container-registry": self = .azureContainerRegistry
         case "azure-cosmos-db": self = .azureCosmosDb
@@ -503,6 +506,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "databricks-workspace-object": self = .databricksWorkspaceObject
         case "dataflow-job": self = .dataflowJob
         case "dataset": self = .dataset
+        case "db-subnet-group": self = .dbSubnetGroup
         case "db-user": self = .dbUser
         case "dedicated-inference": self = .dedicatedInference
         case "deployed-model": self = .deployedModel
@@ -779,6 +783,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .azureAppGateway: return "azure-app-gateway"
         case .azureAppRegistration: return "azure-app-registration"
         case .azureAppService: return "azure-app-service"
+        case .azureAppServicePlan: return "azure-app-service-plan"
         case .azureContainerInstance: return "azure-container-instance"
         case .azureContainerRegistry: return "azure-container-registry"
         case .azureCosmosDb: return "azure-cosmos-db"
@@ -873,6 +878,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .databricksWorkspaceObject: return "databricks-workspace-object"
         case .dataflowJob: return "dataflow-job"
         case .dataset: return "dataset"
+        case .dbSubnetGroup: return "db-subnet-group"
         case .dbUser: return "db-user"
         case .dedicatedInference: return "dedicated-inference"
         case .deployedModel: return "deployed-model"
@@ -1149,6 +1155,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .azureAppGateway,
         .azureAppRegistration,
         .azureAppService,
+        .azureAppServicePlan,
         .azureContainerInstance,
         .azureContainerRegistry,
         .azureCosmosDb,
@@ -1243,6 +1250,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .databricksWorkspaceObject,
         .dataflowJob,
         .dataset,
+        .dbSubnetGroup,
         .dbUser,
         .dedicatedInference,
         .deployedModel,

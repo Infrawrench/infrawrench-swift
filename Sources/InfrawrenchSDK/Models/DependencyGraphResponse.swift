@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.25.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.26.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.25.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.26.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -14,17 +14,22 @@
 import Foundation
 
 public struct DependencyGraphResponse: Codable, Hashable, Sendable {
-    /// Org resources that participate in at least one output reference.
+    /// Org resources that participate in at least one edge.
     public var nodes: [DependencyGraphNode]
     /// Directed depends-on edges (consumer → provider), deduped per consumer
-    /// field.
+    /// field and provider.
     public var edges: [DependencyGraphEdge]
+    /// True when inference hit its edge cap and the returned graph is a partial
+    /// view of the org.
+    public var truncated: Bool
 
     public init(
         nodes: [DependencyGraphNode],
-        edges: [DependencyGraphEdge]
+        edges: [DependencyGraphEdge],
+        truncated: Bool
     ) {
         self.nodes = nodes
         self.edges = edges
+        self.truncated = truncated
     }
 }
