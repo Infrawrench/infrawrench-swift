@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.27.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.28.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.27.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.28.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -100,6 +100,8 @@ public final class APIV1Client: Sendable {
     public let team: TeamNamespace
     /// `client.workflowApprovals`
     public let workflowApprovals: WorkflowApprovalsNamespace
+    /// `client.workflows`
+    public let workflows: WorkflowsNamespace
 
     public init(_ options: ClientOptions = ClientOptions()) {
         let transport = ApiTransport(options: options)
@@ -141,6 +143,7 @@ public final class APIV1Client: Sendable {
         self.storage = StorageNamespace(transport: transport)
         self.team = TeamNamespace(transport: transport)
         self.workflowApprovals = WorkflowApprovalsNamespace(transport: transport)
+        self.workflows = WorkflowsNamespace(transport: transport)
     }
 
     /// The common case, without spelling out `ClientOptions`.
