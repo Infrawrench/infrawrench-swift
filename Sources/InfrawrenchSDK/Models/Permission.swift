@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.28.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.29.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.28.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.29.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -42,6 +42,7 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
     case freezesRead
     case freezesWrite
     case freezesOverride
+    case tagPolicyOverride
     case auditRead
     case teamRead
     case teamInvite
@@ -91,6 +92,7 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case "freezes:read": self = .freezesRead
         case "freezes:write": self = .freezesWrite
         case "freezes:override": self = .freezesOverride
+        case "tag-policy:override": self = .tagPolicyOverride
         case "audit:read": self = .auditRead
         case "team:read": self = .teamRead
         case "team:invite": self = .teamInvite
@@ -140,6 +142,7 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case .freezesRead: return "freezes:read"
         case .freezesWrite: return "freezes:write"
         case .freezesOverride: return "freezes:override"
+        case .tagPolicyOverride: return "tag-policy:override"
         case .auditRead: return "audit:read"
         case .teamRead: return "team:read"
         case .teamInvite: return "team:invite"
@@ -189,6 +192,7 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         .freezesRead,
         .freezesWrite,
         .freezesOverride,
+        .tagPolicyOverride,
         .auditRead,
         .teamRead,
         .teamInvite,

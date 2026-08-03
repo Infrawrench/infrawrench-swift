@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.28.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.29.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.28.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.29.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -52,6 +52,8 @@ public final class APIV1Client: Sendable {
     public let changes: ChangesNamespace
     /// `client.connect`
     public let connect: ConnectNamespace
+    /// `client.costCentres`
+    public let costCentres: CostCentresNamespace
     /// `client.costs`
     public let costs: CostsNamespace
     /// `client.customGraphs`
@@ -66,10 +68,14 @@ public final class APIV1Client: Sendable {
     public let digest: DigestNamespace
     /// `client.docker`
     public let docker: DockerNamespace
+    /// `client.expiring`
+    public let expiring: ExpiringNamespace
     /// `client.invitations`
     public let invitations: InvitationsNamespace
     /// `client.kv`
     public let kv: KvNamespace
+    /// `client.moment`
+    public let moment: MomentNamespace
     /// `client.msteams`
     public let msteams: MsteamsNamespace
     /// `client.orgs`
@@ -82,6 +88,10 @@ public final class APIV1Client: Sendable {
     public let profile: ProfileNamespace
     /// `client.resources`
     public let resources: ResourcesNamespace
+    /// `client.rightsizing`
+    public let rightsizing: RightsizingNamespace
+    /// `client.schedules`
+    public let schedules: SchedulesNamespace
     /// `client.search`
     public let search: SearchNamespace
     /// `client.sftp`
@@ -94,8 +104,12 @@ public final class APIV1Client: Sendable {
     public let sshKeys: SshKeysNamespace
     /// `client.sshTunnels`
     public let sshTunnels: SshTunnelsNamespace
+    /// `client.statusIncidents`
+    public let statusIncidents: StatusIncidentsNamespace
     /// `client.storage`
     public let storage: StorageNamespace
+    /// `client.tagPolicy`
+    public let tagPolicy: TagPolicyNamespace
     /// `client.team`
     public let team: TeamNamespace
     /// `client.workflowApprovals`
@@ -119,6 +133,7 @@ public final class APIV1Client: Sendable {
         self.changeFreezes = ChangeFreezesNamespace(transport: transport)
         self.changes = ChangesNamespace(transport: transport)
         self.connect = ConnectNamespace(transport: transport)
+        self.costCentres = CostCentresNamespace(transport: transport)
         self.costs = CostsNamespace(transport: transport)
         self.customGraphs = CustomGraphsNamespace(transport: transport)
         self.dashboards = DashboardsNamespace(transport: transport)
@@ -126,21 +141,27 @@ public final class APIV1Client: Sendable {
         self.deployments = DeploymentsNamespace(transport: transport)
         self.digest = DigestNamespace(transport: transport)
         self.docker = DockerNamespace(transport: transport)
+        self.expiring = ExpiringNamespace(transport: transport)
         self.invitations = InvitationsNamespace(transport: transport)
         self.kv = KvNamespace(transport: transport)
+        self.moment = MomentNamespace(transport: transport)
         self.msteams = MsteamsNamespace(transport: transport)
         self.orgs = OrgsNamespace(transport: transport)
         self.orphans = OrphansNamespace(transport: transport)
         self.pages = PagesNamespace(transport: transport)
         self.profile = ProfileNamespace(transport: transport)
         self.resources = ResourcesNamespace(transport: transport)
+        self.rightsizing = RightsizingNamespace(transport: transport)
+        self.schedules = SchedulesNamespace(transport: transport)
         self.search = SearchNamespace(transport: transport)
         self.sftp = SftpNamespace(transport: transport)
         self.slack = SlackNamespace(transport: transport)
         self.sql = SqlNamespace(transport: transport)
         self.sshKeys = SshKeysNamespace(transport: transport)
         self.sshTunnels = SshTunnelsNamespace(transport: transport)
+        self.statusIncidents = StatusIncidentsNamespace(transport: transport)
         self.storage = StorageNamespace(transport: transport)
+        self.tagPolicy = TagPolicyNamespace(transport: transport)
         self.team = TeamNamespace(transport: transport)
         self.workflowApprovals = WorkflowApprovalsNamespace(transport: transport)
         self.workflows = WorkflowsNamespace(transport: transport)

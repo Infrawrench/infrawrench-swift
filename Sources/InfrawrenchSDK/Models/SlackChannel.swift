@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.28.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.29.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.28.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.29.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -32,6 +32,11 @@ public struct SlackChannel: Codable, Hashable, Sendable {
     /// Pages and approval requests raised by a workflow (infra.page /
     /// infra.waitForApproval) or by POST /pages
     public var workflowPages: Bool
+    /// A provider status-page incident overlaps resources you hold.
+    public var providerIncidents: Bool
+    /// Daily digests of approaching resource deadlines — expiring certificates,
+    /// domains, tokens and keys past their rotation budget.
+    public var expiryAlerts: Bool
     /// The Monday-morning weekly digest. Only sends when the organization has
     /// enabled the digest (see /digest).
     public var weeklyDigest: Bool
@@ -47,6 +52,8 @@ public struct SlackChannel: Codable, Hashable, Sendable {
         anomalyAlerts: Bool,
         resourceDrift: Bool,
         workflowPages: Bool,
+        providerIncidents: Bool,
+        expiryAlerts: Bool,
         weeklyDigest: Bool
     ) {
         self.id = id
@@ -59,6 +66,8 @@ public struct SlackChannel: Codable, Hashable, Sendable {
         self.anomalyAlerts = anomalyAlerts
         self.resourceDrift = resourceDrift
         self.workflowPages = workflowPages
+        self.providerIncidents = providerIncidents
+        self.expiryAlerts = expiryAlerts
         self.weeklyDigest = weeklyDigest
     }
 }

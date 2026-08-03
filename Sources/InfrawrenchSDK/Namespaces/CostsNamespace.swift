@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.28.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.29.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.28.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.29.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -186,6 +186,41 @@ public final class CostsNamespace: Sendable {
         )
     }
 
+    /// Spend grouped by cost centre (showback)
+    ///
+    /// Runs the org's allocation rules over collected spend and sums per cost
+    /// centre and currency. Spend no rule claims comes back as the "Unallocated"
+    /// bucket; every defined centre appears even with zero spend.
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// GET /api/org/{orgId}/costs/showback
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter from: Defaults to 30 days ago.
+    ///
+    /// - Parameter to: Defaults to today.
+    public func showback(
+        orgId: String? = nil,
+        from: String? = nil,
+        to: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> ShowbackReport {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/costs/showback",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                query: [QueryParameter("from", from), QueryParameter("to", to)]
+            ),
+            options: options
+        )
+    }
+
     /// Per-account cost collection status
     ///
     /// Which accounts support cost collection, whether their history backfill has
@@ -206,6 +241,42 @@ public final class CostsNamespace: Sendable {
                 method: "GET",
                 path: "/api/org/{orgId}/costs/status",
                 pathParameters: ["orgId": orgId?.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Untagged spend over the required tag keys
+    ///
+    /// Spend on cost rows missing at least one of the org's required tag keys,
+    /// overall and per key, plus the largest untagged (account, service) buckets.
+    /// Empty when no tag policy is configured — untagged is only meaningful
+    /// against a policy.
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// GET /api/org/{orgId}/costs/untagged
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter from: Defaults to 30 days ago.
+    ///
+    /// - Parameter to: Defaults to today.
+    public func untagged(
+        orgId: String? = nil,
+        from: String? = nil,
+        to: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> UntaggedSpendReport {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/costs/untagged",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                query: [QueryParameter("from", from), QueryParameter("to", to)]
             ),
             options: options
         )

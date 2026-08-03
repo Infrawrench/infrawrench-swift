@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.28.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.29.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.28.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.29.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -14,6 +14,41 @@
 import Foundation
 
 public struct ResourceChangeFeedEntry: Codable, Hashable, Sendable {
+    public enum Origin: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
+        case schedule
+        /// A value the API added after this SDK was generated. Kept rather than
+        /// rejected, so a new server-side value cannot break decoding.
+        case unrecognized(String)
+
+        public init(rawValue: String) {
+            switch rawValue {
+            case "schedule": self = .schedule
+            default: self = .unrecognized(rawValue)
+            }
+        }
+
+        public var rawValue: String {
+            switch self {
+            case .schedule: return "schedule"
+            case .unrecognized(let value): return value
+            }
+        }
+
+        /// Every value the spec declares. `unrecognized` is deliberately absent.
+        public static let allKnownCases: [Origin] = [
+            .schedule,
+        ]
+
+        public init(from decoder: any Decoder) throws {
+            self.init(rawValue: try decoder.singleValueContainer().decode(String.self))
+        }
+
+        public func encode(to encoder: any Encoder) throws {
+            var container = encoder.singleValueContainer()
+            try container.encode(rawValue)
+        }
+    }
+
     public var id: String
     public var resourceId: ResourceId
     public var accountId: String
@@ -24,6 +59,9 @@ public struct ResourceChangeFeedEntry: Codable, Hashable, Sendable {
     public var changeKind: ResourceChangeKind
     /// Changed fields for `updated` events; empty for `created` and `deleted`.
     public var diff: [ResourceFieldChange]
+    /// Who caused the change when a non-sync writer knows: `schedule` for
+    /// sleep/wake schedule transitions. Absent/null = observed by sync.
+    public var origin: Origin?
     public var createdAt: String
     public var accountName: String?
 
@@ -36,6 +74,7 @@ public struct ResourceChangeFeedEntry: Codable, Hashable, Sendable {
         displayName: String,
         changeKind: ResourceChangeKind,
         diff: [ResourceFieldChange],
+        origin: Origin? = nil,
         createdAt: String,
         accountName: String? = nil
     ) {
@@ -47,6 +86,7 @@ public struct ResourceChangeFeedEntry: Codable, Hashable, Sendable {
         self.displayName = displayName
         self.changeKind = changeKind
         self.diff = diff
+        self.origin = origin
         self.createdAt = createdAt
         self.accountName = accountName
     }

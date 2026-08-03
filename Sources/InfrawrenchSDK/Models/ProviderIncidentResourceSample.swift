@@ -1,0 +1,35 @@
+/*
+ * InfrawrenchSDK v0.29.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * https://github.com/Infrawrench/Infrawrench
+ *
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.29.0).
+ *
+ * DO NOT EDIT. Regenerate with:
+ *   pnpm --filter @infrawrench/web generate:sdk
+ *
+ * Internal routes are absent by construction: the generator consumes the same
+ * published spec that /openapi.json serves, which drops every operation
+ * marked x-internal.
+ */
+import Foundation
+
+public struct ProviderIncidentResourceSample: Codable, Hashable, Sendable {
+    /// Resource id.
+    public var id: String
+    public var displayName: String
+    public var resourceTypeId: String
+    /// The resource's region field, when it has one.
+    public var region: String?
+
+    public init(
+        id: String,
+        displayName: String,
+        resourceTypeId: String,
+        region: String? = nil
+    ) {
+        self.id = id
+        self.displayName = displayName
+        self.resourceTypeId = resourceTypeId
+        self.region = region
+    }
+}
