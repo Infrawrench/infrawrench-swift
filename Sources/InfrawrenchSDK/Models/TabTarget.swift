@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.31.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.32.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.31.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.32.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -22,6 +22,11 @@ public struct TabTarget: Codable, Hashable, Sendable {
         case costs
         case savings
         case graph
+        case logs
+        case changes
+        case expiring
+        case sshFanout
+        case metricAlerts
         case workflows
         case deployments
         case chat
@@ -38,6 +43,11 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case "costs": self = .costs
             case "savings": self = .savings
             case "graph": self = .graph
+            case "logs": self = .logs
+            case "changes": self = .changes
+            case "expiring": self = .expiring
+            case "ssh-fanout": self = .sshFanout
+            case "metric-alerts": self = .metricAlerts
             case "workflows": self = .workflows
             case "deployments": self = .deployments
             case "chat": self = .chat
@@ -54,6 +64,11 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case .costs: return "costs"
             case .savings: return "savings"
             case .graph: return "graph"
+            case .logs: return "logs"
+            case .changes: return "changes"
+            case .expiring: return "expiring"
+            case .sshFanout: return "ssh-fanout"
+            case .metricAlerts: return "metric-alerts"
             case .workflows: return "workflows"
             case .deployments: return "deployments"
             case .chat: return "chat"
@@ -70,6 +85,11 @@ public struct TabTarget: Codable, Hashable, Sendable {
             .costs,
             .savings,
             .graph,
+            .logs,
+            .changes,
+            .expiring,
+            .sshFanout,
+            .metricAlerts,
             .workflows,
             .deployments,
             .chat,
