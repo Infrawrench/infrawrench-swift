@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.29.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.30.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.29.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.30.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -117,6 +117,13 @@ public struct CostAnomaly: Codable, Hashable, Sendable {
     /// When the anomaly was delivered to a notification channel; null when
     /// delivery failed or a recent anomaly for the same key suppressed it.
     public var notifiedAt: String?
+    /// Root-cause hints computed when the anomaly fired: human-readable facts
+    /// from the change timeline and audit log for the anomalous day and the day
+    /// before (e.g. "12 gce-instance resources appeared", a workflow run, a
+    /// lifted change freeze), ranked by likely relevance and capped at three.
+    /// Empty when nothing notable happened in the window or the anomaly predates
+    /// hint collection.
+    public var hints: [String]
 
     public init(
         id: String,
@@ -129,7 +136,8 @@ public struct CostAnomaly: Codable, Hashable, Sendable {
         baselineCents: Int,
         thresholdCents: Int,
         detectedAt: String,
-        notifiedAt: String? = nil
+        notifiedAt: String? = nil,
+        hints: [String]
     ) {
         self.id = id
         self.day = day
@@ -142,5 +150,6 @@ public struct CostAnomaly: Codable, Hashable, Sendable {
         self.thresholdCents = thresholdCents
         self.detectedAt = detectedAt
         self.notifiedAt = notifiedAt
+        self.hints = hints
     }
 }

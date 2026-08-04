@@ -1,0 +1,92 @@
+/*
+ * InfrawrenchSDK v0.30.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * https://github.com/Infrawrench/Infrawrench
+ *
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.30.0).
+ *
+ * DO NOT EDIT. Regenerate with:
+ *   pnpm --filter @infrawrench/web generate:sdk
+ *
+ * Internal routes are absent by construction: the generator consumes the same
+ * published spec that /openapi.json serves, which drops every operation
+ * marked x-internal.
+ */
+import Foundation
+
+public struct PolicyTemplate: Codable, Hashable, Sendable {
+    public enum Language: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
+        case json
+        case yaml
+        case text
+        /// A value the API added after this SDK was generated. Kept rather than
+        /// rejected, so a new server-side value cannot break decoding.
+        case unrecognized(String)
+
+        public init(rawValue: String) {
+            switch rawValue {
+            case "json": self = .json
+            case "yaml": self = .yaml
+            case "text": self = .text
+            default: self = .unrecognized(rawValue)
+            }
+        }
+
+        public var rawValue: String {
+            switch self {
+            case .json: return "json"
+            case .yaml: return "yaml"
+            case .text: return "text"
+            case .unrecognized(let value): return value
+            }
+        }
+
+        /// Every value the spec declares. `unrecognized` is deliberately absent.
+        public static let allKnownCases: [Language] = [
+            .json,
+            .yaml,
+            .text,
+        ]
+
+        public init(from decoder: any Decoder) throws {
+            self.init(rawValue: try decoder.singleValueContainer().decode(String.self))
+        }
+
+        public func encode(to encoder: any Encoder) throws {
+            var container = encoder.singleValueContainer()
+            try container.encode(rawValue)
+        }
+    }
+
+    public struct HelpLink: Codable, Hashable, Sendable {
+        public var label: String
+        public var url: String
+
+        public init(
+            label: String,
+            url: String
+        ) {
+            self.label = label
+            self.url = url
+        }
+    }
+
+    public var formatLabel: String
+    public var language: Language
+    public var document: String
+    public var instructions: String?
+    public var helpLink: HelpLink?
+
+    public init(
+        formatLabel: String,
+        language: Language,
+        document: String,
+        instructions: String? = nil,
+        helpLink: HelpLink? = nil
+    ) {
+        self.formatLabel = formatLabel
+        self.language = language
+        self.document = document
+        self.instructions = instructions
+        self.helpLink = helpLink
+    }
+}

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.29.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.30.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.29.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.30.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -74,6 +74,10 @@ public final class APIV1Client: Sendable {
     public let invitations: InvitationsNamespace
     /// `client.kv`
     public let kv: KvNamespace
+    /// `client.logWorkspaces`
+    public let logWorkspaces: LogWorkspacesNamespace
+    /// `client.metricAlerts`
+    public let metricAlerts: MetricAlertsNamespace
     /// `client.moment`
     public let moment: MomentNamespace
     /// `client.msteams`
@@ -100,6 +104,8 @@ public final class APIV1Client: Sendable {
     public let slack: SlackNamespace
     /// `client.sql`
     public let sql: SqlNamespace
+    /// `client.sshFanout`
+    public let sshFanout: SshFanoutNamespace
     /// `client.sshKeys`
     public let sshKeys: SshKeysNamespace
     /// `client.sshTunnels`
@@ -144,6 +150,8 @@ public final class APIV1Client: Sendable {
         self.expiring = ExpiringNamespace(transport: transport)
         self.invitations = InvitationsNamespace(transport: transport)
         self.kv = KvNamespace(transport: transport)
+        self.logWorkspaces = LogWorkspacesNamespace(transport: transport)
+        self.metricAlerts = MetricAlertsNamespace(transport: transport)
         self.moment = MomentNamespace(transport: transport)
         self.msteams = MsteamsNamespace(transport: transport)
         self.orgs = OrgsNamespace(transport: transport)
@@ -157,6 +165,7 @@ public final class APIV1Client: Sendable {
         self.sftp = SftpNamespace(transport: transport)
         self.slack = SlackNamespace(transport: transport)
         self.sql = SqlNamespace(transport: transport)
+        self.sshFanout = SshFanoutNamespace(transport: transport)
         self.sshKeys = SshKeysNamespace(transport: transport)
         self.sshTunnels = SshTunnelsNamespace(transport: transport)
         self.statusIncidents = StatusIncidentsNamespace(transport: transport)

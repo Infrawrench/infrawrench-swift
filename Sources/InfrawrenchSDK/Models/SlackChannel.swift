@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.29.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.30.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.29.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.30.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -25,6 +25,8 @@ public struct SlackChannel: Codable, Hashable, Sendable {
     public var budgetAlerts: Bool
     /// Statistical spend-spike (cost anomaly) alerts
     public var anomalyAlerts: Bool
+    /// Metric threshold rule firings and recoveries
+    public var metricAlerts: Bool
     /// Batched resource-drift digests from the change timeline. Defaults to false
     /// when a channel is added — drift is continuous where the other triggers are
     /// exceptional.
@@ -37,6 +39,9 @@ public struct SlackChannel: Codable, Hashable, Sendable {
     /// Daily digests of approaching resource deadlines — expiring certificates,
     /// domains, tokens and keys past their rotation budget.
     public var expiryAlerts: Bool
+    /// A saved log-workspace query with alerting enabled found matching log
+    /// lines.
+    public var logMatchAlerts: Bool
     /// The Monday-morning weekly digest. Only sends when the organization has
     /// enabled the digest (see /digest).
     public var weeklyDigest: Bool
@@ -50,10 +55,12 @@ public struct SlackChannel: Codable, Hashable, Sendable {
         syncIncidents: Bool,
         budgetAlerts: Bool,
         anomalyAlerts: Bool,
+        metricAlerts: Bool,
         resourceDrift: Bool,
         workflowPages: Bool,
         providerIncidents: Bool,
         expiryAlerts: Bool,
+        logMatchAlerts: Bool,
         weeklyDigest: Bool
     ) {
         self.id = id
@@ -64,10 +71,12 @@ public struct SlackChannel: Codable, Hashable, Sendable {
         self.syncIncidents = syncIncidents
         self.budgetAlerts = budgetAlerts
         self.anomalyAlerts = anomalyAlerts
+        self.metricAlerts = metricAlerts
         self.resourceDrift = resourceDrift
         self.workflowPages = workflowPages
         self.providerIncidents = providerIncidents
         self.expiryAlerts = expiryAlerts
+        self.logMatchAlerts = logMatchAlerts
         self.weeklyDigest = weeklyDigest
     }
 }

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.29.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.30.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.29.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.30.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -39,6 +39,8 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
     case costsWrite
     case budgetsRead
     case budgetsWrite
+    case metricAlertsRead
+    case metricAlertsWrite
     case freezesRead
     case freezesWrite
     case freezesOverride
@@ -89,6 +91,8 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case "costs:write": self = .costsWrite
         case "budgets:read": self = .budgetsRead
         case "budgets:write": self = .budgetsWrite
+        case "metric-alerts:read": self = .metricAlertsRead
+        case "metric-alerts:write": self = .metricAlertsWrite
         case "freezes:read": self = .freezesRead
         case "freezes:write": self = .freezesWrite
         case "freezes:override": self = .freezesOverride
@@ -139,6 +143,8 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case .costsWrite: return "costs:write"
         case .budgetsRead: return "budgets:read"
         case .budgetsWrite: return "budgets:write"
+        case .metricAlertsRead: return "metric-alerts:read"
+        case .metricAlertsWrite: return "metric-alerts:write"
         case .freezesRead: return "freezes:read"
         case .freezesWrite: return "freezes:write"
         case .freezesOverride: return "freezes:override"
@@ -189,6 +195,8 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         .costsWrite,
         .budgetsRead,
         .budgetsWrite,
+        .metricAlertsRead,
+        .metricAlertsWrite,
         .freezesRead,
         .freezesWrite,
         .freezesOverride,

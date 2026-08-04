@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.29.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.30.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.29.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.30.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -62,12 +62,18 @@ public final class AccountsNamespace: Sendable {
     let transport: ApiTransport
     /// `client.accounts.credentials`
     public let credentials: AccountsCredentialsNamespace
+    /// `client.accounts.plugins`
+    public let plugins: AccountsPluginsNamespace
+    /// `client.accounts.preflight`
+    public let preflight: AccountsPreflightNamespace
     /// `client.accounts.syncType`
     public let syncType: AccountsSyncTypeNamespace
 
     init(transport: ApiTransport) {
         self.transport = transport
         self.credentials = AccountsCredentialsNamespace(transport: transport)
+        self.plugins = AccountsPluginsNamespace(transport: transport)
+        self.preflight = AccountsPreflightNamespace(transport: transport)
         self.syncType = AccountsSyncTypeNamespace(transport: transport)
     }
 
@@ -167,28 +173,6 @@ public final class AccountsNamespace: Sendable {
             RequestSpec(
                 method: "GET",
                 path: "/api/org/{orgId}/accounts",
-                pathParameters: ["orgId": orgId?.parameterValue]
-            ),
-            options: options
-        )
-    }
-
-    /// List installed plugins and their credential fields
-    ///
-    /// _Requires permission: `accounts:read`._
-    ///
-    /// GET /api/org/{orgId}/accounts/plugins
-    ///
-    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
-    /// created with.
-    public func plugins(
-        orgId: String? = nil,
-        options: RequestOptions? = nil
-    ) async throws -> [PluginSummary] {
-        return try await transport.send(
-            RequestSpec(
-                method: "GET",
-                path: "/api/org/{orgId}/accounts/plugins",
                 pathParameters: ["orgId": orgId?.parameterValue]
             ),
             options: options
@@ -341,6 +325,145 @@ public final class AccountsCredentialsNamespace: Sendable {
                 path: "/api/org/{orgId}/accounts/{id}/credentials",
                 pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue],
                 body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.accounts.plugins`
+public final class AccountsPluginsNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// List installed plugins and their credential fields
+    ///
+    /// _Requires permission: `accounts:read`._
+    ///
+    /// GET /api/org/{orgId}/accounts/plugins
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func list(
+        orgId: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> [PluginSummary] {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/accounts/plugins",
+                pathParameters: ["orgId": orgId?.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Generate a least-privilege credential template for a plugin
+    ///
+    /// Returns the paste-ready credential document (IAM policy JSON, custom role
+    /// YAML, token template…) scoped to the requested capability ids. Omitting
+    /// `capabilities` (or sending it empty) selects every declared capability;
+    /// any unknown capability id is rejected with 400. 400 also for plugins that
+    /// don't provide a template.
+    ///
+    /// _Requires permission: `accounts:read`._
+    ///
+    /// GET /api/org/{orgId}/accounts/plugins/{pluginId}/policy-template
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter capabilities: Comma-separated capability ids, e.g.
+    /// `resources,costs`.
+    public func policyTemplate(
+        orgId: String? = nil,
+        pluginId: PluginId,
+        capabilities: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> PolicyTemplateResponse {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/accounts/plugins/{pluginId}/policy-template",
+                pathParameters: ["orgId": orgId?.parameterValue, "pluginId": pluginId.parameterValue],
+                query: [QueryParameter("capabilities", capabilities)]
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.accounts.preflight`
+public final class AccountsPreflightNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// Probe credentials before creating an account
+    ///
+    /// Runs the plugin's per-capability permission checks against the submitted
+    /// credentials. Nothing is stored — use it from the add-account flow before
+    /// committing.
+    ///
+    /// _Requires permission: `accounts:write`._
+    ///
+    /// POST /api/org/{orgId}/accounts/preflight
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func create(
+        orgId: String? = nil,
+        body: PreflightRequest,
+        options: RequestOptions? = nil
+    ) async throws -> PreflightReport {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/accounts/preflight",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+
+    /// Re-run credential preflight on a stored account
+    ///
+    /// _Requires permission: `accounts:write`._
+    ///
+    /// POST /api/org/{orgId}/accounts/{id}/preflight
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func postOrgOrgIdAccountsIdPreflight(
+        orgId: String? = nil,
+        id: String,
+        options: RequestOptions? = nil
+    ) async throws -> PreflightReport {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/accounts/{id}/preflight",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue]
             ),
             options: options
         )
