@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.32.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.33.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.32.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.33.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -74,6 +74,8 @@ public final class APIV1Client: Sendable {
     public let invitations: InvitationsNamespace
     /// `client.kv`
     public let kv: KvNamespace
+    /// `client.leases`
+    public let leases: LeasesNamespace
     /// `client.logWorkspaces`
     public let logWorkspaces: LogWorkspacesNamespace
     /// `client.metricAlerts`
@@ -88,6 +90,10 @@ public final class APIV1Client: Sendable {
     public let orphans: OrphansNamespace
     /// `client.pages`
     public let pages: PagesNamespace
+    /// `client.posture`
+    public let posture: PostureNamespace
+    /// `client.probes`
+    public let probes: ProbesNamespace
     /// `client.profile`
     public let profile: ProfileNamespace
     /// `client.resources`
@@ -150,6 +156,7 @@ public final class APIV1Client: Sendable {
         self.expiring = ExpiringNamespace(transport: transport)
         self.invitations = InvitationsNamespace(transport: transport)
         self.kv = KvNamespace(transport: transport)
+        self.leases = LeasesNamespace(transport: transport)
         self.logWorkspaces = LogWorkspacesNamespace(transport: transport)
         self.metricAlerts = MetricAlertsNamespace(transport: transport)
         self.moment = MomentNamespace(transport: transport)
@@ -157,6 +164,8 @@ public final class APIV1Client: Sendable {
         self.orgs = OrgsNamespace(transport: transport)
         self.orphans = OrphansNamespace(transport: transport)
         self.pages = PagesNamespace(transport: transport)
+        self.posture = PostureNamespace(transport: transport)
+        self.probes = ProbesNamespace(transport: transport)
         self.profile = ProfileNamespace(transport: transport)
         self.resources = ResourcesNamespace(transport: transport)
         self.rightsizing = RightsizingNamespace(transport: transport)

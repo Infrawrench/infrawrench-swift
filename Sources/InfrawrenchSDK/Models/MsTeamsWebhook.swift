@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.32.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.33.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.32.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.33.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -41,6 +41,12 @@ public struct MsTeamsWebhook: Codable, Hashable, Sendable {
     /// A saved log-workspace query with alerting enabled found matching log
     /// lines.
     public var logMatchAlerts: Bool
+    /// Daily digests of critical/high security posture findings on synced
+    /// resources — public buckets, world-open ingress, unencrypted disks.
+    public var postureAlerts: Bool
+    /// A synthetic probe crossed its consecutive-failure threshold (down) or
+    /// answered again (recovered).
+    public var probeAlerts: Bool
     /// The Monday-morning weekly digest. Only sends when the organization has
     /// enabled the digest (see /digest).
     public var weeklyDigest: Bool
@@ -58,6 +64,8 @@ public struct MsTeamsWebhook: Codable, Hashable, Sendable {
         providerIncidents: Bool,
         expiryAlerts: Bool,
         logMatchAlerts: Bool,
+        postureAlerts: Bool,
+        probeAlerts: Bool,
         weeklyDigest: Bool
     ) {
         self.id = id
@@ -72,6 +80,8 @@ public struct MsTeamsWebhook: Codable, Hashable, Sendable {
         self.providerIncidents = providerIncidents
         self.expiryAlerts = expiryAlerts
         self.logMatchAlerts = logMatchAlerts
+        self.postureAlerts = postureAlerts
+        self.probeAlerts = probeAlerts
         self.weeklyDigest = weeklyDigest
     }
 }
