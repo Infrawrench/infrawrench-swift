@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.34.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.35.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.34.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.35.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -105,6 +105,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case cognitoUserPool
     case collection
     case composerEnvironment
+    case connection
     case container
     case containerRegistry
     case customHostname
@@ -139,6 +140,9 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case dedicatedInference
     case deployedModel
     case deployment
+    case directory
+    case directoryGroup
+    case directoryUser
     case dnsRecord
     case dockerContainer
     case dockerImage
@@ -204,6 +208,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case instanceGroup
     case instanceTemplate
     case internetGateway
+    case invitation
     case invite
     case ipAccessRule
     case ipAllocation
@@ -287,6 +292,8 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case objectStorageBucket
     case opensearchCluster
     case opensearchDomain
+    case organization
+    case organizationMembership
     case organizationUser
     case pageRule
     case pgDatabase
@@ -318,6 +325,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case redisInstance
     case redshiftCluster
     case reservedIp
+    case role
     case routeTable
     case route53HealthCheck
     case route53HostedZone
@@ -361,6 +369,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case tursoOrganizationInvite
     case tursoOrganizationMember
     case uploadPreset
+    case user
     case vectorStore
     case vectorizeIndex
     case vercelDeployment
@@ -377,6 +386,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case vpcNetwork
     case wafWebAcl
     case waitingRoom
+    case webhookEndpoint
     case worker
     case workerRoute
     case workersAiModel
@@ -478,6 +488,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "cognito-user-pool": self = .cognitoUserPool
         case "collection": self = .collection
         case "composer-environment": self = .composerEnvironment
+        case "connection": self = .connection
         case "container": self = .container
         case "container-registry": self = .containerRegistry
         case "custom-hostname": self = .customHostname
@@ -512,6 +523,9 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "dedicated-inference": self = .dedicatedInference
         case "deployed-model": self = .deployedModel
         case "deployment": self = .deployment
+        case "directory": self = .directory
+        case "directory-group": self = .directoryGroup
+        case "directory-user": self = .directoryUser
         case "dns-record": self = .dnsRecord
         case "docker-container": self = .dockerContainer
         case "docker-image": self = .dockerImage
@@ -577,6 +591,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "instance-group": self = .instanceGroup
         case "instance-template": self = .instanceTemplate
         case "internet-gateway": self = .internetGateway
+        case "invitation": self = .invitation
         case "invite": self = .invite
         case "ip-access-rule": self = .ipAccessRule
         case "ip-allocation": self = .ipAllocation
@@ -660,6 +675,8 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "object-storage-bucket": self = .objectStorageBucket
         case "opensearch-cluster": self = .opensearchCluster
         case "opensearch-domain": self = .opensearchDomain
+        case "organization": self = .organization
+        case "organization-membership": self = .organizationMembership
         case "organization-user": self = .organizationUser
         case "page-rule": self = .pageRule
         case "pg-database": self = .pgDatabase
@@ -691,6 +708,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "redis-instance": self = .redisInstance
         case "redshift-cluster": self = .redshiftCluster
         case "reserved-ip": self = .reservedIp
+        case "role": self = .role
         case "route-table": self = .routeTable
         case "route53-health-check": self = .route53HealthCheck
         case "route53-hosted-zone": self = .route53HostedZone
@@ -734,6 +752,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "turso-organization-invite": self = .tursoOrganizationInvite
         case "turso-organization-member": self = .tursoOrganizationMember
         case "upload-preset": self = .uploadPreset
+        case "user": self = .user
         case "vector-store": self = .vectorStore
         case "vectorize-index": self = .vectorizeIndex
         case "vercel-deployment": self = .vercelDeployment
@@ -750,6 +769,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "vpc-network": self = .vpcNetwork
         case "waf-web-acl": self = .wafWebAcl
         case "waiting-room": self = .waitingRoom
+        case "webhook-endpoint": self = .webhookEndpoint
         case "worker": self = .worker
         case "worker-route": self = .workerRoute
         case "workers-ai-model": self = .workersAiModel
@@ -851,6 +871,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .cognitoUserPool: return "cognito-user-pool"
         case .collection: return "collection"
         case .composerEnvironment: return "composer-environment"
+        case .connection: return "connection"
         case .container: return "container"
         case .containerRegistry: return "container-registry"
         case .customHostname: return "custom-hostname"
@@ -885,6 +906,9 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .dedicatedInference: return "dedicated-inference"
         case .deployedModel: return "deployed-model"
         case .deployment: return "deployment"
+        case .directory: return "directory"
+        case .directoryGroup: return "directory-group"
+        case .directoryUser: return "directory-user"
         case .dnsRecord: return "dns-record"
         case .dockerContainer: return "docker-container"
         case .dockerImage: return "docker-image"
@@ -950,6 +974,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .instanceGroup: return "instance-group"
         case .instanceTemplate: return "instance-template"
         case .internetGateway: return "internet-gateway"
+        case .invitation: return "invitation"
         case .invite: return "invite"
         case .ipAccessRule: return "ip-access-rule"
         case .ipAllocation: return "ip-allocation"
@@ -1033,6 +1058,8 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .objectStorageBucket: return "object-storage-bucket"
         case .opensearchCluster: return "opensearch-cluster"
         case .opensearchDomain: return "opensearch-domain"
+        case .organization: return "organization"
+        case .organizationMembership: return "organization-membership"
         case .organizationUser: return "organization-user"
         case .pageRule: return "page-rule"
         case .pgDatabase: return "pg-database"
@@ -1064,6 +1091,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .redisInstance: return "redis-instance"
         case .redshiftCluster: return "redshift-cluster"
         case .reservedIp: return "reserved-ip"
+        case .role: return "role"
         case .routeTable: return "route-table"
         case .route53HealthCheck: return "route53-health-check"
         case .route53HostedZone: return "route53-hosted-zone"
@@ -1107,6 +1135,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .tursoOrganizationInvite: return "turso-organization-invite"
         case .tursoOrganizationMember: return "turso-organization-member"
         case .uploadPreset: return "upload-preset"
+        case .user: return "user"
         case .vectorStore: return "vector-store"
         case .vectorizeIndex: return "vectorize-index"
         case .vercelDeployment: return "vercel-deployment"
@@ -1123,6 +1152,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .vpcNetwork: return "vpc-network"
         case .wafWebAcl: return "waf-web-acl"
         case .waitingRoom: return "waiting-room"
+        case .webhookEndpoint: return "webhook-endpoint"
         case .worker: return "worker"
         case .workerRoute: return "worker-route"
         case .workersAiModel: return "workers-ai-model"
@@ -1224,6 +1254,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .cognitoUserPool,
         .collection,
         .composerEnvironment,
+        .connection,
         .container,
         .containerRegistry,
         .customHostname,
@@ -1258,6 +1289,9 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .dedicatedInference,
         .deployedModel,
         .deployment,
+        .directory,
+        .directoryGroup,
+        .directoryUser,
         .dnsRecord,
         .dockerContainer,
         .dockerImage,
@@ -1323,6 +1357,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .instanceGroup,
         .instanceTemplate,
         .internetGateway,
+        .invitation,
         .invite,
         .ipAccessRule,
         .ipAllocation,
@@ -1406,6 +1441,8 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .objectStorageBucket,
         .opensearchCluster,
         .opensearchDomain,
+        .organization,
+        .organizationMembership,
         .organizationUser,
         .pageRule,
         .pgDatabase,
@@ -1437,6 +1474,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .redisInstance,
         .redshiftCluster,
         .reservedIp,
+        .role,
         .routeTable,
         .route53HealthCheck,
         .route53HostedZone,
@@ -1480,6 +1518,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .tursoOrganizationInvite,
         .tursoOrganizationMember,
         .uploadPreset,
+        .user,
         .vectorStore,
         .vectorizeIndex,
         .vercelDeployment,
@@ -1496,6 +1535,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .vpcNetwork,
         .wafWebAcl,
         .waitingRoom,
+        .webhookEndpoint,
         .worker,
         .workerRoute,
         .workersAiModel,

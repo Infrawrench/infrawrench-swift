@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.34.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.35.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.34.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.35.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -61,6 +61,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
     case together
     case turso
     case vercel
+    case workos
     case xai
     /// A value the API added after this SDK was generated. Kept rather than
     /// rejected, so a new server-side value cannot break decoding.
@@ -114,6 +115,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
         case "together": self = .together
         case "turso": self = .turso
         case "vercel": self = .vercel
+        case "workos": self = .workos
         case "xai": self = .xai
         default: self = .unrecognized(rawValue)
         }
@@ -167,6 +169,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
         case .together: return "together"
         case .turso: return "turso"
         case .vercel: return "vercel"
+        case .workos: return "workos"
         case .xai: return "xai"
         case .unrecognized(let value): return value
         }
@@ -220,6 +223,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
         .together,
         .turso,
         .vercel,
+        .workos,
         .xai,
     ]
 
