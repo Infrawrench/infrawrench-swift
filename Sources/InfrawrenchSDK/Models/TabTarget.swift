@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.35.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.36.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.35.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.36.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -31,6 +31,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
         case probes
         case workflows
         case deployments
+        case settings
         case chat
         /// A value the API added after this SDK was generated. Kept rather than
         /// rejected, so a new server-side value cannot break decoding.
@@ -54,6 +55,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case "probes": self = .probes
             case "workflows": self = .workflows
             case "deployments": self = .deployments
+            case "settings": self = .settings
             case "chat": self = .chat
             default: self = .unrecognized(rawValue)
             }
@@ -77,6 +79,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case .probes: return "probes"
             case .workflows: return "workflows"
             case .deployments: return "deployments"
+            case .settings: return "settings"
             case .chat: return "chat"
             case .unrecognized(let value): return value
             }
@@ -100,6 +103,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             .probes,
             .workflows,
             .deployments,
+            .settings,
             .chat,
         ]
 
