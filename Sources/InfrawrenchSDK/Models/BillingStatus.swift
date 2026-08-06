@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.36.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.37.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.36.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.37.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -18,12 +18,15 @@ public struct BillingStatus: Codable, Hashable, Sendable {
     /// never billed.
     public var complimentary: Bool
     public var subscription: Subscription?
+    public var capacity: CapacityStatus
 
     public init(
         complimentary: Bool,
-        subscription: Subscription? = nil
+        subscription: Subscription? = nil,
+        capacity: CapacityStatus
     ) {
         self.complimentary = complimentary
         self.subscription = subscription
+        self.capacity = capacity
     }
 }

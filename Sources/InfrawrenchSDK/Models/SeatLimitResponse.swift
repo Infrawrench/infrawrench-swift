@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.36.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.37.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.36.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.37.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -51,20 +51,27 @@ public struct SeatLimitResponse: Codable, Hashable, Sendable {
 
     public var error: String
     public var code: Code
-    /// Seats on the plan
+    /// Total capacity: monthly subscription seats plus prepaid capacity-slot
+    /// seats
     public var seatCount: Int
     /// Members plus pending unexpired invitations
     public var seatsUsed: Int
+    /// Whether retrying with `addSeat: true` can succeed. False when the org's
+    /// capacity is entirely prepaid capacity slots: there is no monthly seat to
+    /// buy, so the only remedy is another capacity slot.
+    public var canAddSeat: Bool
 
     public init(
         error: String,
         code: Code,
         seatCount: Int,
-        seatsUsed: Int
+        seatsUsed: Int,
+        canAddSeat: Bool
     ) {
         self.error = error
         self.code = code
         self.seatCount = seatCount
         self.seatsUsed = seatsUsed
+        self.canAddSeat = canAddSeat
     }
 }

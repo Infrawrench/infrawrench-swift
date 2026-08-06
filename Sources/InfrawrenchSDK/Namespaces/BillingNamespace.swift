@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.36.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.37.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.36.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.37.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -17,9 +17,12 @@ import Foundation
 public final class BillingNamespace: Sendable {
     /// Shared request plumbing.
     let transport: ApiTransport
+    /// `client.billing.capacity`
+    public let capacity: BillingCapacityNamespace
 
     init(transport: ApiTransport) {
         self.transport = transport
+        self.capacity = BillingCapacityNamespace(transport: transport)
     }
 
     /// Start a Stripe Checkout session
@@ -91,6 +94,52 @@ public final class BillingNamespace: Sendable {
                 method: "GET",
                 path: "/api/org/{orgId}/billing/status",
                 pathParameters: ["orgId": orgId?.parameterValue]
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.billing.capacity`
+public final class BillingCapacityNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// Start a Stripe Checkout session for prepaid capacity slots
+    ///
+    /// A capacity slot is one seat bought outright for a fixed term instead of
+    /// rented monthly, and it grants paid-plan access on its own. This is a
+    /// one-time payment, so the seats are granted by the
+    /// `checkout.session.completed` webhook once Stripe confirms the payment — a
+    /// 200 here only means the buyer was sent to a payment page. Rejected with
+    /// 400 for complimentary organizations, and 503 when the deployment has no
+    /// one-time capacity price configured.
+    ///
+    /// POST /api/org/{orgId}/billing/capacity/checkout
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 500: Server error
+    ///
+    /// Raises on 503: A backing service this endpoint depends on is not available
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func checkout(
+        orgId: String? = nil,
+        body: CapacityCheckoutRequest? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> StripeRedirectUrl {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/billing/capacity/checkout",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: body.map { AnyEncodable($0) }
             ),
             options: options
         )
