@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.37.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.38.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.37.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.38.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -41,6 +41,45 @@ public struct AgentSession: Codable, Hashable, Sendable {
         public static let allKnownCases: [Tool] = [
             .codex,
             .claudeCode,
+        ]
+
+        public init(from decoder: any Decoder) throws {
+            self.init(rawValue: try decoder.singleValueContainer().decode(String.self))
+        }
+
+        public func encode(to encoder: any Encoder) throws {
+            var container = encoder.singleValueContainer()
+            try container.encode(rawValue)
+        }
+    }
+
+    public enum Surface: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
+        case terminal
+        case t3Code
+        /// A value the API added after this SDK was generated. Kept rather than
+        /// rejected, so a new server-side value cannot break decoding.
+        case unrecognized(String)
+
+        public init(rawValue: String) {
+            switch rawValue {
+            case "terminal": self = .terminal
+            case "t3-code": self = .t3Code
+            default: self = .unrecognized(rawValue)
+            }
+        }
+
+        public var rawValue: String {
+            switch self {
+            case .terminal: return "terminal"
+            case .t3Code: return "t3-code"
+            case .unrecognized(let value): return value
+            }
+        }
+
+        /// Every value the spec declares. `unrecognized` is deliberately absent.
+        public static let allKnownCases: [Surface] = [
+            .terminal,
+            .t3Code,
         ]
 
         public init(from decoder: any Decoder) throws {
@@ -116,6 +155,7 @@ public struct AgentSession: Codable, Hashable, Sendable {
     public var pluginId: String
     public var resourceTypeId: String
     public var tool: Tool
+    public var surface: Surface?
     public var branchName: String
     public var status: Status
     public var vmResourceId: String?
@@ -132,6 +172,7 @@ public struct AgentSession: Codable, Hashable, Sendable {
         pluginId: String,
         resourceTypeId: String,
         tool: Tool,
+        surface: Surface? = nil,
         branchName: String,
         status: Status,
         vmResourceId: String? = nil,
@@ -147,6 +188,7 @@ public struct AgentSession: Codable, Hashable, Sendable {
         self.pluginId = pluginId
         self.resourceTypeId = resourceTypeId
         self.tool = tool
+        self.surface = surface
         self.branchName = branchName
         self.status = status
         self.vmResourceId = vmResourceId

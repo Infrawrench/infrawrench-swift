@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.37.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.38.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.37.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.38.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -14,13 +14,13 @@
 import Foundation
 
 public struct CreateAgentSession: Codable, Hashable, Sendable {
-    public var repo: String
+    public var repo: String?
     public var projectName: String?
     public var workspaceName: String?
     public var settings: AgentSettings?
 
     public init(
-        repo: String,
+        repo: String? = nil,
         projectName: String? = nil,
         workspaceName: String? = nil,
         settings: AgentSettings? = nil
