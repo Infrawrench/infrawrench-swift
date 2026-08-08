@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.0.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.1.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.0.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.1.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -27,6 +27,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
         case expiring
         case posture
         case dns
+        case environmentDiff
         case sshFanout
         case metricAlerts
         case probes
@@ -52,6 +53,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case "expiring": self = .expiring
             case "posture": self = .posture
             case "dns": self = .dns
+            case "environment-diff": self = .environmentDiff
             case "ssh-fanout": self = .sshFanout
             case "metric-alerts": self = .metricAlerts
             case "probes": self = .probes
@@ -77,6 +79,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case .expiring: return "expiring"
             case .posture: return "posture"
             case .dns: return "dns"
+            case .environmentDiff: return "environment-diff"
             case .sshFanout: return "ssh-fanout"
             case .metricAlerts: return "metric-alerts"
             case .probes: return "probes"
@@ -102,6 +105,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             .expiring,
             .posture,
             .dns,
+            .environmentDiff,
             .sshFanout,
             .metricAlerts,
             .probes,
