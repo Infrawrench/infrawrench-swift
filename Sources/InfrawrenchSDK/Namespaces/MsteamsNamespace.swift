@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.44.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.0.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.44.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.0.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -46,8 +46,8 @@ public final class MsteamsNamespace: Sendable {
 
     /// List the organization's Teams channels
     ///
-    /// Returns the Teams channels alerts are routed to and which triggers each
-    /// takes. Webhook URLs are never included.
+    /// Returns the Teams channels alerts can be routed to. Which alerts reach
+    /// each one is decided by /alert-rules. Webhook URLs are never included.
     ///
     /// GET /api/org/{orgId}/msteams/status
     ///
@@ -69,9 +69,9 @@ public final class MsteamsNamespace: Sendable {
 
     /// Post a test card to every configured Teams channel
     ///
-    /// Ignores trigger opt-ins — every channel gets the test. Fails with the
-    /// error Microsoft returned when nothing could be delivered (HTTP 404 usually
-    /// means the Workflow was deleted or turned off).
+    /// Ignores routing rules — every channel gets the test. Fails with the error
+    /// Microsoft returned when nothing could be delivered (HTTP 404 usually means
+    /// the Workflow was deleted or turned off).
     ///
     /// POST /api/org/{orgId}/msteams/test
     ///
@@ -103,10 +103,11 @@ public final class MsteamsWebhooksNamespace: Sendable {
         self.transport = transport
     }
 
-    /// Route alerts to a Teams channel
+    /// Connect a Teams channel as an alert destination
     ///
     /// Adds a channel by webhook URL, or updates the one already holding that
-    /// URL. Each trigger defaults to enabled. Responds 400 when the URL is not
+    /// URL. Which alerts reach it is decided by /alert-rules — connecting a
+    /// channel routes nothing to it on its own. Responds 400 when the URL is not
     /// https or its host is not Microsoft-operated.
     ///
     /// POST /api/org/{orgId}/msteams/webhooks
@@ -131,7 +132,7 @@ public final class MsteamsWebhooksNamespace: Sendable {
         )
     }
 
-    /// Stop routing alerts to a Teams channel
+    /// Disconnect a Teams channel
     ///
     /// DELETE /api/org/{orgId}/msteams/webhooks/{id}
     ///
@@ -154,7 +155,7 @@ public final class MsteamsWebhooksNamespace: Sendable {
         )
     }
 
-    /// Rename a Teams channel or change which alerts it receives
+    /// Rename a Teams channel
     ///
     /// The webhook URL is immutable — remove the channel and re-add it to change
     /// it.

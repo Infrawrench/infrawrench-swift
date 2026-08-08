@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.44.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.0.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.44.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.0.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -18,52 +18,16 @@ public struct SlackChannelCreate: Codable, Hashable, Sendable {
     public var channelId: String
     public var channelName: String
     public var isPrivate: Bool?
-    public var syncIncidents: Bool?
-    public var budgetAlerts: Bool?
-    public var anomalyAlerts: Bool?
-    public var metricAlerts: Bool?
-    public var resourceDrift: Bool?
-    public var workflowPages: Bool?
-    public var providerIncidents: Bool?
-    public var expiryAlerts: Bool?
-    public var logMatchAlerts: Bool?
-    public var postureAlerts: Bool?
-    public var probeAlerts: Bool?
-    public var weeklyDigest: Bool?
 
     public init(
         installationId: String,
         channelId: String,
         channelName: String,
-        isPrivate: Bool? = nil,
-        syncIncidents: Bool? = nil,
-        budgetAlerts: Bool? = nil,
-        anomalyAlerts: Bool? = nil,
-        metricAlerts: Bool? = nil,
-        resourceDrift: Bool? = nil,
-        workflowPages: Bool? = nil,
-        providerIncidents: Bool? = nil,
-        expiryAlerts: Bool? = nil,
-        logMatchAlerts: Bool? = nil,
-        postureAlerts: Bool? = nil,
-        probeAlerts: Bool? = nil,
-        weeklyDigest: Bool? = nil
+        isPrivate: Bool? = nil
     ) {
         self.installationId = installationId
         self.channelId = channelId
         self.channelName = channelName
         self.isPrivate = isPrivate
-        self.syncIncidents = syncIncidents
-        self.budgetAlerts = budgetAlerts
-        self.anomalyAlerts = anomalyAlerts
-        self.metricAlerts = metricAlerts
-        self.resourceDrift = resourceDrift
-        self.workflowPages = workflowPages
-        self.providerIncidents = providerIncidents
-        self.expiryAlerts = expiryAlerts
-        self.logMatchAlerts = logMatchAlerts
-        self.postureAlerts = postureAlerts
-        self.probeAlerts = probeAlerts
-        self.weeklyDigest = weeklyDigest
     }
 }
