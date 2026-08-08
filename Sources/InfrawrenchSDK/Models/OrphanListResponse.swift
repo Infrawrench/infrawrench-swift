@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.43.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.44.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.43.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.44.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -17,6 +17,8 @@ public struct OrphanListResponse: Codable, Hashable, Sendable {
     /// Groups sorted by account name.
     public var accounts: [OrphanAccountGroup]
     public var totalCount: Int
+    /// Flagged resources with no recorded owner — the 'nobody to ask' count.
+    public var unownedCount: Int
     /// Days of trailing spend the annotations cover.
     public var costWindowDays: Int
     public var generatedAt: String
@@ -24,11 +26,13 @@ public struct OrphanListResponse: Codable, Hashable, Sendable {
     public init(
         accounts: [OrphanAccountGroup],
         totalCount: Int,
+        unownedCount: Int,
         costWindowDays: Int,
         generatedAt: String
     ) {
         self.accounts = accounts
         self.totalCount = totalCount
+        self.unownedCount = unownedCount
         self.costWindowDays = costWindowDays
         self.generatedAt = generatedAt
     }

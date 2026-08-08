@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.43.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.44.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.43.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.44.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -25,6 +25,7 @@ public struct OrphanedResource: Codable, Hashable, Sendable {
     /// Plugin-authored explanation of why this resource looks wasted.
     public var reason: String
     public var cost: OrphanCostAnnotation?
+    public var owner: ResourceOwnerAnnotation?
     public var lastSyncedAt: String?
 
     public init(
@@ -36,6 +37,7 @@ public struct OrphanedResource: Codable, Hashable, Sendable {
         externalId: String? = nil,
         reason: String,
         cost: OrphanCostAnnotation? = nil,
+        owner: ResourceOwnerAnnotation? = nil,
         lastSyncedAt: String? = nil
     ) {
         self.id = id
@@ -46,6 +48,7 @@ public struct OrphanedResource: Codable, Hashable, Sendable {
         self.externalId = externalId
         self.reason = reason
         self.cost = cost
+        self.owner = owner
         self.lastSyncedAt = lastSyncedAt
     }
 }

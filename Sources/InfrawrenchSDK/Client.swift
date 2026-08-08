@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.43.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.44.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.43.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.44.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -96,6 +96,8 @@ public final class APIV1Client: Sendable {
     public let orgs: OrgsNamespace
     /// `client.orphans`
     public let orphans: OrphansNamespace
+    /// `client.ownership`
+    public let ownership: OwnershipNamespace
     /// `client.pages`
     public let pages: PagesNamespace
     /// `client.posture`
@@ -126,8 +128,12 @@ public final class APIV1Client: Sendable {
     public let sshKeys: SshKeysNamespace
     /// `client.sshTunnels`
     public let sshTunnels: SshTunnelsNamespace
+    /// `client.status`
+    public let status: StatusNamespace
     /// `client.statusIncidents`
     public let statusIncidents: StatusIncidentsNamespace
+    /// `client.statusPages`
+    public let statusPages: StatusPagesNamespace
     /// `client.storage`
     public let storage: StorageNamespace
     /// `client.tagPolicy`
@@ -177,6 +183,7 @@ public final class APIV1Client: Sendable {
         self.msteams = MsteamsNamespace(transport: transport)
         self.orgs = OrgsNamespace(transport: transport)
         self.orphans = OrphansNamespace(transport: transport)
+        self.ownership = OwnershipNamespace(transport: transport)
         self.pages = PagesNamespace(transport: transport)
         self.posture = PostureNamespace(transport: transport)
         self.probes = ProbesNamespace(transport: transport)
@@ -192,7 +199,9 @@ public final class APIV1Client: Sendable {
         self.sshFanout = SshFanoutNamespace(transport: transport)
         self.sshKeys = SshKeysNamespace(transport: transport)
         self.sshTunnels = SshTunnelsNamespace(transport: transport)
+        self.status = StatusNamespace(transport: transport)
         self.statusIncidents = StatusIncidentsNamespace(transport: transport)
+        self.statusPages = StatusPagesNamespace(transport: transport)
         self.storage = StorageNamespace(transport: transport)
         self.tagPolicy = TagPolicyNamespace(transport: transport)
         self.team = TeamNamespace(transport: transport)
