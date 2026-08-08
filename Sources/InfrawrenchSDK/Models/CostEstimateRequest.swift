@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.39.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.43.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.39.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.43.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -13,23 +13,26 @@
  */
 import Foundation
 
-public struct CreateCostEstimateRequest: Codable, Hashable, Sendable {
+public struct CostEstimateRequest: Codable, Hashable, Sendable {
     public var accountId: String
     public var resourceTypeId: String
-    public var fields: [String: String]
+    public var fields: [String: String]?
+    public var resourceId: ResourceId?
     public var pluginId: String?
     public var parentResourceId: ResourceId?
 
     public init(
         accountId: String,
         resourceTypeId: String,
-        fields: [String: String],
+        fields: [String: String]? = nil,
+        resourceId: ResourceId? = nil,
         pluginId: String? = nil,
         parentResourceId: ResourceId? = nil
     ) {
         self.accountId = accountId
         self.resourceTypeId = resourceTypeId
         self.fields = fields
+        self.resourceId = resourceId
         self.pluginId = pluginId
         self.parentResourceId = parentResourceId
     }

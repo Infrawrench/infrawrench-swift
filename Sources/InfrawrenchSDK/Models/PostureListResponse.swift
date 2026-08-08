@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.39.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.43.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.39.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.43.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -14,21 +14,31 @@
 import Foundation
 
 public struct PostureListResponse: Codable, Hashable, Sendable {
-    /// All findings, worst severity first.
+    /// Live findings, worst severity first. Dismissed findings are not included.
     public var findings: [PostureFinding]
+    /// Live finding count; dismissals excluded.
     public var totalCount: Int
     public var counts: PostureSeverityCounts
+    /// Findings a dismissal is currently suppressing, most recently dismissed
+    /// first. Only dismissals whose rule still matches appear, so a finding that
+    /// has since been fixed simply drops out.
+    public var dismissed: [DismissedPostureFinding]
+    public var dismissedCount: Int
     public var generatedAt: String
 
     public init(
         findings: [PostureFinding],
         totalCount: Int,
         counts: PostureSeverityCounts,
+        dismissed: [DismissedPostureFinding],
+        dismissedCount: Int,
         generatedAt: String
     ) {
         self.findings = findings
         self.totalCount = totalCount
         self.counts = counts
+        self.dismissed = dismissed
+        self.dismissedCount = dismissedCount
         self.generatedAt = generatedAt
     }
 }

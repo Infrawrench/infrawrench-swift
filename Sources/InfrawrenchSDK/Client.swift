@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.39.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.43.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.39.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.43.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -26,6 +26,8 @@ import Foundation
 public final class APIV1Client: Sendable {
     /// Shared request plumbing. Reach for it only to inspect the resolved base URL.
     public let transport: ApiTransport
+    /// `client.accessRequests`
+    public let accessRequests: AccessRequestsNamespace
     /// `client.accounts`
     public let accounts: AccountsNamespace
     /// `client.agents`
@@ -56,6 +58,10 @@ public final class APIV1Client: Sendable {
     public let costCentres: CostCentresNamespace
     /// `client.costs`
     public let costs: CostsNamespace
+    /// `client.credentialHygiene`
+    public let credentialHygiene: CredentialHygieneNamespace
+    /// `client.credits`
+    public let credits: CreditsNamespace
     /// `client.customGraphs`
     public let customGraphs: CustomGraphsNamespace
     /// `client.dashboards`
@@ -66,6 +72,8 @@ public final class APIV1Client: Sendable {
     public let deployments: DeploymentsNamespace
     /// `client.digest`
     public let digest: DigestNamespace
+    /// `client.dns`
+    public let dns: DnsNamespace
     /// `client.docker`
     public let docker: DockerNamespace
     /// `client.expiring`
@@ -104,6 +112,8 @@ public final class APIV1Client: Sendable {
     public let schedules: SchedulesNamespace
     /// `client.search`
     public let search: SearchNamespace
+    /// `client.sessionRecordings`
+    public let sessionRecordings: SessionRecordingsNamespace
     /// `client.sftp`
     public let sftp: SftpNamespace
     /// `client.slack`
@@ -132,6 +142,7 @@ public final class APIV1Client: Sendable {
     public init(_ options: ClientOptions = ClientOptions()) {
         let transport = ApiTransport(options: options)
         self.transport = transport
+        self.accessRequests = AccessRequestsNamespace(transport: transport)
         self.accounts = AccountsNamespace(transport: transport)
         self.agents = AgentsNamespace(transport: transport)
         self.apiKeys = ApiKeysNamespace(transport: transport)
@@ -147,11 +158,14 @@ public final class APIV1Client: Sendable {
         self.connect = ConnectNamespace(transport: transport)
         self.costCentres = CostCentresNamespace(transport: transport)
         self.costs = CostsNamespace(transport: transport)
+        self.credentialHygiene = CredentialHygieneNamespace(transport: transport)
+        self.credits = CreditsNamespace(transport: transport)
         self.customGraphs = CustomGraphsNamespace(transport: transport)
         self.dashboards = DashboardsNamespace(transport: transport)
         self.dependencyGraph = DependencyGraphNamespace(transport: transport)
         self.deployments = DeploymentsNamespace(transport: transport)
         self.digest = DigestNamespace(transport: transport)
+        self.dns = DnsNamespace(transport: transport)
         self.docker = DockerNamespace(transport: transport)
         self.expiring = ExpiringNamespace(transport: transport)
         self.invitations = InvitationsNamespace(transport: transport)
@@ -171,6 +185,7 @@ public final class APIV1Client: Sendable {
         self.rightsizing = RightsizingNamespace(transport: transport)
         self.schedules = SchedulesNamespace(transport: transport)
         self.search = SearchNamespace(transport: transport)
+        self.sessionRecordings = SessionRecordingsNamespace(transport: transport)
         self.sftp = SftpNamespace(transport: transport)
         self.slack = SlackNamespace(transport: transport)
         self.sql = SqlNamespace(transport: transport)

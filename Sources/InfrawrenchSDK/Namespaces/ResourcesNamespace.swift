@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.39.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.43.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.39.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.43.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -13,11 +13,11 @@
  */
 import Foundation
 
-public struct ResourcesCreateCostEstimateResult: Codable, Hashable, Sendable {
-    public var estimate: JsonObject?
+public struct ResourcesCostEstimateResult: Codable, Hashable, Sendable {
+    public var estimate: CostEstimate?
 
     public init(
-        estimate: JsonObject? = nil
+        estimate: CostEstimate? = nil
     ) {
         self.estimate = estimate
     }
@@ -69,6 +69,40 @@ public final class ResourcesNamespace: Sendable {
             RequestSpec(
                 method: "POST",
                 path: "/api/org/{orgId}/resources/attach",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+
+    /// Estimated monthly cost of a configuration
+    ///
+    /// Calls the plugin's `estimateCost` and returns a monthly total with the
+    /// line items behind it. Price a proposed resource by passing `fields`, an
+    /// existing one by passing `resourceId`, or a proposed change to an existing
+    /// one by passing both — `fields` is merged over the resource's stored
+    /// fields, so the caller only sends what changed. `estimate` is null when the
+    /// plugin cannot price the configuration; that is not the same as an estimate
+    /// of zero, and it should not be rendered as one.
+    ///
+    /// _Requires permission: `resources:read`._
+    ///
+    /// POST /api/org/{orgId}/resources/cost-estimate
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func costEstimate(
+        orgId: String? = nil,
+        body: CostEstimateRequest,
+        options: RequestOptions? = nil
+    ) async throws -> ResourcesCostEstimateResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/resources/cost-estimate",
                 pathParameters: ["orgId": orgId?.parameterValue],
                 body: AnyEncodable(body)
             ),
@@ -133,30 +167,6 @@ public final class ResourcesNamespace: Sendable {
             RequestSpec(
                 method: "POST",
                 path: "/api/org/{orgId}/resources/create-config",
-                pathParameters: ["orgId": orgId?.parameterValue],
-                body: AnyEncodable(body)
-            ),
-            options: options
-        )
-    }
-
-    /// Cost estimate for the current create form values
-    ///
-    /// _Requires permission: `resources:read`._
-    ///
-    /// POST /api/org/{orgId}/resources/create-cost-estimate
-    ///
-    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
-    /// created with.
-    public func createCostEstimate(
-        orgId: String? = nil,
-        body: CreateCostEstimateRequest,
-        options: RequestOptions? = nil
-    ) async throws -> ResourcesCreateCostEstimateResult {
-        return try await transport.send(
-            RequestSpec(
-                method: "POST",
-                path: "/api/org/{orgId}/resources/create-cost-estimate",
                 pathParameters: ["orgId": orgId?.parameterValue],
                 body: AnyEncodable(body)
             ),

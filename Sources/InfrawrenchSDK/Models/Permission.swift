@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v0.39.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v0.43.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.39.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 0.43.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -46,6 +46,9 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
     case freezesOverride
     case tagPolicyOverride
     case auditRead
+    case accessRead
+    case accessRequest
+    case accessApprove
     case teamRead
     case teamInvite
     case teamRoleWrite
@@ -56,6 +59,8 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
     case billingWrite
     case sshKeysRead
     case sshKeysWrite
+    case sessionRecordingsRead
+    case sessionRecordingsWrite
     case bastionsRead
     case bastionsWrite
     case chatRead
@@ -98,6 +103,9 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case "freezes:override": self = .freezesOverride
         case "tag-policy:override": self = .tagPolicyOverride
         case "audit:read": self = .auditRead
+        case "access:read": self = .accessRead
+        case "access:request": self = .accessRequest
+        case "access:approve": self = .accessApprove
         case "team:read": self = .teamRead
         case "team:invite": self = .teamInvite
         case "team:role:write": self = .teamRoleWrite
@@ -108,6 +116,8 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case "billing:write": self = .billingWrite
         case "ssh-keys:read": self = .sshKeysRead
         case "ssh-keys:write": self = .sshKeysWrite
+        case "session-recordings:read": self = .sessionRecordingsRead
+        case "session-recordings:write": self = .sessionRecordingsWrite
         case "bastions:read": self = .bastionsRead
         case "bastions:write": self = .bastionsWrite
         case "chat:read": self = .chatRead
@@ -150,6 +160,9 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case .freezesOverride: return "freezes:override"
         case .tagPolicyOverride: return "tag-policy:override"
         case .auditRead: return "audit:read"
+        case .accessRead: return "access:read"
+        case .accessRequest: return "access:request"
+        case .accessApprove: return "access:approve"
         case .teamRead: return "team:read"
         case .teamInvite: return "team:invite"
         case .teamRoleWrite: return "team:role:write"
@@ -160,6 +173,8 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case .billingWrite: return "billing:write"
         case .sshKeysRead: return "ssh-keys:read"
         case .sshKeysWrite: return "ssh-keys:write"
+        case .sessionRecordingsRead: return "session-recordings:read"
+        case .sessionRecordingsWrite: return "session-recordings:write"
         case .bastionsRead: return "bastions:read"
         case .bastionsWrite: return "bastions:write"
         case .chatRead: return "chat:read"
@@ -202,6 +217,9 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         .freezesOverride,
         .tagPolicyOverride,
         .auditRead,
+        .accessRead,
+        .accessRequest,
+        .accessApprove,
         .teamRead,
         .teamInvite,
         .teamRoleWrite,
@@ -212,6 +230,8 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         .billingWrite,
         .sshKeysRead,
         .sshKeysWrite,
+        .sessionRecordingsRead,
+        .sessionRecordingsWrite,
         .bastionsRead,
         .bastionsWrite,
         .chatRead,
