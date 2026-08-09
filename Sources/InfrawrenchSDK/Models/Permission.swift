@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.1.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.2.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.1.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.2.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -45,6 +45,8 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
     case freezesWrite
     case freezesOverride
     case tagPolicyOverride
+    case configRead
+    case configWrite
     case auditRead
     case accessRead
     case accessRequest
@@ -102,6 +104,8 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case "freezes:write": self = .freezesWrite
         case "freezes:override": self = .freezesOverride
         case "tag-policy:override": self = .tagPolicyOverride
+        case "config:read": self = .configRead
+        case "config:write": self = .configWrite
         case "audit:read": self = .auditRead
         case "access:read": self = .accessRead
         case "access:request": self = .accessRequest
@@ -159,6 +163,8 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case .freezesWrite: return "freezes:write"
         case .freezesOverride: return "freezes:override"
         case .tagPolicyOverride: return "tag-policy:override"
+        case .configRead: return "config:read"
+        case .configWrite: return "config:write"
         case .auditRead: return "audit:read"
         case .accessRead: return "access:read"
         case .accessRequest: return "access:request"
@@ -216,6 +222,8 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         .freezesWrite,
         .freezesOverride,
         .tagPolicyOverride,
+        .configRead,
+        .configWrite,
         .auditRead,
         .accessRead,
         .accessRequest,

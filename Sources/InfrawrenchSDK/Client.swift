@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.1.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.2.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.1.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.2.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -54,6 +54,8 @@ public final class APIV1Client: Sendable {
     public let changeFreezes: ChangeFreezesNamespace
     /// `client.changes`
     public let changes: ChangesNamespace
+    /// `client.config`
+    public let config: ConfigNamespace
     /// `client.connect`
     public let connect: ConnectNamespace
     /// `client.costCentres`
@@ -166,6 +168,7 @@ public final class APIV1Client: Sendable {
         self.budgets = BudgetsNamespace(transport: transport)
         self.changeFreezes = ChangeFreezesNamespace(transport: transport)
         self.changes = ChangesNamespace(transport: transport)
+        self.config = ConfigNamespace(transport: transport)
         self.connect = ConnectNamespace(transport: transport)
         self.costCentres = CostCentresNamespace(transport: transport)
         self.costs = CostsNamespace(transport: transport)
