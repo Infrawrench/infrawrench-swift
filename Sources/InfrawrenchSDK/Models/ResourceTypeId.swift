@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.3.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.4.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.3.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.4.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -370,6 +370,8 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case tursoOrganizationMember
     case uploadPreset
     case user
+    case utApp
+    case utFile
     case vectorStore
     case vectorizeIndex
     case vercelDeployment
@@ -753,6 +755,8 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "turso-organization-member": self = .tursoOrganizationMember
         case "upload-preset": self = .uploadPreset
         case "user": self = .user
+        case "ut-app": self = .utApp
+        case "ut-file": self = .utFile
         case "vector-store": self = .vectorStore
         case "vectorize-index": self = .vectorizeIndex
         case "vercel-deployment": self = .vercelDeployment
@@ -1136,6 +1140,8 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .tursoOrganizationMember: return "turso-organization-member"
         case .uploadPreset: return "upload-preset"
         case .user: return "user"
+        case .utApp: return "ut-app"
+        case .utFile: return "ut-file"
         case .vectorStore: return "vector-store"
         case .vectorizeIndex: return "vectorize-index"
         case .vercelDeployment: return "vercel-deployment"
@@ -1519,6 +1525,8 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .tursoOrganizationMember,
         .uploadPreset,
         .user,
+        .utApp,
+        .utFile,
         .vectorStore,
         .vectorizeIndex,
         .vercelDeployment,

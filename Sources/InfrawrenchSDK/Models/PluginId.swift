@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.3.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.4.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.3.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.4.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -60,6 +60,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
     case ssh
     case together
     case turso
+    case uploadthing
     case vercel
     case workos
     case xai
@@ -114,6 +115,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
         case "ssh": self = .ssh
         case "together": self = .together
         case "turso": self = .turso
+        case "uploadthing": self = .uploadthing
         case "vercel": self = .vercel
         case "workos": self = .workos
         case "xai": self = .xai
@@ -168,6 +170,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
         case .ssh: return "ssh"
         case .together: return "together"
         case .turso: return "turso"
+        case .uploadthing: return "uploadthing"
         case .vercel: return "vercel"
         case .workos: return "workos"
         case .xai: return "xai"
@@ -222,6 +225,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
         .ssh,
         .together,
         .turso,
+        .uploadthing,
         .vercel,
         .workos,
         .xai,

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.3.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.4.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.3.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.4.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -41,6 +41,8 @@ public struct ResourceTypeSummary: Codable, Hashable, Sendable {
     public var attachTargets: [AttachTarget]?
     public var isSshHost: Bool?
     public var sshTunnelAttachSource: Bool?
+    public var showInSidebar: Bool?
+    public var accountRoot: Bool?
     /// The type declares lifecycle start/stop actions, so its resources can carry
     /// a sleep/wake schedule.
     public var schedulable: Bool?
@@ -54,6 +56,8 @@ public struct ResourceTypeSummary: Codable, Hashable, Sendable {
         attachTargets: [AttachTarget]? = nil,
         isSshHost: Bool? = nil,
         sshTunnelAttachSource: Bool? = nil,
+        showInSidebar: Bool? = nil,
+        accountRoot: Bool? = nil,
         schedulable: Bool? = nil
     ) {
         self.id = id
@@ -64,6 +68,8 @@ public struct ResourceTypeSummary: Codable, Hashable, Sendable {
         self.attachTargets = attachTargets
         self.isSshHost = isSshHost
         self.sshTunnelAttachSource = sshTunnelAttachSource
+        self.showInSidebar = showInSidebar
+        self.accountRoot = accountRoot
         self.schedulable = schedulable
     }
 }
