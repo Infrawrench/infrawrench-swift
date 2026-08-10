@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.2.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.3.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.2.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.3.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -28,6 +28,7 @@ public struct ResourceDetail: Codable, Hashable, Sendable {
     public var canEdit: Bool
     public var editableFields: [EditableField]
     public var credentialFormats: [CredentialFormat]
+    public var supportsTerraformExport: Bool
     public var hasManifestEditor: Bool
     public var hasSecretVersions: Bool
     public var resourceDisplayName: String
@@ -69,6 +70,7 @@ public struct ResourceDetail: Codable, Hashable, Sendable {
         canEdit: Bool,
         editableFields: [EditableField],
         credentialFormats: [CredentialFormat],
+        supportsTerraformExport: Bool,
         hasManifestEditor: Bool,
         hasSecretVersions: Bool,
         resourceDisplayName: String,
@@ -107,6 +109,7 @@ public struct ResourceDetail: Codable, Hashable, Sendable {
         self.canEdit = canEdit
         self.editableFields = editableFields
         self.credentialFormats = credentialFormats
+        self.supportsTerraformExport = supportsTerraformExport
         self.hasManifestEditor = hasManifestEditor
         self.hasSecretVersions = hasSecretVersions
         self.resourceDisplayName = resourceDisplayName

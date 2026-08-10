@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.2.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.3.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.2.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.3.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -151,6 +151,31 @@ public final class AccountsNamespace: Sendable {
             RequestSpec(
                 method: "GET",
                 path: "/api/org/{orgId}/accounts/{id}/detail",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Generate Terraform HCL for the account's stored inventory
+    ///
+    /// _Requires permission: `resources:read`._
+    ///
+    /// GET /api/org/{orgId}/accounts/{id}/export-terraform
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func exportTerraform(
+        orgId: String? = nil,
+        id: String,
+        options: RequestOptions? = nil
+    ) async throws -> TerraformExport {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/accounts/{id}/export-terraform",
                 pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue]
             ),
             options: options

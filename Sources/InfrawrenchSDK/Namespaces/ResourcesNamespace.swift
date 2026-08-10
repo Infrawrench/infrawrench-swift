@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.2.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.3.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.2.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.3.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -327,6 +327,37 @@ public final class ResourcesNamespace: Sendable {
             RequestSpec(
                 method: "POST",
                 path: "/api/org/{orgId}/resources/{pluginId}/{typeId}/export-credential",
+                pathParameters: ["orgId": orgId?.parameterValue, "pluginId": pluginId.parameterValue, "typeId": typeId.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+
+    /// Generate Terraform HCL for a resource (and its direct children) from
+    /// stored state
+    ///
+    /// _Requires permission: `resources:read`._
+    ///
+    /// POST /api/org/{orgId}/resources/{pluginId}/{typeId}/export-terraform
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func exportTerraform(
+        orgId: String? = nil,
+        pluginId: PluginId,
+        typeId: ResourceTypeId,
+        body: ExportTerraformRequest,
+        options: RequestOptions? = nil
+    ) async throws -> TerraformExport {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/resources/{pluginId}/{typeId}/export-terraform",
                 pathParameters: ["orgId": orgId?.parameterValue, "pluginId": pluginId.parameterValue, "typeId": typeId.parameterValue],
                 body: AnyEncodable(body)
             ),
