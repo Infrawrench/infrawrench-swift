@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.6.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.7.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.6.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.7.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -82,6 +82,7 @@ public struct CostExportQuery: Codable, Hashable, Sendable {
 
     public enum ChargeType: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
         case usage
+        case commitmentCoveredUsage
         case commitmentFee
         case commitmentDiscount
         case credit
@@ -97,6 +98,7 @@ public struct CostExportQuery: Codable, Hashable, Sendable {
         public init(rawValue: String) {
             switch rawValue {
             case "usage": self = .usage
+            case "commitment_covered_usage": self = .commitmentCoveredUsage
             case "commitment_fee": self = .commitmentFee
             case "commitment_discount": self = .commitmentDiscount
             case "credit": self = .credit
@@ -112,6 +114,7 @@ public struct CostExportQuery: Codable, Hashable, Sendable {
         public var rawValue: String {
             switch self {
             case .usage: return "usage"
+            case .commitmentCoveredUsage: return "commitment_covered_usage"
             case .commitmentFee: return "commitment_fee"
             case .commitmentDiscount: return "commitment_discount"
             case .credit: return "credit"
@@ -127,6 +130,7 @@ public struct CostExportQuery: Codable, Hashable, Sendable {
         /// Every value the spec declares. `unrecognized` is deliberately absent.
         public static let allKnownCases: [ChargeType] = [
             .usage,
+            .commitmentCoveredUsage,
             .commitmentFee,
             .commitmentDiscount,
             .credit,
