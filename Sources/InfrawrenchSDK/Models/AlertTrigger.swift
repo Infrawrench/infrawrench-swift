@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.4.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.6.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.4.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.6.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -18,6 +18,7 @@ public enum AlertTrigger: RawRepresentable, Codable, Hashable, Sendable, Paramet
     case syncIncidents
     case budgetAlerts
     case anomalyAlerts
+    case costChangeAlerts
     case metricAlerts
     case resourceDrift
     case workflowPages
@@ -36,6 +37,7 @@ public enum AlertTrigger: RawRepresentable, Codable, Hashable, Sendable, Paramet
         case "syncIncidents": self = .syncIncidents
         case "budgetAlerts": self = .budgetAlerts
         case "anomalyAlerts": self = .anomalyAlerts
+        case "costChangeAlerts": self = .costChangeAlerts
         case "metricAlerts": self = .metricAlerts
         case "resourceDrift": self = .resourceDrift
         case "workflowPages": self = .workflowPages
@@ -54,6 +56,7 @@ public enum AlertTrigger: RawRepresentable, Codable, Hashable, Sendable, Paramet
         case .syncIncidents: return "syncIncidents"
         case .budgetAlerts: return "budgetAlerts"
         case .anomalyAlerts: return "anomalyAlerts"
+        case .costChangeAlerts: return "costChangeAlerts"
         case .metricAlerts: return "metricAlerts"
         case .resourceDrift: return "resourceDrift"
         case .workflowPages: return "workflowPages"
@@ -72,6 +75,7 @@ public enum AlertTrigger: RawRepresentable, Codable, Hashable, Sendable, Paramet
         .syncIncidents,
         .budgetAlerts,
         .anomalyAlerts,
+        .costChangeAlerts,
         .metricAlerts,
         .resourceDrift,
         .workflowPages,

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.4.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.6.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.4.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.6.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -106,6 +106,22 @@ public struct CostAccountStatus: Codable, Hashable, Sendable {
     public var supportsCosts: Bool
     public var periodNative: Bool
     public var dimensions: [Dimension]
+    /// Whether this account's plugin can tell one kind of charge from another.
+    /// False means every row it writes is recorded as `usage` — not that the
+    /// provider only bills usage.
+    public var chargeTypes: Bool
+    /// Whether this account's plugin reports an amortized amount distinct from
+    /// the cash amount. Clients offer the amortized cost basis only when at least
+    /// one account says yes; elsewhere the amortized view is the cash numbers
+    /// under another name.
+    public var amortization: Bool
+    /// Whether this account's amounts are derived by Infrawrench — inventory
+    /// priced against a rate card, or metered usage priced at published list
+    /// rates — rather than reported as billed spend. True means the series cannot
+    /// be reconciled against an invoice: resources deleted part-way through a
+    /// period are no longer in inventory to be priced, all rates are list rather
+    /// than negotiated, and credits, tax and refunds never appear.
+    public var estimated: Bool
     public var costLastPolledAt: String?
     public var costBackfilledAt: String?
     public var costPollFailureCount: Int
@@ -122,6 +138,9 @@ public struct CostAccountStatus: Codable, Hashable, Sendable {
         supportsCosts: Bool,
         periodNative: Bool,
         dimensions: [Dimension],
+        chargeTypes: Bool,
+        amortization: Bool,
+        estimated: Bool,
         costLastPolledAt: String? = nil,
         costBackfilledAt: String? = nil,
         costPollFailureCount: Int,
@@ -134,6 +153,9 @@ public struct CostAccountStatus: Codable, Hashable, Sendable {
         self.supportsCosts = supportsCosts
         self.periodNative = periodNative
         self.dimensions = dimensions
+        self.chargeTypes = chargeTypes
+        self.amortization = amortization
+        self.estimated = estimated
         self.costLastPolledAt = costLastPolledAt
         self.costBackfilledAt = costBackfilledAt
         self.costPollFailureCount = costPollFailureCount

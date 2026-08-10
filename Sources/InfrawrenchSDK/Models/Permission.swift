@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.4.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.6.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.4.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.6.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -67,6 +67,10 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
     case bastionsWrite
     case chatRead
     case chatWrite
+    case jiraRead
+    case jiraWrite
+    case linearRead
+    case linearWrite
     case pagesWrite
     case orgSettingsWrite
     /// A value the API added after this SDK was generated. Kept rather than
@@ -126,6 +130,10 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case "bastions:write": self = .bastionsWrite
         case "chat:read": self = .chatRead
         case "chat:write": self = .chatWrite
+        case "jira:read": self = .jiraRead
+        case "jira:write": self = .jiraWrite
+        case "linear:read": self = .linearRead
+        case "linear:write": self = .linearWrite
         case "pages:write": self = .pagesWrite
         case "org:settings:write": self = .orgSettingsWrite
         default: self = .unrecognized(rawValue)
@@ -185,6 +193,10 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case .bastionsWrite: return "bastions:write"
         case .chatRead: return "chat:read"
         case .chatWrite: return "chat:write"
+        case .jiraRead: return "jira:read"
+        case .jiraWrite: return "jira:write"
+        case .linearRead: return "linear:read"
+        case .linearWrite: return "linear:write"
         case .pagesWrite: return "pages:write"
         case .orgSettingsWrite: return "org:settings:write"
         case .unrecognized(let value): return value
@@ -244,6 +256,10 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         .bastionsWrite,
         .chatRead,
         .chatWrite,
+        .jiraRead,
+        .jiraWrite,
+        .linearRead,
+        .linearWrite,
         .pagesWrite,
         .orgSettingsWrite,
     ]

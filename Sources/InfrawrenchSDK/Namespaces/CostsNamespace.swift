@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.4.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.6.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.4.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.6.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -85,7 +85,9 @@ public final class CostsNamespace: Sendable {
     /// List distinct values for a cost dimension
     ///
     /// Feeds the filter and group-by pickers. Pass dimension=tag-keys for tag
-    /// keys; dimension=tag requires tagKey.
+    /// keys; dimension=tag requires tagKey. `charge_type` answers from the fixed
+    /// set of charge types rather than from the stored data, so the picker is
+    /// populated before any provider has reported one.
     ///
     /// _Requires permission: `costs:read`._
     ///
@@ -97,7 +99,7 @@ public final class CostsNamespace: Sendable {
     /// created with.
     ///
     /// - Parameter dimension: One of `provider`, `account`, `service`, `region`,
-    /// `resource`, `tag`, `tag-keys`.
+    /// `resource`, `tag`, `charge_type`, `commitment`, `tag-keys`.
     public func dimensions(
         orgId: String? = nil,
         dimension: String,
@@ -121,6 +123,16 @@ public final class CostsNamespace: Sendable {
     /// cost graphs. Currencies are never merged; mixed-currency orgs get one
     /// series per currency. Optionally returns a previous-period comparison and a
     /// trend forecast.
+    ///
+    /// `costBasis` chooses between cash and amortized money, and `chargeTypes`
+    /// narrows which kinds of charge count. Both the comparison period and the
+    /// forecast are computed on the same basis and charge types as the series
+    /// itself.
+    ///
+    /// The filter can be sent structurally as `filters` or as text in the cost
+    /// query language via `query` (`provider = 'aws' AND tag['env'] != 'dev'`).
+    /// They are two spellings of one filter: sending both is a 400, and a query
+    /// that does not parse is a 400 carrying the offset of the mistake.
     ///
     /// _Requires permission: `costs:read`._
     ///
@@ -204,10 +216,17 @@ public final class CostsNamespace: Sendable {
     /// - Parameter from: Defaults to 30 days ago.
     ///
     /// - Parameter to: Defaults to today.
+    ///
+    /// - Parameter basis: Which money to sum. `cash` (the default) is what the
+    /// provider charged on the day it charged it; `amortized` spreads a
+    /// commitment's up-front fee across the term it buys. Providers that report
+    /// no amortized amount fall back to their cash amount. One of `cash`,
+    /// `amortized`.
     public func showback(
         orgId: String? = nil,
         from: String? = nil,
         to: String? = nil,
+        basis: String? = nil,
         options: RequestOptions? = nil
     ) async throws -> ShowbackReport {
         return try await transport.send(
@@ -215,7 +234,7 @@ public final class CostsNamespace: Sendable {
                 method: "GET",
                 path: "/api/org/{orgId}/costs/showback",
                 pathParameters: ["orgId": orgId?.parameterValue],
-                query: [QueryParameter("from", from), QueryParameter("to", to)]
+                query: [QueryParameter("from", from), QueryParameter("to", to), QueryParameter("basis", basis)]
             ),
             options: options
         )
@@ -265,10 +284,17 @@ public final class CostsNamespace: Sendable {
     /// - Parameter from: Defaults to 30 days ago.
     ///
     /// - Parameter to: Defaults to today.
+    ///
+    /// - Parameter basis: Which money to sum. `cash` (the default) is what the
+    /// provider charged on the day it charged it; `amortized` spreads a
+    /// commitment's up-front fee across the term it buys. Providers that report
+    /// no amortized amount fall back to their cash amount. One of `cash`,
+    /// `amortized`.
     public func untagged(
         orgId: String? = nil,
         from: String? = nil,
         to: String? = nil,
+        basis: String? = nil,
         options: RequestOptions? = nil
     ) async throws -> UntaggedSpendReport {
         return try await transport.send(
@@ -276,7 +302,7 @@ public final class CostsNamespace: Sendable {
                 method: "GET",
                 path: "/api/org/{orgId}/costs/untagged",
                 pathParameters: ["orgId": orgId?.parameterValue],
-                query: [QueryParameter("from", from), QueryParameter("to", to)]
+                query: [QueryParameter("from", from), QueryParameter("to", to), QueryParameter("basis", basis)]
             ),
             options: options
         )

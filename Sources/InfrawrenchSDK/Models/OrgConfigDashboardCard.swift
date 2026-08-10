@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.4.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.6.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.4.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.6.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -57,6 +57,7 @@ public enum OrgConfigDashboardCard: Codable, Hashable, Sendable {
 
         public enum WidgetKind: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
             case costGraph
+            case costReport
             case budget
             case customGraph
             /// A value the API added after this SDK was generated. Kept rather
@@ -66,6 +67,7 @@ public enum OrgConfigDashboardCard: Codable, Hashable, Sendable {
             public init(rawValue: String) {
                 switch rawValue {
                 case "cost_graph": self = .costGraph
+                case "cost_report": self = .costReport
                 case "budget": self = .budget
                 case "custom_graph": self = .customGraph
                 default: self = .unrecognized(rawValue)
@@ -75,6 +77,7 @@ public enum OrgConfigDashboardCard: Codable, Hashable, Sendable {
             public var rawValue: String {
                 switch self {
                 case .costGraph: return "cost_graph"
+                case .costReport: return "cost_report"
                 case .budget: return "budget"
                 case .customGraph: return "custom_graph"
                 case .unrecognized(let value): return value
@@ -84,6 +87,7 @@ public enum OrgConfigDashboardCard: Codable, Hashable, Sendable {
             /// Every value the spec declares. `unrecognized` is deliberately absent.
             public static let allKnownCases: [WidgetKind] = [
                 .costGraph,
+                .costReport,
                 .budget,
                 .customGraph,
             ]

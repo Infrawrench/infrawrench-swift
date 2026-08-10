@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.4.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.6.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.4.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.6.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -21,6 +21,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
         case agents
         case costs
         case savings
+        case costReports
         case graph
         case logs
         case changes
@@ -47,6 +48,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case "agents": self = .agents
             case "costs": self = .costs
             case "savings": self = .savings
+            case "cost-reports": self = .costReports
             case "graph": self = .graph
             case "logs": self = .logs
             case "changes": self = .changes
@@ -73,6 +75,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case .agents: return "agents"
             case .costs: return "costs"
             case .savings: return "savings"
+            case .costReports: return "cost-reports"
             case .graph: return "graph"
             case .logs: return "logs"
             case .changes: return "changes"
@@ -99,6 +102,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             .agents,
             .costs,
             .savings,
+            .costReports,
             .graph,
             .logs,
             .changes,
@@ -130,18 +134,21 @@ public struct TabTarget: Codable, Hashable, Sendable {
     public var accountId: String?
     public var resourceId: ResourceId?
     public var conversationId: String?
+    public var reportId: String?
 
     public init(
         kind: Kind,
         dashboardId: String? = nil,
         accountId: String? = nil,
         resourceId: ResourceId? = nil,
-        conversationId: String? = nil
+        conversationId: String? = nil,
+        reportId: String? = nil
     ) {
         self.kind = kind
         self.dashboardId = dashboardId
         self.accountId = accountId
         self.resourceId = resourceId
         self.conversationId = conversationId
+        self.reportId = reportId
     }
 }

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.4.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.6.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.4.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.6.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -94,6 +94,13 @@ public struct BudgetWithStatus: Codable, Hashable, Sendable {
     public var currency: String
     public var filters: [BudgetCostFilter]
     public var thresholds: [BudgetThreshold]
+    public var costBasis: BudgetCostBasis
+    /// A saved cost filter (see /saved-cost-filters) applied by reference and
+    /// AND-composed with `filters` when the budget is evaluated. Updates are full
+    /// replaces, so omitting it on PUT clears it. A reference that fails to
+    /// resolve errors the budget's evaluation rather than silently measuring all
+    /// spend.
+    public var savedFilterId: String?
     public var month: String
     public var actualCents: Int
     public var forecastCents: Int?
@@ -107,6 +114,8 @@ public struct BudgetWithStatus: Codable, Hashable, Sendable {
         currency: String,
         filters: [BudgetCostFilter],
         thresholds: [BudgetThreshold],
+        costBasis: BudgetCostBasis,
+        savedFilterId: String? = nil,
         month: String,
         actualCents: Int,
         forecastCents: Int? = nil,
@@ -119,6 +128,8 @@ public struct BudgetWithStatus: Codable, Hashable, Sendable {
         self.currency = currency
         self.filters = filters
         self.thresholds = thresholds
+        self.costBasis = costBasis
+        self.savedFilterId = savedFilterId
         self.month = month
         self.actualCents = actualCents
         self.forecastCents = forecastCents

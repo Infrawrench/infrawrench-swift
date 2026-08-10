@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.4.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.6.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.4.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.6.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -20,6 +20,8 @@ public enum CostDimension: RawRepresentable, Codable, Hashable, Sendable, Parame
     case region
     case resource
     case tag
+    case chargeType
+    case commitment
     /// A value the API added after this SDK was generated. Kept rather than
     /// rejected, so a new server-side value cannot break decoding.
     case unrecognized(String)
@@ -32,6 +34,8 @@ public enum CostDimension: RawRepresentable, Codable, Hashable, Sendable, Parame
         case "region": self = .region
         case "resource": self = .resource
         case "tag": self = .tag
+        case "charge_type": self = .chargeType
+        case "commitment": self = .commitment
         default: self = .unrecognized(rawValue)
         }
     }
@@ -44,6 +48,8 @@ public enum CostDimension: RawRepresentable, Codable, Hashable, Sendable, Parame
         case .region: return "region"
         case .resource: return "resource"
         case .tag: return "tag"
+        case .chargeType: return "charge_type"
+        case .commitment: return "commitment"
         case .unrecognized(let value): return value
         }
     }
@@ -56,6 +62,8 @@ public enum CostDimension: RawRepresentable, Codable, Hashable, Sendable, Parame
         .region,
         .resource,
         .tag,
+        .chargeType,
+        .commitment,
     ]
 
     public init(from decoder: any Decoder) throws {

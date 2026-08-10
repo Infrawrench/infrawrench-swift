@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.4.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.6.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.4.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.6.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -54,18 +54,32 @@ public final class APIV1Client: Sendable {
     public let changeFreezes: ChangeFreezesNamespace
     /// `client.changes`
     public let changes: ChangesNamespace
+    /// `client.commitments`
+    public let commitments: CommitmentsNamespace
     /// `client.config`
     public let config: ConfigNamespace
     /// `client.connect`
     public let connect: ConnectNamespace
+    /// `client.costAlerts`
+    public let costAlerts: CostAlertsNamespace
     /// `client.costCentres`
     public let costCentres: CostCentresNamespace
+    /// `client.costExports`
+    public let costExports: CostExportsNamespace
+    /// `client.costReportFolders`
+    public let costReportFolders: CostReportFoldersNamespace
+    /// `client.costReportNotifications`
+    public let costReportNotifications: CostReportNotificationsNamespace
+    /// `client.costReports`
+    public let costReports: CostReportsNamespace
     /// `client.costs`
     public let costs: CostsNamespace
     /// `client.credentialHygiene`
     public let credentialHygiene: CredentialHygieneNamespace
     /// `client.credits`
     public let credits: CreditsNamespace
+    /// `client.currency`
+    public let currency: CurrencyNamespace
     /// `client.customGraphs`
     public let customGraphs: CustomGraphsNamespace
     /// `client.dashboards`
@@ -86,10 +100,14 @@ public final class APIV1Client: Sendable {
     public let expiring: ExpiringNamespace
     /// `client.invitations`
     public let invitations: InvitationsNamespace
+    /// `client.jira`
+    public let jira: JiraNamespace
     /// `client.kv`
     public let kv: KvNamespace
     /// `client.leases`
     public let leases: LeasesNamespace
+    /// `client.linear`
+    public let linear: LinearNamespace
     /// `client.logWorkspaces`
     public let logWorkspaces: LogWorkspacesNamespace
     /// `client.metricAlerts`
@@ -116,6 +134,8 @@ public final class APIV1Client: Sendable {
     public let resources: ResourcesNamespace
     /// `client.rightsizing`
     public let rightsizing: RightsizingNamespace
+    /// `client.savedCostFilters`
+    public let savedCostFilters: SavedCostFiltersNamespace
     /// `client.schedules`
     public let schedules: SchedulesNamespace
     /// `client.search`
@@ -168,12 +188,19 @@ public final class APIV1Client: Sendable {
         self.budgets = BudgetsNamespace(transport: transport)
         self.changeFreezes = ChangeFreezesNamespace(transport: transport)
         self.changes = ChangesNamespace(transport: transport)
+        self.commitments = CommitmentsNamespace(transport: transport)
         self.config = ConfigNamespace(transport: transport)
         self.connect = ConnectNamespace(transport: transport)
+        self.costAlerts = CostAlertsNamespace(transport: transport)
         self.costCentres = CostCentresNamespace(transport: transport)
+        self.costExports = CostExportsNamespace(transport: transport)
+        self.costReportFolders = CostReportFoldersNamespace(transport: transport)
+        self.costReportNotifications = CostReportNotificationsNamespace(transport: transport)
+        self.costReports = CostReportsNamespace(transport: transport)
         self.costs = CostsNamespace(transport: transport)
         self.credentialHygiene = CredentialHygieneNamespace(transport: transport)
         self.credits = CreditsNamespace(transport: transport)
+        self.currency = CurrencyNamespace(transport: transport)
         self.customGraphs = CustomGraphsNamespace(transport: transport)
         self.dashboards = DashboardsNamespace(transport: transport)
         self.dependencyGraph = DependencyGraphNamespace(transport: transport)
@@ -184,8 +211,10 @@ public final class APIV1Client: Sendable {
         self.environmentDiff = EnvironmentDiffNamespace(transport: transport)
         self.expiring = ExpiringNamespace(transport: transport)
         self.invitations = InvitationsNamespace(transport: transport)
+        self.jira = JiraNamespace(transport: transport)
         self.kv = KvNamespace(transport: transport)
         self.leases = LeasesNamespace(transport: transport)
+        self.linear = LinearNamespace(transport: transport)
         self.logWorkspaces = LogWorkspacesNamespace(transport: transport)
         self.metricAlerts = MetricAlertsNamespace(transport: transport)
         self.moment = MomentNamespace(transport: transport)
@@ -199,6 +228,7 @@ public final class APIV1Client: Sendable {
         self.profile = ProfileNamespace(transport: transport)
         self.resources = ResourcesNamespace(transport: transport)
         self.rightsizing = RightsizingNamespace(transport: transport)
+        self.savedCostFilters = SavedCostFiltersNamespace(transport: transport)
         self.schedules = SchedulesNamespace(transport: transport)
         self.search = SearchNamespace(transport: transport)
         self.sessionRecordings = SessionRecordingsNamespace(transport: transport)
