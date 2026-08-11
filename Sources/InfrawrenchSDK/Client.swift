@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.12.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.13.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.12.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.13.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -50,6 +50,8 @@ public final class APIV1Client: Sendable {
     public let billing: BillingNamespace
     /// `client.billingRules`
     public let billingRules: BillingRulesNamespace
+    /// `client.blastRadius`
+    public let blastRadius: BlastRadiusNamespace
     /// `client.budgets`
     public let budgets: BudgetsNamespace
     /// `client.businessMetrics`
@@ -202,6 +204,7 @@ public final class APIV1Client: Sendable {
         self.bastions = BastionsNamespace(transport: transport)
         self.billing = BillingNamespace(transport: transport)
         self.billingRules = BillingRulesNamespace(transport: transport)
+        self.blastRadius = BlastRadiusNamespace(transport: transport)
         self.budgets = BudgetsNamespace(transport: transport)
         self.businessMetrics = BusinessMetricsNamespace(transport: transport)
         self.changeFreezes = ChangeFreezesNamespace(transport: transport)
