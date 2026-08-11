@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.9.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.10.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.9.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.10.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -33,6 +33,11 @@ public struct CostAnnotation: Codable, Hashable, Sendable {
     public var createdByUserId: String?
     public var createdAt: String
     public var updatedAt: String
+    /// The detected cost anomaly this note was written to explain (see POST
+    /// /costs/anomalies/{anomalyId}/acknowledge), or null for a note written by
+    /// hand. The reverse of the anomaly's own `acknowledgement.annotationId`,
+    /// resolved from that same single link rather than stored twice.
+    public var costAnomalyId: String?
 
     public init(
         id: String,
@@ -42,7 +47,8 @@ public struct CostAnnotation: Codable, Hashable, Sendable {
         costReportId: String? = nil,
         createdByUserId: String? = nil,
         createdAt: String,
-        updatedAt: String
+        updatedAt: String,
+        costAnomalyId: String? = nil
     ) {
         self.id = id
         self.startDate = startDate
@@ -52,5 +58,6 @@ public struct CostAnnotation: Codable, Hashable, Sendable {
         self.createdByUserId = createdByUserId
         self.createdAt = createdAt
         self.updatedAt = updatedAt
+        self.costAnomalyId = costAnomalyId
     }
 }

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.9.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.10.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.9.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.10.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -128,6 +128,8 @@ public final class APIV1Client: Sendable {
     public let moment: MomentNamespace
     /// `client.msteams`
     public let msteams: MsteamsNamespace
+    /// `client.networkFlows`
+    public let networkFlows: NetworkFlowsNamespace
     /// `client.orgs`
     public let orgs: OrgsNamespace
     /// `client.orphans`
@@ -237,6 +239,7 @@ public final class APIV1Client: Sendable {
         self.metricAlerts = MetricAlertsNamespace(transport: transport)
         self.moment = MomentNamespace(transport: transport)
         self.msteams = MsteamsNamespace(transport: transport)
+        self.networkFlows = NetworkFlowsNamespace(transport: transport)
         self.orgs = OrgsNamespace(transport: transport)
         self.orphans = OrphansNamespace(transport: transport)
         self.ownership = OwnershipNamespace(transport: transport)

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.9.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.10.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.9.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.10.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -92,6 +92,31 @@ public struct CostAnomaly: Codable, Hashable, Sendable {
         }
     }
 
+    public struct Acknowledgement: Codable, Hashable, Sendable {
+        /// What somebody established this finding was. Also the annotation's
+        /// text.
+        public var explanation: String
+        /// When the current explanation was recorded — restamped by a correction.
+        public var acknowledgedAt: String
+        public var acknowledgedByUserId: String?
+        /// The cost annotation this created, drawn on every chart covering the
+        /// anomalous day. Null once that note has been deleted — which removes
+        /// the marker, never the acknowledgement: the finding stays explained.
+        public var annotationId: String?
+
+        public init(
+            explanation: String,
+            acknowledgedAt: String,
+            acknowledgedByUserId: String? = nil,
+            annotationId: String? = nil
+        ) {
+            self.explanation = explanation
+            self.acknowledgedAt = acknowledgedAt
+            self.acknowledgedByUserId = acknowledgedByUserId
+            self.annotationId = annotationId
+        }
+    }
+
     public var id: String
     /// The anomalous UTC day.
     public var day: String
@@ -124,6 +149,10 @@ public struct CostAnomaly: Codable, Hashable, Sendable {
     /// Empty when nothing notable happened in the window or the anomaly predates
     /// hint collection.
     public var hints: [String]
+    /// Present once somebody has explained this finding, null while it is still
+    /// an open question. Acknowledging does not suppress detection — the same key
+    /// spiking again on a later day is a new anomaly and fires as normal.
+    public var acknowledgement: Acknowledgement?
 
     public init(
         id: String,
@@ -137,7 +166,8 @@ public struct CostAnomaly: Codable, Hashable, Sendable {
         thresholdCents: Int,
         detectedAt: String,
         notifiedAt: String? = nil,
-        hints: [String]
+        hints: [String],
+        acknowledgement: Acknowledgement? = nil
     ) {
         self.id = id
         self.day = day
@@ -151,5 +181,6 @@ public struct CostAnomaly: Codable, Hashable, Sendable {
         self.detectedAt = detectedAt
         self.notifiedAt = notifiedAt
         self.hints = hints
+        self.acknowledgement = acknowledgement
     }
 }

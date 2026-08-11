@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.9.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.10.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.9.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.10.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -12,16 +12,6 @@
  * marked x-internal.
  */
 import Foundation
-
-public struct CostsAnomaliesResult: Codable, Hashable, Sendable {
-    public var anomalies: [CostAnomaly]
-
-    public init(
-        anomalies: [CostAnomaly]
-    ) {
-        self.anomalies = anomalies
-    }
-}
 
 public struct CostsEfficiencyAlertsResult: Codable, Hashable, Sendable {
     public var events: [EfficiencyAlertEvent]
@@ -43,10 +33,34 @@ public struct CostsStatusResult: Codable, Hashable, Sendable {
     }
 }
 
+public struct CostsAnomaliesAcknowledgeBody: Codable, Hashable, Sendable {
+    /// One sentence on what caused the spend. Becomes the annotation's text, so
+    /// the annotation's 500-character ceiling applies.
+    public var explanation: String
+
+    public init(
+        explanation: String
+    ) {
+        self.explanation = explanation
+    }
+}
+
+public struct CostsAnomaliesGetResult: Codable, Hashable, Sendable {
+    public var anomalies: [CostAnomaly]
+
+    public init(
+        anomalies: [CostAnomaly]
+    ) {
+        self.anomalies = anomalies
+    }
+}
+
 /// `client.costs`
 public final class CostsNamespace: Sendable {
     /// Shared request plumbing.
     let transport: ApiTransport
+    /// `client.costs.anomalies`
+    public let anomalies: CostsAnomaliesNamespace
     /// `client.costs.anomalySettings`
     public let anomalySettings: CostsAnomalySettingsNamespace
     /// `client.costs.efficiencyAlertSettings`
@@ -54,45 +68,9 @@ public final class CostsNamespace: Sendable {
 
     init(transport: ApiTransport) {
         self.transport = transport
+        self.anomalies = CostsAnomaliesNamespace(transport: transport)
         self.anomalySettings = CostsAnomalySettingsNamespace(transport: transport)
         self.efficiencyAlertSettings = CostsEfficiencyAlertSettingsNamespace(transport: transport)
-    }
-
-    /// List recently detected cost anomalies
-    ///
-    /// Spend anomalies detected by the daily background pass. Two kinds share the
-    /// list: a `spike`, where a provider's or service's spend exceeded its
-    /// trailing 28-day baseline by a statistical threshold (mean + N·stddev, with
-    /// an absolute floor to ignore penny-scale noise), and a `new_source`, where
-    /// a provider or service with no spend at all across that window suddenly
-    /// billed a material amount. Thresholds are per organization — see GET
-    /// /costs/anomaly-settings. Newest day first, capped at 200 rows.
-    ///
-    /// _Requires permission: `costs:read`._
-    ///
-    /// GET /api/org/{orgId}/costs/anomalies
-    ///
-    /// Raises on 400: Bad request
-    ///
-    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
-    /// created with.
-    ///
-    /// - Parameter days: Window in days over anomalous days, 1-90. Defaults to
-    /// 30.
-    public func anomalies(
-        orgId: String? = nil,
-        days: String? = nil,
-        options: RequestOptions? = nil
-    ) async throws -> CostsAnomaliesResult {
-        return try await transport.send(
-            RequestSpec(
-                method: "GET",
-                path: "/api/org/{orgId}/costs/anomalies",
-                pathParameters: ["orgId": orgId?.parameterValue],
-                query: [QueryParameter("days", days)]
-            ),
-            options: options
-        )
     }
 
     /// List distinct values for a cost dimension
@@ -374,6 +352,98 @@ public final class CostsNamespace: Sendable {
                 path: "/api/org/{orgId}/costs/untagged",
                 pathParameters: ["orgId": orgId?.parameterValue],
                 query: [QueryParameter("from", from), QueryParameter("to", to), QueryParameter("basis", basis)]
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.costs.anomalies`
+public final class CostsAnomaliesNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// Explain a detected cost anomaly
+    ///
+    /// Record what a finding actually was, and publish that sentence as a cost
+    /// annotation on **every** chart covering the anomalous day — the point being
+    /// that 'we migrated the fleet' is not a fact about whichever report somebody
+    /// happened to open. The note's date (the anomalous day) and its org-wide
+    /// scope are derived from the anomaly and are not the caller's to choose.
+    ///
+    /// The reply is the updated anomaly, carrying `acknowledgement` with the id
+    /// of the note it created. Sending it again replaces the sentence and rewords
+    /// that note rather than filing a second one; it will not recreate a note
+    /// that has since been deleted, since deleting a note is a deliberate act and
+    /// the finding stays explained without it.
+    ///
+    /// This does not suppress detection. If the same provider or service spikes
+    /// again on a later day, that is a new anomaly and it is detected and alerted
+    /// on as normal.
+    ///
+    /// POST /api/org/{orgId}/costs/anomalies/{anomalyId}/acknowledge
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 403: Forbidden
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func acknowledge(
+        orgId: String? = nil,
+        anomalyId: String,
+        body: CostsAnomaliesAcknowledgeBody? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> CostAnomaly {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/costs/anomalies/{anomalyId}/acknowledge",
+                pathParameters: ["orgId": orgId?.parameterValue, "anomalyId": anomalyId.parameterValue],
+                body: body.map { AnyEncodable($0) }
+            ),
+            options: options
+        )
+    }
+
+    /// List recently detected cost anomalies
+    ///
+    /// Spend anomalies detected by the daily background pass. Two kinds share the
+    /// list: a `spike`, where a provider's or service's spend exceeded its
+    /// trailing 28-day baseline by a statistical threshold (mean + N·stddev, with
+    /// an absolute floor to ignore penny-scale noise), and a `new_source`, where
+    /// a provider or service with no spend at all across that window suddenly
+    /// billed a material amount. Thresholds are per organization — see GET
+    /// /costs/anomaly-settings. Newest day first, capped at 200 rows.
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// GET /api/org/{orgId}/costs/anomalies
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter days: Window in days over anomalous days, 1-90. Defaults to
+    /// 30.
+    public func get(
+        orgId: String? = nil,
+        days: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> CostsAnomaliesGetResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/costs/anomalies",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                query: [QueryParameter("days", days)]
             ),
             options: options
         )
