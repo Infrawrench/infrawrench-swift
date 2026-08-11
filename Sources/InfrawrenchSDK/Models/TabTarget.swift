@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.10.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.12.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.10.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.12.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -33,6 +33,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
         case sshFanout
         case metricAlerts
         case probes
+        case quotas
         case workflows
         case deployments
         case settings
@@ -61,6 +62,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case "ssh-fanout": self = .sshFanout
             case "metric-alerts": self = .metricAlerts
             case "probes": self = .probes
+            case "quotas": self = .quotas
             case "workflows": self = .workflows
             case "deployments": self = .deployments
             case "settings": self = .settings
@@ -89,6 +91,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case .sshFanout: return "ssh-fanout"
             case .metricAlerts: return "metric-alerts"
             case .probes: return "probes"
+            case .quotas: return "quotas"
             case .workflows: return "workflows"
             case .deployments: return "deployments"
             case .settings: return "settings"
@@ -117,6 +120,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             .sshFanout,
             .metricAlerts,
             .probes,
+            .quotas,
             .workflows,
             .deployments,
             .settings,
