@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.7.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.9.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.7.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.9.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -23,6 +23,16 @@ public struct CostsAnomaliesResult: Codable, Hashable, Sendable {
     }
 }
 
+public struct CostsEfficiencyAlertsResult: Codable, Hashable, Sendable {
+    public var events: [EfficiencyAlertEvent]
+
+    public init(
+        events: [EfficiencyAlertEvent]
+    ) {
+        self.events = events
+    }
+}
+
 public struct CostsStatusResult: Codable, Hashable, Sendable {
     public var accounts: [CostAccountStatus]
 
@@ -39,10 +49,13 @@ public final class CostsNamespace: Sendable {
     let transport: ApiTransport
     /// `client.costs.anomalySettings`
     public let anomalySettings: CostsAnomalySettingsNamespace
+    /// `client.costs.efficiencyAlertSettings`
+    public let efficiencyAlertSettings: CostsEfficiencyAlertSettingsNamespace
 
     init(transport: ApiTransport) {
         self.transport = transport
         self.anomalySettings = CostsAnomalySettingsNamespace(transport: transport)
+        self.efficiencyAlertSettings = CostsEfficiencyAlertSettingsNamespace(transport: transport)
     }
 
     /// List recently detected cost anomalies
@@ -112,6 +125,46 @@ public final class CostsNamespace: Sendable {
                 path: "/api/org/{orgId}/costs/dimensions",
                 pathParameters: ["orgId": orgId?.parameterValue],
                 query: [QueryParameter("dimension", dimension), QueryParameter("tagKey", tagKey)]
+            ),
+            options: options
+        )
+    }
+
+    /// Recently fired efficiency alerts
+    ///
+    /// The three slow-lane cost alerts in one feed, newest first: commitments
+    /// about to lapse, commitments that are not being used, and business metrics
+    /// whose cost per unit rose. Unlike budgets, anomalies and change alerts —
+    /// all of which compare a spend total against another spend total — these
+    /// read the commitment calendar and the volume the spend bought, so they see
+    /// the two surprises the other three structurally cannot.
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// GET /api/org/{orgId}/costs/efficiency-alerts
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter kind: Restrict to one detector. Omitted returns all three,
+    /// interleaved by time. One of `commitment_expiry`, `commitment_idle`,
+    /// `unit_cost_regression`.
+    ///
+    /// - Parameter limit: Rows to return, newest first. Defaults to 50.
+    public func efficiencyAlerts(
+        orgId: String? = nil,
+        kind: String? = nil,
+        limit: Int? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> CostsEfficiencyAlertsResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/costs/efficiency-alerts",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                query: [QueryParameter("kind", kind), QueryParameter("limit", limit)]
             ),
             options: options
         )
@@ -204,6 +257,14 @@ public final class CostsNamespace: Sendable {
     /// centre and currency. Spend no rule claims comes back as the "Unallocated"
     /// bucket; every defined centre appears even with zero spend.
     ///
+    /// Cost centres nest, so the list is a depth-first tree. Each entry carries
+    /// `totals` (spend allocated directly to it) and `subtreeTotals` (its own
+    /// plus every descendant's) — "Engineering, of which Platform" needs both.
+    /// Rules still evaluate first-match-wins by ascending priority against a flat
+    /// list, so a row is allocated exactly once even when a rule targets a parent
+    /// and another targets its child; at equal priority the more deeply nested
+    /// centre wins.
+    ///
     /// _Requires permission: `costs:read`._
     ///
     /// GET /api/org/{orgId}/costs/showback
@@ -222,11 +283,21 @@ public final class CostsNamespace: Sendable {
     /// commitment's up-front fee across the term it buys. Providers that report
     /// no amortized amount fall back to their cash amount. One of `cash`,
     /// `amortized`.
+    ///
+    /// - Parameter adjusted: Apply the organization's billing rules (see
+    /// /billing-rules): markups multiply, and a reallocation moves a centre's
+    /// spend onto another centre. Off by default — a chargeback report that
+    /// silently showed marked-up numbers is one the receiving team could not
+    /// reconcile. On, the response carries `adjustment` with the collected totals
+    /// beside the adjusted ones. Fixed-amount rules are booked onto the cost
+    /// centre they name (or "Unallocated" when they name none), pro-rated across
+    /// the period. One of `true`, `false`.
     public func showback(
         orgId: String? = nil,
         from: String? = nil,
         to: String? = nil,
         basis: String? = nil,
+        adjusted: String? = nil,
         options: RequestOptions? = nil
     ) async throws -> ShowbackReport {
         return try await transport.send(
@@ -234,7 +305,7 @@ public final class CostsNamespace: Sendable {
                 method: "GET",
                 path: "/api/org/{orgId}/costs/showback",
                 pathParameters: ["orgId": orgId?.parameterValue],
-                query: [QueryParameter("from", from), QueryParameter("to", to), QueryParameter("basis", basis)]
+                query: [QueryParameter("from", from), QueryParameter("to", to), QueryParameter("basis", basis), QueryParameter("adjusted", adjusted)]
             ),
             options: options
         )
@@ -372,6 +443,74 @@ public final class CostsAnomalySettingsNamespace: Sendable {
             RequestSpec(
                 method: "PUT",
                 path: "/api/org/{orgId}/costs/anomaly-settings",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.costs.efficiencyAlertSettings`
+public final class CostsEfficiencyAlertSettingsNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// Get the organization's efficiency alert tuning
+    ///
+    /// Thresholds for the commitment-expiry, idle-commitment and
+    /// unit-cost-regression detectors. An organization that has never changed one
+    /// reads back the defaults, which are chosen to work with no setup.
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// GET /api/org/{orgId}/costs/efficiency-alert-settings
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func get(
+        orgId: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> CostEfficiencySettings {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/costs/efficiency-alert-settings",
+                pathParameters: ["orgId": orgId?.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Update the organization's efficiency alert tuning
+    ///
+    /// Takes effect on the next evaluation pass (which runs after each cost
+    /// collection). Already-fired alerts are not re-judged, and horizons that
+    /// have already fired for a commitment's current term do not fire again —
+    /// widening the horizon list warns about future crossings, not past ones. A
+    /// PUT of the whole object, not a patch.
+    ///
+    /// _Requires permission: `costs:write`._
+    ///
+    /// PUT /api/org/{orgId}/costs/efficiency-alert-settings
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func update(
+        orgId: String? = nil,
+        body: CostEfficiencySettings,
+        options: RequestOptions? = nil
+    ) async throws -> CostEfficiencySettings {
+        return try await transport.send(
+            RequestSpec(
+                method: "PUT",
+                path: "/api/org/{orgId}/costs/efficiency-alert-settings",
                 pathParameters: ["orgId": orgId?.parameterValue],
                 body: AnyEncodable(body)
             ),

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.7.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.9.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.7.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.9.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -25,6 +25,8 @@ public struct AuditEntry: Codable, Hashable, Sendable {
     public var createdAt: String
     public var userName: String?
     public var userEmail: String?
+    public var apiKeyName: String?
+    public var apiKeyPrefix: String?
 
     public init(
         id: String,
@@ -37,7 +39,9 @@ public struct AuditEntry: Codable, Hashable, Sendable {
         ipAddress: String? = nil,
         createdAt: String,
         userName: String? = nil,
-        userEmail: String? = nil
+        userEmail: String? = nil,
+        apiKeyName: String? = nil,
+        apiKeyPrefix: String? = nil
     ) {
         self.id = id
         self.userId = userId
@@ -50,5 +54,7 @@ public struct AuditEntry: Codable, Hashable, Sendable {
         self.createdAt = createdAt
         self.userName = userName
         self.userEmail = userEmail
+        self.apiKeyName = apiKeyName
+        self.apiKeyPrefix = apiKeyPrefix
     }
 }

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.7.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.9.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.7.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.9.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -236,6 +236,10 @@ public struct CostGraphConfig: Codable, Hashable, Sendable {
     public var topN: Int?
     public var comparePreviousPeriod: Bool?
     public var showForecast: Bool?
+    /// A scenario model (see /cost-scenarios) overlaid on the forecast — known
+    /// future cost the trend cannot see, drawn as a second dashed line beside the
+    /// trend rather than instead of it. Only meaningful alongside `showForecast`.
+    public var scenarioModelId: String?
     public var costBasis: CostBasis2?
 
     public init(
@@ -250,6 +254,7 @@ public struct CostGraphConfig: Codable, Hashable, Sendable {
         topN: Int? = nil,
         comparePreviousPeriod: Bool? = nil,
         showForecast: Bool? = nil,
+        scenarioModelId: String? = nil,
         costBasis: CostBasis2? = nil
     ) {
         self.version = version
@@ -263,6 +268,7 @@ public struct CostGraphConfig: Codable, Hashable, Sendable {
         self.topN = topN
         self.comparePreviousPeriod = comparePreviousPeriod
         self.showForecast = showForecast
+        self.scenarioModelId = scenarioModelId
         self.costBasis = costBasis
     }
 }

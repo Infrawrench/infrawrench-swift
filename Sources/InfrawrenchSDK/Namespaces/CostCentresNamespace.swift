@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.7.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.9.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.7.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.9.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -53,6 +53,12 @@ public final class CostCentresNamespace: Sendable {
 
     /// Delete a cost centre (its allocation rules go with it)
     ///
+    /// The centre's allocation rules are deleted with it, so the spend they
+    /// claimed falls through to the next matching rule or to "Unallocated". Child
+    /// centres are not deleted: they are re-parented onto the deleted centre's
+    /// own parent (a root's children become roots), so a subtree keeps its shape
+    /// and no ancestor's subtree total moves unexpectedly.
+    ///
     /// _Requires permission: `costs:write`._
     ///
     /// DELETE /api/org/{orgId}/cost-centres/{id}
@@ -98,7 +104,11 @@ public final class CostCentresNamespace: Sendable {
         )
     }
 
-    /// Update a cost centre
+    /// Update or move a cost centre
+    ///
+    /// Renames, redescribes, and/or moves a centre. Moving is `parentId`
+    /// changing; omitting the field leaves the centre where it is. 400 when the
+    /// move would cycle or breach the depth cap.
     ///
     /// _Requires permission: `costs:write`._
     ///

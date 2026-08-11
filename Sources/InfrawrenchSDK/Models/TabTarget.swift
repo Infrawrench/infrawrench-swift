@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.7.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.9.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.7.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.9.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -22,6 +22,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
         case costs
         case savings
         case costReports
+        case invoices
         case graph
         case logs
         case changes
@@ -49,6 +50,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case "costs": self = .costs
             case "savings": self = .savings
             case "cost-reports": self = .costReports
+            case "invoices": self = .invoices
             case "graph": self = .graph
             case "logs": self = .logs
             case "changes": self = .changes
@@ -76,6 +78,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case .costs: return "costs"
             case .savings: return "savings"
             case .costReports: return "cost-reports"
+            case .invoices: return "invoices"
             case .graph: return "graph"
             case .logs: return "logs"
             case .changes: return "changes"
@@ -103,6 +106,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             .costs,
             .savings,
             .costReports,
+            .invoices,
             .graph,
             .logs,
             .changes,
@@ -135,6 +139,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
     public var resourceId: ResourceId?
     public var conversationId: String?
     public var reportId: String?
+    public var invoiceId: String?
 
     public init(
         kind: Kind,
@@ -142,7 +147,8 @@ public struct TabTarget: Codable, Hashable, Sendable {
         accountId: String? = nil,
         resourceId: ResourceId? = nil,
         conversationId: String? = nil,
-        reportId: String? = nil
+        reportId: String? = nil,
+        invoiceId: String? = nil
     ) {
         self.kind = kind
         self.dashboardId = dashboardId
@@ -150,5 +156,6 @@ public struct TabTarget: Codable, Hashable, Sendable {
         self.resourceId = resourceId
         self.conversationId = conversationId
         self.reportId = reportId
+        self.invoiceId = invoiceId
     }
 }

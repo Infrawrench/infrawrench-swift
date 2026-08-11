@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.7.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.9.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.7.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.9.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -48,8 +48,12 @@ public final class APIV1Client: Sendable {
     public let bastions: BastionsNamespace
     /// `client.billing`
     public let billing: BillingNamespace
+    /// `client.billingRules`
+    public let billingRules: BillingRulesNamespace
     /// `client.budgets`
     public let budgets: BudgetsNamespace
+    /// `client.businessMetrics`
+    public let businessMetrics: BusinessMetricsNamespace
     /// `client.changeFreezes`
     public let changeFreezes: ChangeFreezesNamespace
     /// `client.changes`
@@ -62,6 +66,8 @@ public final class APIV1Client: Sendable {
     public let connect: ConnectNamespace
     /// `client.costAlerts`
     public let costAlerts: CostAlertsNamespace
+    /// `client.costAnnotations`
+    public let costAnnotations: CostAnnotationsNamespace
     /// `client.costCentres`
     public let costCentres: CostCentresNamespace
     /// `client.costExports`
@@ -72,6 +78,8 @@ public final class APIV1Client: Sendable {
     public let costReportNotifications: CostReportNotificationsNamespace
     /// `client.costReports`
     public let costReports: CostReportsNamespace
+    /// `client.costScenarios`
+    public let costScenarios: CostScenariosNamespace
     /// `client.costs`
     public let costs: CostsNamespace
     /// `client.credentialHygiene`
@@ -100,6 +108,8 @@ public final class APIV1Client: Sendable {
     public let expiring: ExpiringNamespace
     /// `client.invitations`
     public let invitations: InvitationsNamespace
+    /// `client.invoices`
+    public let invoices: InvoicesNamespace
     /// `client.jira`
     public let jira: JiraNamespace
     /// `client.kv`
@@ -110,6 +120,8 @@ public final class APIV1Client: Sendable {
     public let linear: LinearNamespace
     /// `client.logWorkspaces`
     public let logWorkspaces: LogWorkspacesNamespace
+    /// `client.managedAccounts`
+    public let managedAccounts: ManagedAccountsNamespace
     /// `client.metricAlerts`
     public let metricAlerts: MetricAlertsNamespace
     /// `client.moment`
@@ -185,18 +197,22 @@ public final class APIV1Client: Sendable {
         self.auth = AuthNamespace(transport: transport)
         self.bastions = BastionsNamespace(transport: transport)
         self.billing = BillingNamespace(transport: transport)
+        self.billingRules = BillingRulesNamespace(transport: transport)
         self.budgets = BudgetsNamespace(transport: transport)
+        self.businessMetrics = BusinessMetricsNamespace(transport: transport)
         self.changeFreezes = ChangeFreezesNamespace(transport: transport)
         self.changes = ChangesNamespace(transport: transport)
         self.commitments = CommitmentsNamespace(transport: transport)
         self.config = ConfigNamespace(transport: transport)
         self.connect = ConnectNamespace(transport: transport)
         self.costAlerts = CostAlertsNamespace(transport: transport)
+        self.costAnnotations = CostAnnotationsNamespace(transport: transport)
         self.costCentres = CostCentresNamespace(transport: transport)
         self.costExports = CostExportsNamespace(transport: transport)
         self.costReportFolders = CostReportFoldersNamespace(transport: transport)
         self.costReportNotifications = CostReportNotificationsNamespace(transport: transport)
         self.costReports = CostReportsNamespace(transport: transport)
+        self.costScenarios = CostScenariosNamespace(transport: transport)
         self.costs = CostsNamespace(transport: transport)
         self.credentialHygiene = CredentialHygieneNamespace(transport: transport)
         self.credits = CreditsNamespace(transport: transport)
@@ -211,11 +227,13 @@ public final class APIV1Client: Sendable {
         self.environmentDiff = EnvironmentDiffNamespace(transport: transport)
         self.expiring = ExpiringNamespace(transport: transport)
         self.invitations = InvitationsNamespace(transport: transport)
+        self.invoices = InvoicesNamespace(transport: transport)
         self.jira = JiraNamespace(transport: transport)
         self.kv = KvNamespace(transport: transport)
         self.leases = LeasesNamespace(transport: transport)
         self.linear = LinearNamespace(transport: transport)
         self.logWorkspaces = LogWorkspacesNamespace(transport: transport)
+        self.managedAccounts = ManagedAccountsNamespace(transport: transport)
         self.metricAlerts = MetricAlertsNamespace(transport: transport)
         self.moment = MomentNamespace(transport: transport)
         self.msteams = MsteamsNamespace(transport: transport)

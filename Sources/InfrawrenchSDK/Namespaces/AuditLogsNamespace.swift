@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.7.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.9.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.7.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.9.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -37,6 +37,7 @@ public final class AuditLogsNamespace: Sendable {
         action: String? = nil,
         entityType: String? = nil,
         userId: String? = nil,
+        apiKeyId: String? = nil,
         from: String? = nil,
         to: String? = nil,
         options: RequestOptions? = nil
@@ -46,7 +47,7 @@ public final class AuditLogsNamespace: Sendable {
                 method: "GET",
                 path: "/api/org/{orgId}/audit-logs",
                 pathParameters: ["orgId": orgId?.parameterValue],
-                query: [QueryParameter("page", page), QueryParameter("pageSize", pageSize), QueryParameter("action", action), QueryParameter("entityType", entityType), QueryParameter("userId", userId), QueryParameter("from", from), QueryParameter("to", to)]
+                query: [QueryParameter("page", page), QueryParameter("pageSize", pageSize), QueryParameter("action", action), QueryParameter("entityType", entityType), QueryParameter("userId", userId), QueryParameter("apiKeyId", apiKeyId), QueryParameter("from", from), QueryParameter("to", to)]
             ),
             options: options
         )

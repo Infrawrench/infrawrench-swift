@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.7.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.9.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.7.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.9.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -101,9 +101,44 @@ public struct BudgetWithStatus: Codable, Hashable, Sendable {
     /// resolve errors the budget's evaluation rather than silently measuring all
     /// spend.
     public var savedFilterId: String?
+    /// A scenario model (see /cost-scenarios) this budget's **forecast**
+    /// thresholds are measured against. Null — the default, and the value for
+    /// every budget nobody deliberately opts in — keeps them on the bare trend.
+    /// Opting in is per-budget on purpose: a hypothesis somebody typed into a
+    /// form must not silently change when real people get paged. `actual`
+    /// thresholds are never affected; they measure money already spent. Updates
+    /// are full replaces, so omitting it on PUT clears the opt-in.
+    public var scenarioModelId: String?
+    /// The opted-into model's name, so a card can say whose assumptions are in
+    /// the number.
+    public var scenarioModelName: String?
+    /// Measure this budget against billing-rule-adjusted spend — the internal
+    /// figure — instead of what the providers charged. False by default, and for
+    /// every budget nobody opted in. The default is a deliberate refusal: a
+    /// markup is organisation policy and a budget threshold pages a real person,
+    /// so adding one settings row must not be able to move every on-call rota at
+    /// once. Unlike a scenario this affects `actual` thresholds too — an opted-in
+    /// budget is measuring the internal number, and month-to-date internal spend
+    /// is as marked up as the forecast is. The alert body says the figure is
+    /// adjusted and names the collected one. Updates are full replaces, so
+    /// omitting it on PUT clears the opt-in.
+    public var useAdjustedSpend: Bool
+    /// Month-to-date **collected** spend, non-null only for a budget measuring
+    /// adjusted spend. Null on an unadjusted budget rather than a copy of
+    /// `actualCents`: "there is no separate collected figure because this one is
+    /// it" and "the collected figure happens to equal the adjusted one" are
+    /// different facts, and captioning every budget in the organisation would
+    /// make the adjusted ones invisible.
+    public var rawActualCents: Int?
     public var month: String
     public var actualCents: Int
+    /// The **unadjusted trend** forecast, whether or not a scenario is applied —
+    /// so both numbers are always comparable.
     public var forecastCents: Int?
+    /// The scenario-adjusted month forecast, set only for a budget that opted
+    /// into a model, and the number its forecast thresholds are judged against.
+    /// Null means the thresholds used `forecastCents`.
+    public var scenarioForecastCents: Int?
     public var currentMonthEvents: [CurrentMonthEvent]
     public var placements: [Placement]
 
@@ -116,9 +151,14 @@ public struct BudgetWithStatus: Codable, Hashable, Sendable {
         thresholds: [BudgetThreshold],
         costBasis: BudgetCostBasis,
         savedFilterId: String? = nil,
+        scenarioModelId: String? = nil,
+        scenarioModelName: String? = nil,
+        useAdjustedSpend: Bool,
+        rawActualCents: Int? = nil,
         month: String,
         actualCents: Int,
         forecastCents: Int? = nil,
+        scenarioForecastCents: Int? = nil,
         currentMonthEvents: [CurrentMonthEvent],
         placements: [Placement]
     ) {
@@ -130,9 +170,14 @@ public struct BudgetWithStatus: Codable, Hashable, Sendable {
         self.thresholds = thresholds
         self.costBasis = costBasis
         self.savedFilterId = savedFilterId
+        self.scenarioModelId = scenarioModelId
+        self.scenarioModelName = scenarioModelName
+        self.useAdjustedSpend = useAdjustedSpend
+        self.rawActualCents = rawActualCents
         self.month = month
         self.actualCents = actualCents
         self.forecastCents = forecastCents
+        self.scenarioForecastCents = scenarioForecastCents
         self.currentMonthEvents = currentMonthEvents
         self.placements = placements
     }

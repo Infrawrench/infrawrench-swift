@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.7.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.9.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.7.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.9.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -164,6 +164,14 @@ public struct CostQueryRequest: Codable, Hashable, Sendable {
     public var topN: Int?
     public var comparePreviousPeriod: Bool?
     public var forecast: Bool?
+    /// Apply a scenario model (see /cost-scenarios) to the projection: known
+    /// future cost the trend cannot see. Requires `forecast: true` — sending it
+    /// without one is a 400, not a no-op, because a caller who asked for
+    /// assumptions and silently got none back is the failure this feature exists
+    /// to prevent. The adjusted projection comes back as `scenario`,
+    /// **alongside** the untouched `forecast`, never instead of it. An id that
+    /// does not resolve is a 400.
+    public var scenarioModelId: String?
     public var costBasis: CostBasis?
     /// Restrict to these kinds of charge. Omitted is all of them, which is what
     /// makes an unfiltered total net rather than gross — credits, refunds and
@@ -171,6 +179,14 @@ public struct CostQueryRequest: Codable, Hashable, Sendable {
     /// existed, and rows from providers that cannot distinguish them, are
     /// `usage`.
     public var chargeTypes: [CostChargeType]?
+    /// Apply the organization's billing rules (see /billing-rules) — markups,
+    /// discounts, reallocations. Omitted (the default, and what every unattended
+    /// reader sends) is raw collected spend. Present, the response carries
+    /// `adjustment` with the collected totals beside the adjusted ones and the
+    /// rules that moved them; it is set even for an organization with no rules,
+    /// because the absence of that field is the only signal that a figure is
+    /// unadjusted.
+    public var adjusted: Bool?
 
     public init(
         from: String,
@@ -184,8 +200,10 @@ public struct CostQueryRequest: Codable, Hashable, Sendable {
         topN: Int? = nil,
         comparePreviousPeriod: Bool? = nil,
         forecast: Bool? = nil,
+        scenarioModelId: String? = nil,
         costBasis: CostBasis? = nil,
-        chargeTypes: [CostChargeType]? = nil
+        chargeTypes: [CostChargeType]? = nil,
+        adjusted: Bool? = nil
     ) {
         self.from = from
         self.to = to
@@ -198,7 +216,9 @@ public struct CostQueryRequest: Codable, Hashable, Sendable {
         self.topN = topN
         self.comparePreviousPeriod = comparePreviousPeriod
         self.forecast = forecast
+        self.scenarioModelId = scenarioModelId
         self.costBasis = costBasis
         self.chargeTypes = chargeTypes
+        self.adjusted = adjusted
     }
 }

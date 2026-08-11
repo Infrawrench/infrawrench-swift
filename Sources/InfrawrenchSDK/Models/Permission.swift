@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.7.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.9.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.7.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.9.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -71,6 +71,9 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
     case jiraWrite
     case linearRead
     case linearWrite
+    case invoicesRead
+    case invoicesWrite
+    case invoicesIssue
     case pagesWrite
     case orgSettingsWrite
     /// A value the API added after this SDK was generated. Kept rather than
@@ -134,6 +137,9 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case "jira:write": self = .jiraWrite
         case "linear:read": self = .linearRead
         case "linear:write": self = .linearWrite
+        case "invoices:read": self = .invoicesRead
+        case "invoices:write": self = .invoicesWrite
+        case "invoices:issue": self = .invoicesIssue
         case "pages:write": self = .pagesWrite
         case "org:settings:write": self = .orgSettingsWrite
         default: self = .unrecognized(rawValue)
@@ -197,6 +203,9 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case .jiraWrite: return "jira:write"
         case .linearRead: return "linear:read"
         case .linearWrite: return "linear:write"
+        case .invoicesRead: return "invoices:read"
+        case .invoicesWrite: return "invoices:write"
+        case .invoicesIssue: return "invoices:issue"
         case .pagesWrite: return "pages:write"
         case .orgSettingsWrite: return "org:settings:write"
         case .unrecognized(let value): return value
@@ -260,6 +269,9 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         .jiraWrite,
         .linearRead,
         .linearWrite,
+        .invoicesRead,
+        .invoicesWrite,
+        .invoicesIssue,
         .pagesWrite,
         .orgSettingsWrite,
     ]
