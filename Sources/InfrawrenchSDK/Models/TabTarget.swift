@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.18.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.19.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.18.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.19.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -29,6 +29,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
         case expiring
         case posture
         case accessReview
+        case backups
         case dns
         case environmentDiff
         case sshFanout
@@ -60,6 +61,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case "expiring": self = .expiring
             case "posture": self = .posture
             case "access-review": self = .accessReview
+            case "backups": self = .backups
             case "dns": self = .dns
             case "environment-diff": self = .environmentDiff
             case "ssh-fanout": self = .sshFanout
@@ -91,6 +93,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case .expiring: return "expiring"
             case .posture: return "posture"
             case .accessReview: return "access-review"
+            case .backups: return "backups"
             case .dns: return "dns"
             case .environmentDiff: return "environment-diff"
             case .sshFanout: return "ssh-fanout"
@@ -122,6 +125,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             .expiring,
             .posture,
             .accessReview,
+            .backups,
             .dns,
             .environmentDiff,
             .sshFanout,
