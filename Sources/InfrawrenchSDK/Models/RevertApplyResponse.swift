@@ -1,0 +1,51 @@
+/*
+ * InfrawrenchSDK v1.17.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * https://github.com/Infrawrench/Infrawrench
+ *
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.17.0).
+ *
+ * DO NOT EDIT. Regenerate with:
+ *   pnpm --filter @infrawrench/web generate:sdk
+ *
+ * Internal routes are absent by construction: the generator consumes the same
+ * published spec that /openapi.json serves, which drops every operation
+ * marked x-internal.
+ */
+import Foundation
+
+public struct RevertApplyResponse: Codable, Hashable, Sendable {
+    public var changeId: String
+    public var resourceId: ResourceId
+    /// The fields written, in plan order. Empty on a reconciliation.
+    public var appliedFields: [String]
+    public var plan: RevertPlan
+    public var revertedAt: String
+    /// True when this request wrote nothing and instead recorded an *earlier*
+    /// interrupted attempt's write — the resource was already back, and the event
+    /// is now marked reverted. Nothing was sent to the provider by this request.
+    public var reconciled: Bool?
+    /// Present and `false` only when the audit entry could not be written. The
+    /// provider change still happened; its attribution did not reach the audit
+    /// table and was written to the server log instead. Attribution is
+    /// best-effort — nothing transactional spans a third-party cloud API and
+    /// Infrawrench's database.
+    public var auditRecorded: Bool?
+
+    public init(
+        changeId: String,
+        resourceId: ResourceId,
+        appliedFields: [String],
+        plan: RevertPlan,
+        revertedAt: String,
+        reconciled: Bool? = nil,
+        auditRecorded: Bool? = nil
+    ) {
+        self.changeId = changeId
+        self.resourceId = resourceId
+        self.appliedFields = appliedFields
+        self.plan = plan
+        self.revertedAt = revertedAt
+        self.reconciled = reconciled
+        self.auditRecorded = auditRecorded
+    }
+}

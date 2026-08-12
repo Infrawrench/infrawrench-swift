@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.16.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.17.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.16.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.17.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -63,6 +63,9 @@ public struct ResourceChangeEntry: Codable, Hashable, Sendable {
     /// sleep/wake schedule transitions. Absent/null = observed by sync.
     public var origin: Origin?
     public var createdAt: String
+    /// When this event was reverted, or null if it never was. Reverting is a
+    /// one-shot: an event carrying a timestamp here cannot be reverted again.
+    public var revertedAt: String?
 
     public init(
         id: String,
@@ -74,7 +77,8 @@ public struct ResourceChangeEntry: Codable, Hashable, Sendable {
         changeKind: ResourceChangeKind,
         diff: [ResourceFieldChange],
         origin: Origin? = nil,
-        createdAt: String
+        createdAt: String,
+        revertedAt: String? = nil
     ) {
         self.id = id
         self.resourceId = resourceId
@@ -86,5 +90,6 @@ public struct ResourceChangeEntry: Codable, Hashable, Sendable {
         self.diff = diff
         self.origin = origin
         self.createdAt = createdAt
+        self.revertedAt = revertedAt
     }
 }
