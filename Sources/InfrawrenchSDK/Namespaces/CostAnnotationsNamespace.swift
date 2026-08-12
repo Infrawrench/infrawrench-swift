@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.17.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.18.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.17.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.18.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -30,6 +30,44 @@ public final class CostAnnotationsNamespace: Sendable {
 
     init(transport: ApiTransport) {
         self.transport = transport
+    }
+
+    /// Pin a change's or deploy's cost impact onto the cost charts
+    ///
+    /// Writes the finding as a cost annotation, so the step in the run rate is
+    /// explained on the graph where it shows. Re-posting the same subject
+    /// **rewords the existing note** rather than adding a second — which is what
+    /// makes it safe to pin a finding again once the provider has finished
+    /// restating. The note's date and report scope are never rewritten: they may
+    /// have been edited deliberately.
+    ///
+    /// A subject with no measurable impact is a 400, not a note reading
+    /// `$0.00/day`.
+    ///
+    /// _Requires permission: `costs:write`._
+    ///
+    /// POST /api/org/{orgId}/cost-annotations/change-impact
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func changeImpact(
+        orgId: String? = nil,
+        body: ChangeCostImpactAnnotationRequest? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> ChangeCostImpactAnnotationResponse {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/cost-annotations/change-impact",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: body.map { AnyEncodable($0) }
+            ),
+            options: options
+        )
     }
 
     /// Create a cost annotation

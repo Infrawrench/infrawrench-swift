@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.17.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.18.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.17.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.18.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -26,6 +26,45 @@ public final class ChangesNamespace: Sendable {
         self.transport = transport
         self.alertSettings = ChangesAlertSettingsNamespace(transport: transport)
         self.revert = ChangesRevertNamespace(transport: transport)
+    }
+
+    /// Cost impact of a page of changes
+    ///
+    /// For each change, compares the resource's per-day spend over the window
+    /// before it against the window after, and reports the difference as a
+    /// run-rate delta.
+    ///
+    /// A POST because it takes a list of ids, not because it writes: nothing is
+    /// stored. The answer is recomputed on every call, deliberately — provider
+    /// cost arrives late and is then restated, so a stored number would be a
+    /// wrong number that never corrects itself.
+    ///
+    /// Both windows exclude the change's own day (spend on it is half old shape,
+    /// half new) and today (an accruing day always reads as a dip), and are
+    /// clamped symmetrically to the days cost collection actually covers.
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// POST /api/org/{orgId}/changes/cost-impacts
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func costImpacts(
+        orgId: String? = nil,
+        body: ChangeCostImpactsRequest? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> ChangeCostImpactsResponse {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/changes/cost-impacts",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: body.map { AnyEncodable($0) }
+            ),
+            options: options
+        )
     }
 
     /// Org-wide change timeline (paginated, filterable)

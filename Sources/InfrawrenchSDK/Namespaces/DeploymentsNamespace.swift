@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.17.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.18.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.17.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.18.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -155,6 +155,47 @@ public final class DeploymentsRunsNamespace: Sendable {
 
     init(transport: ApiTransport) {
         self.transport = transport
+    }
+
+    /// Cost impact of a deployment run
+    ///
+    /// The same comparison as `POST /changes/cost-impacts`, run over the
+    /// resources this deploy provisioned, with a per-resource breakdown that sums
+    /// to the total.
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// GET /api/org/{orgId}/deployments/runs/{id}/cost-impact
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter costBasis: Which charge-type basis both windows are read on.
+    /// `cash` (the default) is what the provider charged on the day it charged
+    /// it; `amortized` spreads a commitment's up-front fee across the term it
+    /// buys. It is echoed on every response because a delta whose basis is
+    /// unstated is unreadable — an amortized 'after' against a cash 'before'
+    /// looks exactly like a saving.
+    public func costImpact(
+        orgId: String? = nil,
+        id: String,
+        windowDays: Int? = nil,
+        costBasis: ChangeCostBasis? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> DeploymentCostImpact {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/deployments/runs/{id}/cost-impact",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue],
+                query: [QueryParameter("windowDays", windowDays), QueryParameter("costBasis", costBasis)]
+            ),
+            options: options
+        )
     }
 
     /// Record a deployment that ran elsewhere
