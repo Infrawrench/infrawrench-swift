@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.19.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.20.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.19.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.20.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -49,6 +49,8 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
     case tagPolicyOverride
     case configRead
     case configWrite
+    case iacRead
+    case iacWrite
     case auditRead
     case accessRead
     case accessRequest
@@ -117,6 +119,8 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case "tag-policy:override": self = .tagPolicyOverride
         case "config:read": self = .configRead
         case "config:write": self = .configWrite
+        case "iac:read": self = .iacRead
+        case "iac:write": self = .iacWrite
         case "audit:read": self = .auditRead
         case "access:read": self = .accessRead
         case "access:request": self = .accessRequest
@@ -185,6 +189,8 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case .tagPolicyOverride: return "tag-policy:override"
         case .configRead: return "config:read"
         case .configWrite: return "config:write"
+        case .iacRead: return "iac:read"
+        case .iacWrite: return "iac:write"
         case .auditRead: return "audit:read"
         case .accessRead: return "access:read"
         case .accessRequest: return "access:request"
@@ -253,6 +259,8 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         .tagPolicyOverride,
         .configRead,
         .configWrite,
+        .iacRead,
+        .iacWrite,
         .auditRead,
         .accessRead,
         .accessRequest,

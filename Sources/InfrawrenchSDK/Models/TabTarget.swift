@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.19.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.20.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.19.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.20.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -31,6 +31,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
         case accessReview
         case backups
         case dns
+        case iac
         case environmentDiff
         case sshFanout
         case metricAlerts
@@ -63,6 +64,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case "access-review": self = .accessReview
             case "backups": self = .backups
             case "dns": self = .dns
+            case "iac": self = .iac
             case "environment-diff": self = .environmentDiff
             case "ssh-fanout": self = .sshFanout
             case "metric-alerts": self = .metricAlerts
@@ -95,6 +97,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case .accessReview: return "access-review"
             case .backups: return "backups"
             case .dns: return "dns"
+            case .iac: return "iac"
             case .environmentDiff: return "environment-diff"
             case .sshFanout: return "ssh-fanout"
             case .metricAlerts: return "metric-alerts"
@@ -127,6 +130,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             .accessReview,
             .backups,
             .dns,
+            .iac,
             .environmentDiff,
             .sshFanout,
             .metricAlerts,
