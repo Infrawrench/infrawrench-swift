@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.14.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.15.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.14.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.15.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -44,6 +44,8 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
     case freezesRead
     case freezesWrite
     case freezesOverride
+    case incidentsRead
+    case incidentsWrite
     case tagPolicyOverride
     case configRead
     case configWrite
@@ -110,6 +112,8 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case "freezes:read": self = .freezesRead
         case "freezes:write": self = .freezesWrite
         case "freezes:override": self = .freezesOverride
+        case "incidents:read": self = .incidentsRead
+        case "incidents:write": self = .incidentsWrite
         case "tag-policy:override": self = .tagPolicyOverride
         case "config:read": self = .configRead
         case "config:write": self = .configWrite
@@ -176,6 +180,8 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case .freezesRead: return "freezes:read"
         case .freezesWrite: return "freezes:write"
         case .freezesOverride: return "freezes:override"
+        case .incidentsRead: return "incidents:read"
+        case .incidentsWrite: return "incidents:write"
         case .tagPolicyOverride: return "tag-policy:override"
         case .configRead: return "config:read"
         case .configWrite: return "config:write"
@@ -242,6 +248,8 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         .freezesRead,
         .freezesWrite,
         .freezesOverride,
+        .incidentsRead,
+        .incidentsWrite,
         .tagPolicyOverride,
         .configRead,
         .configWrite,
