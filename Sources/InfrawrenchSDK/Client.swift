@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.23.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.24.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.23.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.24.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -64,6 +64,8 @@ public final class APIV1Client: Sendable {
     public let changeFreezes: ChangeFreezesNamespace
     /// `client.changes`
     public let changes: ChangesNamespace
+    /// `client.chat`
+    public let chat: ChatNamespace
     /// `client.commitments`
     public let commitments: CommitmentsNamespace
     /// `client.config`
@@ -198,6 +200,8 @@ public final class APIV1Client: Sendable {
     public let team: TeamNamespace
     /// `client.workflowApprovals`
     public let workflowApprovals: WorkflowApprovalsNamespace
+    /// `client.workflowSecrets`
+    public let workflowSecrets: WorkflowSecretsNamespace
     /// `client.workflows`
     public let workflows: WorkflowsNamespace
 
@@ -223,6 +227,7 @@ public final class APIV1Client: Sendable {
         self.businessMetrics = BusinessMetricsNamespace(transport: transport)
         self.changeFreezes = ChangeFreezesNamespace(transport: transport)
         self.changes = ChangesNamespace(transport: transport)
+        self.chat = ChatNamespace(transport: transport)
         self.commitments = CommitmentsNamespace(transport: transport)
         self.config = ConfigNamespace(transport: transport)
         self.connect = ConnectNamespace(transport: transport)
@@ -290,6 +295,7 @@ public final class APIV1Client: Sendable {
         self.tagPolicy = TagPolicyNamespace(transport: transport)
         self.team = TeamNamespace(transport: transport)
         self.workflowApprovals = WorkflowApprovalsNamespace(transport: transport)
+        self.workflowSecrets = WorkflowSecretsNamespace(transport: transport)
         self.workflows = WorkflowsNamespace(transport: transport)
     }
 

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.23.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.24.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.23.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.24.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -19,10 +19,13 @@ public final class WorkflowsNamespace: Sendable {
     let transport: ApiTransport
     /// `client.workflows.schedule`
     public let schedule: WorkflowsScheduleNamespace
+    /// `client.workflows.secrets`
+    public let secrets: WorkflowsSecretsNamespace
 
     init(transport: ApiTransport) {
         self.transport = transport
         self.schedule = WorkflowsScheduleNamespace(transport: transport)
+        self.secrets = WorkflowsSecretsNamespace(transport: transport)
     }
 
     /// Generated infra.d.ts for a workflow
@@ -165,6 +168,76 @@ public final class WorkflowsScheduleNamespace: Sendable {
             RequestSpec(
                 method: "PUT",
                 path: "/api/org/{orgId}/workflows/{id}/schedule",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.workflows.secrets`
+public final class WorkflowsSecretsNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// List a workflow's assigned secrets
+    ///
+    /// Returns assigned ids and metadata only, never values.
+    ///
+    /// _Requires permission: `secrets:read`._
+    ///
+    /// GET /api/org/{orgId}/workflows/{id}/secrets
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter id: Workflow id.
+    public func get(
+        orgId: String? = nil,
+        id: String,
+        options: RequestOptions? = nil
+    ) async throws -> WorkflowSecretAssignment {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/workflows/{id}/secrets",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Replace a workflow's secret assignments
+    ///
+    /// _Requires permission: `workflows:write`._
+    ///
+    /// PUT /api/org/{orgId}/workflows/{id}/secrets
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter id: Workflow id.
+    public func update(
+        orgId: String? = nil,
+        id: String,
+        body: WorkflowSecretAssignmentInput,
+        options: RequestOptions? = nil
+    ) async throws -> WorkflowSecretAssignment {
+        return try await transport.send(
+            RequestSpec(
+                method: "PUT",
+                path: "/api/org/{orgId}/workflows/{id}/secrets",
                 pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue],
                 body: AnyEncodable(body)
             ),
