@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.22.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.23.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.22.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.23.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -23,6 +23,47 @@ public final class WorkflowsNamespace: Sendable {
     init(transport: ApiTransport) {
         self.transport = transport
         self.schedule = WorkflowsScheduleNamespace(transport: transport)
+    }
+
+    /// Generated infra.d.ts for a workflow
+    ///
+    /// The ambient TypeScript declarations workflow source is written against,
+    /// specialized with this organization's connected accounts, resource types,
+    /// SSH key names, and the workflow's trigger + metrics. Default is the fast
+    /// static surface (`create` fields are `Record<string, string>`). Pass
+    /// `enrich=1` for a second pass that hits provider APIs for precise create()
+    /// field unions and live sidecar capability flags — the editor loads static
+    /// first and upgrades when that finishes.
+    ///
+    /// _Requires permission: `workflows:read`._
+    ///
+    /// GET /api/org/{orgId}/workflows/{id}/typings
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter id: Workflow id.
+    ///
+    /// - Parameter enrich: When `1` or `true`, enrich create() field shapes and
+    /// sidecar capabilities from live provider configs. Omit for the fast static
+    /// surface. One of `1`, `true`.
+    public func typings(
+        orgId: String? = nil,
+        id: String,
+        enrich: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> WorkflowTypingsResponse {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/workflows/{id}/typings",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue],
+                query: [QueryParameter("enrich", enrich)]
+            ),
+            options: options
+        )
     }
 }
 

@@ -13,12 +13,14 @@
  */
 import Foundation
 
-public struct EnvironmentInstanceList: Codable, Hashable, Sendable {
-    public var instances: [EnvironmentInstance]
+public struct WorkflowTypingsResponse: Codable, Hashable, Sendable {
+    /// Ambient TypeScript declarations for this workflow's `infra` API — the same
+    /// file the Monaco editor and `check` endpoint type against.
+    public var dts: String
 
     public init(
-        instances: [EnvironmentInstance]
+        dts: String
     ) {
-        self.instances = instances
+        self.dts = dts
     }
 }
