@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.25.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.26.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.25.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.26.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -32,6 +32,10 @@ public final class APIV1Client: Sendable {
     public let accessReview: AccessReviewNamespace
     /// `client.accounts`
     public let accounts: AccountsNamespace
+    /// `client.agent`
+    public let agent: AgentNamespace
+    /// `client.agentRegistrations`
+    public let agentRegistrations: AgentRegistrationsNamespace
     /// `client.agents`
     public let agents: AgentsNamespace
     /// `client.alertRules`
@@ -211,6 +215,8 @@ public final class APIV1Client: Sendable {
         self.accessRequests = AccessRequestsNamespace(transport: transport)
         self.accessReview = AccessReviewNamespace(transport: transport)
         self.accounts = AccountsNamespace(transport: transport)
+        self.agent = AgentNamespace(transport: transport)
+        self.agentRegistrations = AgentRegistrationsNamespace(transport: transport)
         self.agents = AgentsNamespace(transport: transport)
         self.alertRules = AlertRulesNamespace(transport: transport)
         self.apiKeys = ApiKeysNamespace(transport: transport)
