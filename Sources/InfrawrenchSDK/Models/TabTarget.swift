@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.26.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.27.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.26.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.27.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -44,6 +44,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
         case deployments
         case settings
         case chat
+        case linuxApp
         /// A value the API added after this SDK was generated. Kept rather than
         /// rejected, so a new server-side value cannot break decoding.
         case unrecognized(String)
@@ -79,6 +80,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case "deployments": self = .deployments
             case "settings": self = .settings
             case "chat": self = .chat
+            case "linux-app": self = .linuxApp
             default: self = .unrecognized(rawValue)
             }
         }
@@ -114,6 +116,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case .deployments: return "deployments"
             case .settings: return "settings"
             case .chat: return "chat"
+            case .linuxApp: return "linux-app"
             case .unrecognized(let value): return value
             }
         }
@@ -149,6 +152,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             .deployments,
             .settings,
             .chat,
+            .linuxApp,
         ]
 
         public init(from decoder: any Decoder) throws {
@@ -168,6 +172,9 @@ public struct TabTarget: Codable, Hashable, Sendable {
     public var conversationId: String?
     public var reportId: String?
     public var invoiceId: String?
+    public var sessionId: String?
+    public var windowId: Int?
+    public var appId: String?
 
     public init(
         kind: Kind,
@@ -176,7 +183,10 @@ public struct TabTarget: Codable, Hashable, Sendable {
         resourceId: ResourceId? = nil,
         conversationId: String? = nil,
         reportId: String? = nil,
-        invoiceId: String? = nil
+        invoiceId: String? = nil,
+        sessionId: String? = nil,
+        windowId: Int? = nil,
+        appId: String? = nil
     ) {
         self.kind = kind
         self.dashboardId = dashboardId
@@ -185,5 +195,8 @@ public struct TabTarget: Codable, Hashable, Sendable {
         self.conversationId = conversationId
         self.reportId = reportId
         self.invoiceId = invoiceId
+        self.sessionId = sessionId
+        self.windowId = windowId
+        self.appId = appId
     }
 }
