@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.29.1 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.30.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.29.1).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.30.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -114,6 +114,40 @@ public final class SshKeysNamespace: Sendable {
                 method: "GET",
                 path: "/api/org/{orgId}/ssh-keys",
                 pathParameters: ["orgId": orgId?.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Sign an SSH auth challenge with a cloud-held key (the cloud as an SSH
+    /// agent)
+    ///
+    /// Signs one publickey-authentication challenge with a server-generated org
+    /// key whose private half never leaves Infrawrench Cloud. Requires the
+    /// `resources:execute` permission — producing an auth signature is the same
+    /// authority as opening a shell. Imported keys cannot sign (only their public
+    /// half is stored). Every call is audited.
+    ///
+    /// POST /api/org/{orgId}/ssh-keys/{id}/sign
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func sign(
+        orgId: String? = nil,
+        id: String,
+        body: SignSshKeyRequest,
+        options: RequestOptions? = nil
+    ) async throws -> SignSshKeyResponse {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/ssh-keys/{id}/sign",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue],
+                body: AnyEncodable(body)
             ),
             options: options
         )
