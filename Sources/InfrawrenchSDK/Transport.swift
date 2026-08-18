@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.29.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.29.1 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.29.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.29.1).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -26,7 +26,7 @@ import Foundation
 /// version the code matches. It is recorded here instead.
 public enum InfrawrenchSDKInfo {
     /// `info.version` of the OpenAPI document this package was generated from.
-    public static let apiVersion = "1.29.0"
+    public static let apiVersion = "1.29.1"
     /// First server advertised by the spec.
     public static let defaultBaseURL = "https://app.infrawrench.com"
     /// Path parameter the client can carry as configuration instead of taking

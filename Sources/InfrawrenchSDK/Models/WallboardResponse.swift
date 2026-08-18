@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.29.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.29.1 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.29.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.29.1).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -66,7 +66,7 @@ public struct WallboardResponse: Codable, Hashable, Sendable {
     public var tiles: [WallboardTile]
     /// Unresolved incidents, newest first.
     public var incidents: [WallboardIncidentLine]
-    /// Probes that are down, monitors breaching, accounts that stopped syncing.
+    /// Probes that are down, accounts that stopped syncing.
     public var failures: [WallboardFailureLine]
     /// Sources that could not be read, **named on the screen**. A wallboard
     /// showing green because a query failed is worse than a blank one — it is
