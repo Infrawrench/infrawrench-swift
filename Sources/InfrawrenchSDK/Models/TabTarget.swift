@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.27.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.28.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.27.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.28.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -30,6 +30,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
         case posture
         case accessReview
         case backups
+        case wallboard
         case dns
         case iac
         case environmentDiff
@@ -66,6 +67,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case "posture": self = .posture
             case "access-review": self = .accessReview
             case "backups": self = .backups
+            case "wallboard": self = .wallboard
             case "dns": self = .dns
             case "iac": self = .iac
             case "environment-diff": self = .environmentDiff
@@ -102,6 +104,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case .posture: return "posture"
             case .accessReview: return "access-review"
             case .backups: return "backups"
+            case .wallboard: return "wallboard"
             case .dns: return "dns"
             case .iac: return "iac"
             case .environmentDiff: return "environment-diff"
@@ -138,6 +141,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             .posture,
             .accessReview,
             .backups,
+            .wallboard,
             .dns,
             .iac,
             .environmentDiff,
