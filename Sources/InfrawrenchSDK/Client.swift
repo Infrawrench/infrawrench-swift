@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.31.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.33.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.31.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.33.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -172,6 +172,8 @@ public final class APIV1Client: Sendable {
     public let resources: ResourcesNamespace
     /// `client.rightsizing`
     public let rightsizing: RightsizingNamespace
+    /// `client.runbooks`
+    public let runbooks: RunbooksNamespace
     /// `client.savedCostFilters`
     public let savedCostFilters: SavedCostFiltersNamespace
     /// `client.schedules`
@@ -291,6 +293,7 @@ public final class APIV1Client: Sendable {
         self.quotas = QuotasNamespace(transport: transport)
         self.resources = ResourcesNamespace(transport: transport)
         self.rightsizing = RightsizingNamespace(transport: transport)
+        self.runbooks = RunbooksNamespace(transport: transport)
         self.savedCostFilters = SavedCostFiltersNamespace(transport: transport)
         self.schedules = SchedulesNamespace(transport: transport)
         self.search = SearchNamespace(transport: transport)
