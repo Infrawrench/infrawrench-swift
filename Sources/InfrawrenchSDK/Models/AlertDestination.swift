@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.33.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.34.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.33.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.34.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -16,6 +16,12 @@ import Foundation
 /// One place a matched alert goes. `push` reaches the organization's phones,
 /// still filtered by each member's own mutes — an organization rule decides
 /// whether the org is told, a member decides whether their phone rings.
+///
+/// `on-call` resolves to one person at delivery time, so a rule reading "database
+/// alerts → whoever is on call" needs no edit at handover. A rotation that
+/// resolves to nobody — disabled, empty, not yet started — contributes nobody and
+/// the rule's **other** destinations still deliver: an alert lost to a
+/// misconfigured rotation would be the worst outcome the feature could have.
 ///
 /// The spec allows several shapes here. Decoding tries the branches in spec
 /// order, so the most specific match wins.
@@ -163,9 +169,59 @@ public enum AlertDestination: Codable, Hashable, Sendable {
         }
     }
 
+    public struct AlertDestinationObject4: Codable, Hashable, Sendable {
+        public enum Kind: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
+            case onCall
+            /// A value the API added after this SDK was generated. Kept rather
+            /// than rejected, so a new server-side value cannot break decoding.
+            case unrecognized(String)
+
+            public init(rawValue: String) {
+                switch rawValue {
+                case "on-call": self = .onCall
+                default: self = .unrecognized(rawValue)
+                }
+            }
+
+            public var rawValue: String {
+                switch self {
+                case .onCall: return "on-call"
+                case .unrecognized(let value): return value
+                }
+            }
+
+            /// Every value the spec declares. `unrecognized` is deliberately absent.
+            public static let allKnownCases: [Kind] = [
+                .onCall,
+            ]
+
+            public init(from decoder: any Decoder) throws {
+                self.init(rawValue: try decoder.singleValueContainer().decode(String.self))
+            }
+
+            public func encode(to encoder: any Encoder) throws {
+                var container = encoder.singleValueContainer()
+                try container.encode(rawValue)
+            }
+        }
+
+        public var kind: Kind
+        /// An on-call rotation id from /on-call/schedules
+        public var scheduleId: String
+
+        public init(
+            kind: Kind,
+            scheduleId: String
+        ) {
+            self.kind = kind
+            self.scheduleId = scheduleId
+        }
+    }
+
     case object(AlertDestinationObject)
     case object2(AlertDestinationObject2)
     case object3(AlertDestinationObject3)
+    case object4(AlertDestinationObject4)
     /// A shape none of the branches above matched.
     case other(JSONValue)
 
@@ -183,6 +239,10 @@ public enum AlertDestination: Codable, Hashable, Sendable {
             self = .object3(value)
             return
         }
+        if let value = try? container.decode(AlertDestinationObject4.self) {
+            self = .object4(value)
+            return
+        }
         self = .other(try container.decode(JSONValue.self))
     }
 
@@ -192,6 +252,7 @@ public enum AlertDestination: Codable, Hashable, Sendable {
         case .object(let value): try container.encode(value)
         case .object2(let value): try container.encode(value)
         case .object3(let value): try container.encode(value)
+        case .object4(let value): try container.encode(value)
         case .other(let value): try container.encode(value)
         }
     }

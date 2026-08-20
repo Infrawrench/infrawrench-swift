@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.33.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.34.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.33.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.34.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -59,6 +59,19 @@ public struct AlertRulesResponse: Codable, Hashable, Sendable {
         }
     }
 
+    public struct OnCallSchedule2: Codable, Hashable, Sendable {
+        public var id: String
+        public var name: String
+
+        public init(
+            id: String,
+            name: String
+        ) {
+            self.id = id
+            self.name = name
+        }
+    }
+
     public var rules: [AlertRule]
     /// True when the organization has saved no rules and `rules` is the
     /// synthesized default — everything except drift, to every connected channel
@@ -67,18 +80,25 @@ public struct AlertRulesResponse: Codable, Hashable, Sendable {
     public var slackChannels: [SlackChannel2]
     public var msTeamsWebhooks: [MsTeamsWebhook2]
     public var accounts: [Account2]
+    /// Live on-call rotations, so the editor can offer 'whoever is on call' as a
+    /// destination. Disabled rotations are omitted for the same reason a
+    /// disconnected Slack install is: offering one would let the editor build a
+    /// rule that routes nowhere.
+    public var onCallSchedules: [OnCallSchedule2]
 
     public init(
         rules: [AlertRule],
         usingDefaults: Bool,
         slackChannels: [SlackChannel2],
         msTeamsWebhooks: [MsTeamsWebhook2],
-        accounts: [Account2]
+        accounts: [Account2],
+        onCallSchedules: [OnCallSchedule2]
     ) {
         self.rules = rules
         self.usingDefaults = usingDefaults
         self.slackChannels = slackChannels
         self.msTeamsWebhooks = msTeamsWebhooks
         self.accounts = accounts
+        self.onCallSchedules = onCallSchedules
     }
 }
