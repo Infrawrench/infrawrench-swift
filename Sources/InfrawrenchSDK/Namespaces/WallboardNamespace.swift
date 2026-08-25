@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.36.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.37.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.36.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.37.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -30,10 +30,10 @@ public final class WallboardNamespace: Sendable {
     /// no trend and no breakdown — those belong on the page you open when you do
     /// walk over.
     ///
-    /// Three sources — declared incidents, synthetic probes and account sync
-    /// health — each guarded independently, because a television that goes blank
-    /// because one query threw is showing nothing to a room that was relying on
-    /// it.
+    /// Four sources — declared incidents, synthetic probes, query monitors and
+    /// account sync health — each guarded independently, because a television
+    /// that goes blank because one query threw is showing nothing to a room that
+    /// was relying on it.
     ///
     /// Session-authenticated on purpose: unlike the calendar feed or a public
     /// status page, this carries incident titles, probe names and account names,

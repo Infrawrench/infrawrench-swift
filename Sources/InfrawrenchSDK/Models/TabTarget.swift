@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.36.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.37.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.36.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.37.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -33,6 +33,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
         case wallboard
         case calendar
         case runbooks
+        case queryMonitors
         case dns
         case iac
         case environmentDiff
@@ -72,6 +73,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case "wallboard": self = .wallboard
             case "calendar": self = .calendar
             case "runbooks": self = .runbooks
+            case "query-monitors": self = .queryMonitors
             case "dns": self = .dns
             case "iac": self = .iac
             case "environment-diff": self = .environmentDiff
@@ -111,6 +113,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case .wallboard: return "wallboard"
             case .calendar: return "calendar"
             case .runbooks: return "runbooks"
+            case .queryMonitors: return "query-monitors"
             case .dns: return "dns"
             case .iac: return "iac"
             case .environmentDiff: return "environment-diff"
@@ -150,6 +153,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             .wallboard,
             .calendar,
             .runbooks,
+            .queryMonitors,
             .dns,
             .iac,
             .environmentDiff,

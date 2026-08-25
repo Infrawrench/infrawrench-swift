@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.36.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.37.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.36.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.37.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -402,7 +402,7 @@ enum SmokeTests {
     // MARK: - Package facts
 
     static func packageFacts(_ check: Check) {
-        check.equal(InfrawrenchSDKInfo.apiVersion, "1.36.0", "recorded API version")
+        check.equal(InfrawrenchSDKInfo.apiVersion, "1.37.0", "recorded API version")
         check.equal(InfrawrenchSDKInfo.defaultBaseURL, "https://app.infrawrench.com", "recorded default base URL")
         check.equal(InfrawrenchSDKInfo.scopeParameter, "orgId", "recorded scope parameter")
     }
