@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.38.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.39.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.38.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.39.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -83,6 +83,35 @@ public final class QueryMonitorsNamespace: Sendable {
                 method: "DELETE",
                 path: "/api/org/{orgId}/query-monitors/{monitorId}",
                 pathParameters: ["orgId": orgId?.parameterValue, "monitorId": monitorId.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// List what a monitor can run against
+    ///
+    /// The editor's target picker: each account with a SQL driver of its own,
+    /// plus the SQL-capable resources inside it — a database that is a *resource*
+    /// (a ClickHouse service, a D1 or Turso database, a Databricks SQL warehouse,
+    /// a BigQuery dataset) rather than the account's own connection. Accounts
+    /// with neither are omitted; a monitor pointed at one could only ever fail.
+    /// Pass a resource's `id` (and optionally its `resourceTypeId` — the server
+    /// fills it from the synced resource either way) when creating a monitor to
+    /// scope the query to that resource.
+    ///
+    /// GET /api/org/{orgId}/query-monitors/targets
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func targets(
+        orgId: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> QueryMonitorTargets {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/query-monitors/targets",
+                pathParameters: ["orgId": orgId?.parameterValue]
             ),
             options: options
         )
