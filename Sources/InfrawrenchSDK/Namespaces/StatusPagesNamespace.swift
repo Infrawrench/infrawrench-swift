@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.37.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.38.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.37.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.38.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -17,12 +17,9 @@ import Foundation
 public final class StatusPagesNamespace: Sendable {
     /// Shared request plumbing.
     let transport: ApiTransport
-    /// `client.statusPages.customHostname`
-    public let customHostname: StatusPagesCustomHostnameNamespace
 
     init(transport: ApiTransport) {
         self.transport = transport
-        self.customHostname = StatusPagesCustomHostnameNamespace(transport: transport)
     }
 
     /// Create a status page
@@ -113,8 +110,7 @@ public final class StatusPagesNamespace: Sendable {
     ///
     /// Replaces the slug, revoking the current public URL immediately — the
     /// reroll for a link that ended up somewhere unintended. The page stays
-    /// published. If a custom hostname is attached, its hostname→slug mapping is
-    /// updated so the vanity URL keeps working.
+    /// published.
     ///
     /// _Requires permission: `resources:write`._
     ///
@@ -166,104 +162,6 @@ public final class StatusPagesNamespace: Sendable {
                 path: "/api/org/{orgId}/status-pages/{id}",
                 pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue],
                 body: body.map { AnyEncodable($0) }
-            ),
-            options: options
-        )
-    }
-}
-
-/// `client.statusPages.customHostname`
-public final class StatusPagesCustomHostnameNamespace: Sendable {
-    /// Shared request plumbing.
-    let transport: ApiTransport
-
-    init(transport: ApiTransport) {
-        self.transport = transport
-    }
-
-    /// Attach a custom domain
-    ///
-    /// Creates a Cloudflare Custom Hostname for a subdomain and returns the DNS
-    /// records the customer must add. Paid plan only. Apex domains are rejected.
-    /// At most one hostname per page.
-    ///
-    /// POST /api/org/{orgId}/status-pages/{id}/custom-hostname
-    ///
-    /// Raises on 400: Bad request
-    ///
-    /// Raises on 402: Payment required — the organization's plan does not include
-    /// this
-    ///
-    /// Raises on 404: Not found
-    ///
-    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
-    /// created with.
-    public func create(
-        orgId: String? = nil,
-        id: String,
-        body: StatusPageCustomHostnameAttach? = nil,
-        options: RequestOptions? = nil
-    ) async throws -> StatusPage {
-        return try await transport.send(
-            RequestSpec(
-                method: "POST",
-                path: "/api/org/{orgId}/status-pages/{id}/custom-hostname",
-                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue],
-                body: body.map { AnyEncodable($0) }
-            ),
-            options: options
-        )
-    }
-
-    /// Detach a custom domain
-    ///
-    /// Removes the Cloudflare Custom Hostname and the edge hostname→slug mapping.
-    /// The secret slug URL is unaffected.
-    ///
-    /// DELETE /api/org/{orgId}/status-pages/{id}/custom-hostname
-    ///
-    /// Raises on 404: Not found
-    ///
-    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
-    /// created with.
-    public func delete(
-        orgId: String? = nil,
-        id: String,
-        options: RequestOptions? = nil
-    ) async throws -> StatusPage {
-        return try await transport.send(
-            RequestSpec(
-                method: "DELETE",
-                path: "/api/org/{orgId}/status-pages/{id}/custom-hostname",
-                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue]
-            ),
-            options: options
-        )
-    }
-
-    /// Refresh custom domain status
-    ///
-    /// Re-fetches Cloudflare hostname and certificate status and updates the page
-    /// record.
-    ///
-    /// POST /api/org/{orgId}/status-pages/{id}/custom-hostname/refresh
-    ///
-    /// Raises on 400: Bad request
-    ///
-    /// Raises on 404: Not found
-    ///
-    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
-    /// created with.
-    public func refresh(
-        orgId: String? = nil,
-        id: String,
-        options: RequestOptions? = nil
-    ) async throws -> StatusPage {
-        return try await transport.send(
-            RequestSpec(
-                method: "POST",
-                path: "/api/org/{orgId}/status-pages/{id}/custom-hostname/refresh",
-                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue]
             ),
             options: options
         )
