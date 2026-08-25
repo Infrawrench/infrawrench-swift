@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.35.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.36.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.35.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.36.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -13,15 +13,28 @@
  */
 import Foundation
 
+public struct BackupsDrillsLogResult: Codable, Hashable, Sendable {
+    public var drills: [RestoreDrill]
+
+    public init(
+        drills: [RestoreDrill]
+    ) {
+        self.drills = drills
+    }
+}
+
 /// `client.backups`
 public final class BackupsNamespace: Sendable {
     /// Shared request plumbing.
     let transport: ApiTransport
+    /// `client.backups.drills`
+    public let drills: BackupsDrillsNamespace
     /// `client.backups.policies`
     public let policies: BackupsPoliciesNamespace
 
     init(transport: ApiTransport) {
         self.transport = transport
+        self.drills = BackupsDrillsNamespace(transport: transport)
         self.policies = BackupsPoliciesNamespace(transport: transport)
     }
 
@@ -48,6 +61,134 @@ public final class BackupsNamespace: Sendable {
                 method: "GET",
                 path: "/api/org/{orgId}/backups",
                 pathParameters: ["orgId": orgId?.parameterValue]
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.backups.drills`
+public final class BackupsDrillsNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// Record a restore drill
+    ///
+    /// A `verified` drill **must** carry the measured time: an RPO comes from the
+    /// backup, and an RTO can only come from somebody with a stopwatch — that
+    /// number is the entire point of the exercise. A `blocked` drill must not
+    /// carry one, because it never started.
+    ///
+    /// Takes `resources:write`, not a settings permission: recording a drill is
+    /// reporting what you did, and the person who spent Saturday restoring a
+    /// database is rarely the person who set the recovery objective.
+    ///
+    /// POST /api/org/{orgId}/backups/drills
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func create(
+        orgId: String? = nil,
+        body: RestoreDrillCreate? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> RestoreDrill {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/backups/drills",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: body.map { AnyEncodable($0) }
+            ),
+            options: options
+        )
+    }
+
+    /// Delete a recorded drill
+    ///
+    /// For one recorded against the wrong resource or the wrong date. Audited —
+    /// deleting evidence that a restore failed is exactly the edit a reviewer
+    /// would want to know about.
+    ///
+    /// DELETE /api/org/{orgId}/backups/drills/{drillId}
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func delete(
+        orgId: String? = nil,
+        drillId: String,
+        options: RequestOptions? = nil
+    ) async throws {
+        try await transport.sendVoid(
+            RequestSpec(
+                method: "DELETE",
+                path: "/api/org/{orgId}/backups/drills/{drillId}",
+                pathParameters: ["orgId": orgId?.parameterValue, "drillId": drillId.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Where every protected resource stands on restore
+    ///
+    /// Backup coverage answers 'is there a backup'. This answers 'does it
+    /// restore, and how long does it take' — a different question, and the one
+    /// routinely answered wrongly on the day.
+    ///
+    /// A drill is a **record that somebody tried**, not an automated restore:
+    /// restoring a customer's database unattended costs real money, can collide
+    /// with production, and cannot be generically verified. What the product can
+    /// do is make the exercise scheduled, recorded and visible when it lapses.
+    ///
+    /// GET /api/org/{orgId}/backups/drills
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter validDays: How long a verified drill counts for. Defaults to
+    /// 180 days.
+    public func get(
+        orgId: String? = nil,
+        validDays: Int? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> DrillCoverageResponse {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/backups/drills",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                query: [QueryParameter("validDays", validDays)]
+            ),
+            options: options
+        )
+    }
+
+    /// List recorded restore drills
+    ///
+    /// GET /api/org/{orgId}/backups/drills/log
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func log(
+        orgId: String? = nil,
+        resourceId: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> BackupsDrillsLogResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/backups/drills/log",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                query: [QueryParameter("resourceId", resourceId)]
             ),
             options: options
         )
