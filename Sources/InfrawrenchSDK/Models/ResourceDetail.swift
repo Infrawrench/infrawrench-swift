@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.39.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.40.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.39.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.40.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -44,6 +44,8 @@ public struct ResourceDetail: Codable, Hashable, Sendable {
     public var hasDockerActions: Bool
     public var hasSshTerminal: Bool
     public var hasSftpBrowser: Bool
+    /// Whether the generic SSH service installer can target this resource.
+    public var supportsSshInstall: Bool?
     public var sshHost: String?
     public var sshPrivateHost: String?
     public var defaultSshUsername: String?
@@ -86,6 +88,7 @@ public struct ResourceDetail: Codable, Hashable, Sendable {
         hasDockerActions: Bool,
         hasSshTerminal: Bool,
         hasSftpBrowser: Bool,
+        supportsSshInstall: Bool? = nil,
         sshHost: String? = nil,
         sshPrivateHost: String? = nil,
         defaultSshUsername: String? = nil,
@@ -125,6 +128,7 @@ public struct ResourceDetail: Codable, Hashable, Sendable {
         self.hasDockerActions = hasDockerActions
         self.hasSshTerminal = hasSshTerminal
         self.hasSftpBrowser = hasSftpBrowser
+        self.supportsSshInstall = supportsSshInstall
         self.sshHost = sshHost
         self.sshPrivateHost = sshPrivateHost
         self.defaultSshUsername = defaultSshUsername

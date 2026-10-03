@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.39.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.40.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.39.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.40.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -94,12 +94,55 @@ public struct AgentSettings: Codable, Hashable, Sendable {
         }
     }
 
+    public enum T3Access: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
+        case t3Connect
+        case tailscale
+        /// A value the API added after this SDK was generated. Kept rather than
+        /// rejected, so a new server-side value cannot break decoding.
+        case unrecognized(String)
+
+        public init(rawValue: String) {
+            switch rawValue {
+            case "t3-connect": self = .t3Connect
+            case "tailscale": self = .tailscale
+            default: self = .unrecognized(rawValue)
+            }
+        }
+
+        public var rawValue: String {
+            switch self {
+            case .t3Connect: return "t3-connect"
+            case .tailscale: return "tailscale"
+            case .unrecognized(let value): return value
+            }
+        }
+
+        /// Every value the spec declares. `unrecognized` is deliberately absent.
+        public static let allKnownCases: [T3Access] = [
+            .t3Connect,
+            .tailscale,
+        ]
+
+        public init(from decoder: any Decoder) throws {
+            self.init(rawValue: try decoder.singleValueContainer().decode(String.self))
+        }
+
+        public func encode(to encoder: any Encoder) throws {
+            var container = encoder.singleValueContainer()
+            try container.encode(rawValue)
+        }
+    }
+
     public var accountId: String
     public var pluginId: String
     public var resourceTypeId: String
     public var tool: Tool
     public var surface: Surface?
     public var fields: [String: String]
+    /// Accounts whose plugin installs a service on the VM over SSH after setup
+    /// (e.g. Tailscale). See GET /resources/ssh-install/accounts.
+    public var serviceAccountIds: [String]?
+    public var t3Access: T3Access?
 
     public init(
         accountId: String,
@@ -107,7 +150,9 @@ public struct AgentSettings: Codable, Hashable, Sendable {
         resourceTypeId: String,
         tool: Tool,
         surface: Surface? = nil,
-        fields: [String: String]
+        fields: [String: String],
+        serviceAccountIds: [String]? = nil,
+        t3Access: T3Access? = nil
     ) {
         self.accountId = accountId
         self.pluginId = pluginId
@@ -115,5 +160,7 @@ public struct AgentSettings: Codable, Hashable, Sendable {
         self.tool = tool
         self.surface = surface
         self.fields = fields
+        self.serviceAccountIds = serviceAccountIds
+        self.t3Access = t3Access
     }
 }

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.39.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.40.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.39.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.40.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -140,6 +140,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case dedicatedInference
     case deployedModel
     case deployment
+    case device
     case directory
     case directoryGroup
     case directoryUser
@@ -525,6 +526,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "dedicated-inference": self = .dedicatedInference
         case "deployed-model": self = .deployedModel
         case "deployment": self = .deployment
+        case "device": self = .device
         case "directory": self = .directory
         case "directory-group": self = .directoryGroup
         case "directory-user": self = .directoryUser
@@ -910,6 +912,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .dedicatedInference: return "dedicated-inference"
         case .deployedModel: return "deployed-model"
         case .deployment: return "deployment"
+        case .device: return "device"
         case .directory: return "directory"
         case .directoryGroup: return "directory-group"
         case .directoryUser: return "directory-user"
@@ -1295,6 +1298,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .dedicatedInference,
         .deployedModel,
         .deployment,
+        .device,
         .directory,
         .directoryGroup,
         .directoryUser,

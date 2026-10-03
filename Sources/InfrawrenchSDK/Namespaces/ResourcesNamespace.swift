@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.39.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.40.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.39.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.40.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -41,11 +41,14 @@ public final class ResourcesNamespace: Sendable {
     public let manifest: ResourcesManifestNamespace
     /// `client.resources.secretVersions`
     public let secretVersions: ResourcesSecretVersionsNamespace
+    /// `client.resources.sshInstall`
+    public let sshInstall: ResourcesSshInstallNamespace
 
     init(transport: ApiTransport) {
         self.transport = transport
         self.manifest = ResourcesManifestNamespace(transport: transport)
         self.secretVersions = ResourcesSecretVersionsNamespace(transport: transport)
+        self.sshInstall = ResourcesSshInstallNamespace(transport: transport)
     }
 
     /// Attach a resource onto another (e.g. disk → VM)
@@ -841,6 +844,80 @@ public final class ResourcesSecretVersionsNamespace: Sendable {
                 method: "POST",
                 path: "/api/org/{orgId}/resources/{pluginId}/{typeId}/secret-versions/modify",
                 pathParameters: ["orgId": orgId?.parameterValue, "pluginId": pluginId.parameterValue, "typeId": typeId.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.resources.sshInstall`
+public final class ResourcesSshInstallNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// List service accounts that can enroll an SSH server
+    ///
+    /// _Requires permission: `resources:read`._
+    ///
+    /// GET /api/org/{orgId}/resources/ssh-install/accounts
+    ///
+    /// Raises on 403: Forbidden
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func accounts(
+        orgId: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> [SshInstallAccount] {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/resources/ssh-install/accounts",
+                pathParameters: ["orgId": orgId?.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Install and enroll a service on an existing SSH target
+    ///
+    /// Requires resources:write and resources:execute. Uses the selected target's
+    /// saved SSH connection or an org SSH key. Respects change freezes and
+    /// host-key trust. Enrollment credentials never appear in the response or
+    /// audit log.
+    ///
+    /// _Requires permission: `resources:execute`._
+    ///
+    /// POST /api/org/{orgId}/resources/ssh-install
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 403: Forbidden
+    ///
+    /// Raises on 409: SSH host-key trust is required before installation can
+    /// begin
+    ///
+    /// Raises on 423: Blocked by an active change freeze. Retry with the
+    /// `x-change-freeze-override: true` header if you hold `freezes:override`;
+    /// both blocks and overrides are audit-logged.
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func create(
+        orgId: String? = nil,
+        body: SshInstallRequest,
+        options: RequestOptions? = nil
+    ) async throws -> SshInstallResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/resources/ssh-install",
+                pathParameters: ["orgId": orgId?.parameterValue],
                 body: AnyEncodable(body)
             ),
             options: options

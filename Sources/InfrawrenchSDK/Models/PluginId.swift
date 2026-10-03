@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.39.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.40.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.39.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.40.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -58,6 +58,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
     case scaleway
     case speechmatics
     case ssh
+    case tailscale
     case together
     case turso
     case uploadthing
@@ -113,6 +114,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
         case "scaleway": self = .scaleway
         case "speechmatics": self = .speechmatics
         case "ssh": self = .ssh
+        case "tailscale": self = .tailscale
         case "together": self = .together
         case "turso": self = .turso
         case "uploadthing": self = .uploadthing
@@ -168,6 +170,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
         case .scaleway: return "scaleway"
         case .speechmatics: return "speechmatics"
         case .ssh: return "ssh"
+        case .tailscale: return "tailscale"
         case .together: return "together"
         case .turso: return "turso"
         case .uploadthing: return "uploadthing"
@@ -223,6 +226,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
         .scaleway,
         .speechmatics,
         .ssh,
+        .tailscale,
         .together,
         .turso,
         .uploadthing,
