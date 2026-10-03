@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.41.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.42.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.41.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.42.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -15,11 +15,14 @@ import Foundation
 
 public struct ResourcesCostEstimateResult: Codable, Hashable, Sendable {
     public var estimate: CostEstimate?
+    public var carbon: ResourceCarbonEstimate?
 
     public init(
-        estimate: CostEstimate? = nil
+        estimate: CostEstimate? = nil,
+        carbon: ResourceCarbonEstimate? = nil
     ) {
         self.estimate = estimate
+        self.carbon = carbon
     }
 }
 

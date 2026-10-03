@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.41.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.42.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.41.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.42.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -42,6 +42,11 @@ public struct OversizedResource: Codable, Hashable, Sendable {
     /// Current minus recommended monthly price; null when either side is
     /// unpriced.
     public var monthlySaving: Double?
+    /// Estimated monthly kg CO2e of the current size where it runs; null when the
+    /// region has no published grid figure. See the Carbon tag for the method.
+    public var currentMonthlyKgCo2e: Double?
+    /// Estimated monthly kg CO2e the resize would save; null as above.
+    public var monthlyKgCo2eSaving: Double?
     /// Plugin-authored caveat (e.g. the provider requires the machine stopped).
     public var resizeNote: String?
     public var lastSyncedAt: String?
@@ -63,6 +68,8 @@ public struct OversizedResource: Codable, Hashable, Sendable {
         projectedCpuP95: Double,
         currency: String,
         monthlySaving: Double? = nil,
+        currentMonthlyKgCo2e: Double? = nil,
+        monthlyKgCo2eSaving: Double? = nil,
         resizeNote: String? = nil,
         lastSyncedAt: String? = nil
     ) {
@@ -82,6 +89,8 @@ public struct OversizedResource: Codable, Hashable, Sendable {
         self.projectedCpuP95 = projectedCpuP95
         self.currency = currency
         self.monthlySaving = monthlySaving
+        self.currentMonthlyKgCo2e = currentMonthlyKgCo2e
+        self.monthlyKgCo2eSaving = monthlyKgCo2eSaving
         self.resizeNote = resizeNote
         self.lastSyncedAt = lastSyncedAt
     }
