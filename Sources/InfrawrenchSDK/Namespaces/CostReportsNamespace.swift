@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.44.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.45.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.44.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.45.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -122,6 +122,39 @@ public final class CostReportsNamespace: Sendable {
                 method: "GET",
                 path: "/api/org/{orgId}/cost-reports",
                 pathParameters: ["orgId": orgId?.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Export a saved cost report as a PDF
+    ///
+    /// The report's chart and totals table for its saved window, rendered
+    /// server-side and converted to the org's display currency where configured.
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// GET /api/org/{orgId}/cost-reports/{id}/pdf
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter tz: IANA zone the document's generated-at line is written in,
+    /// e.g. `Europe/Berlin`. UTC when absent or unknown.
+    public func pdf(
+        orgId: String? = nil,
+        id: String,
+        tz: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> Data {
+        return try await transport.sendData(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/cost-reports/{id}/pdf",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue],
+                query: [QueryParameter("tz", tz)]
             ),
             options: options
         )

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.44.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.45.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.44.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.45.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -39,6 +39,8 @@ public final class DashboardsNamespace: Sendable {
     let transport: ApiTransport
     /// `client.dashboards.default`
     public let `default`: DashboardsDefaultNamespace
+    /// `client.dashboards.notifications`
+    public let notifications: DashboardsNotificationsNamespace
     /// `client.dashboards.pin`
     public let pin: DashboardsPinNamespace
     /// `client.dashboards.widgets`
@@ -47,6 +49,7 @@ public final class DashboardsNamespace: Sendable {
     init(transport: ApiTransport) {
         self.transport = transport
         self.`default` = DashboardsDefaultNamespace(transport: transport)
+        self.notifications = DashboardsNotificationsNamespace(transport: transport)
         self.pin = DashboardsPinNamespace(transport: transport)
         self.widgets = DashboardsWidgetsNamespace(transport: transport)
     }
@@ -146,6 +149,43 @@ public final class DashboardsNamespace: Sendable {
                 method: "GET",
                 path: "/api/org/{orgId}/dashboards",
                 pathParameters: ["orgId": orgId?.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Export a dashboard as a PDF
+    ///
+    /// Renders every card server-side: cost graphs and saved reports (chart plus
+    /// a totals table, converted to the org's display currency where configured),
+    /// budgets (spend against the amount, forecast and thresholds), custom graphs
+    /// (including their KPI and table forms) and pinned resources and workflows.
+    /// Cost cards need `costs:read` as well and are replaced by a note without
+    /// it. A card that fails renders its error in place.
+    ///
+    /// _Requires permission: `dashboards:read`._
+    ///
+    /// GET /api/org/{orgId}/dashboards/{id}/pdf
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter tz: IANA zone the document's generated-at line is written in,
+    /// e.g. `Europe/Berlin`. UTC when absent or unknown.
+    public func pdf(
+        orgId: String? = nil,
+        id: String,
+        tz: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> Data {
+        return try await transport.sendData(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/dashboards/{id}/pdf",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue],
+                query: [QueryParameter("tz", tz)]
             ),
             options: options
         )
@@ -356,6 +396,187 @@ public final class DashboardsDefaultNamespace: Sendable {
                 method: "GET",
                 path: "/api/org/{orgId}/dashboards/default/full",
                 pathParameters: ["orgId": orgId?.parameterValue]
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.dashboards.notifications`
+public final class DashboardsNotificationsNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// Create a dashboard delivery schedule
+    ///
+    /// On its cadence the server renders the dashboard as a PDF and sends a short
+    /// summary (one line per card with a figure to quote) and a deep link to the
+    /// schedule's destinations, with the PDF attached to emails and uploaded to
+    /// Slack when `attachPdf` is on.
+    ///
+    /// _Requires permission: `org:settings:write`._
+    ///
+    /// POST /api/org/{orgId}/dashboards/{id}/notifications
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func create(
+        orgId: String? = nil,
+        id: String,
+        body: DashboardNotificationInput,
+        options: RequestOptions? = nil
+    ) async throws -> DashboardNotification {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/dashboards/{id}/notifications",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+
+    /// Delete a dashboard delivery schedule
+    ///
+    /// _Requires permission: `org:settings:write`._
+    ///
+    /// DELETE /api/org/{orgId}/dashboards/{id}/notifications/{notificationId}
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func delete(
+        orgId: String? = nil,
+        id: String,
+        notificationId: String,
+        options: RequestOptions? = nil
+    ) async throws -> Ok {
+        return try await transport.send(
+            RequestSpec(
+                method: "DELETE",
+                path: "/api/org/{orgId}/dashboards/{id}/notifications/{notificationId}",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue, "notificationId": notificationId.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// List a dashboard's delivery schedules
+    ///
+    /// _Requires permission: `dashboards:read`._
+    ///
+    /// GET /api/org/{orgId}/dashboards/{id}/notifications
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func list(
+        orgId: String? = nil,
+        id: String,
+        options: RequestOptions? = nil
+    ) async throws -> [DashboardNotification] {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/dashboards/{id}/notifications",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Send a dashboard schedule now
+    ///
+    /// Renders and delivers immediately, ignoring the schedule and its enabled
+    /// flag. Fails with a 400 naming the reason when nothing could be delivered.
+    ///
+    /// _Requires permission: `org:settings:write`._
+    ///
+    /// POST /api/org/{orgId}/dashboards/{id}/notifications/{notificationId}/send
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func send(
+        orgId: String? = nil,
+        id: String,
+        notificationId: String,
+        options: RequestOptions? = nil
+    ) async throws -> DashboardNotificationSendResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/dashboards/{id}/notifications/{notificationId}/send",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue, "notificationId": notificationId.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// List the destinations a dashboard schedule can deliver to
+    ///
+    /// _Requires permission: `org:settings:write`._
+    ///
+    /// GET /api/org/{orgId}/dashboards/{id}/notifications/targets
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func targets(
+        orgId: String? = nil,
+        id: String,
+        options: RequestOptions? = nil
+    ) async throws -> ReportDeliveryTargets {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/dashboards/{id}/notifications/targets",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Update a dashboard delivery schedule
+    ///
+    /// _Requires permission: `org:settings:write`._
+    ///
+    /// PUT /api/org/{orgId}/dashboards/{id}/notifications/{notificationId}
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func update(
+        orgId: String? = nil,
+        id: String,
+        notificationId: String,
+        body: DashboardNotificationInput,
+        options: RequestOptions? = nil
+    ) async throws -> DashboardNotification {
+        return try await transport.send(
+            RequestSpec(
+                method: "PUT",
+                path: "/api/org/{orgId}/dashboards/{id}/notifications/{notificationId}",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue, "notificationId": notificationId.parameterValue],
+                body: AnyEncodable(body)
             ),
             options: options
         )

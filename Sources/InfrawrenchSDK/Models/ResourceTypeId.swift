@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.44.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.45.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.44.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.45.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -19,6 +19,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case accessApplication
     case accessKey
     case accessPolicy
+    case accessPolicyToken
     case account
     case acmCertificate
     case actionsCache
@@ -34,6 +35,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case alert
     case alertConfiguration
     case alertPolicy
+    case alertRule
     case alignmentJob
     case alloydbCluster
     case alloydbInstance
@@ -158,6 +160,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case connection
     case connectivityRule
     case connector
+    case contactPoint
     case container
     case containerRegistry
     case context
@@ -198,6 +201,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case databricksWorkspaceObject
     case dataflowJob
     case dataset
+    case datasource
     case dbSubnetGroup
     case dbUser
     case dedicatedInference
@@ -549,6 +553,8 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case sshTarget
     case sslCertificate
     case ssmParameter
+    case stack
+    case stackPlugin
     case stackscript
     case staticIp
     case stepFunction
@@ -556,6 +562,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case subaccount
     case subnet
     case supervisedFineTuningJob
+    case syntheticCheck
     case tailnet
     case targetGroup
     case tcoPolicy
@@ -636,6 +643,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "access-application": self = .accessApplication
         case "access-key": self = .accessKey
         case "access-policy": self = .accessPolicy
+        case "access-policy-token": self = .accessPolicyToken
         case "account": self = .account
         case "acm-certificate": self = .acmCertificate
         case "actions-cache": self = .actionsCache
@@ -651,6 +659,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "alert": self = .alert
         case "alert-configuration": self = .alertConfiguration
         case "alert-policy": self = .alertPolicy
+        case "alert-rule": self = .alertRule
         case "alignment-job": self = .alignmentJob
         case "alloydb-cluster": self = .alloydbCluster
         case "alloydb-instance": self = .alloydbInstance
@@ -775,6 +784,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "connection": self = .connection
         case "connectivity-rule": self = .connectivityRule
         case "connector": self = .connector
+        case "contact-point": self = .contactPoint
         case "container": self = .container
         case "container-registry": self = .containerRegistry
         case "context": self = .context
@@ -815,6 +825,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "databricks-workspace-object": self = .databricksWorkspaceObject
         case "dataflow-job": self = .dataflowJob
         case "dataset": self = .dataset
+        case "datasource": self = .datasource
         case "db-subnet-group": self = .dbSubnetGroup
         case "db-user": self = .dbUser
         case "dedicated-inference": self = .dedicatedInference
@@ -1166,6 +1177,8 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "ssh-target": self = .sshTarget
         case "ssl-certificate": self = .sslCertificate
         case "ssm-parameter": self = .ssmParameter
+        case "stack": self = .stack
+        case "stack-plugin": self = .stackPlugin
         case "stackscript": self = .stackscript
         case "static-ip": self = .staticIp
         case "step-function": self = .stepFunction
@@ -1173,6 +1186,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "subaccount": self = .subaccount
         case "subnet": self = .subnet
         case "supervised-fine-tuning-job": self = .supervisedFineTuningJob
+        case "synthetic-check": self = .syntheticCheck
         case "tailnet": self = .tailnet
         case "target-group": self = .targetGroup
         case "tco-policy": self = .tcoPolicy
@@ -1253,6 +1267,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .accessApplication: return "access-application"
         case .accessKey: return "access-key"
         case .accessPolicy: return "access-policy"
+        case .accessPolicyToken: return "access-policy-token"
         case .account: return "account"
         case .acmCertificate: return "acm-certificate"
         case .actionsCache: return "actions-cache"
@@ -1268,6 +1283,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .alert: return "alert"
         case .alertConfiguration: return "alert-configuration"
         case .alertPolicy: return "alert-policy"
+        case .alertRule: return "alert-rule"
         case .alignmentJob: return "alignment-job"
         case .alloydbCluster: return "alloydb-cluster"
         case .alloydbInstance: return "alloydb-instance"
@@ -1392,6 +1408,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .connection: return "connection"
         case .connectivityRule: return "connectivity-rule"
         case .connector: return "connector"
+        case .contactPoint: return "contact-point"
         case .container: return "container"
         case .containerRegistry: return "container-registry"
         case .context: return "context"
@@ -1432,6 +1449,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .databricksWorkspaceObject: return "databricks-workspace-object"
         case .dataflowJob: return "dataflow-job"
         case .dataset: return "dataset"
+        case .datasource: return "datasource"
         case .dbSubnetGroup: return "db-subnet-group"
         case .dbUser: return "db-user"
         case .dedicatedInference: return "dedicated-inference"
@@ -1783,6 +1801,8 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .sshTarget: return "ssh-target"
         case .sslCertificate: return "ssl-certificate"
         case .ssmParameter: return "ssm-parameter"
+        case .stack: return "stack"
+        case .stackPlugin: return "stack-plugin"
         case .stackscript: return "stackscript"
         case .staticIp: return "static-ip"
         case .stepFunction: return "step-function"
@@ -1790,6 +1810,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .subaccount: return "subaccount"
         case .subnet: return "subnet"
         case .supervisedFineTuningJob: return "supervised-fine-tuning-job"
+        case .syntheticCheck: return "synthetic-check"
         case .tailnet: return "tailnet"
         case .targetGroup: return "target-group"
         case .tcoPolicy: return "tco-policy"
@@ -1870,6 +1891,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .accessApplication,
         .accessKey,
         .accessPolicy,
+        .accessPolicyToken,
         .account,
         .acmCertificate,
         .actionsCache,
@@ -1885,6 +1907,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .alert,
         .alertConfiguration,
         .alertPolicy,
+        .alertRule,
         .alignmentJob,
         .alloydbCluster,
         .alloydbInstance,
@@ -2009,6 +2032,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .connection,
         .connectivityRule,
         .connector,
+        .contactPoint,
         .container,
         .containerRegistry,
         .context,
@@ -2049,6 +2073,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .databricksWorkspaceObject,
         .dataflowJob,
         .dataset,
+        .datasource,
         .dbSubnetGroup,
         .dbUser,
         .dedicatedInference,
@@ -2400,6 +2425,8 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .sshTarget,
         .sslCertificate,
         .ssmParameter,
+        .stack,
+        .stackPlugin,
         .stackscript,
         .staticIp,
         .stepFunction,
@@ -2407,6 +2434,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .subaccount,
         .subnet,
         .supervisedFineTuningJob,
+        .syntheticCheck,
         .tailnet,
         .targetGroup,
         .tcoPolicy,

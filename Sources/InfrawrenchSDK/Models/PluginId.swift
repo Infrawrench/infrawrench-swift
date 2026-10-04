@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.44.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.45.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.44.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.45.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -46,6 +46,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
     case gemini
     case github
     case gladia
+    case grafanaCloud
     case groq
     case hetzner
     case kafka
@@ -122,6 +123,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
         case "gemini": self = .gemini
         case "github": self = .github
         case "gladia": self = .gladia
+        case "grafana-cloud": self = .grafanaCloud
         case "groq": self = .groq
         case "hetzner": self = .hetzner
         case "kafka": self = .kafka
@@ -198,6 +200,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
         case .gemini: return "gemini"
         case .github: return "github"
         case .gladia: return "gladia"
+        case .grafanaCloud: return "grafana-cloud"
         case .groq: return "groq"
         case .hetzner: return "hetzner"
         case .kafka: return "kafka"
@@ -274,6 +277,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
         .gemini,
         .github,
         .gladia,
+        .grafanaCloud,
         .groq,
         .hetzner,
         .kafka,
