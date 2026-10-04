@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.42.3 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.43.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.42.3).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.43.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk

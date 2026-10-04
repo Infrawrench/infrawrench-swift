@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.42.3 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.43.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.42.3).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.43.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -43,6 +43,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case artifactRegistryRepo
     case auditEvent
     case autoScalingGroup
+    case autonomousDatabase
     case autoscalePool
     case azureAiServices
     case azureAksCluster
@@ -97,6 +98,10 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case bigqueryTable
     case bigtableInstance
     case blockVolume
+    case bootVolume
+    case bucket
+    case budget
+    case budgetAlertRule
     case byokCredential
     case cacheRule
     case cachedContent
@@ -132,6 +137,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case cognitoUserPool
     case collection
     case collectionDocument
+    case compartment
     case composerEnvironment
     case connection
     case container
@@ -343,9 +349,11 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case netlifySnippet
     case network
     case nfsShare
+    case nodePool
     case notificationPolicy
     case objectStorageBucket
     case octaviaLoadBalancer
+    case okeCluster
     case opensearchCluster
     case opensearchDomain
     case organization
@@ -411,6 +419,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case secretsManagerSecret
     case secretsStoreSecret
     case securityGroup
+    case securityList
     case sentimentJob
     case server
     case serverlessContainer
@@ -440,6 +449,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case supervisedFineTuningJob
     case tailnet
     case targetGroup
+    case tenancy
     case topicJob
     case training
     case transcript
@@ -463,6 +473,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case userInvite
     case utApp
     case utFile
+    case vcn
     case vectorStore
     case vectorizeIndex
     case vercelDeployment
@@ -528,6 +539,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "artifact-registry-repo": self = .artifactRegistryRepo
         case "audit-event": self = .auditEvent
         case "auto-scaling-group": self = .autoScalingGroup
+        case "autonomous-database": self = .autonomousDatabase
         case "autoscale-pool": self = .autoscalePool
         case "azure-ai-services": self = .azureAiServices
         case "azure-aks-cluster": self = .azureAksCluster
@@ -582,6 +594,10 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "bigquery-table": self = .bigqueryTable
         case "bigtable-instance": self = .bigtableInstance
         case "block-volume": self = .blockVolume
+        case "boot-volume": self = .bootVolume
+        case "bucket": self = .bucket
+        case "budget": self = .budget
+        case "budget-alert-rule": self = .budgetAlertRule
         case "byok-credential": self = .byokCredential
         case "cache-rule": self = .cacheRule
         case "cached-content": self = .cachedContent
@@ -617,6 +633,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "cognito-user-pool": self = .cognitoUserPool
         case "collection": self = .collection
         case "collection-document": self = .collectionDocument
+        case "compartment": self = .compartment
         case "composer-environment": self = .composerEnvironment
         case "connection": self = .connection
         case "container": self = .container
@@ -828,9 +845,11 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "netlify-snippet": self = .netlifySnippet
         case "network": self = .network
         case "nfs-share": self = .nfsShare
+        case "node-pool": self = .nodePool
         case "notification-policy": self = .notificationPolicy
         case "object-storage-bucket": self = .objectStorageBucket
         case "octavia-load-balancer": self = .octaviaLoadBalancer
+        case "oke-cluster": self = .okeCluster
         case "opensearch-cluster": self = .opensearchCluster
         case "opensearch-domain": self = .opensearchDomain
         case "organization": self = .organization
@@ -896,6 +915,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "secrets-manager-secret": self = .secretsManagerSecret
         case "secrets-store-secret": self = .secretsStoreSecret
         case "security-group": self = .securityGroup
+        case "security-list": self = .securityList
         case "sentiment-job": self = .sentimentJob
         case "server": self = .server
         case "serverless-container": self = .serverlessContainer
@@ -925,6 +945,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "supervised-fine-tuning-job": self = .supervisedFineTuningJob
         case "tailnet": self = .tailnet
         case "target-group": self = .targetGroup
+        case "tenancy": self = .tenancy
         case "topic-job": self = .topicJob
         case "training": self = .training
         case "transcript": self = .transcript
@@ -948,6 +969,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "user-invite": self = .userInvite
         case "ut-app": self = .utApp
         case "ut-file": self = .utFile
+        case "vcn": self = .vcn
         case "vector-store": self = .vectorStore
         case "vectorize-index": self = .vectorizeIndex
         case "vercel-deployment": self = .vercelDeployment
@@ -1013,6 +1035,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .artifactRegistryRepo: return "artifact-registry-repo"
         case .auditEvent: return "audit-event"
         case .autoScalingGroup: return "auto-scaling-group"
+        case .autonomousDatabase: return "autonomous-database"
         case .autoscalePool: return "autoscale-pool"
         case .azureAiServices: return "azure-ai-services"
         case .azureAksCluster: return "azure-aks-cluster"
@@ -1067,6 +1090,10 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .bigqueryTable: return "bigquery-table"
         case .bigtableInstance: return "bigtable-instance"
         case .blockVolume: return "block-volume"
+        case .bootVolume: return "boot-volume"
+        case .bucket: return "bucket"
+        case .budget: return "budget"
+        case .budgetAlertRule: return "budget-alert-rule"
         case .byokCredential: return "byok-credential"
         case .cacheRule: return "cache-rule"
         case .cachedContent: return "cached-content"
@@ -1102,6 +1129,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .cognitoUserPool: return "cognito-user-pool"
         case .collection: return "collection"
         case .collectionDocument: return "collection-document"
+        case .compartment: return "compartment"
         case .composerEnvironment: return "composer-environment"
         case .connection: return "connection"
         case .container: return "container"
@@ -1313,9 +1341,11 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .netlifySnippet: return "netlify-snippet"
         case .network: return "network"
         case .nfsShare: return "nfs-share"
+        case .nodePool: return "node-pool"
         case .notificationPolicy: return "notification-policy"
         case .objectStorageBucket: return "object-storage-bucket"
         case .octaviaLoadBalancer: return "octavia-load-balancer"
+        case .okeCluster: return "oke-cluster"
         case .opensearchCluster: return "opensearch-cluster"
         case .opensearchDomain: return "opensearch-domain"
         case .organization: return "organization"
@@ -1381,6 +1411,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .secretsManagerSecret: return "secrets-manager-secret"
         case .secretsStoreSecret: return "secrets-store-secret"
         case .securityGroup: return "security-group"
+        case .securityList: return "security-list"
         case .sentimentJob: return "sentiment-job"
         case .server: return "server"
         case .serverlessContainer: return "serverless-container"
@@ -1410,6 +1441,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .supervisedFineTuningJob: return "supervised-fine-tuning-job"
         case .tailnet: return "tailnet"
         case .targetGroup: return "target-group"
+        case .tenancy: return "tenancy"
         case .topicJob: return "topic-job"
         case .training: return "training"
         case .transcript: return "transcript"
@@ -1433,6 +1465,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .userInvite: return "user-invite"
         case .utApp: return "ut-app"
         case .utFile: return "ut-file"
+        case .vcn: return "vcn"
         case .vectorStore: return "vector-store"
         case .vectorizeIndex: return "vectorize-index"
         case .vercelDeployment: return "vercel-deployment"
@@ -1498,6 +1531,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .artifactRegistryRepo,
         .auditEvent,
         .autoScalingGroup,
+        .autonomousDatabase,
         .autoscalePool,
         .azureAiServices,
         .azureAksCluster,
@@ -1552,6 +1586,10 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .bigqueryTable,
         .bigtableInstance,
         .blockVolume,
+        .bootVolume,
+        .bucket,
+        .budget,
+        .budgetAlertRule,
         .byokCredential,
         .cacheRule,
         .cachedContent,
@@ -1587,6 +1625,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .cognitoUserPool,
         .collection,
         .collectionDocument,
+        .compartment,
         .composerEnvironment,
         .connection,
         .container,
@@ -1798,9 +1837,11 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .netlifySnippet,
         .network,
         .nfsShare,
+        .nodePool,
         .notificationPolicy,
         .objectStorageBucket,
         .octaviaLoadBalancer,
+        .okeCluster,
         .opensearchCluster,
         .opensearchDomain,
         .organization,
@@ -1866,6 +1907,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .secretsManagerSecret,
         .secretsStoreSecret,
         .securityGroup,
+        .securityList,
         .sentimentJob,
         .server,
         .serverlessContainer,
@@ -1895,6 +1937,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .supervisedFineTuningJob,
         .tailnet,
         .targetGroup,
+        .tenancy,
         .topicJob,
         .training,
         .transcript,
@@ -1918,6 +1961,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .userInvite,
         .utApp,
         .utFile,
+        .vcn,
         .vectorStore,
         .vectorizeIndex,
         .vercelDeployment,

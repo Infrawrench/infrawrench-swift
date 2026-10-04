@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.42.3 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.43.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.42.3).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.43.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -49,6 +49,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
     case openai
     case openrouter
     case opensearch
+    case oracleCloud
     case ovh
     case planetscale
     case postgres
@@ -105,6 +106,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
         case "openai": self = .openai
         case "openrouter": self = .openrouter
         case "opensearch": self = .opensearch
+        case "oracle-cloud": self = .oracleCloud
         case "ovh": self = .ovh
         case "planetscale": self = .planetscale
         case "postgres": self = .postgres
@@ -161,6 +163,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
         case .openai: return "openai"
         case .openrouter: return "openrouter"
         case .opensearch: return "opensearch"
+        case .oracleCloud: return "oracle-cloud"
         case .ovh: return "ovh"
         case .planetscale: return "planetscale"
         case .postgres: return "postgres"
@@ -217,6 +220,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
         .openai,
         .openrouter,
         .opensearch,
+        .oracleCloud,
         .ovh,
         .planetscale,
         .postgres,
