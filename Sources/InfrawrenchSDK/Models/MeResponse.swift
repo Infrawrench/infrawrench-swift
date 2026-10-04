@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.43.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.44.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.43.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.44.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -18,16 +18,19 @@ public struct MeResponse: Codable, Hashable, Sendable {
     public var email: String
     public var role: RoleSummary?
     public var permissions: [Permission]
+    public var costVisibility: CostVisibilitySummary?
 
     public init(
         userId: String,
         email: String,
         role: RoleSummary? = nil,
-        permissions: [Permission]
+        permissions: [Permission],
+        costVisibility: CostVisibilitySummary? = nil
     ) {
         self.userId = userId
         self.email = email
         self.role = role
         self.permissions = permissions
+        self.costVisibility = costVisibility
     }
 }

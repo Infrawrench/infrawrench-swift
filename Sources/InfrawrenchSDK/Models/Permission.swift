@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.43.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.44.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.43.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.44.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -79,6 +79,7 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
     case invoicesWrite
     case invoicesIssue
     case pagesWrite
+    case sharingOverride
     case orgSettingsWrite
     /// A value the API added after this SDK was generated. Kept rather than
     /// rejected, so a new server-side value cannot break decoding.
@@ -149,6 +150,7 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case "invoices:write": self = .invoicesWrite
         case "invoices:issue": self = .invoicesIssue
         case "pages:write": self = .pagesWrite
+        case "sharing:override": self = .sharingOverride
         case "org:settings:write": self = .orgSettingsWrite
         default: self = .unrecognized(rawValue)
         }
@@ -219,6 +221,7 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case .invoicesWrite: return "invoices:write"
         case .invoicesIssue: return "invoices:issue"
         case .pagesWrite: return "pages:write"
+        case .sharingOverride: return "sharing:override"
         case .orgSettingsWrite: return "org:settings:write"
         case .unrecognized(let value): return value
         }
@@ -289,6 +292,7 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         .invoicesWrite,
         .invoicesIssue,
         .pagesWrite,
+        .sharingOverride,
         .orgSettingsWrite,
     ]
 

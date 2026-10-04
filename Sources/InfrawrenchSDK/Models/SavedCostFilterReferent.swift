@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.43.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.44.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.43.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.44.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -18,6 +18,7 @@ public struct SavedCostFilterReferent: Codable, Hashable, Sendable {
         case budget
         case costReport
         case costGraphWidget
+        case costVisibilityScope
         /// A value the API added after this SDK was generated. Kept rather than
         /// rejected, so a new server-side value cannot break decoding.
         case unrecognized(String)
@@ -27,6 +28,7 @@ public struct SavedCostFilterReferent: Codable, Hashable, Sendable {
             case "budget": self = .budget
             case "cost_report": self = .costReport
             case "cost_graph_widget": self = .costGraphWidget
+            case "cost_visibility_scope": self = .costVisibilityScope
             default: self = .unrecognized(rawValue)
             }
         }
@@ -36,6 +38,7 @@ public struct SavedCostFilterReferent: Codable, Hashable, Sendable {
             case .budget: return "budget"
             case .costReport: return "cost_report"
             case .costGraphWidget: return "cost_graph_widget"
+            case .costVisibilityScope: return "cost_visibility_scope"
             case .unrecognized(let value): return value
             }
         }
@@ -45,6 +48,7 @@ public struct SavedCostFilterReferent: Codable, Hashable, Sendable {
             .budget,
             .costReport,
             .costGraphWidget,
+            .costVisibilityScope,
         ]
 
         public init(from decoder: any Decoder) throws {

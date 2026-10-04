@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.43.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.44.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.43.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.44.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -17,9 +17,11 @@ import Foundation
 /// `resourceTypes` for the valid (pluginId, typeId) pairs.
 public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
     case accessApplication
+    case accessKey
     case accessPolicy
     case account
     case acmCertificate
+    case actionsCache
     case adminApiKey
     case agent
     case agentApiKey
@@ -29,6 +31,8 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case aiGateway
     case aiSearch
     case alb
+    case alert
+    case alertConfiguration
     case alertPolicy
     case alignmentJob
     case alloydbCluster
@@ -36,6 +40,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case analyticsEngineDataset
     case apiGateway
     case apiKey
+    case apiToken
     case app
     case appEngineService
     case appSecret
@@ -43,6 +48,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case artifactRegistryRepo
     case auditEvent
     case autoScalingGroup
+    case automation
     case autonomousDatabase
     case autoscalePool
     case azureAiServices
@@ -82,7 +88,10 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case azureSubnet
     case azureVm
     case azureVnet
+    case backend
     case backendService
+    case backupPolicy
+    case backupSnapshot
     case backupVault
     case balance
     case basinCatalog
@@ -97,6 +106,8 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case bigqueryDataset
     case bigqueryTable
     case bigtableInstance
+    case billingAccount
+    case billingGroup
     case blockVolume
     case bootVolume
     case bucket
@@ -114,6 +125,8 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case chMember
     case chPostgres
     case chService
+    case cksCluster
+    case clientKey
     case cloudArmorPolicy
     case cloudBuildTrigger
     case cloudDeployPipeline
@@ -132,19 +145,33 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case cloudtrailTrail
     case cloudwatchAlarm
     case cloudwatchLogGroup
+    case cluster
     case codebuildProject
     case codepipelinePipeline
+    case codespace
     case cognitoUserPool
     case collection
     case collectionDocument
     case compartment
     case composerEnvironment
+    case configStore
     case connection
+    case connectivityRule
+    case connector
     case container
     case containerRegistry
+    case context
+    case contextVariable
+    case copilotSeat
+    case costCenter
+    case cronMonitor
+    case customEnrichment
     case customHostname
     case customVoice
     case d1Database
+    case dashboard
+    case database
+    case databaseUser
     case databricksApp
     case databricksCatalog
     case databricksCluster
@@ -176,10 +203,19 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case dedicatedInference
     case deployedModel
     case deployment
+    case depotActionsRepo
+    case depotBuild
+    case depotProject
+    case depotRegistryImage
+    case depotToken
+    case depotTrustPolicy
     case device
+    case dict
+    case dictionary
     case directory
     case directoryGroup
     case directoryUser
+    case disk
     case distributionCredential
     case dnsRecord
     case dnsZone
@@ -190,6 +226,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case documentdbCluster
     case doksCluster
     case domain
+    case domainRecord
     case dpoJob
     case droplet
     case durableObjectNamespace
@@ -205,12 +242,18 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case elasticacheServerlessCache
     case emailRoutingRule
     case embedJob
+    case encryptionKey
     case endpoint
+    case enrichment
+    case environment
     case eval
     case evaluation
     case evaluationJob
     case evaluator
     case eventbridgeRule
+    case events2metrics
+    case exportSink
+    case `extension`
     case featureFlag
     case file
     case fileSearchDocument
@@ -221,10 +264,13 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case firestoreDatabase
     case firewall
     case firewallRule
+    case flexCluster
     case flexibleIp
+    case flinkComputePool
     case floatingIp
     case folder
     case forwardingRule
+    case function
     case gateway
     case gceDisk
     case gceInstance
@@ -247,6 +293,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case healthCheck
     case healthcheck
     case historyItem
+    case hostedRunner
     case hyperdrive
     case iamRole
     case iamUser
@@ -255,12 +302,15 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case instance
     case instanceGroup
     case instanceTemplate
+    case instanceType
     case internetGateway
     case invitation
     case invite
     case invoice
+    case ipAccessEntry
     case ipAccessRule
     case ipAllocation
+    case issue
     case job
     case k8sCluster
     case k8sConfigmap
@@ -284,13 +334,21 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case kmsKey
     case kmsKeyRing
     case knowledgeBaseDocument
+    case knowledgeNote
+    case ksqldbCluster
+    case kubernetesCluster
     case kvNamespace
+    case kvStore
     case lambdaFunction
     case languageIdJob
+    case linode
     case liveSession
+    case lkeCluster
+    case lkeNodePool
     case llmModel
     case loadBalancer
     case logSink
+    case loggingEndpoint
     case logpushJob
     case machine
     case managedDatabase
@@ -304,6 +362,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case memorystoreRedis
     case memorystoreValkey
     case messageBatch
+    case messagingService
     case mistralAgent
     case mistralApiKey
     case mistralBatchJob
@@ -317,10 +376,12 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case modelEndpoint
     case modelVersion
     case mongodbDatabase
+    case monitor
     case mqBroker
     case mskCluster
     case mssqlDatabase
     case mysqlDatabase
+    case namespace
     case natGateway
     case neonAiGateway
     case neonAuth
@@ -348,12 +409,16 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case netlifySite
     case netlifySnippet
     case network
+    case networkConnection
+    case nexusEndpoint
     case nfsShare
     case nodePool
+    case nodebalancer
     case notificationPolicy
     case objectStorageBucket
     case octaviaLoadBalancer
     case okeCluster
+    case onlineArchive
     case opensearchCluster
     case opensearchDomain
     case organization
@@ -362,16 +427,21 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case organizationMembership
     case organizationRole
     case organizationUser
+    case outgoingWebhook
     case pageRule
+    case parsingRuleGroup
     case permission
     case pgDatabase
     case pgSchema
     case phoneNumber
+    case pipeline
     case placementGroup
+    case playbook
     case postgresCluster
     case postureIntegration
     case prediction
     case primaryIp
+    case privateEndpointService
     case privateNetwork
     case productEnvironment
     case project
@@ -379,6 +449,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case projectRateLimit
     case projectServiceAccount
     case projectUser
+    case projectVariable
     case pronunciationDict
     case pronunciationDictionary
     case provider
@@ -394,9 +465,20 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case purchase
     case queue
     case quota
+    case quotaRule
     case r2Bucket
     case rateLimit
     case rateLimitRule
+    case rcAccount
+    case rcAclRole
+    case rcAclRule
+    case rcAclUser
+    case rcCloudAccount
+    case rcDatabase
+    case rcPscEndpoint
+    case rcSubscription
+    case rcTransitGateway
+    case rcVpcPeering
     case rdbInstance
     case rdsCluster
     case rdsInstance
@@ -405,6 +487,9 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case redshiftCluster
     case registryNamespace
     case reinforcementFineTuningJob
+    case release
+    case repoBlocklist
+    case reservation
     case reservedIp
     case role
     case routeTable
@@ -412,10 +497,17 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case route53HostedZone
     case route53RecordSet
     case router
+    case runner
+    case runnerResourceClass
     case s3Bucket
     case sagemakerEndpoint
+    case schedule
+    case scheduledFunction
+    case schemaRegistry
+    case searchIndex
     case secret
     case secretManagerSecret
+    case secretStore
     case secretsManagerSecret
     case secretsStoreSecret
     case securityGroup
@@ -424,10 +516,25 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case server
     case serverlessContainer
     case serverlessFunction
+    case serverlessInstance
+    case serverlessTrafficFilter
     case service
+    case serviceAccount
+    case serviceVersion
+    case session
     case sharedVolume
     case skill
     case snapshot
+    case snowflakeAccount
+    case snowflakeDatabase
+    case snowflakeDynamicTable
+    case snowflakePipe
+    case snowflakeResourceMonitor
+    case snowflakeRole
+    case snowflakeSchema
+    case snowflakeTask
+    case snowflakeUser
+    case snowflakeWarehouse
     case snsTopic
     case spacesBucket
     case spannerBackup
@@ -442,15 +549,23 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case sshTarget
     case sslCertificate
     case ssmParameter
+    case stackscript
     case staticIp
     case stepFunction
     case storageBox
+    case subaccount
     case subnet
     case supervisedFineTuningJob
     case tailnet
     case targetGroup
+    case tcoPolicy
+    case team
+    case teamMember
     case tenancy
+    case tlsCertificate
+    case tlsSubscription
     case topicJob
+    case trafficFilter
     case training
     case transcript
     case transcription
@@ -466,9 +581,12 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case tursoLocation
     case tursoOrganizationInvite
     case tursoOrganizationMember
+    case twimlApp
     case uploadMapping
     case uploadPreset
     case uptimeCheck
+    case uptimeMonitor
+    case usageTrigger
     case user
     case userInvite
     case utApp
@@ -483,8 +601,10 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case vercelProject
     case vercelTeam
     case vercelWebhook
+    case verifyService
     case vertexAiEndpoint
     case vertexGeminiModel
+    case vm
     case vocabulary
     case voice
     case voiceAgent
@@ -494,6 +614,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case vpcNatGateway
     case vpcNetwork
     case vpcPeering
+    case vpcSubnet
     case wafWebAcl
     case waitingRoom
     case webhook
@@ -513,9 +634,11 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     public init(rawValue: String) {
         switch rawValue {
         case "access-application": self = .accessApplication
+        case "access-key": self = .accessKey
         case "access-policy": self = .accessPolicy
         case "account": self = .account
         case "acm-certificate": self = .acmCertificate
+        case "actions-cache": self = .actionsCache
         case "admin-api-key": self = .adminApiKey
         case "agent": self = .agent
         case "agent-api-key": self = .agentApiKey
@@ -525,6 +648,8 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "ai-gateway": self = .aiGateway
         case "ai-search": self = .aiSearch
         case "alb": self = .alb
+        case "alert": self = .alert
+        case "alert-configuration": self = .alertConfiguration
         case "alert-policy": self = .alertPolicy
         case "alignment-job": self = .alignmentJob
         case "alloydb-cluster": self = .alloydbCluster
@@ -532,6 +657,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "analytics-engine-dataset": self = .analyticsEngineDataset
         case "api-gateway": self = .apiGateway
         case "api-key": self = .apiKey
+        case "api-token": self = .apiToken
         case "app": self = .app
         case "app-engine-service": self = .appEngineService
         case "app-secret": self = .appSecret
@@ -539,6 +665,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "artifact-registry-repo": self = .artifactRegistryRepo
         case "audit-event": self = .auditEvent
         case "auto-scaling-group": self = .autoScalingGroup
+        case "automation": self = .automation
         case "autonomous-database": self = .autonomousDatabase
         case "autoscale-pool": self = .autoscalePool
         case "azure-ai-services": self = .azureAiServices
@@ -578,7 +705,10 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "azure-subnet": self = .azureSubnet
         case "azure-vm": self = .azureVm
         case "azure-vnet": self = .azureVnet
+        case "backend": self = .backend
         case "backend-service": self = .backendService
+        case "backup-policy": self = .backupPolicy
+        case "backup-snapshot": self = .backupSnapshot
         case "backup-vault": self = .backupVault
         case "balance": self = .balance
         case "basin-catalog": self = .basinCatalog
@@ -593,6 +723,8 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "bigquery-dataset": self = .bigqueryDataset
         case "bigquery-table": self = .bigqueryTable
         case "bigtable-instance": self = .bigtableInstance
+        case "billing-account": self = .billingAccount
+        case "billing-group": self = .billingGroup
         case "block-volume": self = .blockVolume
         case "boot-volume": self = .bootVolume
         case "bucket": self = .bucket
@@ -610,6 +742,8 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "ch-member": self = .chMember
         case "ch-postgres": self = .chPostgres
         case "ch-service": self = .chService
+        case "cks-cluster": self = .cksCluster
+        case "client-key": self = .clientKey
         case "cloud-armor-policy": self = .cloudArmorPolicy
         case "cloud-build-trigger": self = .cloudBuildTrigger
         case "cloud-deploy-pipeline": self = .cloudDeployPipeline
@@ -628,19 +762,33 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "cloudtrail-trail": self = .cloudtrailTrail
         case "cloudwatch-alarm": self = .cloudwatchAlarm
         case "cloudwatch-log-group": self = .cloudwatchLogGroup
+        case "cluster": self = .cluster
         case "codebuild-project": self = .codebuildProject
         case "codepipeline-pipeline": self = .codepipelinePipeline
+        case "codespace": self = .codespace
         case "cognito-user-pool": self = .cognitoUserPool
         case "collection": self = .collection
         case "collection-document": self = .collectionDocument
         case "compartment": self = .compartment
         case "composer-environment": self = .composerEnvironment
+        case "config-store": self = .configStore
         case "connection": self = .connection
+        case "connectivity-rule": self = .connectivityRule
+        case "connector": self = .connector
         case "container": self = .container
         case "container-registry": self = .containerRegistry
+        case "context": self = .context
+        case "context-variable": self = .contextVariable
+        case "copilot-seat": self = .copilotSeat
+        case "cost-center": self = .costCenter
+        case "cron-monitor": self = .cronMonitor
+        case "custom-enrichment": self = .customEnrichment
         case "custom-hostname": self = .customHostname
         case "custom-voice": self = .customVoice
         case "d1-database": self = .d1Database
+        case "dashboard": self = .dashboard
+        case "database": self = .database
+        case "database-user": self = .databaseUser
         case "databricks-app": self = .databricksApp
         case "databricks-catalog": self = .databricksCatalog
         case "databricks-cluster": self = .databricksCluster
@@ -672,10 +820,19 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "dedicated-inference": self = .dedicatedInference
         case "deployed-model": self = .deployedModel
         case "deployment": self = .deployment
+        case "depot-actions-repo": self = .depotActionsRepo
+        case "depot-build": self = .depotBuild
+        case "depot-project": self = .depotProject
+        case "depot-registry-image": self = .depotRegistryImage
+        case "depot-token": self = .depotToken
+        case "depot-trust-policy": self = .depotTrustPolicy
         case "device": self = .device
+        case "dict": self = .dict
+        case "dictionary": self = .dictionary
         case "directory": self = .directory
         case "directory-group": self = .directoryGroup
         case "directory-user": self = .directoryUser
+        case "disk": self = .disk
         case "distribution-credential": self = .distributionCredential
         case "dns-record": self = .dnsRecord
         case "dns-zone": self = .dnsZone
@@ -686,6 +843,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "documentdb-cluster": self = .documentdbCluster
         case "doks-cluster": self = .doksCluster
         case "domain": self = .domain
+        case "domain-record": self = .domainRecord
         case "dpo-job": self = .dpoJob
         case "droplet": self = .droplet
         case "durable-object-namespace": self = .durableObjectNamespace
@@ -701,12 +859,18 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "elasticache-serverless-cache": self = .elasticacheServerlessCache
         case "email-routing-rule": self = .emailRoutingRule
         case "embed-job": self = .embedJob
+        case "encryption-key": self = .encryptionKey
         case "endpoint": self = .endpoint
+        case "enrichment": self = .enrichment
+        case "environment": self = .environment
         case "eval": self = .eval
         case "evaluation": self = .evaluation
         case "evaluation-job": self = .evaluationJob
         case "evaluator": self = .evaluator
         case "eventbridge-rule": self = .eventbridgeRule
+        case "events2metrics": self = .events2metrics
+        case "export-sink": self = .exportSink
+        case "extension": self = .`extension`
         case "feature-flag": self = .featureFlag
         case "file": self = .file
         case "file-search-document": self = .fileSearchDocument
@@ -717,10 +881,13 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "firestore-database": self = .firestoreDatabase
         case "firewall": self = .firewall
         case "firewall-rule": self = .firewallRule
+        case "flex-cluster": self = .flexCluster
         case "flexible-ip": self = .flexibleIp
+        case "flink-compute-pool": self = .flinkComputePool
         case "floating-ip": self = .floatingIp
         case "folder": self = .folder
         case "forwarding-rule": self = .forwardingRule
+        case "function": self = .function
         case "gateway": self = .gateway
         case "gce-disk": self = .gceDisk
         case "gce-instance": self = .gceInstance
@@ -743,6 +910,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "health-check": self = .healthCheck
         case "healthcheck": self = .healthcheck
         case "history-item": self = .historyItem
+        case "hosted-runner": self = .hostedRunner
         case "hyperdrive": self = .hyperdrive
         case "iam-role": self = .iamRole
         case "iam-user": self = .iamUser
@@ -751,12 +919,15 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "instance": self = .instance
         case "instance-group": self = .instanceGroup
         case "instance-template": self = .instanceTemplate
+        case "instance-type": self = .instanceType
         case "internet-gateway": self = .internetGateway
         case "invitation": self = .invitation
         case "invite": self = .invite
         case "invoice": self = .invoice
+        case "ip-access-entry": self = .ipAccessEntry
         case "ip-access-rule": self = .ipAccessRule
         case "ip-allocation": self = .ipAllocation
+        case "issue": self = .issue
         case "job": self = .job
         case "k8s-cluster": self = .k8sCluster
         case "k8s-configmap": self = .k8sConfigmap
@@ -780,13 +951,21 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "kms-key": self = .kmsKey
         case "kms-key-ring": self = .kmsKeyRing
         case "knowledge-base-document": self = .knowledgeBaseDocument
+        case "knowledge-note": self = .knowledgeNote
+        case "ksqldb-cluster": self = .ksqldbCluster
+        case "kubernetes-cluster": self = .kubernetesCluster
         case "kv-namespace": self = .kvNamespace
+        case "kv-store": self = .kvStore
         case "lambda-function": self = .lambdaFunction
         case "language-id-job": self = .languageIdJob
+        case "linode": self = .linode
         case "live-session": self = .liveSession
+        case "lke-cluster": self = .lkeCluster
+        case "lke-node-pool": self = .lkeNodePool
         case "llm-model": self = .llmModel
         case "load-balancer": self = .loadBalancer
         case "log-sink": self = .logSink
+        case "logging-endpoint": self = .loggingEndpoint
         case "logpush-job": self = .logpushJob
         case "machine": self = .machine
         case "managed-database": self = .managedDatabase
@@ -800,6 +979,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "memorystore-redis": self = .memorystoreRedis
         case "memorystore-valkey": self = .memorystoreValkey
         case "message-batch": self = .messageBatch
+        case "messaging-service": self = .messagingService
         case "mistral-agent": self = .mistralAgent
         case "mistral-api-key": self = .mistralApiKey
         case "mistral-batch-job": self = .mistralBatchJob
@@ -813,10 +993,12 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "model-endpoint": self = .modelEndpoint
         case "model-version": self = .modelVersion
         case "mongodb-database": self = .mongodbDatabase
+        case "monitor": self = .monitor
         case "mq-broker": self = .mqBroker
         case "msk-cluster": self = .mskCluster
         case "mssql-database": self = .mssqlDatabase
         case "mysql-database": self = .mysqlDatabase
+        case "namespace": self = .namespace
         case "nat-gateway": self = .natGateway
         case "neon-ai-gateway": self = .neonAiGateway
         case "neon-auth": self = .neonAuth
@@ -844,12 +1026,16 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "netlify-site": self = .netlifySite
         case "netlify-snippet": self = .netlifySnippet
         case "network": self = .network
+        case "network-connection": self = .networkConnection
+        case "nexus-endpoint": self = .nexusEndpoint
         case "nfs-share": self = .nfsShare
         case "node-pool": self = .nodePool
+        case "nodebalancer": self = .nodebalancer
         case "notification-policy": self = .notificationPolicy
         case "object-storage-bucket": self = .objectStorageBucket
         case "octavia-load-balancer": self = .octaviaLoadBalancer
         case "oke-cluster": self = .okeCluster
+        case "online-archive": self = .onlineArchive
         case "opensearch-cluster": self = .opensearchCluster
         case "opensearch-domain": self = .opensearchDomain
         case "organization": self = .organization
@@ -858,16 +1044,21 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "organization-membership": self = .organizationMembership
         case "organization-role": self = .organizationRole
         case "organization-user": self = .organizationUser
+        case "outgoing-webhook": self = .outgoingWebhook
         case "page-rule": self = .pageRule
+        case "parsing-rule-group": self = .parsingRuleGroup
         case "permission": self = .permission
         case "pg-database": self = .pgDatabase
         case "pg-schema": self = .pgSchema
         case "phone-number": self = .phoneNumber
+        case "pipeline": self = .pipeline
         case "placement-group": self = .placementGroup
+        case "playbook": self = .playbook
         case "postgres-cluster": self = .postgresCluster
         case "posture-integration": self = .postureIntegration
         case "prediction": self = .prediction
         case "primary-ip": self = .primaryIp
+        case "private-endpoint-service": self = .privateEndpointService
         case "private-network": self = .privateNetwork
         case "product-environment": self = .productEnvironment
         case "project": self = .project
@@ -875,6 +1066,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "project-rate-limit": self = .projectRateLimit
         case "project-service-account": self = .projectServiceAccount
         case "project-user": self = .projectUser
+        case "project-variable": self = .projectVariable
         case "pronunciation-dict": self = .pronunciationDict
         case "pronunciation-dictionary": self = .pronunciationDictionary
         case "provider": self = .provider
@@ -890,9 +1082,20 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "purchase": self = .purchase
         case "queue": self = .queue
         case "quota": self = .quota
+        case "quota-rule": self = .quotaRule
         case "r2-bucket": self = .r2Bucket
         case "rate-limit": self = .rateLimit
         case "rate-limit-rule": self = .rateLimitRule
+        case "rc-account": self = .rcAccount
+        case "rc-acl-role": self = .rcAclRole
+        case "rc-acl-rule": self = .rcAclRule
+        case "rc-acl-user": self = .rcAclUser
+        case "rc-cloud-account": self = .rcCloudAccount
+        case "rc-database": self = .rcDatabase
+        case "rc-psc-endpoint": self = .rcPscEndpoint
+        case "rc-subscription": self = .rcSubscription
+        case "rc-transit-gateway": self = .rcTransitGateway
+        case "rc-vpc-peering": self = .rcVpcPeering
         case "rdb-instance": self = .rdbInstance
         case "rds-cluster": self = .rdsCluster
         case "rds-instance": self = .rdsInstance
@@ -901,6 +1104,9 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "redshift-cluster": self = .redshiftCluster
         case "registry-namespace": self = .registryNamespace
         case "reinforcement-fine-tuning-job": self = .reinforcementFineTuningJob
+        case "release": self = .release
+        case "repo-blocklist": self = .repoBlocklist
+        case "reservation": self = .reservation
         case "reserved-ip": self = .reservedIp
         case "role": self = .role
         case "route-table": self = .routeTable
@@ -908,10 +1114,17 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "route53-hosted-zone": self = .route53HostedZone
         case "route53-record-set": self = .route53RecordSet
         case "router": self = .router
+        case "runner": self = .runner
+        case "runner-resource-class": self = .runnerResourceClass
         case "s3-bucket": self = .s3Bucket
         case "sagemaker-endpoint": self = .sagemakerEndpoint
+        case "schedule": self = .schedule
+        case "scheduled-function": self = .scheduledFunction
+        case "schema-registry": self = .schemaRegistry
+        case "search-index": self = .searchIndex
         case "secret": self = .secret
         case "secret-manager-secret": self = .secretManagerSecret
+        case "secret-store": self = .secretStore
         case "secrets-manager-secret": self = .secretsManagerSecret
         case "secrets-store-secret": self = .secretsStoreSecret
         case "security-group": self = .securityGroup
@@ -920,10 +1133,25 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "server": self = .server
         case "serverless-container": self = .serverlessContainer
         case "serverless-function": self = .serverlessFunction
+        case "serverless-instance": self = .serverlessInstance
+        case "serverless-traffic-filter": self = .serverlessTrafficFilter
         case "service": self = .service
+        case "service-account": self = .serviceAccount
+        case "service-version": self = .serviceVersion
+        case "session": self = .session
         case "shared-volume": self = .sharedVolume
         case "skill": self = .skill
         case "snapshot": self = .snapshot
+        case "snowflake-account": self = .snowflakeAccount
+        case "snowflake-database": self = .snowflakeDatabase
+        case "snowflake-dynamic-table": self = .snowflakeDynamicTable
+        case "snowflake-pipe": self = .snowflakePipe
+        case "snowflake-resource-monitor": self = .snowflakeResourceMonitor
+        case "snowflake-role": self = .snowflakeRole
+        case "snowflake-schema": self = .snowflakeSchema
+        case "snowflake-task": self = .snowflakeTask
+        case "snowflake-user": self = .snowflakeUser
+        case "snowflake-warehouse": self = .snowflakeWarehouse
         case "sns-topic": self = .snsTopic
         case "spaces-bucket": self = .spacesBucket
         case "spanner-backup": self = .spannerBackup
@@ -938,15 +1166,23 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "ssh-target": self = .sshTarget
         case "ssl-certificate": self = .sslCertificate
         case "ssm-parameter": self = .ssmParameter
+        case "stackscript": self = .stackscript
         case "static-ip": self = .staticIp
         case "step-function": self = .stepFunction
         case "storage-box": self = .storageBox
+        case "subaccount": self = .subaccount
         case "subnet": self = .subnet
         case "supervised-fine-tuning-job": self = .supervisedFineTuningJob
         case "tailnet": self = .tailnet
         case "target-group": self = .targetGroup
+        case "tco-policy": self = .tcoPolicy
+        case "team": self = .team
+        case "team-member": self = .teamMember
         case "tenancy": self = .tenancy
+        case "tls-certificate": self = .tlsCertificate
+        case "tls-subscription": self = .tlsSubscription
         case "topic-job": self = .topicJob
+        case "traffic-filter": self = .trafficFilter
         case "training": self = .training
         case "transcript": self = .transcript
         case "transcription": self = .transcription
@@ -962,9 +1198,12 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "turso-location": self = .tursoLocation
         case "turso-organization-invite": self = .tursoOrganizationInvite
         case "turso-organization-member": self = .tursoOrganizationMember
+        case "twiml-app": self = .twimlApp
         case "upload-mapping": self = .uploadMapping
         case "upload-preset": self = .uploadPreset
         case "uptime-check": self = .uptimeCheck
+        case "uptime-monitor": self = .uptimeMonitor
+        case "usage-trigger": self = .usageTrigger
         case "user": self = .user
         case "user-invite": self = .userInvite
         case "ut-app": self = .utApp
@@ -979,8 +1218,10 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "vercel-project": self = .vercelProject
         case "vercel-team": self = .vercelTeam
         case "vercel-webhook": self = .vercelWebhook
+        case "verify-service": self = .verifyService
         case "vertex-ai-endpoint": self = .vertexAiEndpoint
         case "vertex-gemini-model": self = .vertexGeminiModel
+        case "vm": self = .vm
         case "vocabulary": self = .vocabulary
         case "voice": self = .voice
         case "voice-agent": self = .voiceAgent
@@ -990,6 +1231,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "vpc-nat-gateway": self = .vpcNatGateway
         case "vpc-network": self = .vpcNetwork
         case "vpc-peering": self = .vpcPeering
+        case "vpc-subnet": self = .vpcSubnet
         case "waf-web-acl": self = .wafWebAcl
         case "waiting-room": self = .waitingRoom
         case "webhook": self = .webhook
@@ -1009,9 +1251,11 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     public var rawValue: String {
         switch self {
         case .accessApplication: return "access-application"
+        case .accessKey: return "access-key"
         case .accessPolicy: return "access-policy"
         case .account: return "account"
         case .acmCertificate: return "acm-certificate"
+        case .actionsCache: return "actions-cache"
         case .adminApiKey: return "admin-api-key"
         case .agent: return "agent"
         case .agentApiKey: return "agent-api-key"
@@ -1021,6 +1265,8 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .aiGateway: return "ai-gateway"
         case .aiSearch: return "ai-search"
         case .alb: return "alb"
+        case .alert: return "alert"
+        case .alertConfiguration: return "alert-configuration"
         case .alertPolicy: return "alert-policy"
         case .alignmentJob: return "alignment-job"
         case .alloydbCluster: return "alloydb-cluster"
@@ -1028,6 +1274,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .analyticsEngineDataset: return "analytics-engine-dataset"
         case .apiGateway: return "api-gateway"
         case .apiKey: return "api-key"
+        case .apiToken: return "api-token"
         case .app: return "app"
         case .appEngineService: return "app-engine-service"
         case .appSecret: return "app-secret"
@@ -1035,6 +1282,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .artifactRegistryRepo: return "artifact-registry-repo"
         case .auditEvent: return "audit-event"
         case .autoScalingGroup: return "auto-scaling-group"
+        case .automation: return "automation"
         case .autonomousDatabase: return "autonomous-database"
         case .autoscalePool: return "autoscale-pool"
         case .azureAiServices: return "azure-ai-services"
@@ -1074,7 +1322,10 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .azureSubnet: return "azure-subnet"
         case .azureVm: return "azure-vm"
         case .azureVnet: return "azure-vnet"
+        case .backend: return "backend"
         case .backendService: return "backend-service"
+        case .backupPolicy: return "backup-policy"
+        case .backupSnapshot: return "backup-snapshot"
         case .backupVault: return "backup-vault"
         case .balance: return "balance"
         case .basinCatalog: return "basin-catalog"
@@ -1089,6 +1340,8 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .bigqueryDataset: return "bigquery-dataset"
         case .bigqueryTable: return "bigquery-table"
         case .bigtableInstance: return "bigtable-instance"
+        case .billingAccount: return "billing-account"
+        case .billingGroup: return "billing-group"
         case .blockVolume: return "block-volume"
         case .bootVolume: return "boot-volume"
         case .bucket: return "bucket"
@@ -1106,6 +1359,8 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .chMember: return "ch-member"
         case .chPostgres: return "ch-postgres"
         case .chService: return "ch-service"
+        case .cksCluster: return "cks-cluster"
+        case .clientKey: return "client-key"
         case .cloudArmorPolicy: return "cloud-armor-policy"
         case .cloudBuildTrigger: return "cloud-build-trigger"
         case .cloudDeployPipeline: return "cloud-deploy-pipeline"
@@ -1124,19 +1379,33 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .cloudtrailTrail: return "cloudtrail-trail"
         case .cloudwatchAlarm: return "cloudwatch-alarm"
         case .cloudwatchLogGroup: return "cloudwatch-log-group"
+        case .cluster: return "cluster"
         case .codebuildProject: return "codebuild-project"
         case .codepipelinePipeline: return "codepipeline-pipeline"
+        case .codespace: return "codespace"
         case .cognitoUserPool: return "cognito-user-pool"
         case .collection: return "collection"
         case .collectionDocument: return "collection-document"
         case .compartment: return "compartment"
         case .composerEnvironment: return "composer-environment"
+        case .configStore: return "config-store"
         case .connection: return "connection"
+        case .connectivityRule: return "connectivity-rule"
+        case .connector: return "connector"
         case .container: return "container"
         case .containerRegistry: return "container-registry"
+        case .context: return "context"
+        case .contextVariable: return "context-variable"
+        case .copilotSeat: return "copilot-seat"
+        case .costCenter: return "cost-center"
+        case .cronMonitor: return "cron-monitor"
+        case .customEnrichment: return "custom-enrichment"
         case .customHostname: return "custom-hostname"
         case .customVoice: return "custom-voice"
         case .d1Database: return "d1-database"
+        case .dashboard: return "dashboard"
+        case .database: return "database"
+        case .databaseUser: return "database-user"
         case .databricksApp: return "databricks-app"
         case .databricksCatalog: return "databricks-catalog"
         case .databricksCluster: return "databricks-cluster"
@@ -1168,10 +1437,19 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .dedicatedInference: return "dedicated-inference"
         case .deployedModel: return "deployed-model"
         case .deployment: return "deployment"
+        case .depotActionsRepo: return "depot-actions-repo"
+        case .depotBuild: return "depot-build"
+        case .depotProject: return "depot-project"
+        case .depotRegistryImage: return "depot-registry-image"
+        case .depotToken: return "depot-token"
+        case .depotTrustPolicy: return "depot-trust-policy"
         case .device: return "device"
+        case .dict: return "dict"
+        case .dictionary: return "dictionary"
         case .directory: return "directory"
         case .directoryGroup: return "directory-group"
         case .directoryUser: return "directory-user"
+        case .disk: return "disk"
         case .distributionCredential: return "distribution-credential"
         case .dnsRecord: return "dns-record"
         case .dnsZone: return "dns-zone"
@@ -1182,6 +1460,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .documentdbCluster: return "documentdb-cluster"
         case .doksCluster: return "doks-cluster"
         case .domain: return "domain"
+        case .domainRecord: return "domain-record"
         case .dpoJob: return "dpo-job"
         case .droplet: return "droplet"
         case .durableObjectNamespace: return "durable-object-namespace"
@@ -1197,12 +1476,18 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .elasticacheServerlessCache: return "elasticache-serverless-cache"
         case .emailRoutingRule: return "email-routing-rule"
         case .embedJob: return "embed-job"
+        case .encryptionKey: return "encryption-key"
         case .endpoint: return "endpoint"
+        case .enrichment: return "enrichment"
+        case .environment: return "environment"
         case .eval: return "eval"
         case .evaluation: return "evaluation"
         case .evaluationJob: return "evaluation-job"
         case .evaluator: return "evaluator"
         case .eventbridgeRule: return "eventbridge-rule"
+        case .events2metrics: return "events2metrics"
+        case .exportSink: return "export-sink"
+        case .`extension`: return "extension"
         case .featureFlag: return "feature-flag"
         case .file: return "file"
         case .fileSearchDocument: return "file-search-document"
@@ -1213,10 +1498,13 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .firestoreDatabase: return "firestore-database"
         case .firewall: return "firewall"
         case .firewallRule: return "firewall-rule"
+        case .flexCluster: return "flex-cluster"
         case .flexibleIp: return "flexible-ip"
+        case .flinkComputePool: return "flink-compute-pool"
         case .floatingIp: return "floating-ip"
         case .folder: return "folder"
         case .forwardingRule: return "forwarding-rule"
+        case .function: return "function"
         case .gateway: return "gateway"
         case .gceDisk: return "gce-disk"
         case .gceInstance: return "gce-instance"
@@ -1239,6 +1527,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .healthCheck: return "health-check"
         case .healthcheck: return "healthcheck"
         case .historyItem: return "history-item"
+        case .hostedRunner: return "hosted-runner"
         case .hyperdrive: return "hyperdrive"
         case .iamRole: return "iam-role"
         case .iamUser: return "iam-user"
@@ -1247,12 +1536,15 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .instance: return "instance"
         case .instanceGroup: return "instance-group"
         case .instanceTemplate: return "instance-template"
+        case .instanceType: return "instance-type"
         case .internetGateway: return "internet-gateway"
         case .invitation: return "invitation"
         case .invite: return "invite"
         case .invoice: return "invoice"
+        case .ipAccessEntry: return "ip-access-entry"
         case .ipAccessRule: return "ip-access-rule"
         case .ipAllocation: return "ip-allocation"
+        case .issue: return "issue"
         case .job: return "job"
         case .k8sCluster: return "k8s-cluster"
         case .k8sConfigmap: return "k8s-configmap"
@@ -1276,13 +1568,21 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .kmsKey: return "kms-key"
         case .kmsKeyRing: return "kms-key-ring"
         case .knowledgeBaseDocument: return "knowledge-base-document"
+        case .knowledgeNote: return "knowledge-note"
+        case .ksqldbCluster: return "ksqldb-cluster"
+        case .kubernetesCluster: return "kubernetes-cluster"
         case .kvNamespace: return "kv-namespace"
+        case .kvStore: return "kv-store"
         case .lambdaFunction: return "lambda-function"
         case .languageIdJob: return "language-id-job"
+        case .linode: return "linode"
         case .liveSession: return "live-session"
+        case .lkeCluster: return "lke-cluster"
+        case .lkeNodePool: return "lke-node-pool"
         case .llmModel: return "llm-model"
         case .loadBalancer: return "load-balancer"
         case .logSink: return "log-sink"
+        case .loggingEndpoint: return "logging-endpoint"
         case .logpushJob: return "logpush-job"
         case .machine: return "machine"
         case .managedDatabase: return "managed-database"
@@ -1296,6 +1596,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .memorystoreRedis: return "memorystore-redis"
         case .memorystoreValkey: return "memorystore-valkey"
         case .messageBatch: return "message-batch"
+        case .messagingService: return "messaging-service"
         case .mistralAgent: return "mistral-agent"
         case .mistralApiKey: return "mistral-api-key"
         case .mistralBatchJob: return "mistral-batch-job"
@@ -1309,10 +1610,12 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .modelEndpoint: return "model-endpoint"
         case .modelVersion: return "model-version"
         case .mongodbDatabase: return "mongodb-database"
+        case .monitor: return "monitor"
         case .mqBroker: return "mq-broker"
         case .mskCluster: return "msk-cluster"
         case .mssqlDatabase: return "mssql-database"
         case .mysqlDatabase: return "mysql-database"
+        case .namespace: return "namespace"
         case .natGateway: return "nat-gateway"
         case .neonAiGateway: return "neon-ai-gateway"
         case .neonAuth: return "neon-auth"
@@ -1340,12 +1643,16 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .netlifySite: return "netlify-site"
         case .netlifySnippet: return "netlify-snippet"
         case .network: return "network"
+        case .networkConnection: return "network-connection"
+        case .nexusEndpoint: return "nexus-endpoint"
         case .nfsShare: return "nfs-share"
         case .nodePool: return "node-pool"
+        case .nodebalancer: return "nodebalancer"
         case .notificationPolicy: return "notification-policy"
         case .objectStorageBucket: return "object-storage-bucket"
         case .octaviaLoadBalancer: return "octavia-load-balancer"
         case .okeCluster: return "oke-cluster"
+        case .onlineArchive: return "online-archive"
         case .opensearchCluster: return "opensearch-cluster"
         case .opensearchDomain: return "opensearch-domain"
         case .organization: return "organization"
@@ -1354,16 +1661,21 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .organizationMembership: return "organization-membership"
         case .organizationRole: return "organization-role"
         case .organizationUser: return "organization-user"
+        case .outgoingWebhook: return "outgoing-webhook"
         case .pageRule: return "page-rule"
+        case .parsingRuleGroup: return "parsing-rule-group"
         case .permission: return "permission"
         case .pgDatabase: return "pg-database"
         case .pgSchema: return "pg-schema"
         case .phoneNumber: return "phone-number"
+        case .pipeline: return "pipeline"
         case .placementGroup: return "placement-group"
+        case .playbook: return "playbook"
         case .postgresCluster: return "postgres-cluster"
         case .postureIntegration: return "posture-integration"
         case .prediction: return "prediction"
         case .primaryIp: return "primary-ip"
+        case .privateEndpointService: return "private-endpoint-service"
         case .privateNetwork: return "private-network"
         case .productEnvironment: return "product-environment"
         case .project: return "project"
@@ -1371,6 +1683,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .projectRateLimit: return "project-rate-limit"
         case .projectServiceAccount: return "project-service-account"
         case .projectUser: return "project-user"
+        case .projectVariable: return "project-variable"
         case .pronunciationDict: return "pronunciation-dict"
         case .pronunciationDictionary: return "pronunciation-dictionary"
         case .provider: return "provider"
@@ -1386,9 +1699,20 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .purchase: return "purchase"
         case .queue: return "queue"
         case .quota: return "quota"
+        case .quotaRule: return "quota-rule"
         case .r2Bucket: return "r2-bucket"
         case .rateLimit: return "rate-limit"
         case .rateLimitRule: return "rate-limit-rule"
+        case .rcAccount: return "rc-account"
+        case .rcAclRole: return "rc-acl-role"
+        case .rcAclRule: return "rc-acl-rule"
+        case .rcAclUser: return "rc-acl-user"
+        case .rcCloudAccount: return "rc-cloud-account"
+        case .rcDatabase: return "rc-database"
+        case .rcPscEndpoint: return "rc-psc-endpoint"
+        case .rcSubscription: return "rc-subscription"
+        case .rcTransitGateway: return "rc-transit-gateway"
+        case .rcVpcPeering: return "rc-vpc-peering"
         case .rdbInstance: return "rdb-instance"
         case .rdsCluster: return "rds-cluster"
         case .rdsInstance: return "rds-instance"
@@ -1397,6 +1721,9 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .redshiftCluster: return "redshift-cluster"
         case .registryNamespace: return "registry-namespace"
         case .reinforcementFineTuningJob: return "reinforcement-fine-tuning-job"
+        case .release: return "release"
+        case .repoBlocklist: return "repo-blocklist"
+        case .reservation: return "reservation"
         case .reservedIp: return "reserved-ip"
         case .role: return "role"
         case .routeTable: return "route-table"
@@ -1404,10 +1731,17 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .route53HostedZone: return "route53-hosted-zone"
         case .route53RecordSet: return "route53-record-set"
         case .router: return "router"
+        case .runner: return "runner"
+        case .runnerResourceClass: return "runner-resource-class"
         case .s3Bucket: return "s3-bucket"
         case .sagemakerEndpoint: return "sagemaker-endpoint"
+        case .schedule: return "schedule"
+        case .scheduledFunction: return "scheduled-function"
+        case .schemaRegistry: return "schema-registry"
+        case .searchIndex: return "search-index"
         case .secret: return "secret"
         case .secretManagerSecret: return "secret-manager-secret"
+        case .secretStore: return "secret-store"
         case .secretsManagerSecret: return "secrets-manager-secret"
         case .secretsStoreSecret: return "secrets-store-secret"
         case .securityGroup: return "security-group"
@@ -1416,10 +1750,25 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .server: return "server"
         case .serverlessContainer: return "serverless-container"
         case .serverlessFunction: return "serverless-function"
+        case .serverlessInstance: return "serverless-instance"
+        case .serverlessTrafficFilter: return "serverless-traffic-filter"
         case .service: return "service"
+        case .serviceAccount: return "service-account"
+        case .serviceVersion: return "service-version"
+        case .session: return "session"
         case .sharedVolume: return "shared-volume"
         case .skill: return "skill"
         case .snapshot: return "snapshot"
+        case .snowflakeAccount: return "snowflake-account"
+        case .snowflakeDatabase: return "snowflake-database"
+        case .snowflakeDynamicTable: return "snowflake-dynamic-table"
+        case .snowflakePipe: return "snowflake-pipe"
+        case .snowflakeResourceMonitor: return "snowflake-resource-monitor"
+        case .snowflakeRole: return "snowflake-role"
+        case .snowflakeSchema: return "snowflake-schema"
+        case .snowflakeTask: return "snowflake-task"
+        case .snowflakeUser: return "snowflake-user"
+        case .snowflakeWarehouse: return "snowflake-warehouse"
         case .snsTopic: return "sns-topic"
         case .spacesBucket: return "spaces-bucket"
         case .spannerBackup: return "spanner-backup"
@@ -1434,15 +1783,23 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .sshTarget: return "ssh-target"
         case .sslCertificate: return "ssl-certificate"
         case .ssmParameter: return "ssm-parameter"
+        case .stackscript: return "stackscript"
         case .staticIp: return "static-ip"
         case .stepFunction: return "step-function"
         case .storageBox: return "storage-box"
+        case .subaccount: return "subaccount"
         case .subnet: return "subnet"
         case .supervisedFineTuningJob: return "supervised-fine-tuning-job"
         case .tailnet: return "tailnet"
         case .targetGroup: return "target-group"
+        case .tcoPolicy: return "tco-policy"
+        case .team: return "team"
+        case .teamMember: return "team-member"
         case .tenancy: return "tenancy"
+        case .tlsCertificate: return "tls-certificate"
+        case .tlsSubscription: return "tls-subscription"
         case .topicJob: return "topic-job"
+        case .trafficFilter: return "traffic-filter"
         case .training: return "training"
         case .transcript: return "transcript"
         case .transcription: return "transcription"
@@ -1458,9 +1815,12 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .tursoLocation: return "turso-location"
         case .tursoOrganizationInvite: return "turso-organization-invite"
         case .tursoOrganizationMember: return "turso-organization-member"
+        case .twimlApp: return "twiml-app"
         case .uploadMapping: return "upload-mapping"
         case .uploadPreset: return "upload-preset"
         case .uptimeCheck: return "uptime-check"
+        case .uptimeMonitor: return "uptime-monitor"
+        case .usageTrigger: return "usage-trigger"
         case .user: return "user"
         case .userInvite: return "user-invite"
         case .utApp: return "ut-app"
@@ -1475,8 +1835,10 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .vercelProject: return "vercel-project"
         case .vercelTeam: return "vercel-team"
         case .vercelWebhook: return "vercel-webhook"
+        case .verifyService: return "verify-service"
         case .vertexAiEndpoint: return "vertex-ai-endpoint"
         case .vertexGeminiModel: return "vertex-gemini-model"
+        case .vm: return "vm"
         case .vocabulary: return "vocabulary"
         case .voice: return "voice"
         case .voiceAgent: return "voice-agent"
@@ -1486,6 +1848,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .vpcNatGateway: return "vpc-nat-gateway"
         case .vpcNetwork: return "vpc-network"
         case .vpcPeering: return "vpc-peering"
+        case .vpcSubnet: return "vpc-subnet"
         case .wafWebAcl: return "waf-web-acl"
         case .waitingRoom: return "waiting-room"
         case .webhook: return "webhook"
@@ -1505,9 +1868,11 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     /// Every value the spec declares. `unrecognized` is deliberately absent.
     public static let allKnownCases: [ResourceTypeId] = [
         .accessApplication,
+        .accessKey,
         .accessPolicy,
         .account,
         .acmCertificate,
+        .actionsCache,
         .adminApiKey,
         .agent,
         .agentApiKey,
@@ -1517,6 +1882,8 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .aiGateway,
         .aiSearch,
         .alb,
+        .alert,
+        .alertConfiguration,
         .alertPolicy,
         .alignmentJob,
         .alloydbCluster,
@@ -1524,6 +1891,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .analyticsEngineDataset,
         .apiGateway,
         .apiKey,
+        .apiToken,
         .app,
         .appEngineService,
         .appSecret,
@@ -1531,6 +1899,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .artifactRegistryRepo,
         .auditEvent,
         .autoScalingGroup,
+        .automation,
         .autonomousDatabase,
         .autoscalePool,
         .azureAiServices,
@@ -1570,7 +1939,10 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .azureSubnet,
         .azureVm,
         .azureVnet,
+        .backend,
         .backendService,
+        .backupPolicy,
+        .backupSnapshot,
         .backupVault,
         .balance,
         .basinCatalog,
@@ -1585,6 +1957,8 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .bigqueryDataset,
         .bigqueryTable,
         .bigtableInstance,
+        .billingAccount,
+        .billingGroup,
         .blockVolume,
         .bootVolume,
         .bucket,
@@ -1602,6 +1976,8 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .chMember,
         .chPostgres,
         .chService,
+        .cksCluster,
+        .clientKey,
         .cloudArmorPolicy,
         .cloudBuildTrigger,
         .cloudDeployPipeline,
@@ -1620,19 +1996,33 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .cloudtrailTrail,
         .cloudwatchAlarm,
         .cloudwatchLogGroup,
+        .cluster,
         .codebuildProject,
         .codepipelinePipeline,
+        .codespace,
         .cognitoUserPool,
         .collection,
         .collectionDocument,
         .compartment,
         .composerEnvironment,
+        .configStore,
         .connection,
+        .connectivityRule,
+        .connector,
         .container,
         .containerRegistry,
+        .context,
+        .contextVariable,
+        .copilotSeat,
+        .costCenter,
+        .cronMonitor,
+        .customEnrichment,
         .customHostname,
         .customVoice,
         .d1Database,
+        .dashboard,
+        .database,
+        .databaseUser,
         .databricksApp,
         .databricksCatalog,
         .databricksCluster,
@@ -1664,10 +2054,19 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .dedicatedInference,
         .deployedModel,
         .deployment,
+        .depotActionsRepo,
+        .depotBuild,
+        .depotProject,
+        .depotRegistryImage,
+        .depotToken,
+        .depotTrustPolicy,
         .device,
+        .dict,
+        .dictionary,
         .directory,
         .directoryGroup,
         .directoryUser,
+        .disk,
         .distributionCredential,
         .dnsRecord,
         .dnsZone,
@@ -1678,6 +2077,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .documentdbCluster,
         .doksCluster,
         .domain,
+        .domainRecord,
         .dpoJob,
         .droplet,
         .durableObjectNamespace,
@@ -1693,12 +2093,18 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .elasticacheServerlessCache,
         .emailRoutingRule,
         .embedJob,
+        .encryptionKey,
         .endpoint,
+        .enrichment,
+        .environment,
         .eval,
         .evaluation,
         .evaluationJob,
         .evaluator,
         .eventbridgeRule,
+        .events2metrics,
+        .exportSink,
+        .`extension`,
         .featureFlag,
         .file,
         .fileSearchDocument,
@@ -1709,10 +2115,13 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .firestoreDatabase,
         .firewall,
         .firewallRule,
+        .flexCluster,
         .flexibleIp,
+        .flinkComputePool,
         .floatingIp,
         .folder,
         .forwardingRule,
+        .function,
         .gateway,
         .gceDisk,
         .gceInstance,
@@ -1735,6 +2144,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .healthCheck,
         .healthcheck,
         .historyItem,
+        .hostedRunner,
         .hyperdrive,
         .iamRole,
         .iamUser,
@@ -1743,12 +2153,15 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .instance,
         .instanceGroup,
         .instanceTemplate,
+        .instanceType,
         .internetGateway,
         .invitation,
         .invite,
         .invoice,
+        .ipAccessEntry,
         .ipAccessRule,
         .ipAllocation,
+        .issue,
         .job,
         .k8sCluster,
         .k8sConfigmap,
@@ -1772,13 +2185,21 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .kmsKey,
         .kmsKeyRing,
         .knowledgeBaseDocument,
+        .knowledgeNote,
+        .ksqldbCluster,
+        .kubernetesCluster,
         .kvNamespace,
+        .kvStore,
         .lambdaFunction,
         .languageIdJob,
+        .linode,
         .liveSession,
+        .lkeCluster,
+        .lkeNodePool,
         .llmModel,
         .loadBalancer,
         .logSink,
+        .loggingEndpoint,
         .logpushJob,
         .machine,
         .managedDatabase,
@@ -1792,6 +2213,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .memorystoreRedis,
         .memorystoreValkey,
         .messageBatch,
+        .messagingService,
         .mistralAgent,
         .mistralApiKey,
         .mistralBatchJob,
@@ -1805,10 +2227,12 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .modelEndpoint,
         .modelVersion,
         .mongodbDatabase,
+        .monitor,
         .mqBroker,
         .mskCluster,
         .mssqlDatabase,
         .mysqlDatabase,
+        .namespace,
         .natGateway,
         .neonAiGateway,
         .neonAuth,
@@ -1836,12 +2260,16 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .netlifySite,
         .netlifySnippet,
         .network,
+        .networkConnection,
+        .nexusEndpoint,
         .nfsShare,
         .nodePool,
+        .nodebalancer,
         .notificationPolicy,
         .objectStorageBucket,
         .octaviaLoadBalancer,
         .okeCluster,
+        .onlineArchive,
         .opensearchCluster,
         .opensearchDomain,
         .organization,
@@ -1850,16 +2278,21 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .organizationMembership,
         .organizationRole,
         .organizationUser,
+        .outgoingWebhook,
         .pageRule,
+        .parsingRuleGroup,
         .permission,
         .pgDatabase,
         .pgSchema,
         .phoneNumber,
+        .pipeline,
         .placementGroup,
+        .playbook,
         .postgresCluster,
         .postureIntegration,
         .prediction,
         .primaryIp,
+        .privateEndpointService,
         .privateNetwork,
         .productEnvironment,
         .project,
@@ -1867,6 +2300,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .projectRateLimit,
         .projectServiceAccount,
         .projectUser,
+        .projectVariable,
         .pronunciationDict,
         .pronunciationDictionary,
         .provider,
@@ -1882,9 +2316,20 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .purchase,
         .queue,
         .quota,
+        .quotaRule,
         .r2Bucket,
         .rateLimit,
         .rateLimitRule,
+        .rcAccount,
+        .rcAclRole,
+        .rcAclRule,
+        .rcAclUser,
+        .rcCloudAccount,
+        .rcDatabase,
+        .rcPscEndpoint,
+        .rcSubscription,
+        .rcTransitGateway,
+        .rcVpcPeering,
         .rdbInstance,
         .rdsCluster,
         .rdsInstance,
@@ -1893,6 +2338,9 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .redshiftCluster,
         .registryNamespace,
         .reinforcementFineTuningJob,
+        .release,
+        .repoBlocklist,
+        .reservation,
         .reservedIp,
         .role,
         .routeTable,
@@ -1900,10 +2348,17 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .route53HostedZone,
         .route53RecordSet,
         .router,
+        .runner,
+        .runnerResourceClass,
         .s3Bucket,
         .sagemakerEndpoint,
+        .schedule,
+        .scheduledFunction,
+        .schemaRegistry,
+        .searchIndex,
         .secret,
         .secretManagerSecret,
+        .secretStore,
         .secretsManagerSecret,
         .secretsStoreSecret,
         .securityGroup,
@@ -1912,10 +2367,25 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .server,
         .serverlessContainer,
         .serverlessFunction,
+        .serverlessInstance,
+        .serverlessTrafficFilter,
         .service,
+        .serviceAccount,
+        .serviceVersion,
+        .session,
         .sharedVolume,
         .skill,
         .snapshot,
+        .snowflakeAccount,
+        .snowflakeDatabase,
+        .snowflakeDynamicTable,
+        .snowflakePipe,
+        .snowflakeResourceMonitor,
+        .snowflakeRole,
+        .snowflakeSchema,
+        .snowflakeTask,
+        .snowflakeUser,
+        .snowflakeWarehouse,
         .snsTopic,
         .spacesBucket,
         .spannerBackup,
@@ -1930,15 +2400,23 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .sshTarget,
         .sslCertificate,
         .ssmParameter,
+        .stackscript,
         .staticIp,
         .stepFunction,
         .storageBox,
+        .subaccount,
         .subnet,
         .supervisedFineTuningJob,
         .tailnet,
         .targetGroup,
+        .tcoPolicy,
+        .team,
+        .teamMember,
         .tenancy,
+        .tlsCertificate,
+        .tlsSubscription,
         .topicJob,
+        .trafficFilter,
         .training,
         .transcript,
         .transcription,
@@ -1954,9 +2432,12 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .tursoLocation,
         .tursoOrganizationInvite,
         .tursoOrganizationMember,
+        .twimlApp,
         .uploadMapping,
         .uploadPreset,
         .uptimeCheck,
+        .uptimeMonitor,
+        .usageTrigger,
         .user,
         .userInvite,
         .utApp,
@@ -1971,8 +2452,10 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .vercelProject,
         .vercelTeam,
         .vercelWebhook,
+        .verifyService,
         .vertexAiEndpoint,
         .vertexGeminiModel,
+        .vm,
         .vocabulary,
         .voice,
         .voiceAgent,
@@ -1982,6 +2465,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .vpcNatGateway,
         .vpcNetwork,
         .vpcPeering,
+        .vpcSubnet,
         .wafWebAcl,
         .waitingRoom,
         .webhook,

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.43.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.44.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.43.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.44.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -98,6 +98,8 @@ public final class APIV1Client: Sendable {
     public let costReports: CostReportsNamespace
     /// `client.costScenarios`
     public let costScenarios: CostScenariosNamespace
+    /// `client.costVisibility`
+    public let costVisibility: CostVisibilityNamespace
     /// `client.costs`
     public let costs: CostsNamespace
     /// `client.credentialHygiene`
@@ -192,6 +194,8 @@ public final class APIV1Client: Sendable {
     public let sftp: SftpNamespace
     /// `client.sharedConsoles`
     public let sharedConsoles: SharedConsolesNamespace
+    /// `client.sharing`
+    public let sharing: SharingNamespace
     /// `client.slack`
     public let slack: SlackNamespace
     /// `client.sql`
@@ -262,6 +266,7 @@ public final class APIV1Client: Sendable {
         self.costReportNotifications = CostReportNotificationsNamespace(transport: transport)
         self.costReports = CostReportsNamespace(transport: transport)
         self.costScenarios = CostScenariosNamespace(transport: transport)
+        self.costVisibility = CostVisibilityNamespace(transport: transport)
         self.costs = CostsNamespace(transport: transport)
         self.credentialHygiene = CredentialHygieneNamespace(transport: transport)
         self.credits = CreditsNamespace(transport: transport)
@@ -309,6 +314,7 @@ public final class APIV1Client: Sendable {
         self.sessionRecordings = SessionRecordingsNamespace(transport: transport)
         self.sftp = SftpNamespace(transport: transport)
         self.sharedConsoles = SharedConsolesNamespace(transport: transport)
+        self.sharing = SharingNamespace(transport: transport)
         self.slack = SlackNamespace(transport: transport)
         self.sql = SqlNamespace(transport: transport)
         self.sshFanout = SshFanoutNamespace(transport: transport)

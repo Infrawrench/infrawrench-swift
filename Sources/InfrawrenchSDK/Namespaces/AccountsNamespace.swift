@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.43.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.44.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.43.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.44.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -102,6 +102,39 @@ public final class AccountsNamespace: Sendable {
             RequestSpec(
                 method: "POST",
                 path: "/api/org/{orgId}/accounts",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+
+    /// List the provider's choices for a credential field
+    ///
+    /// For credential fields that declare `providerOptions` (an account picker
+    /// filled from the API key, say): asks the provider for the choices the
+    /// submitted credentials can see. Nothing is stored. A 400 carries the
+    /// provider's reason, and clients fall back to a text input.
+    ///
+    /// _Requires permission: `accounts:write`._
+    ///
+    /// POST /api/org/{orgId}/accounts/credential-options
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func credentialOptions(
+        orgId: String? = nil,
+        body: CredentialOptionsRequest,
+        options: RequestOptions? = nil
+    ) async throws -> CredentialOptionsResponse {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/accounts/credential-options",
                 pathParameters: ["orgId": orgId?.parameterValue],
                 body: AnyEncodable(body)
             ),
