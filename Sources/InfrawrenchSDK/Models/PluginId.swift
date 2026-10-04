@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.45.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.46.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.45.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.46.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -61,6 +61,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
     case mysql
     case neon
     case netlify
+    case newrelic
     case openai
     case openrouter
     case opensearch
@@ -138,6 +139,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
         case "mysql": self = .mysql
         case "neon": self = .neon
         case "netlify": self = .netlify
+        case "newrelic": self = .newrelic
         case "openai": self = .openai
         case "openrouter": self = .openrouter
         case "opensearch": self = .opensearch
@@ -215,6 +217,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
         case .mysql: return "mysql"
         case .neon: return "neon"
         case .netlify: return "netlify"
+        case .newrelic: return "newrelic"
         case .openai: return "openai"
         case .openrouter: return "openrouter"
         case .opensearch: return "opensearch"
@@ -292,6 +295,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
         .mysql,
         .neon,
         .netlify,
+        .newrelic,
         .openai,
         .openrouter,
         .opensearch,

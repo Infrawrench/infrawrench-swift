@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.45.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.46.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.45.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.46.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -33,6 +33,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case aiSearch
     case alb
     case alert
+    case alertCondition
     case alertConfiguration
     case alertPolicy
     case alertRule
@@ -43,6 +44,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case apiGateway
     case apiKey
     case apiToken
+    case apmApplication
     case app
     case appEngineService
     case appSecret
@@ -112,6 +114,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case billingGroup
     case blockVolume
     case bootVolume
+    case browserApplication
     case bucket
     case budget
     case budgetAlertRule
@@ -297,6 +300,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case healthCheck
     case healthcheck
     case historyItem
+    case host
     case hostedRunner
     case hyperdrive
     case iamRole
@@ -563,6 +567,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case subnet
     case supervisedFineTuningJob
     case syntheticCheck
+    case syntheticMonitor
     case tailnet
     case targetGroup
     case tcoPolicy
@@ -631,6 +636,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case workerRoute
     case workersAiModel
     case workflow
+    case workload
     case workspace
     case workspaceMember
     case zone
@@ -657,6 +663,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "ai-search": self = .aiSearch
         case "alb": self = .alb
         case "alert": self = .alert
+        case "alert-condition": self = .alertCondition
         case "alert-configuration": self = .alertConfiguration
         case "alert-policy": self = .alertPolicy
         case "alert-rule": self = .alertRule
@@ -667,6 +674,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "api-gateway": self = .apiGateway
         case "api-key": self = .apiKey
         case "api-token": self = .apiToken
+        case "apm-application": self = .apmApplication
         case "app": self = .app
         case "app-engine-service": self = .appEngineService
         case "app-secret": self = .appSecret
@@ -736,6 +744,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "billing-group": self = .billingGroup
         case "block-volume": self = .blockVolume
         case "boot-volume": self = .bootVolume
+        case "browser-application": self = .browserApplication
         case "bucket": self = .bucket
         case "budget": self = .budget
         case "budget-alert-rule": self = .budgetAlertRule
@@ -921,6 +930,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "health-check": self = .healthCheck
         case "healthcheck": self = .healthcheck
         case "history-item": self = .historyItem
+        case "host": self = .host
         case "hosted-runner": self = .hostedRunner
         case "hyperdrive": self = .hyperdrive
         case "iam-role": self = .iamRole
@@ -1187,6 +1197,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "subnet": self = .subnet
         case "supervised-fine-tuning-job": self = .supervisedFineTuningJob
         case "synthetic-check": self = .syntheticCheck
+        case "synthetic-monitor": self = .syntheticMonitor
         case "tailnet": self = .tailnet
         case "target-group": self = .targetGroup
         case "tco-policy": self = .tcoPolicy
@@ -1255,6 +1266,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "worker-route": self = .workerRoute
         case "workers-ai-model": self = .workersAiModel
         case "workflow": self = .workflow
+        case "workload": self = .workload
         case "workspace": self = .workspace
         case "workspace-member": self = .workspaceMember
         case "zone": self = .zone
@@ -1281,6 +1293,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .aiSearch: return "ai-search"
         case .alb: return "alb"
         case .alert: return "alert"
+        case .alertCondition: return "alert-condition"
         case .alertConfiguration: return "alert-configuration"
         case .alertPolicy: return "alert-policy"
         case .alertRule: return "alert-rule"
@@ -1291,6 +1304,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .apiGateway: return "api-gateway"
         case .apiKey: return "api-key"
         case .apiToken: return "api-token"
+        case .apmApplication: return "apm-application"
         case .app: return "app"
         case .appEngineService: return "app-engine-service"
         case .appSecret: return "app-secret"
@@ -1360,6 +1374,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .billingGroup: return "billing-group"
         case .blockVolume: return "block-volume"
         case .bootVolume: return "boot-volume"
+        case .browserApplication: return "browser-application"
         case .bucket: return "bucket"
         case .budget: return "budget"
         case .budgetAlertRule: return "budget-alert-rule"
@@ -1545,6 +1560,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .healthCheck: return "health-check"
         case .healthcheck: return "healthcheck"
         case .historyItem: return "history-item"
+        case .host: return "host"
         case .hostedRunner: return "hosted-runner"
         case .hyperdrive: return "hyperdrive"
         case .iamRole: return "iam-role"
@@ -1811,6 +1827,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .subnet: return "subnet"
         case .supervisedFineTuningJob: return "supervised-fine-tuning-job"
         case .syntheticCheck: return "synthetic-check"
+        case .syntheticMonitor: return "synthetic-monitor"
         case .tailnet: return "tailnet"
         case .targetGroup: return "target-group"
         case .tcoPolicy: return "tco-policy"
@@ -1879,6 +1896,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .workerRoute: return "worker-route"
         case .workersAiModel: return "workers-ai-model"
         case .workflow: return "workflow"
+        case .workload: return "workload"
         case .workspace: return "workspace"
         case .workspaceMember: return "workspace-member"
         case .zone: return "zone"
@@ -1905,6 +1923,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .aiSearch,
         .alb,
         .alert,
+        .alertCondition,
         .alertConfiguration,
         .alertPolicy,
         .alertRule,
@@ -1915,6 +1934,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .apiGateway,
         .apiKey,
         .apiToken,
+        .apmApplication,
         .app,
         .appEngineService,
         .appSecret,
@@ -1984,6 +2004,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .billingGroup,
         .blockVolume,
         .bootVolume,
+        .browserApplication,
         .bucket,
         .budget,
         .budgetAlertRule,
@@ -2169,6 +2190,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .healthCheck,
         .healthcheck,
         .historyItem,
+        .host,
         .hostedRunner,
         .hyperdrive,
         .iamRole,
@@ -2435,6 +2457,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .subnet,
         .supervisedFineTuningJob,
         .syntheticCheck,
+        .syntheticMonitor,
         .tailnet,
         .targetGroup,
         .tcoPolicy,
@@ -2503,6 +2526,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .workerRoute,
         .workersAiModel,
         .workflow,
+        .workload,
         .workspace,
         .workspaceMember,
         .zone,
