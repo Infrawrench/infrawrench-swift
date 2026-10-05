@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.67.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.68.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.67.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.68.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -17,6 +17,7 @@ public struct ManagedAccountInput: Codable, Hashable, Sendable {
     public enum CostBasis2: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
         case cash
         case amortized
+        case blended
         /// A value the API added after this SDK was generated. Kept rather than
         /// rejected, so a new server-side value cannot break decoding.
         case unrecognized(String)
@@ -25,6 +26,7 @@ public struct ManagedAccountInput: Codable, Hashable, Sendable {
             switch rawValue {
             case "cash": self = .cash
             case "amortized": self = .amortized
+            case "blended": self = .blended
             default: self = .unrecognized(rawValue)
             }
         }
@@ -33,6 +35,7 @@ public struct ManagedAccountInput: Codable, Hashable, Sendable {
             switch self {
             case .cash: return "cash"
             case .amortized: return "amortized"
+            case .blended: return "blended"
             case .unrecognized(let value): return value
             }
         }
@@ -41,6 +44,7 @@ public struct ManagedAccountInput: Codable, Hashable, Sendable {
         public static let allKnownCases: [CostBasis2] = [
             .cash,
             .amortized,
+            .blended,
         ]
 
         public init(from decoder: any Decoder) throws {
@@ -64,7 +68,10 @@ public struct ManagedAccountInput: Codable, Hashable, Sendable {
     public var billingCurrency: String
     /// Defaults to `amortized`. Charging a customer the whole cash value of a
     /// three-year commitment in the month it was signed is not a bill anyone can
-    /// budget against.
+    /// budget against. `blended` spreads each commitment's discount evenly over
+    /// all the usage it could cover, so a customer is not billed more or less
+    /// depending on which account the provider happened to apply a shared
+    /// commitment to.
     public var costBasis: CostBasis2?
     /// Defaults to true. False is a pass-through contract: the customer is billed
     /// exactly what the providers charged, with no markup, discount or fixed fee

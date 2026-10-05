@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.67.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.68.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.67.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.68.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -380,9 +380,10 @@ public final class CostsNamespace: Sendable {
     ///
     /// - Parameter basis: Which money to sum. `cash` (the default) is what the
     /// provider charged on the day it charged it; `amortized` spreads a
-    /// commitment's up-front fee across the term it buys. Providers that report
-    /// no amortized amount fall back to their cash amount. One of `cash`,
-    /// `amortized`.
+    /// commitment's up-front fee across the term it buys; `blended` also spreads
+    /// each commitment's discount evenly over all the usage it could cover.
+    /// Providers that report no amortized amount fall back to their cash amount.
+    /// One of `cash`, `amortized`, `blended`.
     ///
     /// - Parameter adjusted: Apply the organization's billing rules (see
     /// /billing-rules): markups multiply, and a reallocation moves a centre's
@@ -458,9 +459,10 @@ public final class CostsNamespace: Sendable {
     ///
     /// - Parameter basis: Which money to sum. `cash` (the default) is what the
     /// provider charged on the day it charged it; `amortized` spreads a
-    /// commitment's up-front fee across the term it buys. Providers that report
-    /// no amortized amount fall back to their cash amount. One of `cash`,
-    /// `amortized`.
+    /// commitment's up-front fee across the term it buys; `blended` also spreads
+    /// each commitment's discount evenly over all the usage it could cover.
+    /// Providers that report no amortized amount fall back to their cash amount.
+    /// One of `cash`, `amortized`, `blended`.
     public func untagged(
         orgId: String? = nil,
         from: String? = nil,

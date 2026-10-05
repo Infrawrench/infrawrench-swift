@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.67.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.68.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.67.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.68.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -154,6 +154,10 @@ public struct CostAccountStatus: Codable, Hashable, Sendable {
     /// one account says yes; elsewhere the amortized view is the cash numbers
     /// under another name.
     public var amortization: Bool
+    /// Whether this account's plugin reports blended commitment discounts.
+    /// Clients offer the blended cost basis only when at least one account says
+    /// yes; elsewhere it reads as the amortized numbers.
+    public var blending: Bool?
     /// Whether this account's amounts are derived by Infrawrench — inventory
     /// priced against a rate card, or metered usage priced at published list
     /// rates — rather than reported as billed spend. True means the series cannot
@@ -183,6 +187,7 @@ public struct CostAccountStatus: Codable, Hashable, Sendable {
         dimensions: [Dimension],
         chargeTypes: Bool,
         amortization: Bool,
+        blending: Bool? = nil,
         estimated: Bool,
         granularity: Granularity,
         costLastPolledAt: String? = nil,
@@ -199,6 +204,7 @@ public struct CostAccountStatus: Codable, Hashable, Sendable {
         self.dimensions = dimensions
         self.chargeTypes = chargeTypes
         self.amortization = amortization
+        self.blending = blending
         self.estimated = estimated
         self.granularity = granularity
         self.costLastPolledAt = costLastPolledAt

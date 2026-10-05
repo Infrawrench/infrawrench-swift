@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.67.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.68.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.67.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.68.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -55,6 +55,7 @@ public enum CostCanvasKpiMetric: Codable, Hashable, Sendable {
         public enum CostBasis2: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
             case cash
             case amortized
+            case blended
             /// A value the API added after this SDK was generated. Kept rather
             /// than rejected, so a new server-side value cannot break decoding.
             case unrecognized(String)
@@ -63,6 +64,7 @@ public enum CostCanvasKpiMetric: Codable, Hashable, Sendable {
                 switch rawValue {
                 case "cash": self = .cash
                 case "amortized": self = .amortized
+                case "blended": self = .blended
                 default: self = .unrecognized(rawValue)
                 }
             }
@@ -71,6 +73,7 @@ public enum CostCanvasKpiMetric: Codable, Hashable, Sendable {
                 switch self {
                 case .cash: return "cash"
                 case .amortized: return "amortized"
+                case .blended: return "blended"
                 case .unrecognized(let value): return value
                 }
             }
@@ -79,6 +82,7 @@ public enum CostCanvasKpiMetric: Codable, Hashable, Sendable {
             public static let allKnownCases: [CostBasis2] = [
                 .cash,
                 .amortized,
+                .blended,
             ]
 
             public init(from decoder: any Decoder) throws {
@@ -154,6 +158,7 @@ public enum CostCanvasKpiMetric: Codable, Hashable, Sendable {
         public enum CostBasis2: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
             case cash
             case amortized
+            case blended
             /// A value the API added after this SDK was generated. Kept rather
             /// than rejected, so a new server-side value cannot break decoding.
             case unrecognized(String)
@@ -162,6 +167,7 @@ public enum CostCanvasKpiMetric: Codable, Hashable, Sendable {
                 switch rawValue {
                 case "cash": self = .cash
                 case "amortized": self = .amortized
+                case "blended": self = .blended
                 default: self = .unrecognized(rawValue)
                 }
             }
@@ -170,6 +176,7 @@ public enum CostCanvasKpiMetric: Codable, Hashable, Sendable {
                 switch self {
                 case .cash: return "cash"
                 case .amortized: return "amortized"
+                case .blended: return "blended"
                 case .unrecognized(let value): return value
                 }
             }
@@ -178,6 +185,7 @@ public enum CostCanvasKpiMetric: Codable, Hashable, Sendable {
             public static let allKnownCases: [CostBasis2] = [
                 .cash,
                 .amortized,
+                .blended,
             ]
 
             public init(from decoder: any Decoder) throws {

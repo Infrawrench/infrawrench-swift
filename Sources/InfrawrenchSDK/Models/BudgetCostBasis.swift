@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.67.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.68.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.67.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.68.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -17,6 +17,7 @@ import Foundation
 public enum BudgetCostBasis: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
     case cash
     case amortized
+    case blended
     /// A value the API added after this SDK was generated. Kept rather than
     /// rejected, so a new server-side value cannot break decoding.
     case unrecognized(String)
@@ -25,6 +26,7 @@ public enum BudgetCostBasis: RawRepresentable, Codable, Hashable, Sendable, Para
         switch rawValue {
         case "cash": self = .cash
         case "amortized": self = .amortized
+        case "blended": self = .blended
         default: self = .unrecognized(rawValue)
         }
     }
@@ -33,6 +35,7 @@ public enum BudgetCostBasis: RawRepresentable, Codable, Hashable, Sendable, Para
         switch self {
         case .cash: return "cash"
         case .amortized: return "amortized"
+        case .blended: return "blended"
         case .unrecognized(let value): return value
         }
     }
@@ -41,6 +44,7 @@ public enum BudgetCostBasis: RawRepresentable, Codable, Hashable, Sendable, Para
     public static let allKnownCases: [BudgetCostBasis] = [
         .cash,
         .amortized,
+        .blended,
     ]
 
     public init(from decoder: any Decoder) throws {
