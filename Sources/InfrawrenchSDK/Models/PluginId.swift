@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.48.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.49.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.48.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.49.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -20,6 +20,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
     case assemblyai
     case aws
     case azure
+    case baseten
     case cartesia
     case circleci
     case clickhouse
@@ -100,6 +101,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
         case "assemblyai": self = .assemblyai
         case "aws": self = .aws
         case "azure": self = .azure
+        case "baseten": self = .baseten
         case "cartesia": self = .cartesia
         case "circleci": self = .circleci
         case "clickhouse": self = .clickhouse
@@ -180,6 +182,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
         case .assemblyai: return "assemblyai"
         case .aws: return "aws"
         case .azure: return "azure"
+        case .baseten: return "baseten"
         case .cartesia: return "cartesia"
         case .circleci: return "circleci"
         case .clickhouse: return "clickhouse"
@@ -260,6 +263,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
         .assemblyai,
         .aws,
         .azure,
+        .baseten,
         .cartesia,
         .circleci,
         .clickhouse,

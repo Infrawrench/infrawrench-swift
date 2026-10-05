@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.48.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.49.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.48.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.49.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -131,6 +131,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case chMember
     case chPostgres
     case chService
+    case chain
     case cksCluster
     case clientKey
     case cloud
@@ -384,6 +385,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case mistralModel
     case mistralVoice
     case model
+    case modelApi
     case modelApiKey
     case modelEndpoint
     case modelVersion
@@ -585,6 +587,8 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case topicJob
     case trafficFilter
     case training
+    case trainingJob
+    case trainingProject
     case transcript
     case transcription
     case transformation
@@ -767,6 +771,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "ch-member": self = .chMember
         case "ch-postgres": self = .chPostgres
         case "ch-service": self = .chService
+        case "chain": self = .chain
         case "cks-cluster": self = .cksCluster
         case "client-key": self = .clientKey
         case "cloud": self = .cloud
@@ -1020,6 +1025,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "mistral-model": self = .mistralModel
         case "mistral-voice": self = .mistralVoice
         case "model": self = .model
+        case "model-api": self = .modelApi
         case "model-api-key": self = .modelApiKey
         case "model-endpoint": self = .modelEndpoint
         case "model-version": self = .modelVersion
@@ -1221,6 +1227,8 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "topic-job": self = .topicJob
         case "traffic-filter": self = .trafficFilter
         case "training": self = .training
+        case "training-job": self = .trainingJob
+        case "training-project": self = .trainingProject
         case "transcript": self = .transcript
         case "transcription": self = .transcription
         case "transformation": self = .transformation
@@ -1403,6 +1411,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .chMember: return "ch-member"
         case .chPostgres: return "ch-postgres"
         case .chService: return "ch-service"
+        case .chain: return "chain"
         case .cksCluster: return "cks-cluster"
         case .clientKey: return "client-key"
         case .cloud: return "cloud"
@@ -1656,6 +1665,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .mistralModel: return "mistral-model"
         case .mistralVoice: return "mistral-voice"
         case .model: return "model"
+        case .modelApi: return "model-api"
         case .modelApiKey: return "model-api-key"
         case .modelEndpoint: return "model-endpoint"
         case .modelVersion: return "model-version"
@@ -1857,6 +1867,8 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .topicJob: return "topic-job"
         case .trafficFilter: return "traffic-filter"
         case .training: return "training"
+        case .trainingJob: return "training-job"
+        case .trainingProject: return "training-project"
         case .transcript: return "transcript"
         case .transcription: return "transcription"
         case .transformation: return "transformation"
@@ -2039,6 +2051,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .chMember,
         .chPostgres,
         .chService,
+        .chain,
         .cksCluster,
         .clientKey,
         .cloud,
@@ -2292,6 +2305,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .mistralModel,
         .mistralVoice,
         .model,
+        .modelApi,
         .modelApiKey,
         .modelEndpoint,
         .modelVersion,
@@ -2493,6 +2507,8 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .topicJob,
         .trafficFilter,
         .training,
+        .trainingJob,
+        .trainingProject,
         .transcript,
         .transcription,
         .transformation,
