@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.69.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.70.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.69.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.70.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -114,6 +114,7 @@ public struct EfficiencyAlertEvent: Codable, Hashable, Sendable {
     /// routed (or the routing rule held it for quiet hours and the follow-up pass
     /// has not run yet).
     public var notifiedAt: String?
+    public var remediation: FindingRemediation?
 
     public init(
         id: String,
@@ -125,7 +126,8 @@ public struct EfficiencyAlertEvent: Codable, Hashable, Sendable {
         amount: Double? = nil,
         detail: [String: DetailValue?],
         firedAt: String,
-        notifiedAt: String? = nil
+        notifiedAt: String? = nil,
+        remediation: FindingRemediation? = nil
     ) {
         self.id = id
         self.kind = kind
@@ -137,5 +139,6 @@ public struct EfficiencyAlertEvent: Codable, Hashable, Sendable {
         self.detail = detail
         self.firedAt = firedAt
         self.notifiedAt = notifiedAt
+        self.remediation = remediation
     }
 }

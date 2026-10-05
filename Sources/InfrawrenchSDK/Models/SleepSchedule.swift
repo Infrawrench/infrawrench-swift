@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.69.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.70.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.69.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.70.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -176,6 +176,7 @@ public struct SleepSchedule: Codable, Hashable, Sendable {
     public var currency: String?
     public var createdAt: String
     public var updatedAt: String
+    public var remediation: FindingRemediation?
 
     public init(
         id: String,
@@ -199,7 +200,8 @@ public struct SleepSchedule: Codable, Hashable, Sendable {
         projectedMonthlySaving: Double? = nil,
         currency: String? = nil,
         createdAt: String,
-        updatedAt: String
+        updatedAt: String,
+        remediation: FindingRemediation? = nil
     ) {
         self.id = id
         self.resourceId = resourceId
@@ -223,5 +225,6 @@ public struct SleepSchedule: Codable, Hashable, Sendable {
         self.currency = currency
         self.createdAt = createdAt
         self.updatedAt = updatedAt
+        self.remediation = remediation
     }
 }

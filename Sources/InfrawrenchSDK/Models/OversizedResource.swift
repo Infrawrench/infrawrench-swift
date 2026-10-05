@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.69.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.70.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.69.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.70.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -50,6 +50,7 @@ public struct OversizedResource: Codable, Hashable, Sendable {
     /// Plugin-authored caveat (e.g. the provider requires the machine stopped).
     public var resizeNote: String?
     public var lastSyncedAt: String?
+    public var remediation: FindingRemediation?
 
     public init(
         id: String,
@@ -71,7 +72,8 @@ public struct OversizedResource: Codable, Hashable, Sendable {
         currentMonthlyKgCo2e: Double? = nil,
         monthlyKgCo2eSaving: Double? = nil,
         resizeNote: String? = nil,
-        lastSyncedAt: String? = nil
+        lastSyncedAt: String? = nil,
+        remediation: FindingRemediation? = nil
     ) {
         self.id = id
         self.pluginId = pluginId
@@ -93,5 +95,6 @@ public struct OversizedResource: Codable, Hashable, Sendable {
         self.monthlyKgCo2eSaving = monthlyKgCo2eSaving
         self.resizeNote = resizeNote
         self.lastSyncedAt = lastSyncedAt
+        self.remediation = remediation
     }
 }
