@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.74.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.74.1 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.74.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.74.1).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -67,6 +67,8 @@ public final class CostReportsNamespace: Sendable {
     /// POST /api/org/{orgId}/cost-reports
     ///
     /// Raises on 400: Bad request
+    ///
+    /// Raises on 403: Forbidden
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -243,6 +245,8 @@ public final class CostReportsNamespace: Sendable {
     /// PUT /api/org/{orgId}/cost-reports/{id}
     ///
     /// Raises on 400: Bad request
+    ///
+    /// Raises on 403: Forbidden
     ///
     /// Raises on 404: Not found
     ///
