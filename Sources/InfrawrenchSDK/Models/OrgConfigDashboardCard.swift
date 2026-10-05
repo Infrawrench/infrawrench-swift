@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.54.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.55.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.54.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.55.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -60,6 +60,7 @@ public enum OrgConfigDashboardCard: Codable, Hashable, Sendable {
             case costReport
             case budget
             case customGraph
+            case costCanvas
             /// A value the API added after this SDK was generated. Kept rather
             /// than rejected, so a new server-side value cannot break decoding.
             case unrecognized(String)
@@ -70,6 +71,7 @@ public enum OrgConfigDashboardCard: Codable, Hashable, Sendable {
                 case "cost_report": self = .costReport
                 case "budget": self = .budget
                 case "custom_graph": self = .customGraph
+                case "cost_canvas": self = .costCanvas
                 default: self = .unrecognized(rawValue)
                 }
             }
@@ -80,6 +82,7 @@ public enum OrgConfigDashboardCard: Codable, Hashable, Sendable {
                 case .costReport: return "cost_report"
                 case .budget: return "budget"
                 case .customGraph: return "custom_graph"
+                case .costCanvas: return "cost_canvas"
                 case .unrecognized(let value): return value
                 }
             }
@@ -90,6 +93,7 @@ public enum OrgConfigDashboardCard: Codable, Hashable, Sendable {
                 .costReport,
                 .budget,
                 .customGraph,
+                .costCanvas,
             ]
 
             public init(from decoder: any Decoder) throws {

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.54.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.55.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.54.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.55.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -64,6 +64,7 @@ public enum CostDateRange: Codable, Hashable, Sendable {
             case lastMonth
             case qtd
             case ytd
+            case 6m
             case 12m
             /// A value the API added after this SDK was generated. Kept rather
             /// than rejected, so a new server-side value cannot break decoding.
@@ -78,6 +79,7 @@ public enum CostDateRange: Codable, Hashable, Sendable {
                 case "last_month": self = .lastMonth
                 case "qtd": self = .qtd
                 case "ytd": self = .ytd
+                case "6m": self = .6m
                 case "12m": self = .12m
                 default: self = .unrecognized(rawValue)
                 }
@@ -92,6 +94,7 @@ public enum CostDateRange: Codable, Hashable, Sendable {
                 case .lastMonth: return "last_month"
                 case .qtd: return "qtd"
                 case .ytd: return "ytd"
+                case .6m: return "6m"
                 case .12m: return "12m"
                 case .unrecognized(let value): return value
                 }
@@ -106,6 +109,7 @@ public enum CostDateRange: Codable, Hashable, Sendable {
                 .lastMonth,
                 .qtd,
                 .ytd,
+                .6m,
                 .12m,
             ]
 

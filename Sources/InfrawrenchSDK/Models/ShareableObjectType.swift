@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.54.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.55.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.54.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.55.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -17,6 +17,7 @@ public enum ShareableObjectType: RawRepresentable, Codable, Hashable, Sendable, 
     case costReport
     case costReportFolder
     case dashboard
+    case costCanvas
     /// A value the API added after this SDK was generated. Kept rather than
     /// rejected, so a new server-side value cannot break decoding.
     case unrecognized(String)
@@ -26,6 +27,7 @@ public enum ShareableObjectType: RawRepresentable, Codable, Hashable, Sendable, 
         case "cost_report": self = .costReport
         case "cost_report_folder": self = .costReportFolder
         case "dashboard": self = .dashboard
+        case "cost_canvas": self = .costCanvas
         default: self = .unrecognized(rawValue)
         }
     }
@@ -35,6 +37,7 @@ public enum ShareableObjectType: RawRepresentable, Codable, Hashable, Sendable, 
         case .costReport: return "cost_report"
         case .costReportFolder: return "cost_report_folder"
         case .dashboard: return "dashboard"
+        case .costCanvas: return "cost_canvas"
         case .unrecognized(let value): return value
         }
     }
@@ -44,6 +47,7 @@ public enum ShareableObjectType: RawRepresentable, Codable, Hashable, Sendable, 
         .costReport,
         .costReportFolder,
         .dashboard,
+        .costCanvas,
     ]
 
     public init(from decoder: any Decoder) throws {

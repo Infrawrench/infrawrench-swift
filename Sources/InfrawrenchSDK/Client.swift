@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.54.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.55.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.54.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.55.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -86,6 +86,8 @@ public final class APIV1Client: Sendable {
     public let costAlerts: CostAlertsNamespace
     /// `client.costAnnotations`
     public let costAnnotations: CostAnnotationsNamespace
+    /// `client.costCanvases`
+    public let costCanvases: CostCanvasesNamespace
     /// `client.costCentres`
     public let costCentres: CostCentresNamespace
     /// `client.costExports`
@@ -266,6 +268,7 @@ public final class APIV1Client: Sendable {
         self.connect = ConnectNamespace(transport: transport)
         self.costAlerts = CostAlertsNamespace(transport: transport)
         self.costAnnotations = CostAnnotationsNamespace(transport: transport)
+        self.costCanvases = CostCanvasesNamespace(transport: transport)
         self.costCentres = CostCentresNamespace(transport: transport)
         self.costExports = CostExportsNamespace(transport: transport)
         self.costReportFolders = CostReportFoldersNamespace(transport: transport)
