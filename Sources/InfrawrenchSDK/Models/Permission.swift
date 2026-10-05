@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.52.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.54.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.52.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.54.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -75,6 +75,8 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
     case jiraWrite
     case linearRead
     case linearWrite
+    case githubIssuesRead
+    case githubIssuesWrite
     case invoicesRead
     case invoicesWrite
     case invoicesIssue
@@ -146,6 +148,8 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case "jira:write": self = .jiraWrite
         case "linear:read": self = .linearRead
         case "linear:write": self = .linearWrite
+        case "github-issues:read": self = .githubIssuesRead
+        case "github-issues:write": self = .githubIssuesWrite
         case "invoices:read": self = .invoicesRead
         case "invoices:write": self = .invoicesWrite
         case "invoices:issue": self = .invoicesIssue
@@ -217,6 +221,8 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case .jiraWrite: return "jira:write"
         case .linearRead: return "linear:read"
         case .linearWrite: return "linear:write"
+        case .githubIssuesRead: return "github-issues:read"
+        case .githubIssuesWrite: return "github-issues:write"
         case .invoicesRead: return "invoices:read"
         case .invoicesWrite: return "invoices:write"
         case .invoicesIssue: return "invoices:issue"
@@ -288,6 +294,8 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         .jiraWrite,
         .linearRead,
         .linearWrite,
+        .githubIssuesRead,
+        .githubIssuesWrite,
         .invoicesRead,
         .invoicesWrite,
         .invoicesIssue,

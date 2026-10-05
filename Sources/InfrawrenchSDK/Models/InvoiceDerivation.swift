@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.52.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.54.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.52.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.54.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -76,6 +76,8 @@ public struct InvoiceDerivation: Codable, Hashable, Sendable {
             case percentage
             case fixed
             case reallocation
+            case tiered
+            case expression
             /// A value the API added after this SDK was generated. Kept rather
             /// than rejected, so a new server-side value cannot break decoding.
             case unrecognized(String)
@@ -85,6 +87,8 @@ public struct InvoiceDerivation: Codable, Hashable, Sendable {
                 case "percentage": self = .percentage
                 case "fixed": self = .fixed
                 case "reallocation": self = .reallocation
+                case "tiered": self = .tiered
+                case "expression": self = .expression
                 default: self = .unrecognized(rawValue)
                 }
             }
@@ -94,6 +98,8 @@ public struct InvoiceDerivation: Codable, Hashable, Sendable {
                 case .percentage: return "percentage"
                 case .fixed: return "fixed"
                 case .reallocation: return "reallocation"
+                case .tiered: return "tiered"
+                case .expression: return "expression"
                 case .unrecognized(let value): return value
                 }
             }
@@ -103,6 +109,8 @@ public struct InvoiceDerivation: Codable, Hashable, Sendable {
                 .percentage,
                 .fixed,
                 .reallocation,
+                .tiered,
+                .expression,
             ]
 
             public init(from decoder: any Decoder) throws {
@@ -188,6 +196,13 @@ public struct InvoiceDerivation: Codable, Hashable, Sendable {
     /// Scope entries that no longer exist. Recorded rather than silently skipped
     /// — an invoice that is quietly short is worse than one that says why.
     public var missingScope: [String]
+    public var pricing: ManagedAccountPricing?
+    /// Every rule or setting that moved money, in pipeline order, with its total
+    /// per currency: the per-invoice answer to which rule changed what.
+    public var effects: [PricingEffect]?
+    public var rerateCoverage: RerateCoverage?
+    public var warnings: [String]?
+    public var expressionFailures: [PricingExpressionFailure]?
 
     public init(
         costBasis: CostBasis2,
@@ -197,7 +212,12 @@ public struct InvoiceDerivation: Codable, Hashable, Sendable {
         unconverted: [String],
         rules: [Rule],
         scope: Scope,
-        missingScope: [String]
+        missingScope: [String],
+        pricing: ManagedAccountPricing? = nil,
+        effects: [PricingEffect]? = nil,
+        rerateCoverage: RerateCoverage? = nil,
+        warnings: [String]? = nil,
+        expressionFailures: [PricingExpressionFailure]? = nil
     ) {
         self.costBasis = costBasis
         self.applyBillingRules = applyBillingRules
@@ -207,5 +227,10 @@ public struct InvoiceDerivation: Codable, Hashable, Sendable {
         self.rules = rules
         self.scope = scope
         self.missingScope = missingScope
+        self.pricing = pricing
+        self.effects = effects
+        self.rerateCoverage = rerateCoverage
+        self.warnings = warnings
+        self.expressionFailures = expressionFailures
     }
 }

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.52.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.54.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.52.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.54.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -135,6 +135,70 @@ public final class BillingRulesNamespace: Sendable {
                 method: "GET",
                 path: "/api/org/{orgId}/billing-rules",
                 pathParameters: ["orgId": orgId?.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Preview a rule or customer pricing against a month of spend
+    ///
+    /// Prices one calendar month (last month by default) twice: with the saved
+    /// rules and settings, and with the candidate rule or customer settings
+    /// swapped in. Nothing is written. Returns both totals, every effect,
+    /// re-rating coverage, any expression failures and the lines that moved most.
+    ///
+    /// Requires `costs:read`, and `invoices:read` as well when a customer is
+    /// named.
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// POST /api/org/{orgId}/billing-rules/preview
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func preview(
+        orgId: String? = nil,
+        body: PricingPreviewRequest,
+        options: RequestOptions? = nil
+    ) async throws -> PricingPreviewResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/billing-rules/preview",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+
+    /// Reorder billing rules
+    ///
+    /// Rewrites every rule's priority to match the given order (10, 20, 30…) in
+    /// one transaction and one audit entry. The list must name every rule exactly
+    /// once.
+    ///
+    /// _Requires permission: `org:settings:write`._
+    ///
+    /// POST /api/org/{orgId}/billing-rules/reorder
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func reorder(
+        orgId: String? = nil,
+        body: BillingRuleOrder,
+        options: RequestOptions? = nil
+    ) async throws -> [BillingRule] {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/billing-rules/reorder",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: AnyEncodable(body)
             ),
             options: options
         )

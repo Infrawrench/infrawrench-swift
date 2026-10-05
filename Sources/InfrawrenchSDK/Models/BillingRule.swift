@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.52.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.54.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.52.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.54.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -21,6 +21,7 @@ public struct BillingRule: Codable, Hashable, Sendable {
     public var priority: Int
     public var match: BillingRuleMatch
     public var adjustment: BillingRuleAdjustment
+    public var managedAccountIds: [String]
     public var createdAt: String
     public var updatedAt: String
 
@@ -32,6 +33,7 @@ public struct BillingRule: Codable, Hashable, Sendable {
         priority: Int,
         match: BillingRuleMatch,
         adjustment: BillingRuleAdjustment,
+        managedAccountIds: [String],
         createdAt: String,
         updatedAt: String
     ) {
@@ -42,6 +44,7 @@ public struct BillingRule: Codable, Hashable, Sendable {
         self.priority = priority
         self.match = match
         self.adjustment = adjustment
+        self.managedAccountIds = managedAccountIds
         self.createdAt = createdAt
         self.updatedAt = updatedAt
     }

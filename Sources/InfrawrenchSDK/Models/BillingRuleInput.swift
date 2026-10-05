@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.52.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.54.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.52.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.54.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -25,6 +25,10 @@ public struct BillingRuleInput: Codable, Hashable, Sendable {
     public var priority: Int
     public var match: BillingRuleMatch
     public var adjustment: BillingRuleAdjustment
+    /// `tiered` and `expression` only: the managed accounts whose invoices this
+    /// rule prices. Empty or absent means every customer whose billing rules are
+    /// on.
+    public var managedAccountIds: [String]?
 
     public init(
         name: String,
@@ -32,7 +36,8 @@ public struct BillingRuleInput: Codable, Hashable, Sendable {
         enabled: Bool? = nil,
         priority: Int,
         match: BillingRuleMatch,
-        adjustment: BillingRuleAdjustment
+        adjustment: BillingRuleAdjustment,
+        managedAccountIds: [String]? = nil
     ) {
         self.name = name
         self.description = description
@@ -40,5 +45,6 @@ public struct BillingRuleInput: Codable, Hashable, Sendable {
         self.priority = priority
         self.match = match
         self.adjustment = adjustment
+        self.managedAccountIds = managedAccountIds
     }
 }

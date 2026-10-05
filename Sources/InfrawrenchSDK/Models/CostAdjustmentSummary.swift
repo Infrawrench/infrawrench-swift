@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.52.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.54.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.52.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.54.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -23,6 +23,8 @@ public struct CostAdjustmentSummary: Codable, Hashable, Sendable {
             case percentage
             case fixed
             case reallocation
+            case tiered
+            case expression
             /// A value the API added after this SDK was generated. Kept rather
             /// than rejected, so a new server-side value cannot break decoding.
             case unrecognized(String)
@@ -32,6 +34,8 @@ public struct CostAdjustmentSummary: Codable, Hashable, Sendable {
                 case "percentage": self = .percentage
                 case "fixed": self = .fixed
                 case "reallocation": self = .reallocation
+                case "tiered": self = .tiered
+                case "expression": self = .expression
                 default: self = .unrecognized(rawValue)
                 }
             }
@@ -41,6 +45,8 @@ public struct CostAdjustmentSummary: Codable, Hashable, Sendable {
                 case .percentage: return "percentage"
                 case .fixed: return "fixed"
                 case .reallocation: return "reallocation"
+                case .tiered: return "tiered"
+                case .expression: return "expression"
                 case .unrecognized(let value): return value
                 }
             }
@@ -50,6 +56,8 @@ public struct CostAdjustmentSummary: Codable, Hashable, Sendable {
                 .percentage,
                 .fixed,
                 .reallocation,
+                .tiered,
+                .expression,
             ]
 
             public init(from decoder: any Decoder) throws {

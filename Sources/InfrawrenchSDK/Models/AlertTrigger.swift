@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.52.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.54.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.52.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.54.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -22,6 +22,7 @@ public enum AlertTrigger: RawRepresentable, Codable, Hashable, Sendable, Paramet
     case commitmentExpiryAlerts
     case commitmentIdleAlerts
     case unitCostRegressionAlerts
+    case savingsFindings
     case metricAlerts
     case resourceDrift
     case workflowPages
@@ -46,6 +47,7 @@ public enum AlertTrigger: RawRepresentable, Codable, Hashable, Sendable, Paramet
         case "commitmentExpiryAlerts": self = .commitmentExpiryAlerts
         case "commitmentIdleAlerts": self = .commitmentIdleAlerts
         case "unitCostRegressionAlerts": self = .unitCostRegressionAlerts
+        case "savingsFindings": self = .savingsFindings
         case "metricAlerts": self = .metricAlerts
         case "resourceDrift": self = .resourceDrift
         case "workflowPages": self = .workflowPages
@@ -70,6 +72,7 @@ public enum AlertTrigger: RawRepresentable, Codable, Hashable, Sendable, Paramet
         case .commitmentExpiryAlerts: return "commitmentExpiryAlerts"
         case .commitmentIdleAlerts: return "commitmentIdleAlerts"
         case .unitCostRegressionAlerts: return "unitCostRegressionAlerts"
+        case .savingsFindings: return "savingsFindings"
         case .metricAlerts: return "metricAlerts"
         case .resourceDrift: return "resourceDrift"
         case .workflowPages: return "workflowPages"
@@ -94,6 +97,7 @@ public enum AlertTrigger: RawRepresentable, Codable, Hashable, Sendable, Paramet
         .commitmentExpiryAlerts,
         .commitmentIdleAlerts,
         .unitCostRegressionAlerts,
+        .savingsFindings,
         .metricAlerts,
         .resourceDrift,
         .workflowPages,

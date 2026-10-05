@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.52.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.54.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.52.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.54.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -22,6 +22,12 @@ import Foundation
 /// resolves to nobody — disabled, empty, not yet started — contributes nobody and
 /// the rule's **other** destinations still deliver: an alert lost to a
 /// misconfigured rotation would be the worst outcome the feature could have.
+///
+/// `github-issues` files the alert's finding as a GitHub issue in the repository
+/// the organization's GitHub issue settings route it to (`/github-issues`),
+/// commenting on the open issue instead when one already exists for that finding.
+/// Only alerts that carry a finding (savings findings, cost anomalies, idle
+/// commitments) can be filed; for other triggers this destination is skipped.
 ///
 /// The spec allows several shapes here. Decoding tries the branches in spec
 /// order, so the most specific match wins.
@@ -218,10 +224,56 @@ public enum AlertDestination: Codable, Hashable, Sendable {
         }
     }
 
+    public struct AlertDestinationObject5: Codable, Hashable, Sendable {
+        public enum Kind: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
+            case githubIssues
+            /// A value the API added after this SDK was generated. Kept rather
+            /// than rejected, so a new server-side value cannot break decoding.
+            case unrecognized(String)
+
+            public init(rawValue: String) {
+                switch rawValue {
+                case "github-issues": self = .githubIssues
+                default: self = .unrecognized(rawValue)
+                }
+            }
+
+            public var rawValue: String {
+                switch self {
+                case .githubIssues: return "github-issues"
+                case .unrecognized(let value): return value
+                }
+            }
+
+            /// Every value the spec declares. `unrecognized` is deliberately absent.
+            public static let allKnownCases: [Kind] = [
+                .githubIssues,
+            ]
+
+            public init(from decoder: any Decoder) throws {
+                self.init(rawValue: try decoder.singleValueContainer().decode(String.self))
+            }
+
+            public func encode(to encoder: any Encoder) throws {
+                var container = encoder.singleValueContainer()
+                try container.encode(rawValue)
+            }
+        }
+
+        public var kind: Kind
+
+        public init(
+            kind: Kind
+        ) {
+            self.kind = kind
+        }
+    }
+
     case object(AlertDestinationObject)
     case object2(AlertDestinationObject2)
     case object3(AlertDestinationObject3)
     case object4(AlertDestinationObject4)
+    case object5(AlertDestinationObject5)
     /// A shape none of the branches above matched.
     case other(JSONValue)
 
@@ -243,6 +295,10 @@ public enum AlertDestination: Codable, Hashable, Sendable {
             self = .object4(value)
             return
         }
+        if let value = try? container.decode(AlertDestinationObject5.self) {
+            self = .object5(value)
+            return
+        }
         self = .other(try container.decode(JSONValue.self))
     }
 
@@ -253,6 +309,7 @@ public enum AlertDestination: Codable, Hashable, Sendable {
         case .object2(let value): try container.encode(value)
         case .object3(let value): try container.encode(value)
         case .object4(let value): try container.encode(value)
+        case .object5(let value): try container.encode(value)
         case .other(let value): try container.encode(value)
         }
     }

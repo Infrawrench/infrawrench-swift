@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.52.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.54.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.52.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.54.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -70,6 +70,7 @@ public struct ManagedAccountInput: Codable, Hashable, Sendable {
     /// exactly what the providers charged, with no markup, discount or fixed fee
     /// applied.
     public var applyBillingRules: Bool?
+    public var pricing: ManagedAccountPricing?
     public var notes: String?
     /// Cost centres whose spend belongs to this customer. **Subtrees are
     /// included** — naming a parent bills every descendant, and naming both a
@@ -95,6 +96,7 @@ public struct ManagedAccountInput: Codable, Hashable, Sendable {
         billingCurrency: String,
         costBasis: CostBasis2? = nil,
         applyBillingRules: Bool? = nil,
+        pricing: ManagedAccountPricing? = nil,
         notes: String? = nil,
         costCentreIds: [String]? = nil,
         accountIds: [String]? = nil
@@ -106,6 +108,7 @@ public struct ManagedAccountInput: Codable, Hashable, Sendable {
         self.billingCurrency = billingCurrency
         self.costBasis = costBasis
         self.applyBillingRules = applyBillingRules
+        self.pricing = pricing
         self.notes = notes
         self.costCentreIds = costCentreIds
         self.accountIds = accountIds

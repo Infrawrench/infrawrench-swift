@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.52.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.54.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.52.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.54.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -60,6 +60,19 @@ public struct InvoiceLine: Codable, Hashable, Sendable {
         }
     }
 
+    public struct Effect: Codable, Hashable, Sendable {
+        public var key: String
+        public var amount: Double
+
+        public init(
+            key: String,
+            amount: Double
+        ) {
+            self.key = key
+            self.amount = amount
+        }
+    }
+
     public var kind: Kind
     /// Cost-centre id, account id, or null for an org-level fixed charge.
     public var refId: String?
@@ -81,6 +94,11 @@ public struct InvoiceLine: Codable, Hashable, Sendable {
     public var rate: Double?
     /// `adjusted × rate`, in the invoice currency.
     public var billed: Double?
+    /// What moved this line, in pipeline order and in the line's currency: one
+    /// entry per re-rating step, discount treatment or billing rule. Sums to
+    /// `adjustment`. `key` matches an entry in the derivation's `effects`. Absent
+    /// on invoices approved before the breakdown existed.
+    public var effects: [Effect]?
 
     public init(
         kind: Kind,
@@ -91,7 +109,8 @@ public struct InvoiceLine: Codable, Hashable, Sendable {
         adjustment: Double,
         adjusted: Double,
         rate: Double? = nil,
-        billed: Double? = nil
+        billed: Double? = nil,
+        effects: [Effect]? = nil
     ) {
         self.kind = kind
         self.refId = refId
@@ -102,5 +121,6 @@ public struct InvoiceLine: Codable, Hashable, Sendable {
         self.adjusted = adjusted
         self.rate = rate
         self.billed = billed
+        self.effects = effects
     }
 }

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.52.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.54.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.52.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.54.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -130,6 +130,8 @@ public final class APIV1Client: Sendable {
     public let environments: EnvironmentsNamespace
     /// `client.expiring`
     public let expiring: ExpiringNamespace
+    /// `client.githubIssues`
+    public let githubIssues: GithubIssuesNamespace
     /// `client.iac`
     public let iac: IacNamespace
     /// `client.incidents`
@@ -286,6 +288,7 @@ public final class APIV1Client: Sendable {
         self.environmentDiff = EnvironmentDiffNamespace(transport: transport)
         self.environments = EnvironmentsNamespace(transport: transport)
         self.expiring = ExpiringNamespace(transport: transport)
+        self.githubIssues = GithubIssuesNamespace(transport: transport)
         self.iac = IacNamespace(transport: transport)
         self.incidents = IncidentsNamespace(transport: transport)
         self.invitations = InvitationsNamespace(transport: transport)
