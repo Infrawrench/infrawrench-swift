@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.68.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.69.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.68.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.69.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -36,45 +36,6 @@ public struct UnitCostQueryResponse: Codable, Hashable, Sendable {
             self.unit = unit
             self.kind = kind
             self.currency = currency
-        }
-    }
-
-    public enum Mode: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
-        case unitCost
-        case margin
-        /// A value the API added after this SDK was generated. Kept rather than
-        /// rejected, so a new server-side value cannot break decoding.
-        case unrecognized(String)
-
-        public init(rawValue: String) {
-            switch rawValue {
-            case "unit_cost": self = .unitCost
-            case "margin": self = .margin
-            default: self = .unrecognized(rawValue)
-            }
-        }
-
-        public var rawValue: String {
-            switch self {
-            case .unitCost: return "unit_cost"
-            case .margin: return "margin"
-            case .unrecognized(let value): return value
-            }
-        }
-
-        /// Every value the spec declares. `unrecognized` is deliberately absent.
-        public static let allKnownCases: [Mode] = [
-            .unitCost,
-            .margin,
-        ]
-
-        public init(from decoder: any Decoder) throws {
-            self.init(rawValue: try decoder.singleValueContainer().decode(String.self))
-        }
-
-        public func encode(to encoder: any Encoder) throws {
-            var container = encoder.singleValueContainer()
-            try container.encode(rawValue)
         }
     }
 
@@ -175,9 +136,17 @@ public struct UnitCostQueryResponse: Codable, Hashable, Sendable {
         }
     }
 
-    public var metric: Metric
-    public var mode: Mode
+    /// Null for `usage_unit_cost`, which divides by provider usage instead.
+    public var metric: Metric?
+    public var mode: UnitCostMode
     public var binning: Binning
+    public var scale: UnitCostScale
+    public var usageUnit: String?
+    public var groupByLabel: String?
+    /// Set when grouped. False means every label series carries the whole scope's
+    /// spend (a raw metric grouped by an unmapped label), so draw that spend
+    /// once.
+    public var costPerLabel: Bool?
     /// One series per currency the numerator ended up in — usually one. More than
     /// one means the organization has spend in a currency it holds no rate for;
     /// rather than dropping that spend (understating every unit cost) or adding
@@ -193,9 +162,13 @@ public struct UnitCostQueryResponse: Codable, Hashable, Sendable {
     public var partialBuckets: Int
 
     public init(
-        metric: Metric,
-        mode: Mode,
+        metric: Metric? = nil,
+        mode: UnitCostMode,
         binning: Binning,
+        scale: UnitCostScale,
+        usageUnit: String? = nil,
+        groupByLabel: String? = nil,
+        costPerLabel: Bool? = nil,
         series: [UnitCostSeries],
         conversion: Conversion? = nil,
         gapBuckets: Int,
@@ -204,6 +177,10 @@ public struct UnitCostQueryResponse: Codable, Hashable, Sendable {
         self.metric = metric
         self.mode = mode
         self.binning = binning
+        self.scale = scale
+        self.usageUnit = usageUnit
+        self.groupByLabel = groupByLabel
+        self.costPerLabel = costPerLabel
         self.series = series
         self.conversion = conversion
         self.gapBuckets = gapBuckets

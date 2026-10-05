@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.68.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.69.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.68.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.69.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -23,6 +23,8 @@ public struct BusinessMetric: Codable, Hashable, Sendable {
     public var currency: String?
     public var costScope: [BusinessMetricScopeTerm]
     public var savedFilterId: String?
+    public var labelMappings: [BusinessMetricLabelMapping]
+    public var thresholds: [UnitCostThreshold]
     public var createdByUserId: String?
     public var createdAt: String
     public var updatedAt: String
@@ -39,6 +41,8 @@ public struct BusinessMetric: Codable, Hashable, Sendable {
         currency: String? = nil,
         costScope: [BusinessMetricScopeTerm],
         savedFilterId: String? = nil,
+        labelMappings: [BusinessMetricLabelMapping],
+        thresholds: [UnitCostThreshold],
         createdByUserId: String? = nil,
         createdAt: String,
         updatedAt: String,
@@ -54,6 +58,8 @@ public struct BusinessMetric: Codable, Hashable, Sendable {
         self.currency = currency
         self.costScope = costScope
         self.savedFilterId = savedFilterId
+        self.labelMappings = labelMappings
+        self.thresholds = thresholds
         self.createdByUserId = createdByUserId
         self.createdAt = createdAt
         self.updatedAt = updatedAt

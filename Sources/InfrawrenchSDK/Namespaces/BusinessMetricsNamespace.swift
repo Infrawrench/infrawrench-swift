@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.68.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.69.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.68.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.69.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -66,6 +66,42 @@ public struct BusinessMetricsImporterSourcesResult: Codable, Hashable, Sendable 
         sources: [BusinessMetricSourceAccount]
     ) {
         self.sources = sources
+    }
+}
+
+public struct BusinessMetricsLabelsResult: Codable, Hashable, Sendable {
+    public var labels: [BusinessMetricLabelSummary]
+
+    public init(
+        labels: [BusinessMetricLabelSummary]
+    ) {
+        self.labels = labels
+    }
+}
+
+public struct BusinessMetricsUsageUnitsResult: Codable, Hashable, Sendable {
+    public struct Unit: Codable, Hashable, Sendable {
+        public var unit: String
+        public var usage: Double
+        public var services: [String]
+
+        public init(
+            unit: String,
+            usage: Double,
+            services: [String]
+        ) {
+            self.unit = unit
+            self.usage = usage
+            self.services = services
+        }
+    }
+
+    public var units: [Unit]
+
+    public init(
+        units: [Unit]
+    ) {
+        self.units = units
     }
 }
 
@@ -305,6 +341,35 @@ public final class BusinessMetricsNamespace: Sendable {
         )
     }
 
+    /// List a metric's labels
+    ///
+    /// The label keys the metric's values carry, each with its distinct values
+    /// (at most 500) and its cost mapping. A mapped label nobody has reported yet
+    /// is listed with no values.
+    ///
+    /// GET /api/org/{orgId}/business-metrics/{id}/labels
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter id: Metric id or key.
+    public func labels(
+        orgId: String? = nil,
+        id: String,
+        options: RequestOptions? = nil
+    ) async throws -> BusinessMetricsLabelsResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/business-metrics/{id}/labels",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue]
+            ),
+            options: options
+        )
+    }
+
     /// Query unit costs or margin
     ///
     /// Divide spend by the metric, bucketed as asked. Three properties of the
@@ -319,9 +384,11 @@ public final class BusinessMetricsNamespace: Sendable {
     /// - **Currencies are never merged.** Spend in a currency with no stated rate
     /// keeps its own series rather than being dropped or added to another.
     ///
-    /// There is no `groupBy`: a per-group ratio would need a per-group
-    /// denominator, and dividing each service's spend by the whole customer count
-    /// produces numbers that do not sum to the real one.
+    /// There is no spend `groupBy`: a per-group ratio needs a per-group
+    /// denominator. Split by a metric label with `groupByLabel` instead; in a
+    /// ratio mode the label must be mapped to the cost dimension its values name
+    /// (`labelMappings` on the metric), so each label value's spend is divided by
+    /// its own volume.
     ///
     /// _Requires permission: `costs:read`._
     ///
@@ -385,6 +452,60 @@ public final class BusinessMetricsNamespace: Sendable {
                 path: "/api/org/{orgId}/business-metrics/{id}",
                 pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue],
                 body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+
+    /// Query cost per usage unit
+    ///
+    /// Spend divided by the usage quantity providers report in one `usageUnit`,
+    /// with no business metric involved. Both halves come from the same cost rows
+    /// (those reported in that unit), so the numerator is exactly the spend that
+    /// bought the denominator. A bucket with no usage is a gap (`no_usage`),
+    /// never 0. Labels do not apply.
+    ///
+    /// POST /api/org/{orgId}/business-metrics/usage-unit-costs
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func usageUnitCosts(
+        orgId: String? = nil,
+        body: UnitCostQueryRequest,
+        options: RequestOptions? = nil
+    ) async throws -> UnitCostQueryResponse {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/business-metrics/usage-unit-costs",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+
+    /// List usage units
+    ///
+    /// The provider usage units the organization's cost rows carry over the last
+    /// 90 days, most spend first, with a few of the services reporting each.
+    /// Backs the per-usage-unit picker.
+    ///
+    /// GET /api/org/{orgId}/business-metrics/usage-units
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func usageUnits(
+        orgId: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> BusinessMetricsUsageUnitsResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/business-metrics/usage-units",
+                pathParameters: ["orgId": orgId?.parameterValue]
             ),
             options: options
         )

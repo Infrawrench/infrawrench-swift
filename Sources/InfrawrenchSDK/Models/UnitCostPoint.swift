@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.68.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.69.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.68.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.69.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -18,6 +18,7 @@ public struct UnitCostPoint: Codable, Hashable, Sendable {
         case noMetricValue
         case nonPositiveMetricValue
         case unconvertibleCurrency
+        case noUsage
         /// A value the API added after this SDK was generated. Kept rather than
         /// rejected, so a new server-side value cannot break decoding.
         case unrecognized(String)
@@ -27,6 +28,7 @@ public struct UnitCostPoint: Codable, Hashable, Sendable {
             case "no_metric_value": self = .noMetricValue
             case "non_positive_metric_value": self = .nonPositiveMetricValue
             case "unconvertible_currency": self = .unconvertibleCurrency
+            case "no_usage": self = .noUsage
             default: self = .unrecognized(rawValue)
             }
         }
@@ -36,6 +38,7 @@ public struct UnitCostPoint: Codable, Hashable, Sendable {
             case .noMetricValue: return "no_metric_value"
             case .nonPositiveMetricValue: return "non_positive_metric_value"
             case .unconvertibleCurrency: return "unconvertible_currency"
+            case .noUsage: return "no_usage"
             case .unrecognized(let value): return value
             }
         }
@@ -45,6 +48,7 @@ public struct UnitCostPoint: Codable, Hashable, Sendable {
             .noMetricValue,
             .nonPositiveMetricValue,
             .unconvertibleCurrency,
+            .noUsage,
         ]
 
         public init(from decoder: any Decoder) throws {
@@ -66,8 +70,11 @@ public struct UnitCostPoint: Codable, Hashable, Sendable {
     public var value: Double?
     /// Spend summed over the bucket, in the series' currency.
     public var cost: Double
-    /// Metric value summed over the bucket, or null when nothing was reported.
+    /// The denominator summed over the bucket (the metric, or usage for
+    /// `usage_unit_cost`), unscaled, or null when nothing was reported.
     public var metricValue: Double?
+    /// `margin` only: revenue − spend in the series currency; null on a gap.
+    public var absoluteMargin: Double?
     /// Set exactly when `value` is null.
     public var gap: Gap?
     /// Days in the bucket carrying a reported value, out of `bucketDays`. When it
@@ -81,6 +88,7 @@ public struct UnitCostPoint: Codable, Hashable, Sendable {
         value: Double? = nil,
         cost: Double,
         metricValue: Double? = nil,
+        absoluteMargin: Double? = nil,
         gap: Gap? = nil,
         reportedDays: Int,
         bucketDays: Int
@@ -89,6 +97,7 @@ public struct UnitCostPoint: Codable, Hashable, Sendable {
         self.value = value
         self.cost = cost
         self.metricValue = metricValue
+        self.absoluteMargin = absoluteMargin
         self.gap = gap
         self.reportedDays = reportedDays
         self.bucketDays = bucketDays

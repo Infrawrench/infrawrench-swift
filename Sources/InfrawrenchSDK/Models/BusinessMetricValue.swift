@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.68.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.69.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.68.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.69.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -60,8 +60,10 @@ public struct BusinessMetricValue: Codable, Hashable, Sendable {
     /// UTC day, YYYY-MM-DD.
     public var day: String
     public var value: Double
-    /// Optional breakdown label; a day's total is the sum across its labels.
+    /// The single breakdown label: the `label` key of `labels`, or null. Kept for
+    /// clients that predate multi-dimensional labels.
     public var label: String?
+    public var labels: BusinessMetricLabels
     public var source: Source
     public var updatedAt: String
 
@@ -69,12 +71,14 @@ public struct BusinessMetricValue: Codable, Hashable, Sendable {
         day: String,
         value: Double,
         label: String? = nil,
+        labels: BusinessMetricLabels,
         source: Source,
         updatedAt: String
     ) {
         self.day = day
         self.value = value
         self.label = label
+        self.labels = labels
         self.source = source
         self.updatedAt = updatedAt
     }

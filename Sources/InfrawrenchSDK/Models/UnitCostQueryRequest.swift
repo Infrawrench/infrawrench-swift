@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.68.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.69.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.68.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.69.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -69,45 +69,6 @@ public struct UnitCostQueryRequest: Codable, Hashable, Sendable {
         }
     }
 
-    public enum Mode: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
-        case unitCost
-        case margin
-        /// A value the API added after this SDK was generated. Kept rather than
-        /// rejected, so a new server-side value cannot break decoding.
-        case unrecognized(String)
-
-        public init(rawValue: String) {
-            switch rawValue {
-            case "unit_cost": self = .unitCost
-            case "margin": self = .margin
-            default: self = .unrecognized(rawValue)
-            }
-        }
-
-        public var rawValue: String {
-            switch self {
-            case .unitCost: return "unit_cost"
-            case .margin: return "margin"
-            case .unrecognized(let value): return value
-            }
-        }
-
-        /// Every value the spec declares. `unrecognized` is deliberately absent.
-        public static let allKnownCases: [Mode] = [
-            .unitCost,
-            .margin,
-        ]
-
-        public init(from decoder: any Decoder) throws {
-            self.init(rawValue: try decoder.singleValueContainer().decode(String.self))
-        }
-
-        public func encode(to encoder: any Encoder) throws {
-            var container = encoder.singleValueContainer()
-            try container.encode(rawValue)
-        }
-    }
-
     public enum CostBasis2: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
         case cash
         case amortized
@@ -155,10 +116,18 @@ public struct UnitCostQueryRequest: Codable, Hashable, Sendable {
     public var from: String
     public var to: String
     public var binning: Binning
-    /// Absent is `unit_cost` (spend ÷ metric value). `margin` is `(revenue −
-    /// spend) ÷ revenue` as a fraction, and is a 400 for a metric whose `kind` is
-    /// not `currency`.
-    public var mode: Mode?
+    public var mode: UnitCostMode?
+    public var scale: UnitCostScale?
+    /// Keep only values carrying these labels. In a ratio mode each label must be
+    /// mapped, and the spend is narrowed to the same values on the mapped
+    /// dimension.
+    public var labelFilters: [UnitCostLabelFilter]?
+    /// One series per value of this label (the 25 largest by metric total; the
+    /// rest fold into `Other`). In a ratio mode the label must be mapped.
+    public var groupByLabel: String?
+    /// `usage_unit_cost` only, and required there: the provider usage unit to
+    /// divide by. See `GET /business-metrics/usage-units`.
+    public var usageUnit: String?
     /// Narrowing on top of the metric's own `costScope` — AND-composed, never a
     /// replacement.
     public var filters: [BusinessMetricScopeTerm]?
@@ -176,7 +145,11 @@ public struct UnitCostQueryRequest: Codable, Hashable, Sendable {
         from: String,
         to: String,
         binning: Binning,
-        mode: Mode? = nil,
+        mode: UnitCostMode? = nil,
+        scale: UnitCostScale? = nil,
+        labelFilters: [UnitCostLabelFilter]? = nil,
+        groupByLabel: String? = nil,
+        usageUnit: String? = nil,
         filters: [BusinessMetricScopeTerm]? = nil,
         query: String? = nil,
         savedFilterId: String? = nil,
@@ -188,6 +161,10 @@ public struct UnitCostQueryRequest: Codable, Hashable, Sendable {
         self.to = to
         self.binning = binning
         self.mode = mode
+        self.scale = scale
+        self.labelFilters = labelFilters
+        self.groupByLabel = groupByLabel
+        self.usageUnit = usageUnit
         self.filters = filters
         self.query = query
         self.savedFilterId = savedFilterId

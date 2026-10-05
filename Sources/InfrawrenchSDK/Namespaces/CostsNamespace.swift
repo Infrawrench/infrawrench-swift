@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.68.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.69.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.68.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.69.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -209,7 +209,7 @@ public final class CostsNamespace: Sendable {
     ///
     /// - Parameter kind: Restrict to one detector. Omitted returns all three,
     /// interleaved by time. One of `commitment_expiry`, `commitment_idle`,
-    /// `unit_cost_regression`.
+    /// `unit_cost_regression`, `unit_cost_threshold`.
     ///
     /// - Parameter limit: Rows to return, newest first. Defaults to 50.
     public func efficiencyAlerts(

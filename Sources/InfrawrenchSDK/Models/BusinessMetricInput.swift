@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.68.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.69.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.68.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.69.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -38,6 +38,11 @@ public struct BusinessMetricInput: Codable, Hashable, Sendable {
     /// query time. A reference that fails to resolve errors the unit-cost query
     /// rather than silently widening the numerator to all spend.
     public var savedFilterId: String?
+    /// Which value labels name a cost dimension. One mapping per label.
+    public var labelMappings: [BusinessMetricLabelMapping]?
+    /// Standing unit-cost or margin limits. Margin thresholds need a `currency`
+    /// metric.
+    public var thresholds: [UnitCostThreshold]?
 
     public init(
         key: String,
@@ -47,7 +52,9 @@ public struct BusinessMetricInput: Codable, Hashable, Sendable {
         kind: BusinessMetricKind,
         currency: String? = nil,
         costScope: [BusinessMetricScopeTerm]? = nil,
-        savedFilterId: String? = nil
+        savedFilterId: String? = nil,
+        labelMappings: [BusinessMetricLabelMapping]? = nil,
+        thresholds: [UnitCostThreshold]? = nil
     ) {
         self.key = key
         self.name = name
@@ -57,5 +64,7 @@ public struct BusinessMetricInput: Codable, Hashable, Sendable {
         self.currency = currency
         self.costScope = costScope
         self.savedFilterId = savedFilterId
+        self.labelMappings = labelMappings
+        self.thresholds = thresholds
     }
 }

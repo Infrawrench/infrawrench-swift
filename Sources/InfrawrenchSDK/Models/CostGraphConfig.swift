@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.68.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.69.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.68.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.69.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -189,6 +189,108 @@ public struct CostGraphConfig: Codable, Hashable, Sendable {
         }
     }
 
+    public enum UnitCostMode2: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
+        case unitCost
+        case margin
+        case usageUnitCost
+        case rawMetric
+        /// A value the API added after this SDK was generated. Kept rather than
+        /// rejected, so a new server-side value cannot break decoding.
+        case unrecognized(String)
+
+        public init(rawValue: String) {
+            switch rawValue {
+            case "unit_cost": self = .unitCost
+            case "margin": self = .margin
+            case "usage_unit_cost": self = .usageUnitCost
+            case "raw_metric": self = .rawMetric
+            default: self = .unrecognized(rawValue)
+            }
+        }
+
+        public var rawValue: String {
+            switch self {
+            case .unitCost: return "unit_cost"
+            case .margin: return "margin"
+            case .usageUnitCost: return "usage_unit_cost"
+            case .rawMetric: return "raw_metric"
+            case .unrecognized(let value): return value
+            }
+        }
+
+        /// Every value the spec declares. `unrecognized` is deliberately absent.
+        public static let allKnownCases: [UnitCostMode2] = [
+            .unitCost,
+            .margin,
+            .usageUnitCost,
+            .rawMetric,
+        ]
+
+        public init(from decoder: any Decoder) throws {
+            self.init(rawValue: try decoder.singleValueContainer().decode(String.self))
+        }
+
+        public func encode(to encoder: any Encoder) throws {
+            var container = encoder.singleValueContainer()
+            try container.encode(rawValue)
+        }
+    }
+
+    public struct UnitCostLabelFilter2: Codable, Hashable, Sendable {
+        public enum Op: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
+            case `in`
+            case notIn
+            /// A value the API added after this SDK was generated. Kept rather
+            /// than rejected, so a new server-side value cannot break decoding.
+            case unrecognized(String)
+
+            public init(rawValue: String) {
+                switch rawValue {
+                case "in": self = .`in`
+                case "not_in": self = .notIn
+                default: self = .unrecognized(rawValue)
+                }
+            }
+
+            public var rawValue: String {
+                switch self {
+                case .`in`: return "in"
+                case .notIn: return "not_in"
+                case .unrecognized(let value): return value
+                }
+            }
+
+            /// Every value the spec declares. `unrecognized` is deliberately absent.
+            public static let allKnownCases: [Op] = [
+                .`in`,
+                .notIn,
+            ]
+
+            public init(from decoder: any Decoder) throws {
+                self.init(rawValue: try decoder.singleValueContainer().decode(String.self))
+            }
+
+            public func encode(to encoder: any Encoder) throws {
+                var container = encoder.singleValueContainer()
+                try container.encode(rawValue)
+            }
+        }
+
+        public var key: String
+        public var op: Op
+        public var values: [String]
+
+        public init(
+            key: String,
+            op: Op,
+            values: [String]
+        ) {
+            self.key = key
+            self.op = op
+            self.values = values
+        }
+    }
+
     public var version: Double
     /// How the series are drawn. `pie` and `donut` draw period totals per group;
     /// `table` lists every bucket as a row with a column per series and a total.
@@ -221,6 +323,23 @@ public struct CostGraphConfig: Codable, Hashable, Sendable {
     /// Running totals from the start of the range, at any bin size. Omitted is
     /// off. Totals then report the last point rather than the sum.
     public var cumulative: Bool?
+    /// Divide spend by this business metric (an id, so a key rename never
+    /// re-points the graph).
+    public var unitCostMetricId: String?
+    /// The calculation. `usage_unit_cost` needs `unitCostUsageUnit` instead of a
+    /// metric; the others need `unitCostMetricId`.
+    public var unitCostMode: UnitCostMode2?
+    /// "Per N units" for a ratio, or the unit a raw metric is shown in. Absent is
+    /// 1.
+    public var unitCostScale: Double?
+    /// `usage_unit_cost` only: the provider usage unit to divide by.
+    public var unitCostUsageUnit: String?
+    /// Keep only metric values carrying these labels.
+    public var unitCostLabelFilters: [UnitCostLabelFilter2]?
+    /// One line per value of this metric label.
+    public var unitCostGroupByLabel: String?
+    /// Draw the org's billing rules applied.
+    public var adjusted: Bool?
 
     public init(
         version: Double,
@@ -238,7 +357,14 @@ public struct CostGraphConfig: Codable, Hashable, Sendable {
         costBasis: CostBasis2? = nil,
         measure: CostMeasure? = nil,
         usageUnit: String? = nil,
-        cumulative: Bool? = nil
+        cumulative: Bool? = nil,
+        unitCostMetricId: String? = nil,
+        unitCostMode: UnitCostMode2? = nil,
+        unitCostScale: Double? = nil,
+        unitCostUsageUnit: String? = nil,
+        unitCostLabelFilters: [UnitCostLabelFilter2]? = nil,
+        unitCostGroupByLabel: String? = nil,
+        adjusted: Bool? = nil
     ) {
         self.version = version
         self.chartType = chartType
@@ -256,5 +382,12 @@ public struct CostGraphConfig: Codable, Hashable, Sendable {
         self.measure = measure
         self.usageUnit = usageUnit
         self.cumulative = cumulative
+        self.unitCostMetricId = unitCostMetricId
+        self.unitCostMode = unitCostMode
+        self.unitCostScale = unitCostScale
+        self.unitCostUsageUnit = unitCostUsageUnit
+        self.unitCostLabelFilters = unitCostLabelFilters
+        self.unitCostGroupByLabel = unitCostGroupByLabel
+        self.adjusted = adjusted
     }
 }

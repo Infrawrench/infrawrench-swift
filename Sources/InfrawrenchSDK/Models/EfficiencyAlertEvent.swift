@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.68.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.69.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.68.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.69.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -18,6 +18,7 @@ public struct EfficiencyAlertEvent: Codable, Hashable, Sendable {
         case commitmentExpiry
         case commitmentIdle
         case unitCostRegression
+        case unitCostThreshold
         /// A value the API added after this SDK was generated. Kept rather than
         /// rejected, so a new server-side value cannot break decoding.
         case unrecognized(String)
@@ -27,6 +28,7 @@ public struct EfficiencyAlertEvent: Codable, Hashable, Sendable {
             case "commitment_expiry": self = .commitmentExpiry
             case "commitment_idle": self = .commitmentIdle
             case "unit_cost_regression": self = .unitCostRegression
+            case "unit_cost_threshold": self = .unitCostThreshold
             default: self = .unrecognized(rawValue)
             }
         }
@@ -36,6 +38,7 @@ public struct EfficiencyAlertEvent: Codable, Hashable, Sendable {
             case .commitmentExpiry: return "commitment_expiry"
             case .commitmentIdle: return "commitment_idle"
             case .unitCostRegression: return "unit_cost_regression"
+            case .unitCostThreshold: return "unit_cost_threshold"
             case .unrecognized(let value): return value
             }
         }
@@ -45,6 +48,7 @@ public struct EfficiencyAlertEvent: Codable, Hashable, Sendable {
             .commitmentExpiry,
             .commitmentIdle,
             .unitCostRegression,
+            .unitCostThreshold,
         ]
 
         public init(from decoder: any Decoder) throws {
