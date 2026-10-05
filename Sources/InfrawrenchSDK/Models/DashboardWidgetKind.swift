@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.70.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.71.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.70.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.71.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -16,13 +16,16 @@ import Foundation
 /// `cost_graph` stores its whole config inline — a one-off card. `cost_report`
 /// points at a saved cost report by id, so editing the report updates every
 /// dashboard showing it. `cost_canvas` points at a cost canvas by id (`{version:
-/// 1, canvasId}`) the same way.
+/// 1, canvasId}`) the same way. `realized_savings` shows the org's realized
+/// savings report; its config is only a view choice (`grouping`: month | kind |
+/// costCentre | account, and `months` back, 1–36).
 public enum DashboardWidgetKind: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
     case costGraph
     case costReport
     case budget
     case customGraph
     case costCanvas
+    case realizedSavings
     /// A value the API added after this SDK was generated. Kept rather than
     /// rejected, so a new server-side value cannot break decoding.
     case unrecognized(String)
@@ -34,6 +37,7 @@ public enum DashboardWidgetKind: RawRepresentable, Codable, Hashable, Sendable, 
         case "budget": self = .budget
         case "custom_graph": self = .customGraph
         case "cost_canvas": self = .costCanvas
+        case "realized_savings": self = .realizedSavings
         default: self = .unrecognized(rawValue)
         }
     }
@@ -45,6 +49,7 @@ public enum DashboardWidgetKind: RawRepresentable, Codable, Hashable, Sendable, 
         case .budget: return "budget"
         case .customGraph: return "custom_graph"
         case .costCanvas: return "cost_canvas"
+        case .realizedSavings: return "realized_savings"
         case .unrecognized(let value): return value
         }
     }
@@ -56,6 +61,7 @@ public enum DashboardWidgetKind: RawRepresentable, Codable, Hashable, Sendable, 
         .budget,
         .customGraph,
         .costCanvas,
+        .realizedSavings,
     ]
 
     public init(from decoder: any Decoder) throws {
