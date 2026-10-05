@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.57.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.58.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.57.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.58.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -79,9 +79,11 @@ public struct UnitCostQueryResponse: Codable, Hashable, Sendable {
     }
 
     public enum Binning: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
+        case hourly
         case daily
         case weekly
         case monthly
+        case quarterly
         case cumulative
         /// A value the API added after this SDK was generated. Kept rather than
         /// rejected, so a new server-side value cannot break decoding.
@@ -89,9 +91,11 @@ public struct UnitCostQueryResponse: Codable, Hashable, Sendable {
 
         public init(rawValue: String) {
             switch rawValue {
+            case "hourly": self = .hourly
             case "daily": self = .daily
             case "weekly": self = .weekly
             case "monthly": self = .monthly
+            case "quarterly": self = .quarterly
             case "cumulative": self = .cumulative
             default: self = .unrecognized(rawValue)
             }
@@ -99,9 +103,11 @@ public struct UnitCostQueryResponse: Codable, Hashable, Sendable {
 
         public var rawValue: String {
             switch self {
+            case .hourly: return "hourly"
             case .daily: return "daily"
             case .weekly: return "weekly"
             case .monthly: return "monthly"
+            case .quarterly: return "quarterly"
             case .cumulative: return "cumulative"
             case .unrecognized(let value): return value
             }
@@ -109,9 +115,11 @@ public struct UnitCostQueryResponse: Codable, Hashable, Sendable {
 
         /// Every value the spec declares. `unrecognized` is deliberately absent.
         public static let allKnownCases: [Binning] = [
+            .hourly,
             .daily,
             .weekly,
             .monthly,
+            .quarterly,
             .cumulative,
         ]
 

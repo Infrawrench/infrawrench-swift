@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.57.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.58.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.57.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.58.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -49,6 +49,45 @@ public struct CostAccountStatus: Codable, Hashable, Sendable {
             .region,
             .resource,
             .tag,
+        ]
+
+        public init(from decoder: any Decoder) throws {
+            self.init(rawValue: try decoder.singleValueContainer().decode(String.self))
+        }
+
+        public func encode(to encoder: any Encoder) throws {
+            var container = encoder.singleValueContainer()
+            try container.encode(rawValue)
+        }
+    }
+
+    public enum Granularity: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
+        case daily
+        case hourly
+        /// A value the API added after this SDK was generated. Kept rather than
+        /// rejected, so a new server-side value cannot break decoding.
+        case unrecognized(String)
+
+        public init(rawValue: String) {
+            switch rawValue {
+            case "daily": self = .daily
+            case "hourly": self = .hourly
+            default: self = .unrecognized(rawValue)
+            }
+        }
+
+        public var rawValue: String {
+            switch self {
+            case .daily: return "daily"
+            case .hourly: return "hourly"
+            case .unrecognized(let value): return value
+            }
+        }
+
+        /// Every value the spec declares. `unrecognized` is deliberately absent.
+        public static let allKnownCases: [Granularity] = [
+            .daily,
+            .hourly,
         ]
 
         public init(from decoder: any Decoder) throws {
@@ -122,6 +161,10 @@ public struct CostAccountStatus: Codable, Hashable, Sendable {
     /// period are no longer in inventory to be priced, all rates are list rather
     /// than negotiated, and credits, tax and refunds never appear.
     public var estimated: Bool
+    /// The granularity this account's cost rows are stored at. `daily` for every
+    /// provider today; hourly bins are offered only once some account reports
+    /// `hourly`.
+    public var granularity: Granularity
     public var costLastPolledAt: String?
     public var costBackfilledAt: String?
     public var costPollFailureCount: Int
@@ -141,6 +184,7 @@ public struct CostAccountStatus: Codable, Hashable, Sendable {
         chargeTypes: Bool,
         amortization: Bool,
         estimated: Bool,
+        granularity: Granularity,
         costLastPolledAt: String? = nil,
         costBackfilledAt: String? = nil,
         costPollFailureCount: Int,
@@ -156,6 +200,7 @@ public struct CostAccountStatus: Codable, Hashable, Sendable {
         self.chargeTypes = chargeTypes
         self.amortization = amortization
         self.estimated = estimated
+        self.granularity = granularity
         self.costLastPolledAt = costLastPolledAt
         self.costBackfilledAt = costBackfilledAt
         self.costPollFailureCount = costPollFailureCount

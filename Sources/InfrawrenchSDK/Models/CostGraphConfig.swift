@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.57.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.58.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.57.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.58.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -22,6 +22,8 @@ public struct CostGraphConfig: Codable, Hashable, Sendable {
         case line
         case area
         case pie
+        case donut
+        case table
         /// A value the API added after this SDK was generated. Kept rather than
         /// rejected, so a new server-side value cannot break decoding.
         case unrecognized(String)
@@ -33,6 +35,8 @@ public struct CostGraphConfig: Codable, Hashable, Sendable {
             case "line": self = .line
             case "area": self = .area
             case "pie": self = .pie
+            case "donut": self = .donut
+            case "table": self = .table
             default: self = .unrecognized(rawValue)
             }
         }
@@ -44,6 +48,8 @@ public struct CostGraphConfig: Codable, Hashable, Sendable {
             case .line: return "line"
             case .area: return "area"
             case .pie: return "pie"
+            case .donut: return "donut"
+            case .table: return "table"
             case .unrecognized(let value): return value
             }
         }
@@ -55,53 +61,8 @@ public struct CostGraphConfig: Codable, Hashable, Sendable {
             .line,
             .area,
             .pie,
-        ]
-
-        public init(from decoder: any Decoder) throws {
-            self.init(rawValue: try decoder.singleValueContainer().decode(String.self))
-        }
-
-        public func encode(to encoder: any Encoder) throws {
-            var container = encoder.singleValueContainer()
-            try container.encode(rawValue)
-        }
-    }
-
-    public enum Binning: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
-        case daily
-        case weekly
-        case monthly
-        case cumulative
-        /// A value the API added after this SDK was generated. Kept rather than
-        /// rejected, so a new server-side value cannot break decoding.
-        case unrecognized(String)
-
-        public init(rawValue: String) {
-            switch rawValue {
-            case "daily": self = .daily
-            case "weekly": self = .weekly
-            case "monthly": self = .monthly
-            case "cumulative": self = .cumulative
-            default: self = .unrecognized(rawValue)
-            }
-        }
-
-        public var rawValue: String {
-            switch self {
-            case .daily: return "daily"
-            case .weekly: return "weekly"
-            case .monthly: return "monthly"
-            case .cumulative: return "cumulative"
-            case .unrecognized(let value): return value
-            }
-        }
-
-        /// Every value the spec declares. `unrecognized` is deliberately absent.
-        public static let allKnownCases: [Binning] = [
-            .daily,
-            .weekly,
-            .monthly,
-            .cumulative,
+            .donut,
+            .table,
         ]
 
         public init(from decoder: any Decoder) throws {
@@ -221,8 +182,10 @@ public struct CostGraphConfig: Codable, Hashable, Sendable {
     }
 
     public var version: Double
+    /// How the series are drawn. `pie` and `donut` draw period totals per group;
+    /// `table` lists every bucket as a row with a column per series and a total.
     public var chartType: ChartType
-    public var binning: Binning
+    public var binning: CostBinning
     public var dateRange: CostDateRange
     public var groupBy: GroupBy
     public var groupByTagKey: String?
@@ -241,11 +204,20 @@ public struct CostGraphConfig: Codable, Hashable, Sendable {
     /// trend rather than instead of it. Only meaningful alongside `showForecast`.
     public var scenarioModelId: String?
     public var costBasis: CostBasis2?
+    public var measure: CostMeasure?
+    /// The usage unit a `usage` measure sums, exactly as the provider spells it
+    /// (`Hrs`, `GB-Mo`). List them with GET
+    /// /costs/dimensions?dimension=usage-units. Required for `usage`, refused for
+    /// any other measure.
+    public var usageUnit: String?
+    /// Running totals from the start of the range, at any bin size. Omitted is
+    /// off. Totals then report the last point rather than the sum.
+    public var cumulative: Bool?
 
     public init(
         version: Double,
         chartType: ChartType,
-        binning: Binning,
+        binning: CostBinning,
         dateRange: CostDateRange,
         groupBy: GroupBy,
         groupByTagKey: String? = nil,
@@ -255,7 +227,10 @@ public struct CostGraphConfig: Codable, Hashable, Sendable {
         comparePreviousPeriod: Bool? = nil,
         showForecast: Bool? = nil,
         scenarioModelId: String? = nil,
-        costBasis: CostBasis2? = nil
+        costBasis: CostBasis2? = nil,
+        measure: CostMeasure? = nil,
+        usageUnit: String? = nil,
+        cumulative: Bool? = nil
     ) {
         self.version = version
         self.chartType = chartType
@@ -270,5 +245,8 @@ public struct CostGraphConfig: Codable, Hashable, Sendable {
         self.showForecast = showForecast
         self.scenarioModelId = scenarioModelId
         self.costBasis = costBasis
+        self.measure = measure
+        self.usageUnit = usageUnit
+        self.cumulative = cumulative
     }
 }

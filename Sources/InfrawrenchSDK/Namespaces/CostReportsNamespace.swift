@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.57.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.58.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.57.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.58.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -163,9 +163,12 @@ public final class CostReportsNamespace: Sendable {
     /// Run a cost report
     ///
     /// Executes the report's saved config and returns the series, along with the
-    /// inclusive window a relative preset resolved to. Takes no body: the report
-    /// *is* the query, so a caller never has to reassemble its config to get the
-    /// numbers.
+    /// inclusive window a relative preset resolved to. The body is optional: the
+    /// report *is* the query, so a caller never has to reassemble its config to
+    /// get the numbers. It may carry one-off display overrides (`measure`,
+    /// `usageUnit`, `binning`, `cumulative`) that apply to this run only and are
+    /// never saved; switching a run to `usage` or `count` drops the saved
+    /// forecast, scenario and billing rules, which only apply to money.
     ///
     /// _Requires permission: `costs:read`._
     ///
@@ -180,13 +183,15 @@ public final class CostReportsNamespace: Sendable {
     public func run(
         orgId: String? = nil,
         id: String,
+        body: CostReportRunOverrides? = nil,
         options: RequestOptions? = nil
     ) async throws -> CostReportRunResult {
         return try await transport.send(
             RequestSpec(
                 method: "POST",
                 path: "/api/org/{orgId}/cost-reports/{id}/run",
-                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue]
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue],
+                body: body.map { AnyEncodable($0) }
             ),
             options: options
         )
