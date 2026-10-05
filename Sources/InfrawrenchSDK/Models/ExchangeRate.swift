@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.62.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.63.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.62.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.63.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -29,6 +29,11 @@ public struct ExchangeRate: Codable, Hashable, Sendable {
     /// keep the rate that applied then. A day earlier than every stated rate has
     /// no rate.
     public var effectiveFrom: String
+    /// Inclusive last day this rate applies, or `null` for open-ended (until a
+    /// later stated rate). Past it, the automatic feed takes over when on;
+    /// otherwise those days are unconverted. An older stated rate never
+    /// resurfaces past an end date.
+    public var effectiveTo: String?
     public var createdBy: String?
     public var createdAt: String
     public var updatedAt: String
@@ -39,6 +44,7 @@ public struct ExchangeRate: Codable, Hashable, Sendable {
         toCurrency: String,
         rate: String,
         effectiveFrom: String,
+        effectiveTo: String? = nil,
         createdBy: String? = nil,
         createdAt: String,
         updatedAt: String
@@ -48,6 +54,7 @@ public struct ExchangeRate: Codable, Hashable, Sendable {
         self.toCurrency = toCurrency
         self.rate = rate
         self.effectiveFrom = effectiveFrom
+        self.effectiveTo = effectiveTo
         self.createdBy = createdBy
         self.createdAt = createdAt
         self.updatedAt = updatedAt
