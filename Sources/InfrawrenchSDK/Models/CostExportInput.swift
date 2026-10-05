@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.49.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.50.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.49.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.50.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -98,6 +98,7 @@ public struct CostExportInput: Codable, Hashable, Sendable {
 
     public var name: String
     public var format: Format
+    public var schema: CostExportSchema?
     public var query: CostExportQuery
     /// How often a run happens and — because a run writes one object per period —
     /// what a period is: a calendar day, an ISO week (Monday-start), or a
@@ -126,6 +127,7 @@ public struct CostExportInput: Codable, Hashable, Sendable {
     public init(
         name: String,
         format: Format,
+        schema: CostExportSchema? = nil,
         query: CostExportQuery,
         cadence: Cadence,
         hour: Int,
@@ -139,6 +141,7 @@ public struct CostExportInput: Codable, Hashable, Sendable {
     ) {
         self.name = name
         self.format = format
+        self.schema = schema
         self.query = query
         self.cadence = cadence
         self.hour = hour
