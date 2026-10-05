@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.71.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.73.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.71.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.73.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -86,18 +86,21 @@ public struct CostAnomalySettings: Codable, Hashable, Sendable {
     /// `unexpected` verdict on the same key. Defaults to true. Optional on PUT:
     /// omitting it keeps the stored value. Always present on a read.
     public var feedbackTuning: Bool?
+    public var emailRecipients: AlertEmailRecipients?
 
     public init(
         sigmas: Double,
         minDeltaCents: Int,
         newSourceMinCents: Int,
         smsAlerts: SmsAlerts,
-        feedbackTuning: Bool? = nil
+        feedbackTuning: Bool? = nil,
+        emailRecipients: AlertEmailRecipients? = nil
     ) {
         self.sigmas = sigmas
         self.minDeltaCents = minDeltaCents
         self.newSourceMinCents = newSourceMinCents
         self.smsAlerts = smsAlerts
         self.feedbackTuning = feedbackTuning
+        self.emailRecipients = emailRecipients
     }
 }

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.71.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.73.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.71.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.73.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -40,6 +40,8 @@ public final class APIV1Client: Sendable {
     public let agents: AgentsNamespace
     /// `client.aiAttribution`
     public let aiAttribution: AiAttributionNamespace
+    /// `client.alertEmail`
+    public let alertEmail: AlertEmailNamespace
     /// `client.alertRules`
     public let alertRules: AlertRulesNamespace
     /// `client.apiKeys`
@@ -136,6 +138,8 @@ public final class APIV1Client: Sendable {
     public let environments: EnvironmentsNamespace
     /// `client.expiring`
     public let expiring: ExpiringNamespace
+    /// `client.extendedSupport`
+    public let extendedSupport: ExtendedSupportNamespace
     /// `client.githubIssues`
     public let githubIssues: GithubIssuesNamespace
     /// `client.iac`
@@ -255,6 +259,7 @@ public final class APIV1Client: Sendable {
         self.agentRegistrations = AgentRegistrationsNamespace(transport: transport)
         self.agents = AgentsNamespace(transport: transport)
         self.aiAttribution = AiAttributionNamespace(transport: transport)
+        self.alertEmail = AlertEmailNamespace(transport: transport)
         self.alertRules = AlertRulesNamespace(transport: transport)
         self.apiKeys = ApiKeysNamespace(transport: transport)
         self.apps = AppsNamespace(transport: transport)
@@ -303,6 +308,7 @@ public final class APIV1Client: Sendable {
         self.environmentDiff = EnvironmentDiffNamespace(transport: transport)
         self.environments = EnvironmentsNamespace(transport: transport)
         self.expiring = ExpiringNamespace(transport: transport)
+        self.extendedSupport = ExtendedSupportNamespace(transport: transport)
         self.githubIssues = GithubIssuesNamespace(transport: transport)
         self.iac = IacNamespace(transport: transport)
         self.incidents = IncidentsNamespace(transport: transport)

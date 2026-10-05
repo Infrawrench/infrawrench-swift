@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.71.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.73.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.71.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.73.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -47,6 +47,7 @@ public struct BudgetFull: Codable, Hashable, Sendable {
     /// adjusted and names the collected one. Updates are full replaces, so
     /// omitting it on PUT clears the opt-in.
     public var useAdjustedSpend: Bool
+    public var emailRecipients: AlertEmailRecipients
     public var createdByUserId: String?
     public var deletedAt: String?
     public var createdAt: String
@@ -77,6 +78,7 @@ public struct BudgetFull: Codable, Hashable, Sendable {
         thresholds: [BudgetThreshold],
         costBasis: BudgetCostBasis,
         useAdjustedSpend: Bool,
+        emailRecipients: AlertEmailRecipients,
         createdByUserId: String? = nil,
         deletedAt: String? = nil,
         createdAt: String,
@@ -98,6 +100,7 @@ public struct BudgetFull: Codable, Hashable, Sendable {
         self.thresholds = thresholds
         self.costBasis = costBasis
         self.useAdjustedSpend = useAdjustedSpend
+        self.emailRecipients = emailRecipients
         self.createdByUserId = createdByUserId
         self.deletedAt = deletedAt
         self.createdAt = createdAt

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.71.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.73.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.71.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.73.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -72,6 +72,74 @@ public struct AlertRulesResponse: Codable, Hashable, Sendable {
         }
     }
 
+    public struct Member: Codable, Hashable, Sendable {
+        public var userId: String
+        public var name: String?
+        public var email: String
+
+        public init(
+            userId: String,
+            name: String? = nil,
+            email: String
+        ) {
+            self.userId = userId
+            self.name = name
+            self.email = email
+        }
+    }
+
+    public struct EmailSettings: Codable, Hashable, Sendable {
+        public enum ExternalPolicy: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
+            case memberDomains
+            case any
+            /// A value the API added after this SDK was generated. Kept rather
+            /// than rejected, so a new server-side value cannot break decoding.
+            case unrecognized(String)
+
+            public init(rawValue: String) {
+                switch rawValue {
+                case "member-domains": self = .memberDomains
+                case "any": self = .any
+                default: self = .unrecognized(rawValue)
+                }
+            }
+
+            public var rawValue: String {
+                switch self {
+                case .memberDomains: return "member-domains"
+                case .any: return "any"
+                case .unrecognized(let value): return value
+                }
+            }
+
+            /// Every value the spec declares. `unrecognized` is deliberately absent.
+            public static let allKnownCases: [ExternalPolicy] = [
+                .memberDomains,
+                .any,
+            ]
+
+            public init(from decoder: any Decoder) throws {
+                self.init(rawValue: try decoder.singleValueContainer().decode(String.self))
+            }
+
+            public func encode(to encoder: any Encoder) throws {
+                var container = encoder.singleValueContainer()
+                try container.encode(rawValue)
+            }
+        }
+
+        public var externalPolicy: ExternalPolicy
+        public var allowedDomains: [String]
+
+        public init(
+            externalPolicy: ExternalPolicy,
+            allowedDomains: [String]
+        ) {
+            self.externalPolicy = externalPolicy
+            self.allowedDomains = allowedDomains
+        }
+    }
+
     public var rules: [AlertRule]
     /// True when the organization has saved no rules and `rules` is the
     /// synthesized default — everything except drift, to every connected channel
@@ -85,6 +153,14 @@ public struct AlertRulesResponse: Codable, Hashable, Sendable {
     /// disconnected Slack install is: offering one would let the editor build a
     /// rule that routes nowhere.
     public var onCallSchedules: [OnCallSchedule2]
+    /// Current members, for the email destination picker.
+    public var members: [Member]
+    /// Whether this deployment has a mail provider configured.
+    public var emailAvailable: Bool
+    /// The external-address policy an `email-address` destination must pass.
+    public var emailSettings: EmailSettings
+    /// Domains the organization's members sign in with: the implicit allowlist.
+    public var memberDomains: [String]
 
     public init(
         rules: [AlertRule],
@@ -92,7 +168,11 @@ public struct AlertRulesResponse: Codable, Hashable, Sendable {
         slackChannels: [SlackChannel2],
         msTeamsWebhooks: [MsTeamsWebhook2],
         accounts: [Account2],
-        onCallSchedules: [OnCallSchedule2]
+        onCallSchedules: [OnCallSchedule2],
+        members: [Member],
+        emailAvailable: Bool,
+        emailSettings: EmailSettings,
+        memberDomains: [String]
     ) {
         self.rules = rules
         self.usingDefaults = usingDefaults
@@ -100,5 +180,9 @@ public struct AlertRulesResponse: Codable, Hashable, Sendable {
         self.msTeamsWebhooks = msTeamsWebhooks
         self.accounts = accounts
         self.onCallSchedules = onCallSchedules
+        self.members = members
+        self.emailAvailable = emailAvailable
+        self.emailSettings = emailSettings
+        self.memberDomains = memberDomains
     }
 }

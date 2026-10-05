@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.71.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.73.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.71.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.73.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -32,6 +32,7 @@ public enum AlertTrigger: RawRepresentable, Codable, Hashable, Sendable, Paramet
     case postureAlerts
     case probeAlerts
     case quotaAlerts
+    case extendedSupportAlerts
     case incidentAlerts
     case weeklyDigest
     /// A value the API added after this SDK was generated. Kept rather than
@@ -57,6 +58,7 @@ public enum AlertTrigger: RawRepresentable, Codable, Hashable, Sendable, Paramet
         case "postureAlerts": self = .postureAlerts
         case "probeAlerts": self = .probeAlerts
         case "quotaAlerts": self = .quotaAlerts
+        case "extendedSupportAlerts": self = .extendedSupportAlerts
         case "incidentAlerts": self = .incidentAlerts
         case "weeklyDigest": self = .weeklyDigest
         default: self = .unrecognized(rawValue)
@@ -82,6 +84,7 @@ public enum AlertTrigger: RawRepresentable, Codable, Hashable, Sendable, Paramet
         case .postureAlerts: return "postureAlerts"
         case .probeAlerts: return "probeAlerts"
         case .quotaAlerts: return "quotaAlerts"
+        case .extendedSupportAlerts: return "extendedSupportAlerts"
         case .incidentAlerts: return "incidentAlerts"
         case .weeklyDigest: return "weeklyDigest"
         case .unrecognized(let value): return value
@@ -107,6 +110,7 @@ public enum AlertTrigger: RawRepresentable, Codable, Hashable, Sendable, Paramet
         .postureAlerts,
         .probeAlerts,
         .quotaAlerts,
+        .extendedSupportAlerts,
         .incidentAlerts,
         .weeklyDigest,
     ]

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.71.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.73.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.71.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.73.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -63,6 +63,7 @@ public struct CostEfficiencySettings: Codable, Hashable, Sendable {
     /// Least spend in the current window before alerting, in USD cents, restated
     /// per currency. Defaults to 10000 ($100).
     public var unitCostMinSpendCents: Int
+    public var emailRecipients: AlertEmailRecipients?
 
     public init(
         commitmentExpiryEnabled: Bool,
@@ -77,7 +78,8 @@ public struct CostEfficiencySettings: Codable, Hashable, Sendable {
         unitCostThresholdPercent: Int,
         unitCostWindowDays: Int,
         unitCostMinReportedDays: Int,
-        unitCostMinSpendCents: Int
+        unitCostMinSpendCents: Int,
+        emailRecipients: AlertEmailRecipients? = nil
     ) {
         self.commitmentExpiryEnabled = commitmentExpiryEnabled
         self.commitmentExpiryHorizonDays = commitmentExpiryHorizonDays
@@ -92,5 +94,6 @@ public struct CostEfficiencySettings: Codable, Hashable, Sendable {
         self.unitCostWindowDays = unitCostWindowDays
         self.unitCostMinReportedDays = unitCostMinReportedDays
         self.unitCostMinSpendCents = unitCostMinSpendCents
+        self.emailRecipients = emailRecipients
     }
 }

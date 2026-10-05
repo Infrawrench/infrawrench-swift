@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.71.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.73.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.71.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.73.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -100,6 +100,7 @@ public struct CostAlert: Codable, Hashable, Sendable {
     public var enabled: Bool
     public var lastEvaluatedAt: String?
     public var lastFiredAt: String?
+    public var emailRecipients: AlertEmailRecipients
     public var createdAt: String
     public var updatedAt: String
 
@@ -116,6 +117,7 @@ public struct CostAlert: Codable, Hashable, Sendable {
         enabled: Bool,
         lastEvaluatedAt: String? = nil,
         lastFiredAt: String? = nil,
+        emailRecipients: AlertEmailRecipients,
         createdAt: String,
         updatedAt: String
     ) {
@@ -131,6 +133,7 @@ public struct CostAlert: Codable, Hashable, Sendable {
         self.enabled = enabled
         self.lastEvaluatedAt = lastEvaluatedAt
         self.lastFiredAt = lastFiredAt
+        self.emailRecipients = emailRecipients
         self.createdAt = createdAt
         self.updatedAt = updatedAt
     }

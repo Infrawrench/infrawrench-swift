@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.71.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.73.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.71.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.73.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -126,6 +126,7 @@ public struct BudgetWithStatus: Codable, Hashable, Sendable {
     /// adjusted and names the collected one. Updates are full replaces, so
     /// omitting it on PUT clears the opt-in.
     public var useAdjustedSpend: Bool
+    public var emailRecipients: AlertEmailRecipients
     /// Month-to-date **collected** spend, non-null only for a budget measuring
     /// adjusted spend. Null on an unadjusted budget rather than a copy of
     /// `actualCents`: "there is no separate collected figure because this one is
@@ -188,6 +189,7 @@ public struct BudgetWithStatus: Codable, Hashable, Sendable {
         scenarioModelId: String? = nil,
         scenarioModelName: String? = nil,
         useAdjustedSpend: Bool,
+        emailRecipients: AlertEmailRecipients,
         rawActualCents: Int? = nil,
         month: String,
         actualCents: Int,
@@ -220,6 +222,7 @@ public struct BudgetWithStatus: Codable, Hashable, Sendable {
         self.scenarioModelId = scenarioModelId
         self.scenarioModelName = scenarioModelName
         self.useAdjustedSpend = useAdjustedSpend
+        self.emailRecipients = emailRecipients
         self.rawActualCents = rawActualCents
         self.month = month
         self.actualCents = actualCents

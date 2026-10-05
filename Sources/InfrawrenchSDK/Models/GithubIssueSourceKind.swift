@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.71.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.73.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.71.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.73.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -21,6 +21,7 @@ public enum GithubIssueSourceKind: RawRepresentable, Codable, Hashable, Sendable
     case postureFinding
     case expiring
     case probe
+    case extendedSupport
     case commitmentIdle
     /// A value the API added after this SDK was generated. Kept rather than
     /// rejected, so a new server-side value cannot break decoding.
@@ -34,6 +35,7 @@ public enum GithubIssueSourceKind: RawRepresentable, Codable, Hashable, Sendable
         case "posture_finding": self = .postureFinding
         case "expiring": self = .expiring
         case "probe": self = .probe
+        case "extended_support": self = .extendedSupport
         case "commitment_idle": self = .commitmentIdle
         default: self = .unrecognized(rawValue)
         }
@@ -47,6 +49,7 @@ public enum GithubIssueSourceKind: RawRepresentable, Codable, Hashable, Sendable
         case .postureFinding: return "posture_finding"
         case .expiring: return "expiring"
         case .probe: return "probe"
+        case .extendedSupport: return "extended_support"
         case .commitmentIdle: return "commitment_idle"
         case .unrecognized(let value): return value
         }
@@ -60,6 +63,7 @@ public enum GithubIssueSourceKind: RawRepresentable, Codable, Hashable, Sendable
         .postureFinding,
         .expiring,
         .probe,
+        .extendedSupport,
         .commitmentIdle,
     ]
 

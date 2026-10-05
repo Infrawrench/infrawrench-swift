@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.71.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.73.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.71.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.73.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -61,6 +61,7 @@ public struct BudgetInput: Codable, Hashable, Sendable {
     /// children up to its own parent. Updates are full replaces, so omitting it
     /// on PUT makes the budget a root.
     public var parentBudgetId: String?
+    public var emailRecipients: AlertEmailRecipients?
 
     public init(
         name: String,
@@ -76,7 +77,8 @@ public struct BudgetInput: Codable, Hashable, Sendable {
         usageUnit: String? = nil,
         usageAmount: Double? = nil,
         period: BudgetPeriod? = nil,
-        parentBudgetId: String? = nil
+        parentBudgetId: String? = nil,
+        emailRecipients: AlertEmailRecipients? = nil
     ) {
         self.name = name
         self.amountCents = amountCents
@@ -92,5 +94,6 @@ public struct BudgetInput: Codable, Hashable, Sendable {
         self.usageAmount = usageAmount
         self.period = period
         self.parentBudgetId = parentBudgetId
+        self.emailRecipients = emailRecipients
     }
 }

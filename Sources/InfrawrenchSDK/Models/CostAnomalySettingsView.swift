@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.71.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.73.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.71.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.73.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -86,6 +86,7 @@ public struct CostAnomalySettingsView: Codable, Hashable, Sendable {
     /// `unexpected` verdict on the same key. Defaults to true. Optional on PUT:
     /// omitting it keeps the stored value. Always present on a read.
     public var feedbackTuning: Bool?
+    public var emailRecipients: AlertEmailRecipients?
     /// Whether an SMS raised right now could be delivered: paging enabled for the
     /// organization, Twilio credentials and a from-number stored, and at least
     /// one recipient opted into SMS. Read-only and derived — it is not accepted
@@ -98,6 +99,7 @@ public struct CostAnomalySettingsView: Codable, Hashable, Sendable {
         newSourceMinCents: Int,
         smsAlerts: SmsAlerts,
         feedbackTuning: Bool? = nil,
+        emailRecipients: AlertEmailRecipients? = nil,
         smsConfigured: Bool
     ) {
         self.sigmas = sigmas
@@ -105,6 +107,7 @@ public struct CostAnomalySettingsView: Codable, Hashable, Sendable {
         self.newSourceMinCents = newSourceMinCents
         self.smsAlerts = smsAlerts
         self.feedbackTuning = feedbackTuning
+        self.emailRecipients = emailRecipients
         self.smsConfigured = smsConfigured
     }
 }

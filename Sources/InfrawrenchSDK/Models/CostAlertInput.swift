@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.71.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.73.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.71.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.73.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -98,6 +98,7 @@ public struct CostAlertInput: Codable, Hashable, Sendable {
     public var thresholdAmountCents: Int?
     public var direction: CostChangeDirection
     public var enabled: Bool?
+    public var emailRecipients: AlertEmailRecipients?
 
     public init(
         name: String,
@@ -108,7 +109,8 @@ public struct CostAlertInput: Codable, Hashable, Sendable {
         thresholdPercent: Int? = nil,
         thresholdAmountCents: Int? = nil,
         direction: CostChangeDirection,
-        enabled: Bool? = nil
+        enabled: Bool? = nil,
+        emailRecipients: AlertEmailRecipients? = nil
     ) {
         self.name = name
         self.filters = filters
@@ -119,5 +121,6 @@ public struct CostAlertInput: Codable, Hashable, Sendable {
         self.thresholdAmountCents = thresholdAmountCents
         self.direction = direction
         self.enabled = enabled
+        self.emailRecipients = emailRecipients
     }
 }
