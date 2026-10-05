@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.60.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.62.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.60.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.62.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -22,18 +22,27 @@ public struct AllocationRuleMatch: Codable, Hashable, Sendable {
     public var accountId: String?
     public var pluginId: String?
     public var service: String?
+    /// One of the organization's virtual tags, by key. Alone it matches rows
+    /// where the tag is set; a split virtual tag routes each share separately.
+    public var virtualTagKey: String?
+    /// Only meaningful with virtualTagKey.
+    public var virtualTagValue: String?
 
     public init(
         tagKey: String? = nil,
         tagValue: String? = nil,
         accountId: String? = nil,
         pluginId: String? = nil,
-        service: String? = nil
+        service: String? = nil,
+        virtualTagKey: String? = nil,
+        virtualTagValue: String? = nil
     ) {
         self.tagKey = tagKey
         self.tagValue = tagValue
         self.accountId = accountId
         self.pluginId = pluginId
         self.service = service
+        self.virtualTagKey = virtualTagKey
+        self.virtualTagValue = virtualTagValue
     }
 }

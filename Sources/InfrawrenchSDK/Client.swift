@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.60.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.62.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.60.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.62.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -226,10 +226,14 @@ public final class APIV1Client: Sendable {
     public let statusPages: StatusPagesNamespace
     /// `client.storage`
     public let storage: StorageNamespace
+    /// `client.tagKeys`
+    public let tagKeys: TagKeysNamespace
     /// `client.tagPolicy`
     public let tagPolicy: TagPolicyNamespace
     /// `client.team`
     public let team: TeamNamespace
+    /// `client.virtualTags`
+    public let virtualTags: VirtualTagsNamespace
     /// `client.wallboard`
     public let wallboard: WallboardNamespace
     /// `client.workflowApprovals`
@@ -342,8 +346,10 @@ public final class APIV1Client: Sendable {
         self.statusIncidents = StatusIncidentsNamespace(transport: transport)
         self.statusPages = StatusPagesNamespace(transport: transport)
         self.storage = StorageNamespace(transport: transport)
+        self.tagKeys = TagKeysNamespace(transport: transport)
         self.tagPolicy = TagPolicyNamespace(transport: transport)
         self.team = TeamNamespace(transport: transport)
+        self.virtualTags = VirtualTagsNamespace(transport: transport)
         self.wallboard = WallboardNamespace(transport: transport)
         self.workflowApprovals = WorkflowApprovalsNamespace(transport: transport)
         self.workflowSecrets = WorkflowSecretsNamespace(transport: transport)

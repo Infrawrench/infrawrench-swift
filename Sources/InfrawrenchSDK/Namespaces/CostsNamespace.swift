@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.60.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.62.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.60.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.62.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -76,12 +76,15 @@ public final class CostsNamespace: Sendable {
     /// List distinct values for a cost dimension
     ///
     /// Feeds the filter and group-by pickers. Pass dimension=tag-keys for tag
-    /// keys, or dimension=usage-units for the usage units providers report (a
-    /// usage budget's unit); dimension=tag requires tagKey. `charge_type` answers
-    /// from the fixed set of charge types rather than from the stored data, so
-    /// the picker is populated before any provider has reported one.
-    /// `usage-units` lists the usage units present in the cost data, most common
-    /// first, for the `usage` measure's unit picker.
+    /// keys, which follow the org's tag key settings (preferred keys first and
+    /// flagged, hidden keys omitted unless includeHidden=true),
+    /// dimension=virtual-tag-keys for the organization's virtual tag keys
+    /// (labelled by name), or dimension=usage-units for the usage units providers
+    /// report (a usage budget's unit); dimension=tag and dimension=virtual_tag
+    /// require tagKey. `charge_type` answers from the fixed set of charge types
+    /// rather than from the stored data, so the picker is populated before any
+    /// provider has reported one. `usage-units` lists the usage units present in
+    /// the cost data, most common first, for the `usage` measure's unit picker.
     ///
     /// _Requires permission: `costs:read`._
     ///
@@ -93,11 +96,16 @@ public final class CostsNamespace: Sendable {
     /// created with.
     ///
     /// - Parameter dimension: One of `provider`, `account`, `service`, `region`,
-    /// `resource`, `tag`, `charge_type`, `commitment`, `tag-keys`, `usage-units`.
+    /// `resource`, `tag`, `charge_type`, `commitment`, `virtual_tag`, `tag-keys`,
+    /// `usage-units`, `virtual-tag-keys`.
+    ///
+    /// - Parameter includeHidden: dimension=tag-keys only: also list keys the org
+    /// hides, flagged `hidden`. One of `true`, `false`.
     public func dimensions(
         orgId: String? = nil,
         dimension: String,
         tagKey: String? = nil,
+        includeHidden: String? = nil,
         options: RequestOptions? = nil
     ) async throws -> CostDimensionValues {
         return try await transport.send(
@@ -105,7 +113,7 @@ public final class CostsNamespace: Sendable {
                 method: "GET",
                 path: "/api/org/{orgId}/costs/dimensions",
                 pathParameters: ["orgId": orgId?.parameterValue],
-                query: [QueryParameter("dimension", dimension), QueryParameter("tagKey", tagKey)]
+                query: [QueryParameter("dimension", dimension), QueryParameter("tagKey", tagKey), QueryParameter("includeHidden", includeHidden)]
             ),
             options: options
         )

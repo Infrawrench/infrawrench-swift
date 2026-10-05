@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.60.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.62.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.60.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.62.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -26,6 +26,7 @@ public struct CostExportQuery: Codable, Hashable, Sendable {
         case tag
         case chargeType
         case commitment
+        case virtualTag
         /// A value the API added after this SDK was generated. Kept rather than
         /// rejected, so a new server-side value cannot break decoding.
         case unrecognized(String)
@@ -40,6 +41,7 @@ public struct CostExportQuery: Codable, Hashable, Sendable {
             case "tag": self = .tag
             case "charge_type": self = .chargeType
             case "commitment": self = .commitment
+            case "virtual_tag": self = .virtualTag
             default: self = .unrecognized(rawValue)
             }
         }
@@ -54,6 +56,7 @@ public struct CostExportQuery: Codable, Hashable, Sendable {
             case .tag: return "tag"
             case .chargeType: return "charge_type"
             case .commitment: return "commitment"
+            case .virtualTag: return "virtual_tag"
             case .unrecognized(let value): return value
             }
         }
@@ -68,6 +71,7 @@ public struct CostExportQuery: Codable, Hashable, Sendable {
             .tag,
             .chargeType,
             .commitment,
+            .virtualTag,
         ]
 
         public init(from decoder: any Decoder) throws {
@@ -197,6 +201,10 @@ public struct CostExportQuery: Codable, Hashable, Sendable {
     public var dimensions: [Dimension]
     /// Tag keys emitted as their own `tag_<key>` columns.
     public var tagKeys: [String]
+    /// Virtual tag keys emitted as their own `vtag_<key>` columns. A row a split
+    /// rule divides is exported once per share with weighted amounts, so the file
+    /// still sums to the total.
+    public var virtualTagKeys: [String]?
     public var filters: [CostExportFilter]
     public var chargeTypes: [ChargeType]?
     public var costBasis: CostBasis2?
@@ -205,6 +213,7 @@ public struct CostExportQuery: Codable, Hashable, Sendable {
         version: Double,
         dimensions: [Dimension],
         tagKeys: [String],
+        virtualTagKeys: [String]? = nil,
         filters: [CostExportFilter],
         chargeTypes: [ChargeType]? = nil,
         costBasis: CostBasis2? = nil
@@ -212,6 +221,7 @@ public struct CostExportQuery: Codable, Hashable, Sendable {
         self.version = version
         self.dimensions = dimensions
         self.tagKeys = tagKeys
+        self.virtualTagKeys = virtualTagKeys
         self.filters = filters
         self.chargeTypes = chargeTypes
         self.costBasis = costBasis

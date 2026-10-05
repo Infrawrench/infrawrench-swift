@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.60.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.62.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.60.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.62.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -20,13 +20,24 @@ public struct CostDimensionValues: Codable, Hashable, Sendable {
         public struct ValueObject: Codable, Hashable, Sendable {
             public var value: String
             public var label: String
+            /// dimension=tag-keys only: the org pins this key (tag key settings).
+            /// Preferred keys come first, in the org's order.
+            public var preferred: Bool?
+            /// dimension=tag-keys with includeHidden=true only: the org hides
+            /// this key from pickers. Its data is untouched and filters naming it
+            /// still work.
+            public var hidden: Bool?
 
             public init(
                 value: String,
-                label: String
+                label: String,
+                preferred: Bool? = nil,
+                hidden: Bool? = nil
             ) {
                 self.value = value
                 self.label = label
+                self.preferred = preferred
+                self.hidden = hidden
             }
         }
 
