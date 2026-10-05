@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.47.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.48.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.47.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.48.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -16,6 +16,7 @@ import Foundation
 /// Manifest id of an installed plugin.
 public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
     case anthropic
+    case anyscale
     case assemblyai
     case aws
     case azure
@@ -95,6 +96,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
     public init(rawValue: String) {
         switch rawValue {
         case "anthropic": self = .anthropic
+        case "anyscale": self = .anyscale
         case "assemblyai": self = .assemblyai
         case "aws": self = .aws
         case "azure": self = .azure
@@ -174,6 +176,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
     public var rawValue: String {
         switch self {
         case .anthropic: return "anthropic"
+        case .anyscale: return "anyscale"
         case .assemblyai: return "assemblyai"
         case .aws: return "aws"
         case .azure: return "azure"
@@ -253,6 +256,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
     /// Every value the spec declares. `unrecognized` is deliberately absent.
     public static let allKnownCases: [PluginId] = [
         .anthropic,
+        .anyscale,
         .assemblyai,
         .aws,
         .azure,

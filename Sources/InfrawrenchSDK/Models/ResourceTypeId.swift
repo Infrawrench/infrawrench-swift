@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.47.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.48.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.47.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.48.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -133,6 +133,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case chService
     case cksCluster
     case clientKey
+    case cloud
     case cloudArmorPolicy
     case cloudBuildTrigger
     case cloudDeployPipeline
@@ -160,6 +161,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case collectionDocument
     case compartment
     case composerEnvironment
+    case computeConfig
     case configStore
     case connection
     case connectivityRule
@@ -767,6 +769,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "ch-service": self = .chService
         case "cks-cluster": self = .cksCluster
         case "client-key": self = .clientKey
+        case "cloud": self = .cloud
         case "cloud-armor-policy": self = .cloudArmorPolicy
         case "cloud-build-trigger": self = .cloudBuildTrigger
         case "cloud-deploy-pipeline": self = .cloudDeployPipeline
@@ -794,6 +797,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "collection-document": self = .collectionDocument
         case "compartment": self = .compartment
         case "composer-environment": self = .composerEnvironment
+        case "compute-config": self = .computeConfig
         case "config-store": self = .configStore
         case "connection": self = .connection
         case "connectivity-rule": self = .connectivityRule
@@ -1401,6 +1405,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .chService: return "ch-service"
         case .cksCluster: return "cks-cluster"
         case .clientKey: return "client-key"
+        case .cloud: return "cloud"
         case .cloudArmorPolicy: return "cloud-armor-policy"
         case .cloudBuildTrigger: return "cloud-build-trigger"
         case .cloudDeployPipeline: return "cloud-deploy-pipeline"
@@ -1428,6 +1433,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .collectionDocument: return "collection-document"
         case .compartment: return "compartment"
         case .composerEnvironment: return "composer-environment"
+        case .computeConfig: return "compute-config"
         case .configStore: return "config-store"
         case .connection: return "connection"
         case .connectivityRule: return "connectivity-rule"
@@ -2035,6 +2041,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .chService,
         .cksCluster,
         .clientKey,
+        .cloud,
         .cloudArmorPolicy,
         .cloudBuildTrigger,
         .cloudDeployPipeline,
@@ -2062,6 +2069,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .collectionDocument,
         .compartment,
         .composerEnvironment,
+        .computeConfig,
         .configStore,
         .connection,
         .connectivityRule,
