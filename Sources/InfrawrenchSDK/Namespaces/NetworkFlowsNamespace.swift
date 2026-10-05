@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.63.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.67.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.63.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.67.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -13,15 +13,28 @@
  */
 import Foundation
 
+public struct NetworkFlowsKubernetesSettingsUpdateBody: Codable, Hashable, Sendable {
+    public var billedQuery: String?
+
+    public init(
+        billedQuery: String? = nil
+    ) {
+        self.billedQuery = billedQuery
+    }
+}
+
 /// `client.networkFlows`
 public final class NetworkFlowsNamespace: Sendable {
     /// Shared request plumbing.
     let transport: ApiTransport
+    /// `client.networkFlows.kubernetes`
+    public let kubernetes: NetworkFlowsKubernetesNamespace
     /// `client.networkFlows.settings`
     public let settings: NetworkFlowsSettingsNamespace
 
     init(transport: ApiTransport) {
         self.transport = transport
+        self.kubernetes = NetworkFlowsKubernetesNamespace(transport: transport)
         self.settings = NetworkFlowsSettingsNamespace(transport: transport)
     }
 
@@ -79,6 +92,134 @@ public final class NetworkFlowsNamespace: Sendable {
                 path: "/api/org/{orgId}/network-flows",
                 pathParameters: ["orgId": orgId?.parameterValue],
                 query: [QueryParameter("from", from), QueryParameter("to", to), QueryParameter("scope", scope), QueryParameter("accountId", accountId), QueryParameter("limit", limit)]
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.networkFlows.kubernetes`
+public final class NetworkFlowsKubernetesNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+    /// `client.networkFlows.kubernetes.settings`
+    public let settings: NetworkFlowsKubernetesSettingsNamespace
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+        self.settings = NetworkFlowsKubernetesSettingsNamespace(transport: transport)
+    }
+
+    /// Kubernetes network costs for one cluster
+    ///
+    /// Pod-level network attribution for a Kubernetes account: bytes by
+    /// namespace, workload and boundary (same zone, cross-zone, cross-region,
+    /// internet), the largest workload → peer pairs, and which sources the
+    /// figures came from.
+    ///
+    /// `estimatedCost` is bytes at the published rate of the cloud the nodes run
+    /// on, with any per-cluster overrides from the account's rates field. When a
+    /// billed source is configured (`PUT .../settings`), `allocatedCost`
+    /// apportions that real billed spend across the rows day by day, never
+    /// handing out more than was billed; the rest is `unallocatedCost`.
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// GET /api/org/{orgId}/network-flows/kubernetes/{accountId}
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Defaults to the `orgId` the client was created with.
+    ///
+    /// - Parameter from: Inclusive start day. Defaults to 13 days ago.
+    ///
+    /// - Parameter to: Inclusive end day. Defaults to today.
+    ///
+    /// - Parameter limit: Pairs to return in `topTalkers`. Defaults to 25.
+    public func get(
+        orgId: String? = nil,
+        accountId: String,
+        from: String? = nil,
+        to: String? = nil,
+        limit: Int? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> KubernetesNetworkReport {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/network-flows/kubernetes/{accountId}",
+                pathParameters: ["orgId": orgId?.parameterValue, "accountId": accountId.parameterValue],
+                query: [QueryParameter("from", from), QueryParameter("to", to), QueryParameter("limit", limit)]
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.networkFlows.kubernetes.settings`
+public final class NetworkFlowsKubernetesSettingsNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// Read a cluster's network cost settings
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// GET /api/org/{orgId}/network-flows/kubernetes/{accountId}/settings
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Defaults to the `orgId` the client was created with.
+    public func get(
+        orgId: String? = nil,
+        accountId: String,
+        options: RequestOptions? = nil
+    ) async throws -> KubernetesNetworkSettings {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/network-flows/kubernetes/{accountId}/settings",
+                pathParameters: ["orgId": orgId?.parameterValue, "accountId": accountId.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Set the billed data-transfer source for a cluster
+    ///
+    /// Say which billed cost rows are this cluster's data transfer, in the cost
+    /// query language. An empty or null query clears it. A query that narrows
+    /// nothing is refused: it would apportion the whole bill across one cluster.
+    ///
+    /// _Requires permission: `costs:write`._
+    ///
+    /// PUT /api/org/{orgId}/network-flows/kubernetes/{accountId}/settings
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 403: Forbidden
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Defaults to the `orgId` the client was created with.
+    public func update(
+        orgId: String? = nil,
+        accountId: String,
+        body: NetworkFlowsKubernetesSettingsUpdateBody,
+        options: RequestOptions? = nil
+    ) async throws -> KubernetesNetworkSettings {
+        return try await transport.send(
+            RequestSpec(
+                method: "PUT",
+                path: "/api/org/{orgId}/network-flows/kubernetes/{accountId}/settings",
+                pathParameters: ["orgId": orgId?.parameterValue, "accountId": accountId.parameterValue],
+                body: AnyEncodable(body)
             ),
             options: options
         )

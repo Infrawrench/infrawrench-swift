@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.63.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.67.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.63.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.67.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -23,6 +23,41 @@ public final class CostReportsNamespace: Sendable {
     init(transport: ApiTransport) {
         self.transport = transport
         self.notifications = CostReportsNotificationsNamespace(transport: transport)
+    }
+
+    /// Move or delete many reports and folders at once
+    ///
+    /// All or nothing. Every item is checked first: it exists, the caller's
+    /// per-object sharing allows the action (editor to move, owner to delete, or
+    /// editor when nobody owns it), and for a move, the folder tree that would
+    /// result keeps every folder within the three-level nesting limit and free of
+    /// cycles. Any problem is a 400 listing each blocking item, and nothing is
+    /// written. Deleting a report removes its dashboard cards and pauses its
+    /// delivery schedules; deleting a folder drops whatever remains inside it to
+    /// the top level. One audit entry is written per item.
+    ///
+    /// _Requires permission: `costs:write`._
+    ///
+    /// POST /api/org/{orgId}/cost-reports/bulk
+    ///
+    /// Raises on 400: Refused; nothing was changed
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func bulk(
+        orgId: String? = nil,
+        body: CostReportBulkRequest,
+        options: RequestOptions? = nil
+    ) async throws -> CostReportBulkResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/cost-reports/bulk",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
     }
 
     /// Create a cost report

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.63.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.67.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.63.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.67.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -22,6 +22,11 @@ public struct NetworkFlowAccountStatus: Codable, Hashable, Sendable {
     /// zero bytes — zero would be a claim about their network, this is a
     /// statement about our coverage.
     public var supportsFlows: Bool
+    /// True when the account's flows re-cut traffic another account may already
+    /// report (a Kubernetes cluster's pods). Left out of this feed's totals
+    /// unless asked for by `accountId`; see `GET
+    /// /network-flows/kubernetes/{accountId}`.
+    public var recut: Bool
     public var collectedThrough: String?
     public var lastPolledAt: String?
     public var failureCount: Int
@@ -37,6 +42,7 @@ public struct NetworkFlowAccountStatus: Codable, Hashable, Sendable {
         pluginId: String,
         displayName: String,
         supportsFlows: Bool,
+        recut: Bool,
         collectedThrough: String? = nil,
         lastPolledAt: String? = nil,
         failureCount: Int,
@@ -49,6 +55,7 @@ public struct NetworkFlowAccountStatus: Codable, Hashable, Sendable {
         self.pluginId = pluginId
         self.displayName = displayName
         self.supportsFlows = supportsFlows
+        self.recut = recut
         self.collectedThrough = collectedThrough
         self.lastPolledAt = lastPolledAt
         self.failureCount = failureCount

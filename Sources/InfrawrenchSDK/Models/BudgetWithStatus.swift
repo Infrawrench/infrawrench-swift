@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.63.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.67.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.63.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.67.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -58,17 +58,20 @@ public struct BudgetWithStatus: Codable, Hashable, Sendable {
         public var thresholdType: ThresholdType
         public var thresholdPercent: Int
         public var triggeredAt: String
+        public var note: BudgetAlertNote?
 
         public init(
             id: String,
             thresholdType: ThresholdType,
             thresholdPercent: Int,
-            triggeredAt: String
+            triggeredAt: String,
+            note: BudgetAlertNote? = nil
         ) {
             self.id = id
             self.thresholdType = thresholdType
             self.thresholdPercent = thresholdPercent
             self.triggeredAt = triggeredAt
+            self.note = note
         }
     }
 

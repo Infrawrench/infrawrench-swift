@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.63.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.67.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.63.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.67.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -55,6 +55,16 @@ public struct CostsAnomaliesGetResult: Codable, Hashable, Sendable {
     }
 }
 
+public struct CostsAnomalySuppressionsGetResult: Codable, Hashable, Sendable {
+    public var suppressions: [CostAnomalySuppression?]
+
+    public init(
+        suppressions: [CostAnomalySuppression?]
+    ) {
+        self.suppressions = suppressions
+    }
+}
+
 /// `client.costs`
 public final class CostsNamespace: Sendable {
     /// Shared request plumbing.
@@ -63,6 +73,8 @@ public final class CostsNamespace: Sendable {
     public let anomalies: CostsAnomaliesNamespace
     /// `client.costs.anomalySettings`
     public let anomalySettings: CostsAnomalySettingsNamespace
+    /// `client.costs.anomalySuppressions`
+    public let anomalySuppressions: CostsAnomalySuppressionsNamespace
     /// `client.costs.efficiencyAlertSettings`
     public let efficiencyAlertSettings: CostsEfficiencyAlertSettingsNamespace
 
@@ -70,7 +82,65 @@ public final class CostsNamespace: Sendable {
         self.transport = transport
         self.anomalies = CostsAnomaliesNamespace(transport: transport)
         self.anomalySettings = CostsAnomalySettingsNamespace(transport: transport)
+        self.anomalySuppressions = CostsAnomalySuppressionsNamespace(transport: transport)
         self.efficiencyAlertSettings = CostsEfficiencyAlertSettingsNamespace(transport: transport)
+    }
+
+    /// Anomaly detection precision over time
+    ///
+    /// Per month of the anomalous day: findings detected, suppressed, and marked
+    /// expected or unexpected, and precision (the share of reviewed findings that
+    /// were real problems).
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// GET /api/org/{orgId}/costs/anomaly-precision
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter months: Months to cover, 1-24. Defaults to 6.
+    public func anomalyPrecision(
+        orgId: String? = nil,
+        months: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> CostAnomalyPrecisionReport {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/costs/anomaly-precision",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                query: [QueryParameter("months", months)]
+            ),
+            options: options
+        )
+    }
+
+    /// Per-key sensitivity learned from feedback
+    ///
+    /// Every provider or service with a verdict in the last 90 days, the σ its
+    /// spikes are judged against, and one sentence saying why.
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// GET /api/org/{orgId}/costs/anomaly-sensitivity
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func anomalySensitivity(
+        orgId: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> CostAnomalySensitivity {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/costs/anomaly-sensitivity",
+                pathParameters: ["orgId": orgId?.parameterValue]
+            ),
+            options: options
+        )
     }
 
     /// List distinct values for a cost dimension
@@ -414,9 +484,12 @@ public final class CostsNamespace: Sendable {
 public final class CostsAnomaliesNamespace: Sendable {
     /// Shared request plumbing.
     let transport: ApiTransport
+    /// `client.costs.anomalies.feedback`
+    public let feedback: CostsAnomaliesFeedbackNamespace
 
     init(transport: ApiTransport) {
         self.transport = transport
+        self.feedback = CostsAnomaliesFeedbackNamespace(transport: transport)
     }
 
     /// Explain a detected cost anomaly
@@ -502,6 +575,89 @@ public final class CostsAnomaliesNamespace: Sendable {
     }
 }
 
+/// `client.costs.anomalies.feedback`
+public final class CostsAnomaliesFeedbackNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// Mark a cost anomaly expected or unexpected
+    ///
+    /// Record whether a finding was expected (planned or known) or unexpected (a
+    /// real problem), with an optional reason category and note. The verdict
+    /// tunes detection: repeated `expected` verdicts on a provider or service
+    /// raise its spike threshold within bounds (see GET
+    /// /costs/anomaly-sensitivity), and an `expected` verdict with `suppress`
+    /// creates a suppression so the same pattern does not alert again.
+    /// `unexpected` keeps sensitivity where it is and removes any suppression an
+    /// earlier `expected` verdict on the same anomaly created. Sending again
+    /// replaces the verdict.
+    ///
+    /// _Requires permission: `costs:write`._
+    ///
+    /// POST /api/org/{orgId}/costs/anomalies/{anomalyId}/feedback
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 403: Forbidden
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// Raises on 409: Conflict
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func create(
+        orgId: String? = nil,
+        anomalyId: String,
+        body: CostAnomalyFeedbackInput,
+        options: RequestOptions? = nil
+    ) async throws -> CostAnomalyFeedbackResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/costs/anomalies/{anomalyId}/feedback",
+                pathParameters: ["orgId": orgId?.parameterValue, "anomalyId": anomalyId.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+
+    /// Withdraw a cost anomaly verdict
+    ///
+    /// Clears the verdict and deletes the suppression it created, if any.
+    /// Suppressions made by hand are never touched.
+    ///
+    /// _Requires permission: `costs:write`._
+    ///
+    /// DELETE /api/org/{orgId}/costs/anomalies/{anomalyId}/feedback
+    ///
+    /// Raises on 403: Forbidden
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func delete(
+        orgId: String? = nil,
+        anomalyId: String,
+        options: RequestOptions? = nil
+    ) async throws -> CostAnomaly {
+        return try await transport.send(
+            RequestSpec(
+                method: "DELETE",
+                path: "/api/org/{orgId}/costs/anomalies/{anomalyId}/feedback",
+                pathParameters: ["orgId": orgId?.parameterValue, "anomalyId": anomalyId.parameterValue]
+            ),
+            options: options
+        )
+    }
+}
+
 /// `client.costs.anomalySettings`
 public final class CostsAnomalySettingsNamespace: Sendable {
     /// Shared request plumbing.
@@ -542,11 +698,12 @@ public final class CostsAnomalySettingsNamespace: Sendable {
     /// Update the organization's anomaly detection thresholds
     ///
     /// Takes effect on the next detection pass (which runs after each cost
-    /// collection). Anomalies already stored are not re-judged. All four fields
-    /// are required — this is a PUT of the whole settings object, not a patch —
-    /// and `smsAlerts` deliberately has no server-side default, so a client that
-    /// omits it is rejected rather than silently switching an organization's SMS
-    /// paging back off. `smsConfigured` is derived and is not accepted here.
+    /// collection). Anomalies already stored are not re-judged. The four
+    /// threshold fields are required — this is a PUT of the whole settings
+    /// object, not a patch — and `smsAlerts` deliberately has no server-side
+    /// default, so a client that omits it is rejected rather than silently
+    /// switching an organization's SMS paging back off. `smsConfigured` is
+    /// derived and is not accepted here.
     ///
     /// _Requires permission: `costs:write`._
     ///
@@ -566,6 +723,159 @@ public final class CostsAnomalySettingsNamespace: Sendable {
                 method: "PUT",
                 path: "/api/org/{orgId}/costs/anomaly-settings",
                 pathParameters: ["orgId": orgId?.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.costs.anomalySuppressions`
+public final class CostsAnomalySuppressionsNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// Create an anomaly suppression
+    ///
+    /// Declare that spend in a scope is expected on a pattern of days until an
+    /// expiry. An organization can hold at most 100 active suppressions (409 past
+    /// that).
+    ///
+    /// _Requires permission: `costs:write`._
+    ///
+    /// POST /api/org/{orgId}/costs/anomaly-suppressions
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 409: Conflict
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func create(
+        orgId: String? = nil,
+        body: CostAnomalySuppressionInput,
+        options: RequestOptions? = nil
+    ) async throws -> CostAnomalySuppression? {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/costs/anomaly-suppressions",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+
+    /// Delete an anomaly suppression
+    ///
+    /// The findings it suppressed keep their rows. Any whose day detection still
+    /// re-judges (the last three days) becomes eligible to alert on the next
+    /// pass.
+    ///
+    /// _Requires permission: `costs:write`._
+    ///
+    /// DELETE /api/org/{orgId}/costs/anomaly-suppressions/{suppressionId}
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func delete(
+        orgId: String? = nil,
+        suppressionId: String,
+        options: RequestOptions? = nil
+    ) async throws {
+        try await transport.sendVoid(
+            RequestSpec(
+                method: "DELETE",
+                path: "/api/org/{orgId}/costs/anomaly-suppressions/{suppressionId}",
+                pathParameters: ["orgId": orgId?.parameterValue, "suppressionId": suppressionId.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// List anomaly suppressions
+    ///
+    /// Every suppression of the organization, active ones first (soonest expiry
+    /// first), then expired ones, most recent first. Expired suppressions are
+    /// kept so the list can show what they suppressed.
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// GET /api/org/{orgId}/costs/anomaly-suppressions
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func get(
+        orgId: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> CostsAnomalySuppressionsGetResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/costs/anomaly-suppressions",
+                pathParameters: ["orgId": orgId?.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Get an anomaly suppression
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// GET /api/org/{orgId}/costs/anomaly-suppressions/{suppressionId}
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func getOrgOrgIdCostsAnomalySuppressionsSuppressionId(
+        orgId: String? = nil,
+        suppressionId: String,
+        options: RequestOptions? = nil
+    ) async throws -> CostAnomalySuppression? {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/costs/anomaly-suppressions/{suppressionId}",
+                pathParameters: ["orgId": orgId?.parameterValue, "suppressionId": suppressionId.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Update an anomaly suppression
+    ///
+    /// Replaces the whole object. Takes effect on the next detection pass.
+    ///
+    /// _Requires permission: `costs:write`._
+    ///
+    /// PUT /api/org/{orgId}/costs/anomaly-suppressions/{suppressionId}
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func update(
+        orgId: String? = nil,
+        suppressionId: String,
+        body: CostAnomalySuppressionInput,
+        options: RequestOptions? = nil
+    ) async throws -> CostAnomalySuppression? {
+        return try await transport.send(
+            RequestSpec(
+                method: "PUT",
+                path: "/api/org/{orgId}/costs/anomaly-suppressions/{suppressionId}",
+                pathParameters: ["orgId": orgId?.parameterValue, "suppressionId": suppressionId.parameterValue],
                 body: AnyEncodable(body)
             ),
             options: options

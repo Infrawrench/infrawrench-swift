@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.63.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.67.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.63.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.67.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -69,6 +69,7 @@ public struct BudgetAlertEvent: Codable, Hashable, Sendable {
     /// are 0).
     public var actualUsage: Double?
     public var forecastUsage: Double?
+    public var note: BudgetAlertNote?
 
     public init(
         id: String,
@@ -81,7 +82,8 @@ public struct BudgetAlertEvent: Codable, Hashable, Sendable {
         periodStart: String? = nil,
         periodEnd: String? = nil,
         actualUsage: Double? = nil,
-        forecastUsage: Double? = nil
+        forecastUsage: Double? = nil,
+        note: BudgetAlertNote? = nil
     ) {
         self.id = id
         self.month = month
@@ -94,5 +96,6 @@ public struct BudgetAlertEvent: Codable, Hashable, Sendable {
         self.periodEnd = periodEnd
         self.actualUsage = actualUsage
         self.forecastUsage = forecastUsage
+        self.note = note
     }
 }

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.63.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.67.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.63.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.67.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -153,6 +153,11 @@ public struct CostAnomaly: Codable, Hashable, Sendable {
     /// an open question. Acknowledging does not suppress detection — the same key
     /// spiking again on a later day is a new anomaly and fires as normal.
     public var acknowledgement: Acknowledgement?
+    public var feedback: CostAnomalyFeedback?
+    /// The suppression that explained this finding when detection judged it. A
+    /// suppressed finding is stored but never alerted on, so its `notifiedAt`
+    /// stays null. Null once the suppression is deleted.
+    public var suppressionId: String?
 
     public init(
         id: String,
@@ -167,7 +172,9 @@ public struct CostAnomaly: Codable, Hashable, Sendable {
         detectedAt: String,
         notifiedAt: String? = nil,
         hints: [String],
-        acknowledgement: Acknowledgement? = nil
+        acknowledgement: Acknowledgement? = nil,
+        feedback: CostAnomalyFeedback? = nil,
+        suppressionId: String? = nil
     ) {
         self.id = id
         self.day = day
@@ -182,5 +189,7 @@ public struct CostAnomaly: Codable, Hashable, Sendable {
         self.notifiedAt = notifiedAt
         self.hints = hints
         self.acknowledgement = acknowledgement
+        self.feedback = feedback
+        self.suppressionId = suppressionId
     }
 }

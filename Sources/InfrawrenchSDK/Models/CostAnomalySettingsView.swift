@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.63.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.67.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.63.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.67.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -80,6 +80,12 @@ public struct CostAnomalySettingsView: Codable, Hashable, Sendable {
     /// six hours per organization — and never places a voice call. Push, Slack
     /// and Teams delivery is unaffected by this setting.
     public var smsAlerts: SmsAlerts
+    /// Whether repeated `expected` feedback on a provider or service raises its
+    /// spike threshold: half a standard deviation per expected verdict after the
+    /// first within 90 days, at most +2σ and never past 10σ, cancelled by any
+    /// `unexpected` verdict on the same key. Defaults to true. Optional on PUT:
+    /// omitting it keeps the stored value. Always present on a read.
+    public var feedbackTuning: Bool?
     /// Whether an SMS raised right now could be delivered: paging enabled for the
     /// organization, Twilio credentials and a from-number stored, and at least
     /// one recipient opted into SMS. Read-only and derived — it is not accepted
@@ -91,12 +97,14 @@ public struct CostAnomalySettingsView: Codable, Hashable, Sendable {
         minDeltaCents: Int,
         newSourceMinCents: Int,
         smsAlerts: SmsAlerts,
+        feedbackTuning: Bool? = nil,
         smsConfigured: Bool
     ) {
         self.sigmas = sigmas
         self.minDeltaCents = minDeltaCents
         self.newSourceMinCents = newSourceMinCents
         self.smsAlerts = smsAlerts
+        self.feedbackTuning = feedbackTuning
         self.smsConfigured = smsConfigured
     }
 }

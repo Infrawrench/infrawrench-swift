@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.63.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.67.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.63.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.67.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -14,6 +14,19 @@
 import Foundation
 
 public struct CostAnnotation: Codable, Hashable, Sendable {
+    public struct BudgetAlert: Codable, Hashable, Sendable {
+        public var budgetId: String
+        public var eventId: String
+
+        public init(
+            budgetId: String,
+            eventId: String
+        ) {
+            self.budgetId = budgetId
+            self.eventId = eventId
+        }
+    }
+
     public var id: String
     /// Inclusive first day (UTC) the note is about. Mapped to whichever bucket
     /// holds it at the chart's binning — daily and cumulative use the day itself,
@@ -38,6 +51,10 @@ public struct CostAnnotation: Codable, Hashable, Sendable {
     /// hand. The reverse of the anomaly's own `acknowledgement.annotationId`,
     /// resolved from that same single link rather than stored twice.
     public var costAnomalyId: String?
+    /// The fired budget alert this note explains (see POST
+    /// /budgets/{id}/events/{eventId}/note), or null. Resolved from the event's
+    /// own `note.annotationId`, the same single link, never stored twice.
+    public var budgetAlert: BudgetAlert?
 
     public init(
         id: String,
@@ -48,7 +65,8 @@ public struct CostAnnotation: Codable, Hashable, Sendable {
         createdByUserId: String? = nil,
         createdAt: String,
         updatedAt: String,
-        costAnomalyId: String? = nil
+        costAnomalyId: String? = nil,
+        budgetAlert: BudgetAlert? = nil
     ) {
         self.id = id
         self.startDate = startDate
@@ -59,5 +77,6 @@ public struct CostAnnotation: Codable, Hashable, Sendable {
         self.createdAt = createdAt
         self.updatedAt = updatedAt
         self.costAnomalyId = costAnomalyId
+        self.budgetAlert = budgetAlert
     }
 }
