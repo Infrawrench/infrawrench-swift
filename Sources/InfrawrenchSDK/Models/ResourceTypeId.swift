@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.46.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.47.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.46.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.47.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -48,6 +48,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case app
     case appEngineService
     case appSecret
+    case applicationKey
     case apprunnerService
     case artifactRegistryRepo
     case auditEvent
@@ -234,6 +235,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case doksCluster
     case domain
     case domainRecord
+    case downtime
     case dpoJob
     case droplet
     case durableObjectNamespace
@@ -532,6 +534,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case session
     case sharedVolume
     case skill
+    case slo
     case snapshot
     case snowflakeAccount
     case snowflakeDatabase
@@ -568,6 +571,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case supervisedFineTuningJob
     case syntheticCheck
     case syntheticMonitor
+    case syntheticsTest
     case tailnet
     case targetGroup
     case tcoPolicy
@@ -678,6 +682,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "app": self = .app
         case "app-engine-service": self = .appEngineService
         case "app-secret": self = .appSecret
+        case "application-key": self = .applicationKey
         case "apprunner-service": self = .apprunnerService
         case "artifact-registry-repo": self = .artifactRegistryRepo
         case "audit-event": self = .auditEvent
@@ -864,6 +869,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "doks-cluster": self = .doksCluster
         case "domain": self = .domain
         case "domain-record": self = .domainRecord
+        case "downtime": self = .downtime
         case "dpo-job": self = .dpoJob
         case "droplet": self = .droplet
         case "durable-object-namespace": self = .durableObjectNamespace
@@ -1162,6 +1168,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "session": self = .session
         case "shared-volume": self = .sharedVolume
         case "skill": self = .skill
+        case "slo": self = .slo
         case "snapshot": self = .snapshot
         case "snowflake-account": self = .snowflakeAccount
         case "snowflake-database": self = .snowflakeDatabase
@@ -1198,6 +1205,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "supervised-fine-tuning-job": self = .supervisedFineTuningJob
         case "synthetic-check": self = .syntheticCheck
         case "synthetic-monitor": self = .syntheticMonitor
+        case "synthetics-test": self = .syntheticsTest
         case "tailnet": self = .tailnet
         case "target-group": self = .targetGroup
         case "tco-policy": self = .tcoPolicy
@@ -1308,6 +1316,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .app: return "app"
         case .appEngineService: return "app-engine-service"
         case .appSecret: return "app-secret"
+        case .applicationKey: return "application-key"
         case .apprunnerService: return "apprunner-service"
         case .artifactRegistryRepo: return "artifact-registry-repo"
         case .auditEvent: return "audit-event"
@@ -1494,6 +1503,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .doksCluster: return "doks-cluster"
         case .domain: return "domain"
         case .domainRecord: return "domain-record"
+        case .downtime: return "downtime"
         case .dpoJob: return "dpo-job"
         case .droplet: return "droplet"
         case .durableObjectNamespace: return "durable-object-namespace"
@@ -1792,6 +1802,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .session: return "session"
         case .sharedVolume: return "shared-volume"
         case .skill: return "skill"
+        case .slo: return "slo"
         case .snapshot: return "snapshot"
         case .snowflakeAccount: return "snowflake-account"
         case .snowflakeDatabase: return "snowflake-database"
@@ -1828,6 +1839,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .supervisedFineTuningJob: return "supervised-fine-tuning-job"
         case .syntheticCheck: return "synthetic-check"
         case .syntheticMonitor: return "synthetic-monitor"
+        case .syntheticsTest: return "synthetics-test"
         case .tailnet: return "tailnet"
         case .targetGroup: return "target-group"
         case .tcoPolicy: return "tco-policy"
@@ -1938,6 +1950,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .app,
         .appEngineService,
         .appSecret,
+        .applicationKey,
         .apprunnerService,
         .artifactRegistryRepo,
         .auditEvent,
@@ -2124,6 +2137,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .doksCluster,
         .domain,
         .domainRecord,
+        .downtime,
         .dpoJob,
         .droplet,
         .durableObjectNamespace,
@@ -2422,6 +2436,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .session,
         .sharedVolume,
         .skill,
+        .slo,
         .snapshot,
         .snowflakeAccount,
         .snowflakeDatabase,
@@ -2458,6 +2473,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .supervisedFineTuningJob,
         .syntheticCheck,
         .syntheticMonitor,
+        .syntheticsTest,
         .tailnet,
         .targetGroup,
         .tcoPolicy,

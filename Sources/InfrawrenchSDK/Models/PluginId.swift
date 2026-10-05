@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.46.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.47.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.46.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.47.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -31,6 +31,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
     case crusoe
     case cursor
     case databricks
+    case datadog
     case deepgram
     case deepseek
     case depot
@@ -109,6 +110,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
         case "crusoe": self = .crusoe
         case "cursor": self = .cursor
         case "databricks": self = .databricks
+        case "datadog": self = .datadog
         case "deepgram": self = .deepgram
         case "deepseek": self = .deepseek
         case "depot": self = .depot
@@ -187,6 +189,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
         case .crusoe: return "crusoe"
         case .cursor: return "cursor"
         case .databricks: return "databricks"
+        case .datadog: return "datadog"
         case .deepgram: return "deepgram"
         case .deepseek: return "deepseek"
         case .depot: return "depot"
@@ -265,6 +268,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
         .crusoe,
         .cursor,
         .databricks,
+        .datadog,
         .deepgram,
         .deepseek,
         .depot,
