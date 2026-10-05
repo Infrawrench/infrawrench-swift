@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.56.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.57.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.56.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.57.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -60,6 +60,15 @@ public struct BudgetAlertEvent: Codable, Hashable, Sendable {
     public var actualAmountCents: Int
     public var forecastAmountCents: Int?
     public var triggeredAt: String
+    /// First day of the period the crossing was observed in; null on events from
+    /// before budget periods were configurable (those are calendar months: see
+    /// `month`).
+    public var periodStart: String?
+    public var periodEnd: String?
+    /// A usage budget's period-to-date usage at the crossing (the cents fields
+    /// are 0).
+    public var actualUsage: Double?
+    public var forecastUsage: Double?
 
     public init(
         id: String,
@@ -68,7 +77,11 @@ public struct BudgetAlertEvent: Codable, Hashable, Sendable {
         thresholdPercent: Int,
         actualAmountCents: Int,
         forecastAmountCents: Int? = nil,
-        triggeredAt: String
+        triggeredAt: String,
+        periodStart: String? = nil,
+        periodEnd: String? = nil,
+        actualUsage: Double? = nil,
+        forecastUsage: Double? = nil
     ) {
         self.id = id
         self.month = month
@@ -77,5 +90,9 @@ public struct BudgetAlertEvent: Codable, Hashable, Sendable {
         self.actualAmountCents = actualAmountCents
         self.forecastAmountCents = forecastAmountCents
         self.triggeredAt = triggeredAt
+        self.periodStart = periodStart
+        self.periodEnd = periodEnd
+        self.actualUsage = actualUsage
+        self.forecastUsage = forecastUsage
     }
 }

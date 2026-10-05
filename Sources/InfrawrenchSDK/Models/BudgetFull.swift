@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.56.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.57.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.56.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.57.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -51,6 +51,19 @@ public struct BudgetFull: Codable, Hashable, Sendable {
     public var deletedAt: String?
     public var createdAt: String
     public var updatedAt: String
+    public var measure: BudgetMeasure
+    /// The usage unit a usage budget counts, exactly as the providers report it.
+    public var usageUnit: String?
+    /// A usage budget's limit per period, in `usageUnit`.
+    public var usageAmount: Double?
+    public var period: BudgetPeriod?
+    /// The budget this one rolls up into. A parent's actual and forecast are the
+    /// sum of its children's, each measured over the parent's period; parent and
+    /// children must count the same thing (one currency, or one usage unit).
+    /// Hierarchies are at most 4 levels deep. Deleting a budget moves its
+    /// children up to its own parent. Updates are full replaces, so omitting it
+    /// on PUT makes the budget a root.
+    public var parentBudgetId: String?
 
     public init(
         id: String,
@@ -67,7 +80,12 @@ public struct BudgetFull: Codable, Hashable, Sendable {
         createdByUserId: String? = nil,
         deletedAt: String? = nil,
         createdAt: String,
-        updatedAt: String
+        updatedAt: String,
+        measure: BudgetMeasure,
+        usageUnit: String? = nil,
+        usageAmount: Double? = nil,
+        period: BudgetPeriod? = nil,
+        parentBudgetId: String? = nil
     ) {
         self.id = id
         self.organizationId = organizationId
@@ -84,5 +102,10 @@ public struct BudgetFull: Codable, Hashable, Sendable {
         self.deletedAt = deletedAt
         self.createdAt = createdAt
         self.updatedAt = updatedAt
+        self.measure = measure
+        self.usageUnit = usageUnit
+        self.usageAmount = usageAmount
+        self.period = period
+        self.parentBudgetId = parentBudgetId
     }
 }

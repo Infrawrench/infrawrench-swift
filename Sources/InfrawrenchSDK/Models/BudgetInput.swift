@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.56.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.57.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.56.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.57.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -15,7 +15,10 @@ import Foundation
 
 public struct BudgetInput: Codable, Hashable, Sendable {
     public var name: String
-    public var amountCents: Int
+    /// The limit per period of a spend budget, in minor units of `currency`.
+    /// Required (and positive) for a spend budget unless `period` is an explicit
+    /// list; ignored by a usage budget. Defaults to 0.
+    public var amountCents: Int?
     public var currency: String?
     public var filters: [BudgetCostFilter]?
     /// A saved cost filter (see /saved-cost-filters) applied by reference and
@@ -45,17 +48,35 @@ public struct BudgetInput: Codable, Hashable, Sendable {
     /// adjusted and names the collected one. Updates are full replaces, so
     /// omitting it on PUT clears the opt-in.
     public var useAdjustedSpend: Bool?
+    public var measure: BudgetMeasure?
+    /// The usage unit a usage budget counts, exactly as the providers report it.
+    public var usageUnit: String?
+    /// A usage budget's limit per period, in `usageUnit`.
+    public var usageAmount: Double?
+    public var period: BudgetPeriod?
+    /// The budget this one rolls up into. A parent's actual and forecast are the
+    /// sum of its children's, each measured over the parent's period; parent and
+    /// children must count the same thing (one currency, or one usage unit).
+    /// Hierarchies are at most 4 levels deep. Deleting a budget moves its
+    /// children up to its own parent. Updates are full replaces, so omitting it
+    /// on PUT makes the budget a root.
+    public var parentBudgetId: String?
 
     public init(
         name: String,
-        amountCents: Int,
+        amountCents: Int? = nil,
         currency: String? = nil,
         filters: [BudgetCostFilter]? = nil,
         savedFilterId: String? = nil,
         scenarioModelId: String? = nil,
         thresholds: [BudgetThreshold],
         costBasis: BudgetCostBasis? = nil,
-        useAdjustedSpend: Bool? = nil
+        useAdjustedSpend: Bool? = nil,
+        measure: BudgetMeasure? = nil,
+        usageUnit: String? = nil,
+        usageAmount: Double? = nil,
+        period: BudgetPeriod? = nil,
+        parentBudgetId: String? = nil
     ) {
         self.name = name
         self.amountCents = amountCents
@@ -66,5 +87,10 @@ public struct BudgetInput: Codable, Hashable, Sendable {
         self.thresholds = thresholds
         self.costBasis = costBasis
         self.useAdjustedSpend = useAdjustedSpend
+        self.measure = measure
+        self.usageUnit = usageUnit
+        self.usageAmount = usageAmount
+        self.period = period
+        self.parentBudgetId = parentBudgetId
     }
 }

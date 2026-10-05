@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.56.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.57.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.56.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.57.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -141,6 +141,37 @@ public struct BudgetWithStatus: Codable, Hashable, Sendable {
     public var scenarioForecastCents: Int?
     public var currentMonthEvents: [CurrentMonthEvent]
     public var placements: [Placement]
+    public var measure: BudgetMeasure
+    /// The usage unit a usage budget counts, exactly as the providers report it.
+    public var usageUnit: String?
+    /// A usage budget's limit per period, in `usageUnit`.
+    public var usageAmount: Double?
+    public var period: BudgetPeriod?
+    /// The budget this one rolls up into. A parent's actual and forecast are the
+    /// sum of its children's, each measured over the parent's period; parent and
+    /// children must count the same thing (one currency, or one usage unit).
+    /// Hierarchies are at most 4 levels deep. Deleting a budget moves its
+    /// children up to its own parent. Updates are full replaces, so omitting it
+    /// on PUT makes the budget a root.
+    public var parentBudgetId: String?
+    /// First day of the period being measured. Null when the budget's periods do
+    /// not cover today (a cadence not started yet, a gap in an explicit list):
+    /// nothing is measured.
+    public var periodStart: String?
+    public var periodEnd: String?
+    /// This period's limit in the budget's unit: cents for a spend budget, the
+    /// quantity for a usage budget. Null when no period is active.
+    public var periodLimit: Double?
+    /// Period-to-date usage, for a usage budget (whose `actualCents` is 0).
+    public var actualUsage: Double?
+    /// Projected period-end usage, for a usage budget.
+    public var forecastUsage: Double?
+    /// True when the budget has children, so its figures are the sum of theirs
+    /// over its period rather than a measurement of its own scope.
+    public var rolledUp: Bool
+    /// Number of direct child budgets.
+    public var childCount: Int
+    public var hierarchyWarnings: [BudgetHierarchyWarning]
 
     public init(
         id: String,
@@ -160,7 +191,20 @@ public struct BudgetWithStatus: Codable, Hashable, Sendable {
         forecastCents: Int? = nil,
         scenarioForecastCents: Int? = nil,
         currentMonthEvents: [CurrentMonthEvent],
-        placements: [Placement]
+        placements: [Placement],
+        measure: BudgetMeasure,
+        usageUnit: String? = nil,
+        usageAmount: Double? = nil,
+        period: BudgetPeriod? = nil,
+        parentBudgetId: String? = nil,
+        periodStart: String? = nil,
+        periodEnd: String? = nil,
+        periodLimit: Double? = nil,
+        actualUsage: Double? = nil,
+        forecastUsage: Double? = nil,
+        rolledUp: Bool,
+        childCount: Int,
+        hierarchyWarnings: [BudgetHierarchyWarning]
     ) {
         self.id = id
         self.name = name
@@ -180,5 +224,18 @@ public struct BudgetWithStatus: Codable, Hashable, Sendable {
         self.scenarioForecastCents = scenarioForecastCents
         self.currentMonthEvents = currentMonthEvents
         self.placements = placements
+        self.measure = measure
+        self.usageUnit = usageUnit
+        self.usageAmount = usageAmount
+        self.period = period
+        self.parentBudgetId = parentBudgetId
+        self.periodStart = periodStart
+        self.periodEnd = periodEnd
+        self.periodLimit = periodLimit
+        self.actualUsage = actualUsage
+        self.forecastUsage = forecastUsage
+        self.rolledUp = rolledUp
+        self.childCount = childCount
+        self.hierarchyWarnings = hierarchyWarnings
     }
 }

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.56.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.57.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.56.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.57.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -92,7 +92,7 @@ public final class BudgetsNamespace: Sendable {
         )
     }
 
-    /// Get a budget with current-month status
+    /// Get a budget with current-period status
     ///
     /// GET /api/org/{orgId}/budgets/{id}
     ///
@@ -104,7 +104,7 @@ public final class BudgetsNamespace: Sendable {
         orgId: String? = nil,
         id: String,
         options: RequestOptions? = nil
-    ) async throws -> BudgetFull {
+    ) async throws -> BudgetWithStatus {
         return try await transport.send(
             RequestSpec(
                 method: "GET",
@@ -115,7 +115,7 @@ public final class BudgetsNamespace: Sendable {
         )
     }
 
-    /// List budgets with current-month actuals and forecasts
+    /// List budgets with current-period actuals and forecasts
     ///
     /// GET /api/org/{orgId}/budgets
     ///
