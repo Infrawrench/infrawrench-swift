@@ -21,7 +21,7 @@ public struct StatusPageCreate: Codable, Hashable, Sendable {
     public var showHistory: Bool?
     public var showUptime: Bool?
     public var supportUrl: String?
-    /// Order is significant — it is the public render order.
+    /// Order is significant; it is the public render order.
     public var components: [StatusPageComponentInput]?
 
     public init(

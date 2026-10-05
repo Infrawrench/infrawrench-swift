@@ -14,7 +14,7 @@
 import Foundation
 
 public struct SignSshKeyResponse: Codable, Hashable, Sendable {
-    /// Raw signature bytes, base64-encoded — Ed25519/RSA as-is, ECDSA in DER as
+    /// Raw signature bytes, base64-encoded; Ed25519/RSA as-is, ECDSA in DER as
     /// node produces it.
     public var signature: String
     public var algorithm: SshSignAlgorithm

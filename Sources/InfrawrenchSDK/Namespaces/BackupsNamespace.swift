@@ -43,7 +43,7 @@ public final class BackupsNamespace: Sendable {
     /// What protects the organization's stateful resources, what does not, and
     /// which backups protect nothing. Derived from already-synced inventory using
     /// the `backupRole` and `backupPolicy` declarations plugins carry on their
-    /// resource types — no provider API calls are made and results reflect the
+    /// resource types; no provider API calls are made and results reflect the
     /// last sync. Findings are recomputed on every read rather than stored.
     /// Orphaned backups carry a trailing-30-day spend quote when billing data is
     /// available.
@@ -79,7 +79,7 @@ public final class BackupsDrillsNamespace: Sendable {
     /// Record a restore drill
     ///
     /// A `verified` drill **must** carry the measured time: an RPO comes from the
-    /// backup, and an RTO can only come from somebody with a stopwatch — that
+    /// backup, and an RTO can only come from somebody with a stopwatch; that
     /// number is the entire point of the exercise. A `blocked` drill must not
     /// carry one, because it never started.
     ///
@@ -111,7 +111,7 @@ public final class BackupsDrillsNamespace: Sendable {
 
     /// Delete a recorded drill
     ///
-    /// For one recorded against the wrong resource or the wrong date. Audited —
+    /// For one recorded against the wrong resource or the wrong date. Audited:
     /// deleting evidence that a restore failed is exactly the edit a reviewer
     /// would want to know about.
     ///
@@ -139,7 +139,7 @@ public final class BackupsDrillsNamespace: Sendable {
     /// Where every protected resource stands on restore
     ///
     /// Backup coverage answers 'is there a backup'. This answers 'does it
-    /// restore, and how long does it take' — a different question, and the one
+    /// restore, and how long does it take'; a different question, and the one
     /// routinely answered wrongly on the day.
     ///
     /// A drill is a **record that somebody tried**, not an automated restore:
@@ -206,8 +206,8 @@ public final class BackupsPoliciesNamespace: Sendable {
 
     /// Create a backup policy
     ///
-    /// A policy must demand at least one of `maxRpoHours` and `minRetentionDays`
-    /// — one that demands nothing could never produce a finding and would read as
+    /// A policy must demand at least one of `maxRpoHours` and `minRetentionDays`:
+    /// one that demands nothing could never produce a finding and would read as
     /// protection while providing none. An empty `resourceTypeIds` selects every
     /// stateful resource type.
     ///

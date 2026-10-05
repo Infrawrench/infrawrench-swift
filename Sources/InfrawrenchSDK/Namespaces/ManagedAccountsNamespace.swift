@@ -58,8 +58,8 @@ public final class ManagedAccountsNamespace: Sendable {
     ///
     /// A soft delete: an issued invoice names its customer, and an invoice whose
     /// customer stopped resolving is exactly the unreconcilable document this
-    /// feature exists to prevent. Draft invoices are removed with it — a draft
-    /// was never issued.
+    /// feature exists to prevent. Draft invoices are removed with it; a draft was
+    /// never issued.
     ///
     /// _Requires permission: `invoices:write`._
     ///

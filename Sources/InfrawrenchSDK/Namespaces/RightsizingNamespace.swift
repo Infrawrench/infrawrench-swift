@@ -30,7 +30,7 @@ public final class RightsizingNamespace: Sendable {
     /// create form's size options, live-priced). Each recommendation names the
     /// cheapest smaller size that still clears a headroom margin and quotes the
     /// monthly saving. Apply one by submitting `sizeFieldKey` with the
-    /// recommended size id through the resource-update endpoint — which enforces
+    /// recommended size id through the resource-update endpoint; which enforces
     /// change freezes and writes the audit trail. Results are cached for a few
     /// minutes; pass `refresh=true` to recompute.
     ///

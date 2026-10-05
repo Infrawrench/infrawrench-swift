@@ -69,7 +69,7 @@ public final class MsteamsNamespace: Sendable {
 
     /// Post a test card to every configured Teams channel
     ///
-    /// Ignores routing rules — every channel gets the test. Fails with the error
+    /// Ignores routing rules; every channel gets the test. Fails with the error
     /// Microsoft returned when nothing could be delivered (HTTP 404 usually means
     /// the Workflow was deleted or turned off).
     ///
@@ -106,7 +106,7 @@ public final class MsteamsWebhooksNamespace: Sendable {
     /// Connect a Teams channel as an alert destination
     ///
     /// Adds a channel by webhook URL, or updates the one already holding that
-    /// URL. Which alerts reach it is decided by /alert-rules — connecting a
+    /// URL. Which alerts reach it is decided by /alert-rules; connecting a
     /// channel routes nothing to it on its own. Responds 400 when the URL is not
     /// https or its host is not Microsoft-operated.
     ///
@@ -157,7 +157,7 @@ public final class MsteamsWebhooksNamespace: Sendable {
 
     /// Rename a Teams channel
     ///
-    /// The webhook URL is immutable — remove the channel and re-add it to change
+    /// The webhook URL is immutable; remove the channel and re-add it to change
     /// it.
     ///
     /// PATCH /api/org/{orgId}/msteams/webhooks/{id}

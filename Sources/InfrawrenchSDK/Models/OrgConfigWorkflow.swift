@@ -13,7 +13,7 @@
  */
 import Foundation
 
-/// A workflow. The git-webhook signing secret is deliberately absent — it is
+/// A workflow. The git-webhook signing secret is deliberately absent; it is
 /// write-only, so a document can neither leak nor set one.
 public struct OrgConfigWorkflow: Codable, Hashable, Sendable {
     public struct Metric: Codable, Hashable, Sendable {

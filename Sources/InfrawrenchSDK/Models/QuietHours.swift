@@ -14,7 +14,7 @@
 import Foundation
 
 /// A recurring local-time window during which the rule holds its alerts. Held,
-/// not dropped — a held alert is queued and delivered when the window closes.
+/// not dropped; a held alert is queued and delivered when the window closes.
 ///
 /// The API may send `null` in place of this, which is why references to it are
 /// optional.

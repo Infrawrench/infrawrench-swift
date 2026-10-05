@@ -16,8 +16,8 @@ import Foundation
 public struct SessionRecordingSettings: Codable, Hashable, Sendable {
     public var enabled: Bool
     /// Also record keystrokes. Separate from `enabled` because it captures input
-    /// at prompts the remote host chose not to echo — a sudo password, a pasted
-    /// token — which is a materially different promise to the people being
+    /// at prompts the remote host chose not to echo (a sudo password, a pasted
+    /// token) which is a materially different promise to the people being
     /// recorded.
     public var captureInput: Bool
     public var retentionDays: Int

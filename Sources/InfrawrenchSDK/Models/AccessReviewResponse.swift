@@ -15,7 +15,7 @@ import Foundation
 
 public struct AccessReviewResponse: Codable, Hashable, Sendable {
     /// Every synced principal, by account then type then name. Never filtered by
-    /// dismissals — accepting a finding must not remove a principal from the
+    /// dismissals; accepting a finding must not remove a principal from the
     /// inventory.
     public var principals: [AccessPrincipal]
     /// Live findings, worst severity first. Dismissed findings are not included.

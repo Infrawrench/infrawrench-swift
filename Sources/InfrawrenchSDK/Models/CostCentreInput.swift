@@ -17,7 +17,7 @@ public struct CostCentreInput: Codable, Hashable, Sendable {
     public var name: String
     public var description: String?
     /// Cost centre to nest this one under; null is the top level. On an update,
-    /// moving a centre is this field changing — omitting it leaves the centre
+    /// moving a centre is this field changing; omitting it leaves the centre
     /// where it is. Rejected with 400 when the parent is unknown, is the centre
     /// itself or one of its own descendants, or when the resulting tree would be
     /// more than 4 levels deep (measured over the whole subtree being moved).

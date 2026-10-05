@@ -16,7 +16,7 @@ import Foundation
 public struct AgentRevoked: Codable, Hashable, Sendable {
     public var ok: Bool
     /// False when the registration was already revoked. The request still
-    /// succeeds — revocation is idempotent — but nothing changed.
+    /// succeeds (revocation is idempotent) but nothing changed.
     public var revoked: Bool
 
     public init(

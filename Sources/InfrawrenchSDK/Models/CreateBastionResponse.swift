@@ -18,7 +18,7 @@ public struct CreateBastionResponse: Codable, Hashable, Sendable {
     public var name: String
     public var tokenPrefix: String
     /// Enrollment token in the form `iwb_<random>`. Pass to the agent container
-    /// as `BASTION_TOKEN`. Returned once — not recoverable later.
+    /// as `BASTION_TOKEN`. Returned once: not recoverable later.
     public var token: String
 
     public init(

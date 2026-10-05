@@ -92,7 +92,7 @@ public struct BlastRadiusReference: Codable, Hashable, Sendable {
     public var name: String
     /// One extra clause of context.
     public var detail: String?
-    /// Set when the reference is visible outside the organization — a published
+    /// Set when the reference is visible outside the organization; a published
     /// status page component, or the probe behind one. Any user-facing reference
     /// makes the report high severity on its own.
     public var userFacing: Bool?

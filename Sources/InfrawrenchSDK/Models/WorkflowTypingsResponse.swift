@@ -14,7 +14,7 @@
 import Foundation
 
 public struct WorkflowTypingsResponse: Codable, Hashable, Sendable {
-    /// Ambient TypeScript declarations for this workflow's `infra` API — the same
+    /// Ambient TypeScript declarations for this workflow's `infra` API; the same
     /// file the Monaco editor and `check` endpoint type against.
     public var dts: String
 

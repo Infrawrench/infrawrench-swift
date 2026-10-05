@@ -137,7 +137,7 @@ public final class AgentIdentityNamespace: Sendable {
 
     /// Open an anonymous registration and a 24-hour trial workspace
     ///
-    /// Requires no authentication — this is how a client with no credentials gets
+    /// Requires no authentication; this is how a client with no credentials gets
     /// one. Rate limited per source address. The workspace it opens is deleted 24
     /// hours later unless a person completes the claim ceremony.
     ///

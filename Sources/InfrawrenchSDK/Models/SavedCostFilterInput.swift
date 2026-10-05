@@ -18,7 +18,7 @@ public struct SavedCostFilterInput: Codable, Hashable, Sendable {
     public var description: String?
     /// The structured filter. May be omitted only when `query` is sent instead.
     public var filters: [SavedCostFilterTerm]?
-    /// The same filter written in the cost query language — an alternative
+    /// The same filter written in the cost query language; an alternative
     /// spelling of `filters`, compiled server-side into exactly that structure.
     /// Sending both a query and a non-empty `filters` is a 400, not a precedence
     /// rule. Whichever spelling is used, the result must be non-empty (an empty

@@ -34,7 +34,7 @@ public final class EnvironmentsNamespace: Sendable {
     /// Preview a template capture
     ///
     /// Turn a selection of live resources into a draft template. **Persists
-    /// nothing** — the editor shows the draft so the user can choose which fields
+    /// nothing**: the editor shows the draft so the user can choose which fields
     /// to vary before saving. The shape of every member comes from the plugin's
     /// own `getCreateConfig`: a captured value with no matching create field is
     /// dropped, and a resource type the plugin cannot create is reported in
@@ -81,7 +81,7 @@ public final class EnvironmentsInstancesNamespace: Sendable {
 
     /// Forget a torn-down environment
     ///
-    /// Removes the record. Refuses while the instance still owns resources — the
+    /// Removes the record. Refuses while the instance still owns resources; the
     /// row is the only thing that knows they exist. Audit-logged.
     ///
     /// _Requires permission: `resources:write`._
@@ -90,7 +90,7 @@ public final class EnvironmentsInstancesNamespace: Sendable {
     ///
     /// Raises on 404: Not found
     ///
-    /// Raises on 409: The environment is still live — tear it down first
+    /// Raises on 409: The environment is still live; tear it down first
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -233,8 +233,8 @@ public final class EnvironmentsSettingsNamespace: Sendable {
 
     /// Set the organization's environment TTL rails
     ///
-    /// `org:settings:write`, not `resources:write` — this is a governance
-    /// decision about how long the organization is willing to pay for a throwaway
+    /// `org:settings:write`, not `resources:write`: this is a governance decision
+    /// about how long the organization is willing to pay for a throwaway
     /// environment. Clamped to a 720-hour ceiling; the default is clamped to the
     /// maximum. Audit-logged.
     ///
@@ -274,7 +274,7 @@ public final class EnvironmentsTemplatesNamespace: Sendable {
     ///
     /// Save a capture draft as a template. Member keys must be unique, every
     /// parameter and member reference must resolve, and the members must be
-    /// orderable — a dependency cycle is rejected here rather than half-way
+    /// orderable; a dependency cycle is rejected here rather than half-way
     /// through an apply. Audit-logged.
     ///
     /// _Requires permission: `resources:write`._
@@ -305,7 +305,7 @@ public final class EnvironmentsTemplatesNamespace: Sendable {
 
     /// Delete an environment template
     ///
-    /// Live instances keep running and keep their TTL — they own real resources,
+    /// Live instances keep running and keep their TTL; they own real resources,
     /// and the template is only where they came from. Their `templateId` becomes
     /// null; the denormalized `templateName` is what the surface reads.
     /// Audit-logged.
@@ -337,7 +337,7 @@ public final class EnvironmentsTemplatesNamespace: Sendable {
     ///
     /// Runs each member's create fields through the plugin's own `estimateCost`.
     /// A member the plugin cannot price is counted in `unpricedCount` and makes
-    /// the total `partial` — `null` is never rounded to zero.
+    /// the total `partial`: `null` is never rounded to zero.
     ///
     /// _Requires permission: `resources:read`._
     ///

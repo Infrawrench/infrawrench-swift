@@ -53,8 +53,8 @@ public struct NetworkFlowFeed: Codable, Hashable, Sendable {
     public var initialLookbackDays: Int
     /// Always true. Flow bytes come from logs that sample or drop under load and
     /// are priced at published list rates with no free tier, no volume tier and
-    /// no negotiated discount modelled — the ranking is sound, the absolute
-    /// figure will not reconcile to the invoice.
+    /// no negotiated discount modelled: the ranking is sound, the absolute figure
+    /// will not reconcile to the invoice.
     public var estimated: Bool
     public var range: Range
     public var scopes: [NetworkFlowScopeSummary]

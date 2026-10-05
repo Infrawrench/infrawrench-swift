@@ -124,13 +124,13 @@ public struct BackupFinding: Codable, Hashable, Sendable {
     /// window is shorter than the policy asks; or a backup whose source resource
     /// no longer exists.
     public var kind: Kind
-    /// How bad the gap is. Orphaned backups are always `low` — they cost money,
+    /// How bad the gap is. Orphaned backups are always `low`: they cost money,
     /// not data.
     public var severity: Severity
     public var title: String
     /// Sentence explaining the gap and what would close it.
     public var detail: String
-    /// The policy supplying the objective this finding breaches — the RPO policy
+    /// The policy supplying the objective this finding breaches; the RPO policy
     /// for `rpo-breach`, the retention policy for `retention-below-policy`. Null
     /// when no policy applies.
     public var policyId: String?
@@ -149,7 +149,7 @@ public struct BackupFinding: Codable, Hashable, Sendable {
     /// Size of an orphaned backup in GiB, when the plugin syncs one.
     public var sizeGb: Double?
     /// Trailing-30-day spend on an orphaned backup. Null means the cost could not
-    /// be determined — never that the backup is free.
+    /// be determined: never that the backup is free.
     public var monthlyCost: Double?
     public var currency: String?
 

@@ -13,8 +13,8 @@
  */
 import Foundation
 
-/// A full replace, like a report's own PUT. At least one destination is required
-/// — a schedule with nowhere to deliver would only ever record failures.
+/// A full replace, like a report's own PUT. At least one destination is required;
+/// a schedule with nowhere to deliver would only ever record failures.
 public struct ReportNotificationInput: Codable, Hashable, Sendable {
     public enum Cadence: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
         case daily

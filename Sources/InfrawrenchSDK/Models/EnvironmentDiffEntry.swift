@@ -57,8 +57,8 @@ public struct EnvironmentDiffEntry: Codable, Hashable, Sendable {
         }
     }
 
-    /// The pairing key both sides matched on — the resource type plus the
-    /// resource name with environment words removed. Stable across runs.
+    /// The pairing key both sides matched on; the resource type plus the resource
+    /// name with environment words removed. Stable across runs.
     public var key: String
     public var resourceTypeId: String
     public var resourceTypeName: String

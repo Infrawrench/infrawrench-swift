@@ -54,9 +54,9 @@ public final class OwnershipNamespace: Sendable {
 
     /// List resource ownership records
     ///
-    /// Every ownership record in the organization — owner, purpose and
-    /// authorizing ticket, per resource. Only resources somebody has recorded
-    /// something about appear; an absent record means the resource is unowned.
+    /// Every ownership record in the organization; owner, purpose and authorizing
+    /// ticket, per resource. Only resources somebody has recorded something about
+    /// appear; an absent record means the resource is unowned.
     ///
     /// _Requires permission: `resources:read`._
     ///
@@ -135,7 +135,7 @@ public final class OwnershipNamespace: Sendable {
 
     /// Set a resource's ownership
     ///
-    /// Upsert keyed by `resourceId` — ownership is a property of the resource, so
+    /// Upsert keyed by `resourceId`: ownership is a property of the resource, so
     /// there is no separate create and update. Omitted fields keep their value
     /// and `null` clears one. Clearing every field removes the record entirely
     /// and the response is `null`, which is the new truth rather than an empty

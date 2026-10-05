@@ -55,8 +55,8 @@ public struct SavingsShortfall: Codable, Hashable, Sendable {
         }
     }
 
-    /// `below_projection` — the trailing realized rate is under the org's
-    /// threshold share of the projected rate; `grew_back` — post-action spend is
+    /// `below_projection`: the trailing realized rate is under the org's
+    /// threshold share of the projected rate; `grew_back`: post-action spend is
     /// above the pre-action baseline.
     public var kind: Kind
     /// Currency units (not cents), in the row's currency.

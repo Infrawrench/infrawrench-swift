@@ -56,9 +56,8 @@ public struct CostAlertEvent: Codable, Hashable, Sendable {
     public var id: String
     public var alertId: String
     public var alertName: String
-    /// The cadence period the firing belongs to — a day, an ISO week (2026-W32)
-    /// or a month (2026-08). One period fires at most once per group and
-    /// currency.
+    /// The cadence period the firing belongs to; a day, an ISO week (2026-W32) or
+    /// a month (2026-08). One period fires at most once per group and currency.
     public var periodKey: String
     public var windowFrom: String
     public var windowTo: String
@@ -70,7 +69,7 @@ public struct CostAlertEvent: Codable, Hashable, Sendable {
     public var previousAmountCents: Int
     public var currentAmountCents: Int
     /// Signed percent change. Null when the prior window had no spend at all (new
-    /// spend — the change is infinite); -100 when the group vanished.
+    /// spend; the change is infinite); -100 when the group vanished.
     public var changePercent: Int?
     public var direction: Direction
     public var firedAt: String

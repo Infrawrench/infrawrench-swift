@@ -125,15 +125,15 @@ public struct CalendarEvent: Codable, Hashable, Sendable {
     /// Clamped to the requested window's lower bound when the underlying span
     /// began earlier; `openEnded` says so.
     public var startsAt: String
-    /// Null means a point in time — a deadline, a scheduled run — or a span whose
+    /// Null means a point in time (a deadline, a scheduled run) or a span whose
     /// end is not known. `openEnded` distinguishes the two.
     public var endsAt: String?
     /// The span continues past an edge of the window, or has no declared end at
     /// all (a freeze held until further notice, an unresolved incident).
     public var openEnded: Bool
-    /// The event is meaningful only to the day — a deadline read off a date
-    /// field. Rendering such a thing at the provider's stored midnight would be
-    /// false precision.
+    /// The event is meaningful only to the day; a deadline read off a date field.
+    /// Rendering such a thing at the provider's stored midnight would be false
+    /// precision.
     public var allDay: Bool
     public var severity: Severity
     public var link: CalendarEventLink?

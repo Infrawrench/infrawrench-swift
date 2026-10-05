@@ -19,7 +19,7 @@ public struct AgentClaimLookup: Codable, Hashable, Sendable {
     public var trialExpiresInMs: Int?
     /// Organizations this user may merge the workspace into: ones they already
     /// belong to AND hold `accounts:write` in. A merge writes cloud credentials,
-    /// so membership alone is not enough — the confirm route enforces the same
+    /// so membership alone is not enough: the confirm route enforces the same
     /// rule.
     public var mergeTargets: [AgentClaimMergeTarget]
 

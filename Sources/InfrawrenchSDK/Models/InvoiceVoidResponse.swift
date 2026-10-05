@@ -18,8 +18,8 @@ public struct InvoiceVoidResponse: Codable, Hashable, Sendable {
         public var id: String
         public var managedAccountId: String
         public var managedAccountName: String
-        /// `INV-2026-0001`. Null while draft — numbers are assigned at approval
-        /// so a deleted draft cannot leave a gap in the sequence.
+        /// `INV-2026-0001`. Null while draft: numbers are assigned at approval so
+        /// a deleted draft cannot leave a gap in the sequence.
         public var number: String?
         public var status: InvoiceStatus
         public var periodFrom: String
@@ -38,7 +38,7 @@ public struct InvoiceVoidResponse: Codable, Hashable, Sendable {
         public var notes: String?
         public var lines: [InvoiceLine]
         public var derivation: InvoiceDerivation
-        /// True when the figures in this response were recomputed for it — true
+        /// True when the figures in this response were recomputed for it; true
         /// for a draft, false for everything else. Say so: “these numbers will
         /// move” and “these numbers are what we sent” are different claims about
         /// the same fields.

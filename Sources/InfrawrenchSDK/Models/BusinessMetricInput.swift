@@ -19,14 +19,14 @@ public struct BusinessMetricInput: Codable, Hashable, Sendable {
     /// independent of `name` so a rename never breaks a running job.
     public var key: String
     public var name: String
-    /// Singular unit label used for display — the noun in "USD per customer".
+    /// Singular unit label used for display; the noun in "USD per customer".
     public var unit: String
     public var description: String?
     public var kind: BusinessMetricKind
     /// ISO-4217 code. **Required when `kind` is `currency`, and rejected
-    /// otherwise** — a revenue metric with no currency cannot have margin
-    /// computed against it, and a count metric carrying one would suggest its
-    /// numbers are money when they are requests.
+    /// otherwise**; a revenue metric with no currency cannot have margin computed
+    /// against it, and a count metric carrying one would suggest its numbers are
+    /// money when they are requests.
     public var currency: String?
     /// The spend this metric divides, in the same filter vocabulary cost graphs
     /// and budgets use. Empty (the default) is all of the organization's spend. A

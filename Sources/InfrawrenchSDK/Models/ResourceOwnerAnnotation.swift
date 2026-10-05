@@ -24,7 +24,7 @@ public struct ResourceOwnerAnnotation: Codable, Hashable, Sendable {
     public var userId: String?
     /// The member's name, or the free-text owner.
     public var displayName: String
-    /// True when the owner is free text — nothing can be routed to it.
+    /// True when the owner is free text; nothing can be routed to it.
     public var isLabel: Bool
     public var ticketUrl: String?
     public var purpose: String?

@@ -13,7 +13,7 @@
  */
 import Foundation
 
-/// Null when the metric has no values at all — not an error, but every unit-cost
+/// Null when the metric has no values at all; not an error, but every unit-cost
 /// chart drawn from it is one continuous gap.
 ///
 /// The API may send `null` in place of this, which is why references to it are
@@ -22,7 +22,7 @@ public struct BusinessMetricCoverage: Codable, Hashable, Sendable {
     /// Earliest reported day, YYYY-MM-DD.
     public var firstDay: String
     public var lastDay: String
-    /// Days carrying a value — compare against the span to spot a sparse series.
+    /// Days carrying a value; compare against the span to spot a sparse series.
     public var reportedDays: Int
 
     public init(

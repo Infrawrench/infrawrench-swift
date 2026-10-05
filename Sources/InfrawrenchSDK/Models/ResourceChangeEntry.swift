@@ -54,7 +54,7 @@ public struct ResourceChangeEntry: Codable, Hashable, Sendable {
     public var accountId: String
     public var pluginId: String
     public var resourceTypeId: String
-    /// Resource display name at the time of the change — survives deletion.
+    /// Resource display name at the time of the change, survives deletion.
     public var displayName: String
     public var changeKind: ResourceChangeKind
     /// Changed fields for `updated` events; empty for `created` and `deleted`.

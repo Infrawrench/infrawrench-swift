@@ -74,7 +74,7 @@ public struct CalendarSubscription: Codable, Hashable, Sendable {
     /// Kinds the feed carries. Empty means every kind, including ones added
     /// later.
     public var kinds: [Kind]
-    /// The subscription URL, returned **only** by the create call — the token it
+    /// The subscription URL, returned **only** by the create call; the token it
     /// contains is stored hashed and cannot be shown again. Lose it and mint a
     /// new feed.
     public var url: String?

@@ -14,7 +14,7 @@
 import Foundation
 
 /// The saved graph. Identical to the config an ad-hoc `cost_graph` dashboard
-/// widget stores inline — a report is that config given a name and an id.
+/// widget stores inline: a report is that config given a name and an id.
 public struct CostGraphConfig: Codable, Hashable, Sendable {
     public enum ChartType: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
         case stackedBar
@@ -309,7 +309,7 @@ public struct CostGraphConfig: Codable, Hashable, Sendable {
     public var topN: Int?
     public var comparePreviousPeriod: Bool?
     public var showForecast: Bool?
-    /// A scenario model (see /cost-scenarios) overlaid on the forecast — known
+    /// A scenario model (see /cost-scenarios) overlaid on the forecast; known
     /// future cost the trend cannot see, drawn as a second dashed line beside the
     /// trend rather than instead of it. Only meaningful alongside `showForecast`.
     public var scenarioModelId: String?

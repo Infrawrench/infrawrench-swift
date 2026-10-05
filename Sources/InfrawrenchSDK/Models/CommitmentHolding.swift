@@ -189,40 +189,40 @@ public struct CommitmentHolding: Codable, Hashable, Sendable {
     public var accountId: String
     public var accountName: String
     public var pluginId: PluginId
-    /// Provider-native id — the join key against cost rows' commitment dimension
+    /// Provider-native id: the join key against cost rows' commitment dimension
     /// (an ARN where billing data carries ARNs, the bare id where it does not).
     public var commitmentId: String
     public var kind: Kind
     public var description: String
-    /// Provider scope qualifier — an AZ, an instance family, 'Shared'.
+    /// Provider scope qualifier; an AZ, an instance family, 'Shared'.
     public var scope: String?
     /// Null means the commitment applies across regions (an AWS Compute Savings
-    /// Plan) — a real state, rendered as 'All regions', not missing data.
+    /// Plan); a real state, rendered as 'All regions', not missing data.
     public var region: String?
     public var startDate: String?
     public var endDate: String?
-    /// Provider-reported term length — never derived from the dates, which stop
+    /// Provider-reported term length; never derived from the dates, which stop
     /// spanning the term once a commitment is split or merged.
     public var termDays: Int?
     public var paymentOption: PaymentOption?
     /// Null when the provider reports no money at all for this record.
     public var currency: String?
     /// Null means the provider did not report a price (Azure's list API reports
-    /// none) — 'not reported', never rendered as 'free'.
+    /// none); 'not reported', never rendered as 'free'.
     public var upfrontAmount: Double?
     public var recurringAmount: Double?
     /// Atomic with recurringAmount: an amount without a period is a 730×
     /// ambiguity.
     public var recurringPeriod: RecurringPeriod?
-    /// Committed spend per hour — what utilization is measured against.
+    /// Committed spend per hour; what utilization is measured against.
     public var hourlyCommitmentAmount: Double?
     /// Committed resource quantities for unit-denominated commitments (GCP CUDs).
-    /// A record has either this or hourlyCommitmentAmount — the split decides
+    /// A record has either this or hourlyCommitmentAmount; the split decides
     /// which utilization question is even askable.
     public var unitCommitments: [CommitmentUnitAmount]?
     public var state: State
     /// The provider's own utilization aggregates (Azure reservations only),
-    /// verbatim — never blended with the derived utilization below.
+    /// verbatim; never blended with the derived utilization below.
     public var providerUtilization: [CommitmentProviderUtilization]?
     public var lastSeenAt: String
     public var utilization: CommitmentUtilization

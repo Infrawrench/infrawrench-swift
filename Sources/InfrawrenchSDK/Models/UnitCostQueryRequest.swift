@@ -128,7 +128,7 @@ public struct UnitCostQueryRequest: Codable, Hashable, Sendable {
     /// `usage_unit_cost` only, and required there: the provider usage unit to
     /// divide by. See `GET /business-metrics/usage-units`.
     public var usageUnit: String?
-    /// Narrowing on top of the metric's own `costScope` — AND-composed, never a
+    /// Narrowing on top of the metric's own `costScope`: AND-composed, never a
     /// replacement.
     public var filters: [BusinessMetricScopeTerm]?
     /// The same narrowing as cost-query-language text.

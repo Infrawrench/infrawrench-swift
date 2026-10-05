@@ -64,11 +64,11 @@ public struct CreditPot: Codable, Hashable, Sendable {
     public var accountId: String
     public var accountName: String
     public var pluginId: PluginId
-    /// The provider's own word for this pot — "Credits", "Balance".
+    /// The provider's own word for this pot, "Credits", "Balance".
     public var capabilityLabel: String
     public var topUpUrl: String?
-    /// Stable identity for this pot within the account — a currency code, a
-    /// project id — so successive readings line up into a series.
+    /// Stable identity for this pot within the account (a currency code, a
+    /// project id) so successive readings line up into a series.
     public var potKey: String
     public var label: String
     public var remaining: Double
@@ -79,12 +79,12 @@ public struct CreditPot: Codable, Hashable, Sendable {
     public var creditExpiresAt: String?
     public var observedAt: String
     /// Spend per day over the observed span. **Null means there is not enough
-    /// history to say** — never 0, which would read as 'nothing is being spent'.
+    /// history to say**: never 0, which would read as 'nothing is being spent'.
     public var burnPerDay: Double?
     public var burnSpanDays: Double
     public var observations: Int
     /// Increases seen between consecutive readings. A top-up is recorded, never
-    /// netted off the burn — subtracting the endpoints of a window containing one
+    /// netted off the burn: subtracting the endpoints of a window containing one
     /// reports a negative burn and an infinite runway.
     public var topUps: Int
     public var runwayDays: Double?

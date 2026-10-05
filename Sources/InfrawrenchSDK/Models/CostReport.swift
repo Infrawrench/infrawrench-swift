@@ -21,13 +21,13 @@ public struct CostReport: Codable, Hashable, Sendable {
     /// Folder the report is filed under (see /cost-report-folders); null is the
     /// top level of the Reports list. Moving a report is this same PUT with a
     /// different folderId; an id from another org is a 400. Deleting a folder
-    /// never deletes its reports — they fall back to the top level.
+    /// never deletes its reports; they fall back to the top level.
     public var folderId: String?
     public var createdByUserId: String?
     public var createdAt: String
     public var updatedAt: String
     /// The dashboards carrying a `cost_report` card for this report. Empty is
-    /// normal — a report exists, and can be run, whether or not any dashboard
+    /// normal: a report exists, and can be run, whether or not any dashboard
     /// shows it. Deleting the report removes these cards; removing a card leaves
     /// the report alone.
     public var placements: [CostReportPlacement]

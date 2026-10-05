@@ -22,7 +22,7 @@ public struct WorkflowSchedule: Codable, Hashable, Sendable {
     /// IANA timezone the expression's wall times are evaluated in. Omit or null
     /// for UTC.
     public var timezone: String?
-    /// Mirrors the workflow's enabled flag — a disabled workflow's schedule never
+    /// Mirrors the workflow's enabled flag; a disabled workflow's schedule never
     /// fires.
     public var enabled: Bool
     /// When the workflow last finished a run (any trigger source).

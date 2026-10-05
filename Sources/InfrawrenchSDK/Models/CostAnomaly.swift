@@ -96,12 +96,12 @@ public struct CostAnomaly: Codable, Hashable, Sendable {
         /// What somebody established this finding was. Also the annotation's
         /// text.
         public var explanation: String
-        /// When the current explanation was recorded — restamped by a correction.
+        /// When the current explanation was recorded, restamped by a correction.
         public var acknowledgedAt: String
         public var acknowledgedByUserId: String?
         /// The cost annotation this created, drawn on every chart covering the
-        /// anomalous day. Null once that note has been deleted — which removes
-        /// the marker, never the acknowledgement: the finding stays explained.
+        /// anomalous day. Null once that note has been deleted; which removes the
+        /// marker, never the acknowledgement: the finding stays explained.
         public var annotationId: String?
 
         public init(
@@ -122,17 +122,17 @@ public struct CostAnomaly: Codable, Hashable, Sendable {
     public var day: String
     /// Which detection produced the row. `spike` is spend far above the key's own
     /// trailing baseline; `new_source` is a provider or service with no spend at
-    /// all across the trailing window that suddenly has material spend — it can
+    /// all across the trailing window that suddenly has material spend; it can
     /// never be a `spike`, since a zero baseline has no mean or deviation to
     /// exceed. Rows written before new-source detection existed read as `spike`.
     public var kind: Kind
     public var dimension: Dimension
-    /// The dimension's value — a plugin id or a service name.
+    /// The dimension's value; a plugin id or a service name.
     public var dimensionKey: String
     public var currency: String
     public var actualCents: Int
     /// Mean daily spend over the trailing 28-day baseline, in cents. Zero, or
-    /// near it, for a `new_source` — clients must not compute a percentage change
+    /// near it, for a `new_source`: clients must not compute a percentage change
     /// from it.
     public var baselineCents: Int
     /// The detection bar the day cleared, in cents: baseline mean + N·stddev for
@@ -150,7 +150,7 @@ public struct CostAnomaly: Codable, Hashable, Sendable {
     /// hint collection.
     public var hints: [String]
     /// Present once somebody has explained this finding, null while it is still
-    /// an open question. Acknowledging does not suppress detection — the same key
+    /// an open question. Acknowledging does not suppress detection; the same key
     /// spiking again on a later day is a new anomaly and fires as normal.
     public var acknowledgement: Acknowledgement?
     public var feedback: CostAnomalyFeedback?

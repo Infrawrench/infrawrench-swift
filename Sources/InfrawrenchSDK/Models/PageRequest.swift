@@ -15,7 +15,7 @@ import Foundation
 
 public struct PageRequest: Codable, Hashable, Sendable {
     /// Stable name for the system raising the page: letters, digits, `.`, `_` and
-    /// `-`. It is the notification's sender, and it scopes the cooldown — two
+    /// `-`. It is the notification's sender, and it scopes the cooldown; two
     /// services paging under the same key never throttle each other.
     public var source: String
     /// The alert text. Becomes the SMS and notification body.
@@ -29,8 +29,8 @@ public struct PageRequest: Codable, Hashable, Sendable {
     /// Minutes to suppress repeat pages under the same key. Defaults to 60; `0`
     /// sends every time.
     public var cooldownMinutes: Int?
-    /// Also place a voice call to recipients who opted into voice. Off by default
-    /// — reserve it for things worth waking someone up for.
+    /// Also place a voice call to recipients who opted into voice. Off by
+    /// default; reserve it for things worth waking someone up for.
     public var voice: Bool?
 
     public init(

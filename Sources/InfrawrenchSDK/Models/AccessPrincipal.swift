@@ -124,7 +124,7 @@ public struct AccessPrincipal: Codable, Hashable, Sendable {
     /// Provider-native id, when known.
     public var externalId: String?
     /// What kind of identity the principal is, from the resource type's
-    /// `principalRole` declaration. Grouping and labels only — it is not a
+    /// `principalRole` declaration. Grouping and labels only; it is not a
     /// permission model.
     public var role: Role2
     /// When the principal was last used, or null when the review has no evidence.
@@ -132,7 +132,7 @@ public struct AccessPrincipal: Codable, Hashable, Sendable {
     public var daysSinceLastUsed: Int?
     /// What could be established about the principal's last use. `unknown` means
     /// the resource type declares no last-used field, or the provider stored
-    /// nothing parseable — it is a first-class answer and is never reported as
+    /// nothing parseable; it is a first-class answer and is never reported as
     /// `stale`.
     public var activity: Activity
     public var createdAt: String?
@@ -141,9 +141,9 @@ public struct AccessPrincipal: Codable, Hashable, Sendable {
     /// declares none.
     public var admin: Bool?
     /// Multi-factor state, only on types that declare an MFA field. Null
-    /// everywhere else — "not synced" is not "MFA is off".
+    /// everywhere else; "not synced" is not "MFA is off".
     public var mfa: Bool?
-    /// The principal this one hangs off — a key's owner, a binding's subject.
+    /// The principal this one hangs off; a key's owner, a binding's subject.
     public var parent: String?
     public var owner: AccessPrincipalOwner?
     /// The plugin action that revokes this principal, when the type declares one.

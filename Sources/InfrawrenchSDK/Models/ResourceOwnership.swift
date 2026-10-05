@@ -22,7 +22,7 @@ public struct ResourceOwnership: Codable, Hashable, Sendable {
     /// Resource display name, denormalized so a report can name a deleted
     /// resource.
     public var resourceName: String
-    /// The routable owner — an org member. Alerts about this resource reach them.
+    /// The routable owner; an org member. Alerts about this resource reach them.
     public var ownerUserId: String?
     /// Resolved server-side; null when unset or removed.
     public var ownerName: String?

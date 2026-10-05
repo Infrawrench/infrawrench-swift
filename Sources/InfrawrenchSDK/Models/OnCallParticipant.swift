@@ -13,7 +13,7 @@
  */
 import Foundation
 
-/// The next person in the rotation — where an escalation goes. Resolved from the
+/// The next person in the rotation, where an escalation goes. Resolved from the
 /// rotation and never from a cover: a cover is somebody standing in for one
 /// shift.
 ///

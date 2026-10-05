@@ -64,7 +64,7 @@ public final class DigestNamespace: Sendable {
 
     /// Compose and send last week's digest now
     ///
-    /// Ignores the schedule and the enabled flag — composes the digest for the
+    /// Ignores the schedule and the enabled flag; composes the digest for the
     /// last complete week and sends it to every opted-in channel and email
     /// recipient. This is also the manual recovery for a partial delivery, which
     /// is never retried automatically. Fails when nothing is routed to receive
@@ -93,7 +93,7 @@ public final class DigestNamespace: Sendable {
     /// Update the weekly digest settings
     ///
     /// Every field is optional. Enabling schedules the first digest for the next
-    /// configured send time rather than sending immediately — use POST
+    /// configured send time rather than sending immediately; use POST
     /// /digest/send for an immediate one. The week boundary follows `timezone`,
     /// so the reported window is always the organization's own local
     /// Monday-to-Sunday week. Changing the schedule clears any parked failure
@@ -187,8 +187,8 @@ public final class DigestRecipientsNamespace: Sendable {
     ///
     /// Email is a digest-only transport, so its destinations are an
     /// organization-level address list rather than a per-channel trigger.
-    /// Addresses need not belong to Infrawrench users — a finance alias is a
-    /// valid recipient.
+    /// Addresses need not belong to Infrawrench users; a finance alias is a valid
+    /// recipient.
     ///
     /// GET /api/org/{orgId}/digest/recipients
     ///

@@ -192,7 +192,7 @@ public struct ExpiryItem: Codable, Hashable, Sendable {
     public var kind: Kind
     /// Plugin-authored caption for the deadline.
     public var label: String
-    /// `expiry` — the field held the deadline itself; `age` — the deadline was
+    /// `expiry`: the field held the deadline itself; `age`: the deadline was
     /// derived from a creation/rotation date plus an age budget.
     public var basis: Basis
     /// The deadline.

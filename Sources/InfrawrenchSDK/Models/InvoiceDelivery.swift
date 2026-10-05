@@ -13,7 +13,7 @@
  */
 import Foundation
 
-/// The last delivery attempt, or null when none has been made — including on an
+/// The last delivery attempt, or null when none has been made; including on an
 /// invoice marked sent by a deployment with no mail provider. “A person released
 /// this” and “we delivered it” are different claims, and this field is only ever
 /// the second.
@@ -72,9 +72,9 @@ public struct InvoiceDelivery: Codable, Hashable, Sendable {
         }
     }
 
-    /// `pending` means an attempt was claimed and its outcome never recorded —
-    /// the process died mid-send, so whether the customer received it is unknown.
-    /// It is not a failure and is never retried automatically.
+    /// `pending` means an attempt was claimed and its outcome never recorded; the
+    /// process died mid-send, so whether the customer received it is unknown. It
+    /// is not a failure and is never retried automatically.
     public var status: Status
     /// The addresses this attempt was made to, as the customer record had them
     /// then.
@@ -83,8 +83,8 @@ public struct InvoiceDelivery: Codable, Hashable, Sendable {
     public var delivered: Int
     public var attemptedAt: String
     /// The last attempt that reached at least one address, or null when none ever
-    /// has. Never cleared by a later failure — it is a fact about the past, and
-    /// it is what decides whether sending again is a retry or a second copy.
+    /// has. Never cleared by a later failure; it is a fact about the past, and it
+    /// is what decides whether sending again is a retry or a second copy.
     public var deliveredAt: String?
     public var attempts: Int
     public var error: String?

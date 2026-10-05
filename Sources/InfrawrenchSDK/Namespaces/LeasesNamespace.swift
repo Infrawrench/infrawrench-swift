@@ -24,7 +24,7 @@ public final class LeasesNamespace: Sendable {
 
     /// Cancel a lease
     ///
-    /// Stop the countdown — the resource stays, the lease goes `canceled` and
+    /// Stop the countdown; the resource stays, the lease goes `canceled` and
     /// leaves the expiry radar. Audit-logged.
     ///
     /// _Requires permission: `resources:write`._
@@ -54,9 +54,9 @@ public final class LeasesNamespace: Sendable {
 
     /// Create a resource lease
     ///
-    /// Attach an expiry to a resource — 'give me a test cluster for 3 days'. One
+    /// Attach an expiry to a resource; 'give me a test cluster for 3 days'. One
     /// lease per resource (an active lease conflicts; a terminal one is
-    /// replaced). `autoDelete: true` opts into deletion at expiry — the poller
+    /// replaced). `autoDelete: true` opts into deletion at expiry; the poller
     /// announces it twice first, defers during change freezes, and requires the
     /// caller to hold `resources:delete`. Audit-logged.
     ///

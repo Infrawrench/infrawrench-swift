@@ -16,7 +16,7 @@ import Foundation
 public struct StorageObject: Codable, Hashable, Sendable {
     /// Full path within the bucket.
     public var key: String
-    /// Last path segment — what the browser renders.
+    /// Last path segment, what the browser renders.
     public var name: String
     public var size: Double
     public var lastModified: String

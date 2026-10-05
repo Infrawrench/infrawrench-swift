@@ -110,8 +110,8 @@ public final class BillingRulesNamespace: Sendable {
 
     /// List billing rules in evaluation order
     ///
-    /// Billing rules are the organisation's own adjustments to collected spend —
-    /// a markup that recovers shared overhead, a discount negotiated outside the
+    /// Billing rules are the organisation's own adjustments to collected spend; a
+    /// markup that recovers shared overhead, a discount negotiated outside the
     /// provider's pricing, a shared cluster reallocated onto the teams that use
     /// it.
     ///
@@ -206,7 +206,7 @@ public final class BillingRulesNamespace: Sendable {
 
     /// Update a billing rule
     ///
-    /// A full replace, `enabled` included — switching a markup off is an edit of
+    /// A full replace, `enabled` included; switching a markup off is an edit of
     /// the rule, so there is one audited action for “this rule changed” rather
     /// than two.
     ///

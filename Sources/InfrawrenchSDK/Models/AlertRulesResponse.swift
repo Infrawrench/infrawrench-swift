@@ -142,7 +142,7 @@ public struct AlertRulesResponse: Codable, Hashable, Sendable {
 
     public var rules: [AlertRule]
     /// True when the organization has saved no rules and `rules` is the
-    /// synthesized default — everything except drift, to every connected channel
+    /// synthesized default; everything except drift, to every connected channel
     /// and to mobile push.
     public var usingDefaults: Bool
     public var slackChannels: [SlackChannel2]

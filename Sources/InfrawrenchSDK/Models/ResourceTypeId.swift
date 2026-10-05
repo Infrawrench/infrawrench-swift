@@ -13,7 +13,7 @@
  */
 import Foundation
 
-/// Resource type id. Note: not every plugin exposes every type — see the plugin's
+/// Resource type id. Note: not every plugin exposes every type; see the plugin's
 /// `resourceTypes` for the valid (pluginId, typeId) pairs.
 public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
     case accessApplication

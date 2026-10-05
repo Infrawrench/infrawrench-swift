@@ -21,13 +21,13 @@ public struct RevertApplyResponse: Codable, Hashable, Sendable {
     public var plan: RevertPlan
     public var revertedAt: String
     /// True when this request wrote nothing and instead recorded an *earlier*
-    /// interrupted attempt's write — the resource was already back, and the event
+    /// interrupted attempt's write: the resource was already back, and the event
     /// is now marked reverted. Nothing was sent to the provider by this request.
     public var reconciled: Bool?
     /// Present and `false` only when the audit entry could not be written. The
     /// provider change still happened; its attribution did not reach the audit
     /// table and was written to the server log instead. Attribution is
-    /// best-effort — nothing transactional spans a third-party cloud API and
+    /// best-effort; nothing transactional spans a third-party cloud API and
     /// Infrawrench's database.
     public var auditRecorded: Bool?
 

@@ -16,7 +16,7 @@ import Foundation
 public struct RegisteredAgent: Codable, Hashable, Sendable {
     public var registration_id: String
     /// Bearer credential for this registration. Format `iwa_<base64url>`.
-    /// Returned once and never recoverable — there is no route that can show it
+    /// Returned once and never recoverable: there is no route that can show it
     /// again.
     public var credential: String
     public var organization_id: String

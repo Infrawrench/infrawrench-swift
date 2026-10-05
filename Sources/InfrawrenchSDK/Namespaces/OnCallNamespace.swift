@@ -41,7 +41,7 @@ public final class OnCallNamespace: Sendable {
     /// Who is on call right now
     ///
     /// One entry per rotation: the shift in effect, and the next person in the
-    /// rotation. Takes `team:read` — knowing who is on call is something every
+    /// rotation. Takes `team:read`: knowing who is on call is something every
     /// member needs and nobody should have to ask an admin for.
     ///
     /// GET /api/org/{orgId}/on-call/now
@@ -168,7 +168,7 @@ public final class OnCallSchedulesNamespace: Sendable {
     /// Shift boundaries are calendar-day arithmetic in the rotation's own zone,
     /// not 24-hour arithmetic: a rotation stepped in fixed milliseconds drifts an
     /// hour at each daylight-saving change until the 09:00 Monday handover
-    /// happens at 08:00 — or until two people each think the other is on call.
+    /// happens at 08:00; or until two people each think the other is on call.
     ///
     /// Writing takes `org:settings:write`: a rotation decides who gets woken up.
     ///
@@ -275,7 +275,7 @@ public final class OnCallSchedulesNamespace: Sendable {
     /// Edit an on-call rotation
     ///
     /// Omitted fields are left alone, and the result is validated after merging.
-    /// Sending `participantUserIds` replaces the list wholesale — position is
+    /// Sending `participantUserIds` replaces the list wholesale; position is
     /// rotation order, so reordering re-plans the future.
     ///
     /// PATCH /api/org/{orgId}/on-call/schedules/{scheduleId}

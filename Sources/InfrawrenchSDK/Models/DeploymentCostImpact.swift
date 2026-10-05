@@ -30,7 +30,7 @@ public struct DeploymentCostImpact: Codable, Hashable, Sendable {
     public var runId: String
     public var costBasis: ChangeCostBasis
     public var windowDays: Int
-    /// The run's start day, UTC — what both windows hang off.
+    /// The run's start day, UTC; what both windows hang off.
     public var eventDay: String
     /// One row per resource the run provisioned through
     /// `infra.accounts.*.create(...)`. That is the only set attributable to a run

@@ -121,7 +121,7 @@ public struct NetworkFlowScopeSummary: Codable, Hashable, Sendable {
     }
 
     /// Which billing boundary the traffic crossed. `unknown` means the provider's
-    /// record did not determine one — it is priced at zero and labelled rather
+    /// record did not determine one; it is priced at zero and labelled rather
     /// than folded into a neighbouring boundary.
     public var scope: Scope
     public var direction: Direction
@@ -132,7 +132,7 @@ public struct NetworkFlowScopeSummary: Codable, Hashable, Sendable {
     public var crossedRegion: Bool
     public var leftCloud: Bool
     /// Bytes inside `bytes` whose endpoints could not be tied to a workload. A
-    /// subset, not an addition — nothing here has been apportioned across the
+    /// subset, not an addition: nothing here has been apportioned across the
     /// attributed rows.
     public var unattributedBytes: Double
     /// Bytes inside `bytes` that fell below the stored top-N pair cap, computed

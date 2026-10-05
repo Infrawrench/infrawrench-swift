@@ -63,7 +63,7 @@ public struct IacReconciliationResponse: Codable, Hashable, Sendable {
 
     public var state: IacState
     public var resources: [IacReconciledResource]
-    /// State entries with no inventory match — their own category.
+    /// State entries with no inventory match, their own category.
     public var stateOnly: [IacStateOnlyResource]
     public var summary: Summary
     /// Plugin resource types whose Terraform type could not be derived from the

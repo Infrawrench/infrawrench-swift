@@ -14,7 +14,7 @@
 import Foundation
 
 public struct NetworkFlowEndpoint: Codable, Hashable, Sendable {
-    /// Stable endpoint identity — a provider resource id where one could be
+    /// Stable endpoint identity; a provider resource id where one could be
     /// resolved, otherwise a class token (`internet`, `aws:s3`,
     /// `infrawrench:unattributed`). Never a raw IP address: addresses churn, so
     /// the same workload would be a different row every day.

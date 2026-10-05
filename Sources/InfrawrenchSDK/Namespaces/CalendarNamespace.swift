@@ -30,7 +30,7 @@ public final class CalendarNamespace: Sendable {
     /// One time axis over six things the organization already stores: change
     /// freezes, sleep/wake schedules, declared deadlines (certificates, domains,
     /// keys and resource leases), commitment term ends, cron-triggered workflow
-    /// runs, and declared incidents. Nothing here is a new record — the calendar
+    /// runs, and declared incidents. Nothing here is a new record; the calendar
     /// is recomputed on every read, exactly as posture findings and backup
     /// coverage are.
     ///
@@ -84,7 +84,7 @@ public final class CalendarSubscriptionsNamespace: Sendable {
     ///
     /// Returns the only copy of the feed URL. The token in it is 32 random bytes,
     /// stored as a SHA-256 hash, and is the sole credential on a route that runs
-    /// outside every auth layer — treat the URL as a secret. The URL deliberately
+    /// outside every auth layer; treat the URL as a secret. The URL deliberately
     /// contains no organization id.
     ///
     /// An organization may hold 25 live subscriptions; revoking makes room.
@@ -139,7 +139,7 @@ public final class CalendarSubscriptionsNamespace: Sendable {
 
     /// List the organization's iCalendar subscriptions
     ///
-    /// Feed URLs that have been minted, including revoked ones — a revoked row is
+    /// Feed URLs that have been minted, including revoked ones; a revoked row is
     /// kept so the audit trail still resolves. The token itself is never
     /// returned.
     ///

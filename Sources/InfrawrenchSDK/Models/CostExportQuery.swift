@@ -199,7 +199,7 @@ public struct CostExportQuery: Codable, Hashable, Sendable {
     }
 
     public var version: Double
-    /// Row-identity columns kept in the output. Dropping one aggregates over it —
+    /// Row-identity columns kept in the output. Dropping one aggregates over it;
     /// an export grouped to provider + service is orders of magnitude smaller
     /// than a per-resource one.
     public var dimensions: [Dimension]

@@ -15,7 +15,7 @@ import Foundation
 
 /// What a captured create-form field is filled with at instantiation. `literal`
 /// is the captured value; `parameter` is a field the user chose to vary; `output`
-/// is another member's resolved output (a connection string, an IP — the captured
+/// is another member's resolved output (a connection string, an IP; the captured
 /// half of an output reference); `member-id` is another member's provider-side
 /// id.
 ///

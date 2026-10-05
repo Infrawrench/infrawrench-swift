@@ -93,7 +93,7 @@ public struct AlertRulesDeliveriesAckResult: Codable, Hashable, Sendable {
     public var acknowledged: Bool
     public var alreadyAcknowledgedBy: String?
     /// Why the acknowledgement did not take. `not_pending` means the delivery
-    /// exists but was never awaiting one — still held, already sent, or expired.
+    /// exists but was never awaiting one; still held, already sent, or expired.
     public var reason: Reason?
     public var title: String?
 
@@ -195,10 +195,10 @@ public final class AlertRulesNamespace: Sendable {
 
     /// Replace the organization's alert routing rules
     ///
-    /// Whole-list replacement in one transaction. Order is part of the meaning —
-    /// a rule is only correct relative to the ones above it — so a reorder
-    /// applied as several requests would leave a window in which alerts route
-    /// somewhere nobody asked for. Positions are re-derived from array order.
+    /// Whole-list replacement in one transaction. Order is part of the meaning (a
+    /// rule is only correct relative to the ones above it) so a reorder applied
+    /// as several requests would leave a window in which alerts route somewhere
+    /// nobody asked for. Positions are re-derived from array order.
     ///
     /// PUT /api/org/{orgId}/alert-rules
     ///

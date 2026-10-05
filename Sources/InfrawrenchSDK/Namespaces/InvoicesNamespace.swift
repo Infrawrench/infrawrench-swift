@@ -22,7 +22,7 @@ public final class InvoicesNamespace: Sendable {
         self.transport = transport
     }
 
-    /// Approve an invoice — freeze its figures
+    /// Approve an invoice; freeze its figures
     ///
     /// Computes the figures one last time and writes them onto the invoice
     /// together with the exchange rates, the day they were read, the billing
@@ -37,7 +37,7 @@ public final class InvoicesNamespace: Sendable {
     /// customer's currency.
     ///
     /// Refused with 409, too, when the draft or its customer changed while the
-    /// figures were being computed — a different period, scope, currency, cost
+    /// figures were being computed: a different period, scope, currency, cost
     /// basis or billing-rules setting. Nothing is approved in that case: freezing
     /// figures that describe a different question would be worse than making the
     /// caller look again.
@@ -134,9 +134,9 @@ public final class InvoicesNamespace: Sendable {
     /// Download an invoice as CSV
     ///
     /// The derivation, not a rendered document: what was collected, what the
-    /// rules added, the rate and the day it was read, and the final figure —
-    /// every column an accounts-payable clerk needs to check the arithmetic. Same
-    /// RFC 4180 quoting as the scheduled cost exports.
+    /// rules added, the rate and the day it was read, and the final figure; every
+    /// column an accounts-payable clerk needs to check the arithmetic. Same RFC
+    /// 4180 quoting as the scheduled cost exports.
     ///
     /// _Requires permission: `invoices:read`._
     ///
@@ -193,7 +193,7 @@ public final class InvoicesNamespace: Sendable {
     /// List invoices
     ///
     /// Summaries, newest period first. A draft's `totals` is null here rather
-    /// than recomputed — recomputing every draft would make opening the list one
+    /// than recomputed; recomputing every draft would make opening the list one
     /// cost-data scan per draft, and zero would be a lie the reader cannot
     /// detect.
     ///
@@ -224,7 +224,7 @@ public final class InvoicesNamespace: Sendable {
 
     /// Send an invoice to its customer
     ///
-    /// Changes no figure — the document was frozen at approval. It records the
+    /// Changes no figure; the document was frozen at approval. It records the
     /// **release** (this may go to the customer, and this person said so), then
     /// emails the invoice to the customer's contact addresses with the CSV
     /// attached.
@@ -235,8 +235,8 @@ public final class InvoicesNamespace: Sendable {
     /// delivery is visible, and re-sending retries it.
     ///
     /// Sending again needs `resend: true` only when the last attempt reached
-    /// somebody — see `InvoiceSendRequest`. The body may be omitted entirely for
-    /// a first send.
+    /// somebody, see `InvoiceSendRequest`. The body may be omitted entirely for a
+    /// first send.
     ///
     /// _Requires permission: `invoices:issue`._
     ///
@@ -270,7 +270,7 @@ public final class InvoicesNamespace: Sendable {
     /// Edit a draft invoice
     ///
     /// Draft only. An approved, sent or void invoice is refused with 409 by the
-    /// service, not merely hidden by the UI — an issued invoice that silently
+    /// service, not merely hidden by the UI; an issued invoice that silently
     /// changed after the customer received it is the worst outcome this feature
     /// could produce.
     ///
@@ -306,7 +306,7 @@ public final class InvoicesNamespace: Sendable {
     /// Void an issued invoice
     ///
     /// The only correction there is. The original keeps every figure it was sent
-    /// with — “we billed you this, it was wrong, here is the corrected one” is a
+    /// with: “we billed you this, it was wrong, here is the corrected one” is a
     /// story a customer can follow, and “we changed the invoice” is not.
     ///
     /// With `supersede`, the void, the corrective draft and both directions of

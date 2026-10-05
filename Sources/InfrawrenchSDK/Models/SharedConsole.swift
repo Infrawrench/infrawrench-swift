@@ -66,7 +66,7 @@ public struct SharedConsole: Codable, Hashable, Sendable {
     public var ownerName: String?
     public var accountId: String?
     public var resourceId: String?
-    /// Final hop, as the proxy dialled it — never as a client asserted it.
+    /// Final hop, as the proxy dialled it; never as a client asserted it.
     public var host: String
     public var port: Int
     public var username: String
@@ -74,7 +74,7 @@ public struct SharedConsole: Codable, Hashable, Sendable {
     /// type. This is the one hard safety property the feature offers, as opposed
     /// to inferring intent from command text.
     public var allowHandover: Bool
-    /// `revoked` — somebody ended the share; `ended` — the underlying SSH session
+    /// `revoked`: somebody ended the share; `ended`: the underlying SSH session
     /// closed. Either way the fan-out stops and attached guests are disconnected.
     public var status: Status
     public var inviteTokenPrefix: String?

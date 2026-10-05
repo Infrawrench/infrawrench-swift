@@ -36,8 +36,8 @@ public struct BusinessMetricValuesInput: Codable, Hashable, Sendable {
     }
 
     /// Days to report. **Re-reporting a day (with the same labels) restates it
-    /// rather than adding to it**, so an unattended nightly job is safe to retry
-    /// — an accumulating write would double every number the first time the job
+    /// rather than adding to it**, so an unattended nightly job is safe to retry;
+    /// an accumulating write would double every number the first time the job
     /// re-ran. A batch naming the same day and labels twice keeps the last value,
     /// applying the same rule within a batch that restatement applies between
     /// them.

@@ -85,7 +85,7 @@ public struct AccessRequest: Codable, Hashable, Sendable {
     public var revokedAt: String?
     public var revokedByName: String?
     /// True when this row is granting permissions right now. Evaluated, never
-    /// swept — a grant stops applying the instant it lapses.
+    /// swept; a grant stops applying the instant it lapses.
     public var active: Bool
     public var createdAt: String
 

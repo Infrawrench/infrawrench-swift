@@ -24,8 +24,8 @@ public final class EnvironmentDiffNamespace: Sendable {
 
     /// Compare two accounts' resource inventories
     ///
-    /// Compares two accounts of the same provider — typically staging against
-    /// production — over already-synced state: which resource types exist in one
+    /// Compares two accounts of the same provider (typically staging against
+    /// production) over already-synced state: which resource types exist in one
     /// and not the other, the per-type count deltas, and the fields on which two
     /// corresponding resources disagree (instance class, engine version, feature
     /// flags).
@@ -33,8 +33,8 @@ public final class EnvironmentDiffNamespace: Sendable {
     /// Resources are paired by resource type plus name with environment words
     /// removed, so `api-staging` lines up with `api-prod` without any naming
     /// convention to configure. By default the comparison hides divergences that
-    /// are artefacts of being two different resources — ids, links, network
-    /// addresses and timestamps — because every resource has different ones; pass
+    /// are artefacts of being two different resources (ids, links, network
+    /// addresses and timestamps) because every resource has different ones; pass
     /// `includeIdentityFields=true` to see them.
     ///
     /// Read-only and cheap: no provider API calls are made, so results reflect
@@ -51,7 +51,7 @@ public final class EnvironmentDiffNamespace: Sendable {
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
     ///
-    /// - Parameter a: Baseline account id — by convention the environment that
+    /// - Parameter a: Baseline account id; by convention the environment that
     /// works.
     ///
     /// - Parameter b: Compared account id. Must differ from `a` and use the same

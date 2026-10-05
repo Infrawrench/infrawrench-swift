@@ -17,7 +17,7 @@ public struct OrphanListResponse: Codable, Hashable, Sendable {
     /// Groups sorted by account name.
     public var accounts: [OrphanAccountGroup]
     public var totalCount: Int
-    /// Flagged resources with no recorded owner — the 'nobody to ask' count.
+    /// Flagged resources with no recorded owner; the 'nobody to ask' count.
     public var unownedCount: Int
     /// Days of trailing spend the annotations cover.
     public var costWindowDays: Int

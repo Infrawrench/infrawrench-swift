@@ -27,7 +27,7 @@ public final class BillingNamespace: Sendable {
 
     /// Start a Stripe Checkout session
     ///
-    /// Rejected with 400 for complimentary organizations — they are never billed.
+    /// Rejected with 400 for complimentary organizations; they are never billed.
     ///
     /// _Requires permission: `billing:write`._
     ///
@@ -114,7 +114,7 @@ public final class BillingCapacityNamespace: Sendable {
     /// A capacity slot is one seat bought outright for a fixed term instead of
     /// rented monthly, and it grants paid-plan access on its own. This is a
     /// one-time payment, so the seats are granted by the
-    /// `checkout.session.completed` webhook once Stripe confirms the payment — a
+    /// `checkout.session.completed` webhook once Stripe confirms the payment; a
     /// 200 here only means the buyer was sent to a payment page. Rejected with
     /// 400 for complimentary organizations, and 503 when the deployment has no
     /// one-time capacity price configured.

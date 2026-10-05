@@ -14,12 +14,12 @@
 import Foundation
 
 /// One place a matched alert goes. `push` reaches the organization's phones,
-/// still filtered by each member's own mutes — an organization rule decides
+/// still filtered by each member's own mutes; an organization rule decides
 /// whether the org is told, a member decides whether their phone rings.
 ///
 /// `on-call` resolves to one person at delivery time, so a rule reading "database
 /// alerts → whoever is on call" needs no edit at handover. A rotation that
-/// resolves to nobody — disabled, empty, not yet started — contributes nobody and
+/// resolves to nobody (disabled, empty, not yet started) contributes nobody and
 /// the rule's **other** destinations still deliver: an alert lost to a
 /// misconfigured rotation would be the worst outcome the feature could have.
 ///

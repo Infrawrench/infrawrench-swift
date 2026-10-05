@@ -14,7 +14,7 @@
 import Foundation
 
 public struct LogStreamSelector: Codable, Hashable, Sendable {
-    /// Infrawrench resource id of the stream to tail — or, for a sidecar stream,
+    /// Infrawrench resource id of the stream to tail; or, for a sidecar stream,
     /// the peer plugin's own resource id (not a stored row).
     public var resourceId: String
     public var accountId: String

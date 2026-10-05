@@ -14,7 +14,7 @@
 import Foundation
 
 /// A customer a managed service provider bills. A cost centre or cloud account
-/// belongs to at most one managed account — billing the same money to two
+/// belongs to at most one managed account; billing the same money to two
 /// customers is refused at write time with a 409 naming the other customer.
 public struct ManagedAccount: Codable, Hashable, Sendable {
     public enum CostBasis2: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {

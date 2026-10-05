@@ -16,7 +16,7 @@ import Foundation
 public struct JiraIssueType: Codable, Hashable, Sendable {
     public var id: String
     public var name: String
-    /// Always false — subtasks need a parent issue, so they are filtered out.
+    /// Always false: subtasks need a parent issue, so they are filtered out.
     public var subtask: Bool
     public var description: String?
 

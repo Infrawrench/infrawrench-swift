@@ -35,7 +35,7 @@ public final class WorkflowsNamespace: Sendable {
     /// SSH key names, and the workflow's trigger + metrics. Default is the fast
     /// static surface (`create` fields are `Record<string, string>`). Pass
     /// `enrich=1` for a second pass that hits provider APIs for precise create()
-    /// field unions and live sidecar capability flags — the editor loads static
+    /// field unions and live sidecar capability flags; the editor loads static
     /// first and upgrades when that finishes.
     ///
     /// _Requires permission: `workflows:read`._
@@ -144,7 +144,7 @@ public final class WorkflowsScheduleNamespace: Sendable {
     ///
     /// Sets the workflow's trigger to cron with the given expression and
     /// timezone, validating both, and computes the next fire time. The workflow
-    /// fires at the schedule's next occurrence — never immediately on save.
+    /// fires at the schedule's next occurrence; never immediately on save.
     ///
     /// Changing the schedule makes scheduled runs act with the permissions of the
     /// caller from then on, the same as editing the workflow's code. When the

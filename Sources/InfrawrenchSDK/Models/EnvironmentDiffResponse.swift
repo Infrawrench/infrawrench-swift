@@ -24,7 +24,7 @@ public struct EnvironmentDiffResponse: Codable, Hashable, Sendable {
     public var entries: [EnvironmentDiffEntry]
     public var totals: EnvironmentDiffTotals
     /// Resource types excluded because they could not be listed. Always empty
-    /// over this API — it reads already-synced rows, which cannot half-fail — and
+    /// over this API; it reads already-synced rows, which cannot half-fail; and
     /// populated only by the desktop and CLI local modes, which list live.
     public var unavailableTypes: [EnvironmentDiffUnavailableType]
     public var includeIdentityFields: Bool

@@ -24,8 +24,8 @@ public final class CostReportNotificationsNamespace: Sendable {
 
     /// List every delivery schedule in the organization
     ///
-    /// All reports' schedules in one call — what the CLI's schedules column
-    /// reads. Schedules of deleted reports are excluded.
+    /// All reports' schedules in one call; what the CLI's schedules column reads.
+    /// Schedules of deleted reports are excluded.
     ///
     /// _Requires permission: `costs:read`._
     ///

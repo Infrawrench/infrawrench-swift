@@ -13,7 +13,7 @@
  */
 import Foundation
 
-/// Where opening the event should go — a hint rather than a URL, because each
+/// Where opening the event should go; a hint rather than a URL, because each
 /// surface addresses its own pages differently.
 ///
 /// The API may send `null` in place of this, which is why references to it are

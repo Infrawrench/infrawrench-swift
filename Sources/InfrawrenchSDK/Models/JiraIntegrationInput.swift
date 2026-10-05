@@ -18,7 +18,7 @@ public struct JiraIntegrationInput: Codable, Hashable, Sendable {
     /// .jira.com) host; a bare hostname and a pasted board or issue URL are both
     /// accepted and normalized.
     public var siteUrl: String
-    /// Atlassian account email — the username half of the basic-auth pair.
+    /// Atlassian account email; the username half of the basic-auth pair.
     public var accountEmail: String
     /// API token from id.atlassian.com. Omit to keep the stored token; required
     /// on first connect.

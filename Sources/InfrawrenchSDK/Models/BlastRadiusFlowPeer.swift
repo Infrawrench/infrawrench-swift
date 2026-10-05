@@ -53,7 +53,7 @@ public struct BlastRadiusFlowPeer: Codable, Hashable, Sendable {
         }
     }
 
-    /// The peer's flow ref — a provider resource id, or a class token like
+    /// The peer's flow ref; a provider resource id, or a class token like
     /// `internet`.
     public var ref: String
     public var label: String
@@ -65,7 +65,7 @@ public struct BlastRadiusFlowPeer: Codable, Hashable, Sendable {
     public var bytes: Double
     public var estimatedCost: Double
     public var currency: String
-    /// Days in the window this peer appeared on — a spike versus a standing flow.
+    /// Days in the window this peer appeared on; a spike versus a standing flow.
     public var days: Int
     public var resourceId: ResourceId?
 

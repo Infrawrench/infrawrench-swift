@@ -15,13 +15,13 @@ import Foundation
 
 public struct IncidentActions: Codable, Hashable, Sendable {
     /// Open an org change freeze for the duration, lifted when the incident
-    /// resolves. Defaults to false — freezing has blast radius beyond the
+    /// resolves. Defaults to false; freezing has blast radius beyond the
     /// incident. Needs `freezes:write`; without it the freeze is recorded as a
     /// failed artefact naming the permission, and the incident still stands.
     public var openFreeze: Bool?
     /// Pin the moment (a timestamp and a window) so `GET /moment` is one click
-    /// away. Defaults to true — it cannot fail, and the investigation always
-    /// wants it.
+    /// away. Defaults to true; it cannot fail, and the investigation always wants
+    /// it.
     public var pinMoment: Bool?
     /// Announce through the org's alert routing rules under the `incidentAlerts`
     /// trigger, so channels, quiet hours, escalation and the acknowledge button

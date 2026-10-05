@@ -22,7 +22,7 @@ public struct SleepSchedulePreview: Codable, Hashable, Sendable {
     public var currency: String?
     /// Days of billing data the estimate was computed over (0 = none found).
     public var costWindowDays: Int
-    /// The next few transitions, soonest first — a timezone sanity check.
+    /// The next few transitions, soonest first; a timezone sanity check.
     public var nextTransitions: [ScheduleTransition]
 
     public init(

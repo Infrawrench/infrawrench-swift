@@ -18,7 +18,7 @@ public struct CommitmentsFeed: Codable, Hashable, Sendable {
     public var coverage: CommitmentCoverage
     public var planner: CommitmentPlanner
     public var failures: [CommitmentPollFailure]
-    /// Commitment-capable accounts never yet collected — named rather than
+    /// Commitment-capable accounts never yet collected, named rather than
     /// omitted.
     public var pendingAccountIds: [String]
     public var utilizationWindowDays: Int

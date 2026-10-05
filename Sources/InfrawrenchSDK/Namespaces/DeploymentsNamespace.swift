@@ -179,7 +179,7 @@ public final class DeploymentsRunsNamespace: Sendable {
     /// it; `amortized` spreads a commitment's up-front fee across the term it
     /// buys; `blended` also spreads each commitment's discount evenly over the
     /// usage it could cover. It is echoed on every response because a delta whose
-    /// basis is unstated is unreadable — an amortized 'after' against a cash
+    /// basis is unstated is unreadable: an amortized 'after' against a cash
     /// 'before' looks exactly like a saving.
     public func costImpact(
         orgId: String? = nil,
@@ -293,11 +293,11 @@ public final class DeploymentsRunsNamespace: Sendable {
     /// Roll back to a previous deployment
     ///
     /// Re-runs that run's `deploy()` with the image and plan it recorded,
-    /// building nothing — the exact artifact that was known good ships again. The
+    /// building nothing; the exact artifact that was known good ships again. The
     /// Infrafile is read at the commit that run deployed, not at the branch head.
     /// Only a successful run that produced an image can be rolled back to. With
     /// `deleteCreated`, resources that runs after the target created through
-    /// `infra.accounts` are deleted once the rollback has succeeded — undoing the
+    /// `infra.accounts` are deleted once the rollback has succeeded; undoing the
     /// provisioning, not just the shipping. Deletions are best-effort and
     /// reported in the result's notes.
     ///
@@ -309,7 +309,7 @@ public final class DeploymentsRunsNamespace: Sendable {
     ///
     /// Raises on 401: Unauthenticated
     ///
-    /// Raises on 402: Payment required — the organization's plan does not include
+    /// Raises on 402: Payment required: the organization's plan does not include
     /// this
     ///
     /// Raises on 403: Forbidden
@@ -353,10 +353,10 @@ public final class DeploymentsTriggersNamespace: Sendable {
 
     /// Deploy an environment whenever a branch moves
     ///
-    /// Arming a trigger records the branch's current commit WITHOUT deploying it
-    /// — the trigger fires on the next push, not on the state at the moment it
-    /// was created. The environment is validated against the Infrafile at that
-    /// branch head, so a typo fails here rather than silently never firing.
+    /// Arming a trigger records the branch's current commit WITHOUT deploying it;
+    /// the trigger fires on the next push, not on the state at the moment it was
+    /// created. The environment is validated against the Infrafile at that branch
+    /// head, so a typo fails here rather than silently never firing.
     ///
     /// _Requires permission: `deployments:write`._
     ///

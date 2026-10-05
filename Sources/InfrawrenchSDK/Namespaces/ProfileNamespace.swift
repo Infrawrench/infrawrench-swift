@@ -215,7 +215,7 @@ public final class ProfileNamespace: Sendable {
 
     /// Mint a password reset link for the signed-in user
     ///
-    /// Returns a one-time AuthKit-hosted reset URL rather than emailing it — the
+    /// Returns a one-time AuthKit-hosted reset URL rather than emailing it; the
     /// caller already holds a valid session for the account. Also the way to set
     /// a first password on an SSO or OAuth-only account.
     ///
@@ -423,7 +423,7 @@ public final class ProfileMfaNamespace: Sendable {
 
     /// List enrolled authentication factors
     ///
-    /// Includes factors whose enrolment was never confirmed — WorkOS does not
+    /// Includes factors whose enrolment was never confirmed; WorkOS does not
     /// expose a verified flag.
     ///
     /// GET /api/profile/mfa
@@ -478,7 +478,7 @@ public final class ProfileSessionsNamespace: Sendable {
 
     /// Revoke one session
     ///
-    /// Refuses the session making the request — use sign-out for that.
+    /// Refuses the session making the request, use sign-out for that.
     ///
     /// DELETE /api/profile/sessions/{sessionId}
     ///

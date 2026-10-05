@@ -14,7 +14,7 @@
 import Foundation
 
 public struct ChangeCostImpactsRequest: Codable, Hashable, Sendable {
-    /// Change ids from `GET /changes`. At most 50 — one feed page.
+    /// Change ids from `GET /changes`. At most 50: one feed page.
     public var changeIds: [String]
     /// Days either side of the change. Default 7; clamped server-side.
     public var windowDays: Int?

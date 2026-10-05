@@ -127,7 +127,7 @@ public final class LinearNamespace: Sendable {
     /// created with.
     ///
     /// - Parameter sourceId: Repeat to narrow to specific findings. Omit to
-    /// return every link of the kind — this is the batch lookup a list view makes
+    /// return every link of the kind; this is the batch lookup a list view makes
     /// once instead of one request per row.
     public func links(
         orgId: String? = nil,
@@ -148,7 +148,7 @@ public final class LinearNamespace: Sendable {
 
     /// List Linear teams
     ///
-    /// Backs the team picker, so nobody has to know a team id by hand —
+    /// Backs the team picker, so nobody has to know a team id by hand;
     /// issueCreate requires one, and every issue belongs to exactly one team.
     ///
     /// _Requires permission: `linear:read`._

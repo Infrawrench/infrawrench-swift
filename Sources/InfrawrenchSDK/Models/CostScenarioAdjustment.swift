@@ -104,7 +104,7 @@ public struct CostScenarioAdjustment: Codable, Hashable, Sendable {
     /// `one_off` is a single amount on a single day; `recurring` is an amount
     /// every period from a date; `rate_change` is ±X% of the trend from a date.
     /// The split between an amount and a percentage of the trend is what fixes
-    /// the composition order — see the `scenario` field on the cost query
+    /// the composition order; see the `scenario` field on the cost query
     /// response.
     public var kind: Kind
     public var startDate: String
@@ -112,7 +112,7 @@ public struct CostScenarioAdjustment: Codable, Hashable, Sendable {
     /// is one day.
     public var endDate: String?
     /// Minor units of the model's currency, for the amount kinds; null for
-    /// `rate_change`. May be negative — turning off an old cluster is as real a
+    /// `rate_change`. May be negative; turning off an old cluster is as real a
     /// known future cost as buying a new one.
     public var amountCents: Int?
     /// Always the model's own currency; a model that held two would sum two kinds
@@ -126,7 +126,7 @@ public struct CostScenarioAdjustment: Codable, Hashable, Sendable {
     public var percent: Double?
     /// Which spend this adjustment describes; empty is the whole organization.
     /// For a rate change the scope is what the percentage is *of*. For an amount
-    /// it decides whether the adjustment applies to a given chart at all — a GCP
+    /// it decides whether the adjustment applies to a given chart at all; a GCP
     /// commitment does not belong on a chart filtered to AWS, and one that is
     /// excluded is named in `scenario.outOfScope`.
     public var scope: [CostScenarioScopeTerm]

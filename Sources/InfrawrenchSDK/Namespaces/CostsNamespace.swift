@@ -193,10 +193,10 @@ public final class CostsNamespace: Sendable {
     ///
     /// The three slow-lane cost alerts in one feed, newest first: commitments
     /// about to lapse, commitments that are not being used, and business metrics
-    /// whose cost per unit rose. Unlike budgets, anomalies and change alerts —
-    /// all of which compare a spend total against another spend total — these
-    /// read the commitment calendar and the volume the spend bought, so they see
-    /// the two surprises the other three structurally cannot.
+    /// whose cost per unit rose. Unlike budgets, anomalies and change alerts (all
+    /// of which compare a spend total against another spend total) these read the
+    /// commitment calendar and the volume the spend bought, so they see the two
+    /// surprises the other three structurally cannot.
     ///
     /// _Requires permission: `costs:read`._
     ///
@@ -317,8 +317,8 @@ public final class CostsNamespace: Sendable {
 
     /// Push cost rows from your own systems
     ///
-    /// Reports spend Infrawrench has no provider plugin for — a parsed SaaS
-    /// invoice, an internal chargeback, a colo bill — into the same store the
+    /// Reports spend Infrawrench has no provider plugin for (a parsed SaaS
+    /// invoice, an internal chargeback, a colo bill) into the same store the
     /// provider collectors write to, so it appears in cost graphs, dimension
     /// filters, and budgets alongside everything else.
     ///
@@ -363,7 +363,7 @@ public final class CostsNamespace: Sendable {
     ///
     /// Cost centres nest, so the list is a depth-first tree. Each entry carries
     /// `totals` (spend allocated directly to it) and `subtreeTotals` (its own
-    /// plus every descendant's) — "Engineering, of which Platform" needs both.
+    /// plus every descendant's). "Engineering, of which Platform" needs both.
     /// Rules still evaluate first-match-wins by ascending priority against a flat
     /// list, so a row is allocated exactly once even when a rule targets a parent
     /// and another targets its child; at equal priority the more deeply nested
@@ -391,7 +391,7 @@ public final class CostsNamespace: Sendable {
     ///
     /// - Parameter adjusted: Apply the organization's billing rules (see
     /// /billing-rules): markups multiply, and a reallocation moves a centre's
-    /// spend onto another centre. Off by default — a chargeback report that
+    /// spend onto another centre. Off by default; a chargeback report that
     /// silently showed marked-up numbers is one the receiving team could not
     /// reconcile. On, the response carries `adjustment` with the collected totals
     /// beside the adjusted ones. Fixed-amount rules are booked onto the cost
@@ -445,7 +445,7 @@ public final class CostsNamespace: Sendable {
     ///
     /// Spend on cost rows missing at least one of the org's required tag keys,
     /// overall and per key, plus the largest untagged (account, service) buckets.
-    /// Empty when no tag policy is configured — untagged is only meaningful
+    /// Empty when no tag policy is configured: untagged is only meaningful
     /// against a policy.
     ///
     /// _Requires permission: `costs:read`._
@@ -501,7 +501,7 @@ public final class CostsAnomaliesNamespace: Sendable {
     /// Explain a detected cost anomaly
     ///
     /// Record what a finding actually was, and publish that sentence as a cost
-    /// annotation on **every** chart covering the anomalous day — the point being
+    /// annotation on **every** chart covering the anomalous day; the point being
     /// that 'we migrated the fleet' is not a fact about whichever report somebody
     /// happened to open. The note's date (the anomalous day) and its org-wide
     /// scope are derived from the anomaly and are not the caller's to choose.
@@ -550,7 +550,7 @@ public final class CostsAnomaliesNamespace: Sendable {
     /// trailing 28-day baseline by a statistical threshold (mean + N·stddev, with
     /// an absolute floor to ignore penny-scale noise), and a `new_source`, where
     /// a provider or service with no spend at all across that window suddenly
-    /// billed a material amount. Thresholds are per organization — see GET
+    /// billed a material amount. Thresholds are per organization: see GET
     /// /costs/anomaly-settings. Newest day first, capped at 200 rows.
     ///
     /// _Requires permission: `costs:read`._
@@ -676,8 +676,8 @@ public final class CostsAnomalySettingsNamespace: Sendable {
     /// Get the organization's anomaly detection thresholds
     ///
     /// The tunable part of cost anomaly detection. Everything else about the
-    /// model — the 28-day baseline, the 7-day notification cooldown, the minimum
-    /// history a baseline needs — is fixed. An organization that has never
+    /// model (the 28-day baseline, the 7-day notification cooldown, the minimum
+    /// history a baseline needs ) is fixed. An organization that has never
     /// changed a threshold reads back the defaults. The response also carries the
     /// derived, read-only `smsConfigured`.
     ///
@@ -705,11 +705,11 @@ public final class CostsAnomalySettingsNamespace: Sendable {
     ///
     /// Takes effect on the next detection pass (which runs after each cost
     /// collection). Anomalies already stored are not re-judged. The four
-    /// threshold fields are required — this is a PUT of the whole settings
-    /// object, not a patch — and `smsAlerts` deliberately has no server-side
-    /// default, so a client that omits it is rejected rather than silently
-    /// switching an organization's SMS paging back off. `smsConfigured` is
-    /// derived and is not accepted here.
+    /// threshold fields are required (this is a PUT of the whole settings object,
+    /// not a patch) and `smsAlerts` deliberately has no server-side default, so a
+    /// client that omits it is rejected rather than silently switching an
+    /// organization's SMS paging back off. `smsConfigured` is derived and is not
+    /// accepted here.
     ///
     /// _Requires permission: `costs:write`._
     ///
@@ -928,7 +928,7 @@ public final class CostsEfficiencyAlertSettingsNamespace: Sendable {
     ///
     /// Takes effect on the next evaluation pass (which runs after each cost
     /// collection). Already-fired alerts are not re-judged, and horizons that
-    /// have already fired for a commitment's current term do not fire again —
+    /// have already fired for a commitment's current term do not fire again;
     /// widening the horizon list warns about future crossings, not past ones. A
     /// PUT of the whole object, not a patch.
     ///

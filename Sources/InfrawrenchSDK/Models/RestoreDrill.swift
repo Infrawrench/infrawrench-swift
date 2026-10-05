@@ -66,7 +66,7 @@ public struct RestoreDrill: Codable, Hashable, Sendable {
     public var resourceName: String?
     public var accountId: String?
     public var accountName: String?
-    /// When the drill was performed, which is **not** when it was recorded —
+    /// When the drill was performed, which is **not** when it was recorded;
     /// people write these up on Monday for a drill they ran on Saturday, and
     /// every staleness computation uses this.
     public var performedAt: String
@@ -80,7 +80,7 @@ public struct RestoreDrill: Codable, Hashable, Sendable {
     /// blocked drill has no RTO, and an invented one would be the most dangerous
     /// number on the page.
     public var rtoMinutes: Int?
-    /// Snapshot id, S3 key, a date — free text.
+    /// Snapshot id, S3 key, a date, free text.
     public var restoredFrom: String?
     public var notes: String?
     public var performedByUserId: String?

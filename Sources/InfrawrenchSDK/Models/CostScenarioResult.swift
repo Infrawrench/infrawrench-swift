@@ -79,7 +79,7 @@ public struct CostScenarioResult: Codable, Hashable, Sendable {
     public var modelId: String
     public var modelName: String
     public var currency: String
-    /// The adjusted projection — exactly the same days as `forecast`, never one
+    /// The adjusted projection; exactly the same days as `forecast`, never one
     /// more or fewer. A scenario modifies the projected region; it does not
     /// extend it, and it can never touch a day that already has recorded spend
     /// behind it.
@@ -90,7 +90,7 @@ public struct CostScenarioResult: Codable, Hashable, Sendable {
     public var totalDelta: Double
     /// Set when the model's amounts were converted at the org's stated rates.
     public var convertedFrom: String?
-    /// Adjustments this chart's own filters exclude, by label — a GCP commitment
+    /// Adjustments this chart's own filters exclude, by label; a GCP commitment
     /// on an AWS-filtered chart is correctly left out, and saying so is what
     /// makes the number trustworthy rather than quietly assumed broken.
     public var outOfScope: [String]

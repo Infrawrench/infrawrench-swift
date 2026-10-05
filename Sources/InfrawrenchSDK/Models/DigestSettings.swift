@@ -97,10 +97,10 @@ public struct DigestSettings: Codable, Hashable, Sendable {
     public var attemptCount: Int
     public var lastAttemptAt: String?
     /// Outcome of the most recent delivery attempt. `partial` (some destinations
-    /// took it, some failed) is deliberately never retried automatically — a
-    /// retry would post the digest twice where it already landed. `failed`
-    /// (nothing landed) is retried a bounded number of times with backoff, then
-    /// parked until the next week.
+    /// took it, some failed) is deliberately never retried automatically; a retry
+    /// would post the digest twice where it already landed. `failed` (nothing
+    /// landed) is retried a bounded number of times with backoff, then parked
+    /// until the next week.
     public var lastStatus: LastStatus?
     /// Why the last attempt was not a clean success, for display in the settings
     /// UI.

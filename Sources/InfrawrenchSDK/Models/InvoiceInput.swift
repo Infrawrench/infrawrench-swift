@@ -20,7 +20,7 @@ public struct InvoiceInput: Codable, Hashable, Sendable {
     public var periodFrom: String
     public var periodTo: String
     public var notes: String?
-    /// The void invoice this one corrects. The original must already be void — a
+    /// The void invoice this one corrects. The original must already be void; a
     /// correction that leaves the original standing means the customer holds two
     /// live invoices for one period.
     public var supersedesInvoiceId: String?

@@ -186,7 +186,7 @@ public struct InvoiceDerivation: Codable, Hashable, Sendable {
 
     public var costBasis: CostBasis2
     public var applyBillingRules: Bool
-    /// The day the exchange rates were read — always the period's last day. One
+    /// The day the exchange rates were read; always the period's last day. One
     /// rate for the period rather than a per-day blend: “January, at the 31
     /// January rate” is a sentence a finance team can reproduce.
     public var rateDate: String
@@ -197,8 +197,8 @@ public struct InvoiceDerivation: Codable, Hashable, Sendable {
     public var unconverted: [String]
     public var rules: [Rule]
     public var scope: Scope
-    /// Scope entries that no longer exist. Recorded rather than silently skipped
-    /// — an invoice that is quietly short is worse than one that says why.
+    /// Scope entries that no longer exist. Recorded rather than silently skipped;
+    /// an invoice that is quietly short is worse than one that says why.
     public var missingScope: [String]
     public var pricing: ManagedAccountPricing?
     /// Every rule or setting that moved money, in pipeline order, with its total

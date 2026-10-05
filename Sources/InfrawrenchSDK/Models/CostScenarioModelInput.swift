@@ -16,7 +16,7 @@ import Foundation
 public struct CostScenarioModelInput: Codable, Hashable, Sendable {
     public var name: String
     public var description: String?
-    /// Three-letter code. Every amount in the model must be in it — a model that
+    /// Three-letter code. Every amount in the model must be in it; a model that
     /// mixed two would produce a projection that is the sum of two kinds of
     /// money, so this is refused rather than converted behind the caller's back.
     public var currency: String

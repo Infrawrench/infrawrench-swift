@@ -100,7 +100,7 @@ public struct CostExportInput: Codable, Hashable, Sendable {
     public var format: Format
     public var schema: CostExportSchema?
     public var query: CostExportQuery
-    /// How often a run happens and — because a run writes one object per period —
+    /// How often a run happens and (because a run writes one object per period)
     /// what a period is: a calendar day, an ISO week (Monday-start), or a
     /// calendar month.
     public var cadence: Cadence
@@ -120,7 +120,7 @@ public struct CostExportInput: Codable, Hashable, Sendable {
     public var accessKeyId: String?
     /// S3 only. Write-only, never returned.
     public var secretAccessKey: String?
-    /// HTTPS destinations only. Write-only, never returned — a signed URL carries
+    /// HTTPS destinations only. Write-only, never returned; a signed URL carries
     /// its own signature, so it is treated as a bearer credential.
     public var url: String?
 

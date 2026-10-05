@@ -13,9 +13,9 @@
  */
 import Foundation
 
-/// `measured` — both windows had collected data and the delta is real.
-/// `insufficient_data` — the windows exist but are too short to compare.
-/// `unknown` — nothing here can answer the question. **`unknown` is never zero**:
+/// `measured`: both windows had collected data and the delta is real.
+/// `insufficient_data`: the windows exist but are too short to compare.
+/// `unknown`: nothing here can answer the question. **`unknown` is never zero**:
 /// a resource with no cost data reports that we cannot say, not that the change
 /// was free.
 public enum ChangeCostImpactStatus: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {

@@ -62,8 +62,8 @@ public struct CostQueryResponse: Codable, Hashable, Sendable {
     public var scenario: CostScenarioResult?
     public var currencies: [String]
     /// Period total per currency, and always exactly the sum of `series`.
-    /// Fixed-amount billing-rule charges are deliberately **not** folded in here
-    /// — they have no series behind them and are reported in
+    /// Fixed-amount billing-rule charges are deliberately **not** folded in here;
+    /// they have no series behind them and are reported in
     /// `adjustment.fixedTotals` instead.
     public var totals: [String: Double]
     public var previousTotals: [String: Double]?

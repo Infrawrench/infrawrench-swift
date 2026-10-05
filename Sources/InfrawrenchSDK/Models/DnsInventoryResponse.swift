@@ -19,7 +19,7 @@ public struct DnsInventoryResponse: Codable, Hashable, Sendable {
     /// Sorted worst status first, then by name.
     public var records: [DnsRecord]
     public var counts: DnsInventoryCounts
-    /// Provider namespaces that were declared but not evaluated, and why — either
+    /// Provider namespaces that were declared but not evaluated, and why; either
     /// no account for the plugin is connected, or no claimant resource has
     /// synced. Both are missing data rather than a clean bill of health, so they
     /// are reported rather than hidden.

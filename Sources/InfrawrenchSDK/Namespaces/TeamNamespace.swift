@@ -89,7 +89,7 @@ public final class TeamInvitationsNamespace: Sendable {
     ///
     /// POST /api/org/{orgId}/team/invitations
     ///
-    /// Raises on 402: Payment required — the organization's plan does not include
+    /// Raises on 402: Payment required: the organization's plan does not include
     /// this
     ///
     /// Raises on 403: The role would grant permissions the caller does not hold,

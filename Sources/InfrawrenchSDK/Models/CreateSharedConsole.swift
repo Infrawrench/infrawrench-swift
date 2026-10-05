@@ -15,9 +15,9 @@ import Foundation
 
 public struct CreateSharedConsole: Codable, Hashable, Sendable {
     /// The pty to share, as the terminal's WebSocket reported it in its
-    /// `ssh:connected` frame. Everything else about the session — host, account,
-    /// recording — is read from the proxy's own registration rather than from
-    /// this body.
+    /// `ssh:connected` frame. Everything else about the session (host, account,
+    /// recording) is read from the proxy's own registration rather than from this
+    /// body.
     public var liveConsoleId: String
     public var routingKey: String
     /// Defaults to true.

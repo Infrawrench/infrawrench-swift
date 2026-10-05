@@ -91,7 +91,7 @@ public struct CostQueryRequest: Codable, Hashable, Sendable {
     public var groupBy: GroupBy
     public var groupByTagKey: String?
     public var filters: [CostFilter]?
-    /// The same filter written as text, in the cost query language — an
+    /// The same filter written as text, in the cost query language; an
     /// alternative to `filters`, compiled server-side into exactly that
     /// structure.
     ///
@@ -114,15 +114,15 @@ public struct CostQueryRequest: Codable, Hashable, Sendable {
     public var query: String?
     /// A saved cost filter (see /saved-cost-filters) applied by reference.
     /// Resolved server-side at query time and AND-composed with whichever of
-    /// `filters`/`query` is present — unlike those two it is a composition, not
-    /// an alternative. An id that does not resolve to a live filter is a 400; the
+    /// `filters`/`query` is present: unlike those two it is a composition, not an
+    /// alternative. An id that does not resolve to a live filter is a 400; the
     /// query is never silently run unfiltered.
     public var savedFilterId: String?
     public var topN: Int?
     public var comparePreviousPeriod: Bool?
     public var forecast: Bool?
     /// Apply a scenario model (see /cost-scenarios) to the projection: known
-    /// future cost the trend cannot see. Requires `forecast: true` — sending it
+    /// future cost the trend cannot see. Requires `forecast: true`: sending it
     /// without one is a 400, not a no-op, because a caller who asked for
     /// assumptions and silently got none back is the failure this feature exists
     /// to prevent. The adjusted projection comes back as `scenario`,
@@ -131,12 +131,12 @@ public struct CostQueryRequest: Codable, Hashable, Sendable {
     public var scenarioModelId: String?
     public var costBasis: CostBasis?
     /// Restrict to these kinds of charge. Omitted is all of them, which is what
-    /// makes an unfiltered total net rather than gross — credits, refunds and
+    /// makes an unfiltered total net rather than gross; credits, refunds and
     /// commitment discounts are included. Rows collected before charge types
     /// existed, and rows from providers that cannot distinguish them, are
     /// `usage`.
     public var chargeTypes: [CostChargeType]?
-    /// Apply the organization's billing rules (see /billing-rules) — markups,
+    /// Apply the organization's billing rules (see /billing-rules); markups,
     /// discounts, reallocations. Omitted (the default, and what every unattended
     /// reader sends) is raw collected spend. Present, the response carries
     /// `adjustment` with the collected totals beside the adjusted ones and the

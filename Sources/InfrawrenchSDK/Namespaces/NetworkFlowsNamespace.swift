@@ -53,7 +53,7 @@ public final class NetworkFlowsNamespace: Sendable {
     /// line.
     ///
     /// Accounts whose provider has no readable flow source appear in `accounts`
-    /// with `supportsFlows: false` and contribute nothing to the totals — never
+    /// with `supportsFlows: false` and contribute nothing to the totals; never
     /// zero bytes.
     ///
     /// _Requires permission: `costs:read`._
@@ -260,7 +260,7 @@ public final class NetworkFlowsSettingsNamespace: Sendable {
     /// Turn network flow collection on or off
     ///
     /// Collection is **off by default**. Enabling it authorizes Infrawrench to
-    /// run daily queries against the provider's log store — and on AWS those
+    /// run daily queries against the provider's log store; and on AWS those
     /// queries are billed to your own cloud account per GB of log data scanned,
     /// every day, until you turn them off. That is why the write is governed by
     /// `org:settings:write` rather than `costs:write`, and why it is

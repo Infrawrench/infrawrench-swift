@@ -21,7 +21,7 @@ public struct ChangeCostImpact: Codable, Hashable, Sendable {
     /// The half-window the data supported. Clamped symmetrically, so both means
     /// always average the same number of days.
     public var effectiveWindowDays: Int
-    /// UTC day the change landed on. Excluded from both windows — it is a mixed
+    /// UTC day the change landed on. Excluded from both windows; it is a mixed
     /// day.
     public var eventDay: String
     public var before: ChangeCostImpactWindow?

@@ -17,7 +17,7 @@ public struct InvoiceSummary: Codable, Hashable, Sendable {
     public var id: String
     public var managedAccountId: String
     public var managedAccountName: String
-    /// `INV-2026-0001`. Null while draft — numbers are assigned at approval so a
+    /// `INV-2026-0001`. Null while draft: numbers are assigned at approval so a
     /// deleted draft cannot leave a gap in the sequence.
     public var number: String?
     public var status: InvoiceStatus

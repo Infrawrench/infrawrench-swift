@@ -146,7 +146,7 @@ public struct CostAccountStatus: Codable, Hashable, Sendable {
     public var periodNative: Bool
     public var dimensions: [Dimension]
     /// Whether this account's plugin can tell one kind of charge from another.
-    /// False means every row it writes is recorded as `usage` — not that the
+    /// False means every row it writes is recorded as `usage`: not that the
     /// provider only bills usage.
     public var chargeTypes: Bool
     /// Whether this account's plugin reports an amortized amount distinct from
@@ -158,9 +158,9 @@ public struct CostAccountStatus: Codable, Hashable, Sendable {
     /// Clients offer the blended cost basis only when at least one account says
     /// yes; elsewhere it reads as the amortized numbers.
     public var blending: Bool?
-    /// Whether this account's amounts are derived by Infrawrench — inventory
+    /// Whether this account's amounts are derived by Infrawrench (inventory
     /// priced against a rate card, or metered usage priced at published list
-    /// rates — rather than reported as billed spend. True means the series cannot
+    /// rates) rather than reported as billed spend. True means the series cannot
     /// be reconciled against an invoice: resources deleted part-way through a
     /// period are no longer in inventory to be priced, all rates are list rather
     /// than negotiated, and credits, tax and refunds never appear.

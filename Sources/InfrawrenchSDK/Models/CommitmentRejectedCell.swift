@@ -65,7 +65,7 @@ public struct CommitmentRejectedCell: Codable, Hashable, Sendable {
     public var service: String
     public var region: String
     public var currency: String
-    /// First gate the cell failed, in evaluation order — the most actionable
+    /// First gate the cell failed, in evaluation order; the most actionable
     /// objection.
     public var gate: Gate
 

@@ -107,7 +107,7 @@ public struct IacReconciledResource: Codable, Hashable, Sendable {
     public var displayName: String
     public var externalId: String?
     /// `managed`: matched a state entry and agrees with it. `drifted`: matched,
-    /// but live fields differ. `unmanaged`: in inventory, absent from state —
+    /// but live fields differ. `unmanaged`: in inventory, absent from state;
     /// somebody made it by hand.
     public var status: Status
     public var terraformType: String?

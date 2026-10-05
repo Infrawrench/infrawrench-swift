@@ -25,7 +25,7 @@ public final class CredentialHygieneNamespace: Sendable {
     /// Credential hygiene report
     ///
     /// API keys nobody uses, SSH keys nothing references, and members holding
-    /// write permissions they have never exercised — derived entirely from data
+    /// write permissions they have never exercised; derived entirely from data
     /// the server already holds. No provider call and nothing to enable.
     ///
     /// **The audit log only witnesses writes.** Reading a resource list or a cost
@@ -33,7 +33,7 @@ public final class CredentialHygieneNamespace: Sendable {
     /// about read permissions: an absence of evidence about them proves nothing.
     /// `permissionFindingsWithheld` is set when the organization does not yet
     /// have enough audit history for the unused-permission finding to be
-    /// meaningful. Both are load-bearing — a governance report that overclaims is
+    /// meaningful. Both are load-bearing; a governance report that overclaims is
     /// worse than none.
     ///
     /// Gated on `audit:read` rather than a permission of its own: every fact here

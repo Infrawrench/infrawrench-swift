@@ -24,12 +24,12 @@ public struct CostEfficiencySettings: Codable, Hashable, Sendable {
     public var commitmentExpiryHorizonDays: [Int]
     /// Whether a commitment that lapsed without any horizon warning having fired
     /// raises one alert anyway. Defaults to true, and bounded to terms that ended
-    /// within the last 90 days — connecting an account with years of dead
+    /// within the last 90 days: connecting an account with years of dead
     /// reservations produces one pass of recent news, not an archive.
     public var commitmentExpiryAlertOnExpired: Bool
     /// Whether under-used commitments raise alerts. Defaults to true.
     public var commitmentIdleEnabled: Bool
-    /// Utilization percent the whole window must stay under. Defaults to 70 —
+    /// Utilization percent the whole window must stay under. Defaults to 70;
     /// roughly where a 1-year no-upfront commitment stops beating on-demand for
     /// the usage it covers.
     public var commitmentIdleThresholdPercent: Int
@@ -38,9 +38,9 @@ public struct CostEfficiencySettings: Codable, Hashable, Sendable {
     /// month and does not fire, which is the point.
     public var commitmentIdleWindowDays: Int
     /// Window days that must carry cost data before anything is judged. Defaults
-    /// to 14. A commitment whose utilization cannot be measured at all — a
+    /// to 14. A commitment whose utilization cannot be measured at all (a
     /// unit-denominated GCP CUD, or an account whose plugin reports no commitment
-    /// attribution — never alerts, regardless of this value.
+    /// attribution) never alerts, regardless of this value.
     public var commitmentIdleMinMeasuredDays: Int
     /// Least wasted money (obligation − delivered) before alerting, in USD cents,
     /// restated per currency. Defaults to 5000 ($50).
@@ -50,7 +50,7 @@ public struct CostEfficiencySettings: Codable, Hashable, Sendable {
     public var unitCostRegressionEnabled: Bool
     /// Percent the unit cost must rise versus the prior window. Defaults to 20.
     public var unitCostThresholdPercent: Int
-    /// Length of each of the two compared windows. Defaults to 14 — two whole
+    /// Length of each of the two compared windows. Defaults to 14; two whole
     /// weekly cycles a side, so a weekday-shaped unit cost compares like with
     /// like.
     public var unitCostWindowDays: Int

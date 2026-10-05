@@ -91,7 +91,7 @@ public struct BlastRadiusReport: Codable, Hashable, Sendable {
     /// first.
     public var references: [BlastRadiusReference]
     /// Measured network peers over the last 14 days, heaviest first. Empty when
-    /// flow collection is off — see `unchecked`.
+    /// flow collection is off, see `unchecked`.
     public var flowPeers: [BlastRadiusFlowPeer]
     /// Totals over `flowPeers`, or null when traffic could not be measured at
     /// all. Zeroed totals mean collection is on and the resource is quiet; null

@@ -39,7 +39,7 @@ public struct EnvironmentCostEstimate: Codable, Hashable, Sendable {
     /// Null means 'could not be priced', which is not the same as zero.
     public var monthlyAmount: Double?
     public var currency: String?
-    /// True when at least one member is unpriced — read as 'at least'.
+    /// True when at least one member is unpriced, read as 'at least'.
     public var partial: Bool
     public var unpricedCount: Int
     /// Estimated monthly kg CO2e of the members that could be placed against a

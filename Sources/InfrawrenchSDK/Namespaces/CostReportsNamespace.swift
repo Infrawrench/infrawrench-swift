@@ -91,7 +91,7 @@ public final class CostReportsNamespace: Sendable {
     /// Delete a cost report
     ///
     /// Soft delete. Every dashboard card pointing at the report is removed with
-    /// it — a card whose report is gone could only ever render as an unavailable
+    /// it; a card whose report is gone could only ever render as an unavailable
     /// tile.
     ///
     /// _Requires permission: `costs:write`._
@@ -237,7 +237,7 @@ public final class CostReportsNamespace: Sendable {
     /// Update a cost report
     ///
     /// Replaces the report's name, description, config and folder. Every
-    /// dashboard showing the report picks up the new config — that is what
+    /// dashboard showing the report picks up the new config; that is what
     /// referencing a report by id buys.
     ///
     /// _Requires permission: `costs:write`._
@@ -282,7 +282,7 @@ public final class CostReportsNotificationsNamespace: Sendable {
     /// Create a delivery schedule
     ///
     /// On its cadence the server runs the report and sends a composed text
-    /// summary — period total (converted to the org's display currency where
+    /// summary; period total (converted to the org's display currency where
     /// configured, with the conversion caveat), change vs the previous period,
     /// top groups, and a deep link. No chart images. An empty result still sends,
     /// saying so.
@@ -370,7 +370,7 @@ public final class CostReportsNotificationsNamespace: Sendable {
     /// Runs the report and delivers it to this schedule's destinations
     /// immediately, ignoring the schedule and its enabled flag. Fails with a 400
     /// naming the reason when nothing could be delivered. A successful manual
-    /// send clears a parked failure — it is the documented recovery for a partial
+    /// send clears a parked failure; it is the documented recovery for a partial
     /// delivery.
     ///
     /// _Requires permission: `org:settings:write`._
@@ -403,7 +403,7 @@ public final class CostReportsNotificationsNamespace: Sendable {
     /// List the destinations a schedule can deliver to
     ///
     /// The org's live Slack channels and Teams webhooks, and whether this
-    /// deployment can send mail. Destinations are picked from here — a schedule
+    /// deployment can send mail. Destinations are picked from here; a schedule
     /// can only point at surfaces the org already connected.
     ///
     /// _Requires permission: `org:settings:write`._

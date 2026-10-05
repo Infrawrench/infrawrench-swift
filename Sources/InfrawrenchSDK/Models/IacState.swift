@@ -63,7 +63,7 @@ public struct IacState: Codable, Hashable, Sendable {
     /// Which document shape was uploaded: a raw state file, or `terraform show
     /// -json`.
     public var format: Format
-    /// The document's own version — "4" for a state file, "1.0"-style otherwise.
+    /// The document's own version; "4" for a state file, "1.0"-style otherwise.
     public var formatVersion: String
     public var terraformVersion: String?
     /// State file serial; null for show output.
@@ -75,7 +75,7 @@ public struct IacState: Codable, Hashable, Sendable {
     /// Data-source entries, recorded but never matched against inventory.
     public var dataSourceCount: Int
     /// Attribute values dropped because the state marked them sensitive.
-    /// Redaction happens at parse time — no sensitive value is ever stored.
+    /// Redaction happens at parse time; no sensitive value is ever stored.
     public var redactedAttributeCount: Int
     public var parseWarnings: [String]
     public var uploadedByUserId: String?

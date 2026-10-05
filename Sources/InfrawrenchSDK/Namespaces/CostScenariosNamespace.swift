@@ -47,7 +47,7 @@ public final class CostScenariosNamespace: Sendable {
 
     /// Create a scenario model
     ///
-    /// Names must be unique per organization (case-insensitively) — the name is
+    /// Names must be unique per organization (case-insensitively); the name is
     /// what a chart prints under its scenario line and what the CLI's `--scenario
     /// <name>` addresses, so two models sharing one would make both meaningless.
     /// A model needs at least one adjustment: an empty model changes nothing,
@@ -81,7 +81,7 @@ public final class CostScenariosNamespace: Sendable {
 
     /// Delete a scenario model
     ///
-    /// Soft delete — **refused with a 409 while anything references the model**,
+    /// Soft delete: **refused with a 409 while anything references the model**,
     /// with the referents in the body. For a chart, deleting would silently drop
     /// the assumptions from a projection somebody is reading; for a budget it
     /// would move the forecast thresholds back to the bare trend, changing when
@@ -94,7 +94,7 @@ public final class CostScenariosNamespace: Sendable {
     ///
     /// Raises on 404: Not found
     ///
-    /// Raises on 409: Still referenced — the body lists every referent.
+    /// Raises on 409: Still referenced: the body lists every referent.
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -115,9 +115,9 @@ public final class CostScenariosNamespace: Sendable {
 
     /// List a scenario model's referents
     ///
-    /// Every budget, cost report and dashboard cost graph referencing this model
-    /// — what an edit will change, and what a delete would be refused over.
-    /// Budgets come first: they are the referents that page people.
+    /// Every budget, cost report and dashboard cost graph referencing this model;
+    /// what an edit will change, and what a delete would be refused over. Budgets
+    /// come first: they are the referents that page people.
     ///
     /// _Requires permission: `costs:read`._
     ///
@@ -146,7 +146,7 @@ public final class CostScenariosNamespace: Sendable {
     ///
     /// Replaces the whole model. This is the high-leverage write: every chart
     /// drawing it, and **every budget whose forecast thresholds are measured
-    /// against it**, uses the new numbers on its next evaluation — which for a
+    /// against it**, uses the new numbers on its next evaluation; which for a
     /// budget can change which alerts fire. `GET /{id}/referents` names what a
     /// change will touch.
     ///
@@ -192,7 +192,7 @@ public final class CostScenariosGetNamespace: Sendable {
     /// List scenario models
     ///
     /// Named, reusable sets of adjustments an organization overlays on a cost
-    /// forecast — the **known future cost a trend fit cannot see**. Pass an id as
+    /// forecast; the **known future cost a trend fit cannot see**. Pass an id as
     /// `POST /costs/query`'s `scenarioModelId` (alongside `forecast: true`) to
     /// get the adjusted projection back *beside* the unadjusted one, never
     /// instead of it.

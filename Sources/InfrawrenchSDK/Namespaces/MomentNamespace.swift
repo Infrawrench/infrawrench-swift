@@ -24,7 +24,7 @@ public final class MomentNamespace: Sendable {
 
     /// Everything that happened around a timestamp
     ///
-    /// "What changed around 03:14?" — one merged, chronological narrative of
+    /// "What changed around 03:14?"; one merged, chronological narrative of
     /// everything the platform knows happened in a window: resource changes
     /// (including sleep/wake schedule attribution), provider status incidents
     /// that started/resolved in or overlap the window, cost anomalies, workflow

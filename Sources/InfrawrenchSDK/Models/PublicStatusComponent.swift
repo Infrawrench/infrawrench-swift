@@ -66,7 +66,7 @@ public struct PublicStatusComponent: Codable, Hashable, Sendable {
     public var name: String
     public var groupName: String?
     /// A component's public state. A paused probe reads `unknown` regardless of
-    /// its last result — the page is a claim about what is being checked now.
+    /// its last result: the page is a claim about what is being checked now.
     public var state: State
     public var uptime24h: Double?
     /// Oldest first; empty when history is hidden.

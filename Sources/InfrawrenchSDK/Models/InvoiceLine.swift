@@ -76,8 +76,8 @@ public struct InvoiceLine: Codable, Hashable, Sendable {
     public var kind: Kind
     /// Cost-centre id, account id, or null for an org-level fixed charge.
     public var refId: String?
-    /// The name at issue time, frozen with the numbers — renaming a cost centre
-    /// in March must not retitle a line on January's invoice.
+    /// The name at issue time, frozen with the numbers; renaming a cost centre in
+    /// March must not retitle a line on January's invoice.
     public var label: String
     /// The currency the providers billed in.
     public var currency: String

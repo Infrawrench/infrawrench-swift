@@ -19,9 +19,9 @@ public struct InviteRequest: Codable, Hashable, Sendable {
     public var roleId: String?
     /// When the paid plan is full (409 seat_limit_reached), retry with this set
     /// to buy one more monthly seat and send the invitation. Requires
-    /// billing:write. Only works when the 409 reported `canAddSeat: true` — an
-    /// org whose capacity is entirely prepaid capacity slots has no monthly seat
-    /// to add.
+    /// billing:write. Only works when the 409 reported `canAddSeat: true`: an org
+    /// whose capacity is entirely prepaid capacity slots has no monthly seat to
+    /// add.
     public var addSeat: Bool?
 
     public init(

@@ -62,22 +62,22 @@ public struct CommitmentUtilization: Codable, Hashable, Sendable {
     }
 
     /// delivered ÷ obligation, unclamped (values above 1 mean spend past the
-    /// commitment). **Null means not measurable** — never 0, which would read as
+    /// commitment). **Null means not measurable**; never 0, which would read as
     /// 'unused'; the reason field says why.
     public var utilization: Double?
-    /// Why utilization is null: `unit_denominated` — the commitment is in
-    /// resource units (GCP CUDs) and cost rows cannot say how many ran;
-    /// `no_active_days` — the term does not intersect the window; `no_data_days`
-    /// — no cost data was collected on any active day; `unattributed_rows` — the
-    /// account's plugin does not stamp commitment ids onto cost rows, so
-    /// delivered spend would falsely read as zero.
+    /// Why utilization is null: `unit_denominated`: the commitment is in resource
+    /// units (GCP CUDs) and cost rows cannot say how many ran; `no_active_days`:
+    /// the term does not intersect the window; `no_data_days`: no cost data was
+    /// collected on any active day; `unattributed_rows`: the account's plugin
+    /// does not stamp commitment ids onto cost rows, so delivered spend would
+    /// falsely read as zero.
     public var reason: Reason?
     /// hourlyCommitmentAmount × 24 × measuredDays, in the commitment's currency.
     public var obligationAmount: Double?
     public var deliveredAmount: Double
     /// Days of the window the commitment was active.
     public var activeDays: Int
-    /// Active days with cost data — the only days in the obligation. Counting a
+    /// Active days with cost data; the only days in the obligation. Counting a
     /// day the collection never ran would make a fully-used plan read as
     /// under-utilized.
     public var measuredDays: Int

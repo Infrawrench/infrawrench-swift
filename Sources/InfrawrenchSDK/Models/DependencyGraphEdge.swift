@@ -66,7 +66,7 @@ public struct DependencyGraphEdge: Codable, Hashable, Sendable {
     /// where the link is the resource hierarchy itself rather than a field.
     public var consumerFieldKey: String
     public var providerResourceId: ResourceId
-    /// The provider output or identity the reference reads — an output key for
+    /// The provider output or identity the reference reads; an output key for
     /// output references, the matched identity ("externalId", "name",
     /// "endpoint"…) for inferred edges.
     public var providerOutputKey: String

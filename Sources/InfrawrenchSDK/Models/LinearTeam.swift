@@ -14,7 +14,7 @@
 import Foundation
 
 public struct LinearTeam: Codable, Hashable, Sendable {
-    /// Team id (UUID) — what issueCreate wants.
+    /// Team id (UUID), what issueCreate wants.
     public var id: String
     /// Short prefix issue identifiers are built from.
     public var key: String

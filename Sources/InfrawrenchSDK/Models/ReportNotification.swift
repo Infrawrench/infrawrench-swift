@@ -126,7 +126,7 @@ public struct ReportNotification: Codable, Hashable, Sendable {
     /// When a delivery last actually reached at least one destination.
     public var lastSentAt: String?
     /// What the last attempt did. `partial` means some destinations took it and
-    /// some failed — never retried automatically, because a retry would
+    /// some failed; never retried automatically, because a retry would
     /// double-post where it landed.
     public var lastStatus: LastStatus?
     public var lastError: String?

@@ -58,9 +58,9 @@ public struct CostAnomalySettingsView: Codable, Hashable, Sendable {
     }
 
     /// Standard deviations above a key's own trailing mean that count as a spike.
-    /// Lower is more sensitive. Bounded at 1 — below that roughly a third of
-    /// ordinary days clear the bar — and at 10, above which nothing short of a
-    /// 10x jump fires. Defaults to 3.
+    /// Lower is more sensitive. Bounded at 1 (below that roughly a third of
+    /// ordinary days clear the bar) and at 10, above which nothing short of a 10x
+    /// jump fires. Defaults to 3.
     public var sigmas: Double
     /// Minimum rise over the baseline mean before a spike alerts, in USD cents
     /// (converted per series, so it means the same real amount in every
@@ -72,13 +72,13 @@ public struct CostAnomalySettingsView: Codable, Hashable, Sendable {
     /// 2500 ($25).
     public var newSourceMinCents: Int
     /// Which anomalies also text the organization's Twilio recipients. Defaults
-    /// to `off` — an organization with Twilio configured for budgets does not
+    /// to `off`: an organization with Twilio configured for budgets does not
     /// start receiving anomaly texts until it asks to. `new_source` texts only
     /// about spend appearing from nothing, which is what a leaked key looks like
-    /// on a bill; `all` adds spikes on existing lines. Delivery is batched — one
+    /// on a bill; `all` adds spikes on existing lines. Delivery is batched (one
     /// SMS per detection pass summarizing what it alerted on, at most one every
-    /// six hours per organization — and never places a voice call. Push, Slack
-    /// and Teams delivery is unaffected by this setting.
+    /// six hours per organization) and never places a voice call. Push, Slack and
+    /// Teams delivery is unaffected by this setting.
     public var smsAlerts: SmsAlerts
     /// Whether repeated `expected` feedback on a provider or service raises its
     /// spike threshold: half a standard deviation per expected verdict after the
@@ -89,8 +89,8 @@ public struct CostAnomalySettingsView: Codable, Hashable, Sendable {
     public var emailRecipients: AlertEmailRecipients?
     /// Whether an SMS raised right now could be delivered: paging enabled for the
     /// organization, Twilio credentials and a from-number stored, and at least
-    /// one recipient opted into SMS. Read-only and derived — it is not accepted
-    /// on PUT.
+    /// one recipient opted into SMS. Read-only and derived; it is not accepted on
+    /// PUT.
     public var smsConfigured: Bool
 
     public init(

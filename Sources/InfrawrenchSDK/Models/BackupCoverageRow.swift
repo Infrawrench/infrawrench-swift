@@ -77,8 +77,8 @@ public struct BackupCoverageRow: Codable, Hashable, Sendable {
     /// How the resource reads at a glance. `automated` means the provider is
     /// taking backups we cannot enumerate, so there is a restore point but no
     /// listable one. `unknown` means the resource type declares a provider-native
-    /// automated-backup signal but this instance's value could not be read — it
-    /// is unassessed, not a confirmed gap, and never produces a finding.
+    /// automated-backup signal but this instance's value could not be read; it is
+    /// unassessed, not a confirmed gap, and never produces a finding.
     public var state: State
     /// Backups in the inventory that protect this resource.
     public var backupCount: Int
@@ -87,11 +87,11 @@ public struct BackupCoverageRow: Codable, Hashable, Sendable {
     public var latestBackupAt: String?
     public var rpoHours: Double?
     /// Whether provider-native automated backups are on. Null means the plugin
-    /// syncs no signal either way — which never counts as protection and never
+    /// syncs no signal either way; which never counts as protection and never
     /// counts as a fault.
     public var automatedBackups: Bool?
     public var retentionDays: Double?
-    /// The policy supplying `maxRpoHours` — the strictest RPO among those
+    /// The policy supplying `maxRpoHours`: the strictest RPO among those
     /// selecting this resource. Tracked separately from the retention policy
     /// because the two strictest demands routinely come from different policies.
     public var rpoPolicyId: String?

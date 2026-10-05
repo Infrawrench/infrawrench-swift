@@ -16,7 +16,7 @@ import Foundation
 public struct LogsResponse: Codable, Hashable, Sendable {
     /// Raw log text; each entry keeps its trailing newline.
     public var text: String
-    /// Container names available for this resource — drives the container picker.
+    /// Container names available for this resource, drives the container picker.
     public var containers: [String]
     /// Container `text` was read from.
     public var activeContainer: String

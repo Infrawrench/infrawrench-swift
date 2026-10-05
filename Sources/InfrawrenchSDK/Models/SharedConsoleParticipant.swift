@@ -102,7 +102,7 @@ public struct SharedConsoleParticipant: Codable, Hashable, Sendable {
     public var userName: String?
     /// `driver` holds the keyboard; `observer` sees the terminal and cannot type
     /// into it. Exactly one participant per console is a driver at any moment,
-    /// enforced by a partial unique index rather than by the application — two
+    /// enforced by a partial unique index rather than by the application; two
     /// simultaneous handovers cannot both win.
     public var role: Role2
     /// `left` walked away and may resume on the same row without a new invite;
@@ -110,8 +110,8 @@ public struct SharedConsoleParticipant: Codable, Hashable, Sendable {
     /// one.
     public var status: Status
     /// Set when this participant has asked for the keyboard and nobody has
-    /// answered yet. Asking grants nothing — only the current driver or the
-    /// sharer can move it.
+    /// answered yet. Asking grants nothing; only the current driver or the sharer
+    /// can move it.
     public var driverRequestedAt: String?
     public var joinedAt: String
 

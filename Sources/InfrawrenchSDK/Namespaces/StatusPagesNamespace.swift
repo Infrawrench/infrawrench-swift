@@ -25,7 +25,7 @@ public final class StatusPagesNamespace: Sendable {
     /// Create a status page
     ///
     /// Creates a page with a freshly generated slug. `published` defaults to
-    /// false, so creating a page never exposes anything — publish it as a
+    /// false, so creating a page never exposes anything; publish it as a
     /// separate, deliberate step.
     ///
     /// _Requires permission: `resources:write`._
@@ -108,9 +108,8 @@ public final class StatusPagesNamespace: Sendable {
 
     /// Issue a new public link
     ///
-    /// Replaces the slug, revoking the current public URL immediately — the
-    /// reroll for a link that ended up somewhere unintended. The page stays
-    /// published.
+    /// Replaces the slug, revoking the current public URL immediately; the reroll
+    /// for a link that ended up somewhere unintended. The page stays published.
     ///
     /// _Requires permission: `resources:write`._
     ///
@@ -138,7 +137,7 @@ public final class StatusPagesNamespace: Sendable {
     /// Update a status page
     ///
     /// Omitted fields keep their value. `components`, when present, replaces the
-    /// whole ordered set — which is also how a reorder is expressed.
+    /// whole ordered set: which is also how a reorder is expressed.
     ///
     /// _Requires permission: `resources:write`._
     ///

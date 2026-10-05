@@ -19,13 +19,13 @@ public struct MomentEvent: Codable, Hashable, Sendable {
     public var feed: MomentFeedId
     /// Fine-grained `<noun>.<verb>` kind, e.g. `change.created`,
     /// `incident.started`, `workflow-run.failed`, `deployment.finished`,
-    /// `freeze.started`, `drift-alert.sent`. Open set — render unknown kinds
+    /// `freeze.started`, `drift-alert.sent`. Open set: render unknown kinds
     /// generically.
     public var kind: String
     public var timestamp: String
     /// One-line headline.
     public var title: String
-    /// Optional second line — diff summary, actor, error text.
+    /// Optional second line; diff summary, actor, error text.
     public var detail: String?
     public var severity: MomentSeverity
     public var pluginId: String?

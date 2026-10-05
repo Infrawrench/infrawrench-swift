@@ -21,7 +21,7 @@ public struct CapacityStatus: Codable, Hashable, Sendable {
     /// List price of one slot in whole dollars, for display copy.
     public var priceUsd: Int
     /// Seats from slots still inside their term, excluding lapsed and refunded.
-    /// ADDITIONAL to `subscription.seatCount` — an org's capacity is the two
+    /// ADDITIONAL to `subscription.seatCount`: an org's capacity is the two
     /// summed, and an org can hold slots with no subscription at all.
     public var seats: Int
     /// Every purchase ever made, newest first, including lapsed and refunded.

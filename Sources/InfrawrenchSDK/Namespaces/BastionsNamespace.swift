@@ -48,7 +48,7 @@ public final class BastionsNamespace: Sendable {
         )
     }
 
-    /// Revoke a bastion — accounts referencing it have their bastion binding
+    /// Revoke a bastion; accounts referencing it have their bastion binding
     /// cleared
     ///
     /// _Requires permission: `bastions:write`._

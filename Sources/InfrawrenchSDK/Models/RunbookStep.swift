@@ -63,12 +63,12 @@ public struct RunbookStep: Codable, Hashable, Sendable {
     public var id: String
     /// What the step does. Three kinds and not a scripting language: a runbook is
     /// written by whoever is on call for whoever is on call next, and the moment
-    /// it needs a language it stops being written. `workflow` is the escape hatch
-    /// — anything genuinely automated belongs in a workflow, which already has a
-    /// sandbox, approvals, secrets and a history.
+    /// it needs a language it stops being written. `workflow` is the escape
+    /// hatch; anything genuinely automated belongs in a workflow, which already
+    /// has a sandbox, approvals, secrets and a history.
     public var kind: Kind
     public var title: String
-    /// Markdown — the detail nobody remembers at 03:00.
+    /// Markdown: the detail nobody remembers at 03:00.
     public var body: String
     /// For `workflow` steps: which workflow the button runs.
     public var workflowId: String?

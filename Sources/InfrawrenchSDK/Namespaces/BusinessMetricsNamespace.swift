@@ -189,7 +189,7 @@ public final class BusinessMetricsNamespace: Sendable {
 
     /// Create a business metric
     ///
-    /// Keys must be unique per organization among live metrics — they are how
+    /// Keys must be unique per organization among live metrics; they are how
     /// workflows and the CLI address the metric. A key collision is a 409.
     ///
     /// _Requires permission: `costs:write`._
@@ -376,7 +376,7 @@ public final class BusinessMetricsNamespace: Sendable {
     /// answer are worth knowing before reading it:
     ///
     /// - **The ratio is computed at the requested bucket**, from a summed
-    /// numerator and a summed denominator — never a mean of daily ratios, which
+    /// numerator and a summed denominator: never a mean of daily ratios, which
     /// weights a quiet day as heavily as a peak one. The same holds for
     /// `overallValue`.
     /// - **A missing or non-positive denominator is a gap** (`value: null` with a
@@ -421,8 +421,8 @@ public final class BusinessMetricsNamespace: Sendable {
 
     /// Update a business metric
     ///
-    /// Replaces the whole definition. Changing `key` never orphans history —
-    /// values are keyed on the metric's id — but it does break a workflow still
+    /// Replaces the whole definition. Changing `key` never orphans history
+    /// (values are keyed on the metric's id) but it does break a workflow still
     /// writing to the old key, which is why the key is separate from the display
     /// name in the first place.
     ///
@@ -766,7 +766,7 @@ public final class BusinessMetricsValuesNamespace: Sendable {
     /// accumulating**, which is what makes a nightly job safe to retry. Nothing
     /// lands unless the whole batch validates, so a bad row is a 400 rather than
     /// half a month restated. The same guarantees back
-    /// `infra.businessMetrics.write(...)` in a workflow — both go through one
+    /// `infra.businessMetrics.write(...)` in a workflow; both go through one
     /// validator.
     ///
     /// _Requires permission: `costs:write`._

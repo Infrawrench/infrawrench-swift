@@ -153,9 +153,8 @@ public struct SavingsEventResult: Codable, Hashable, Sendable {
     public var attributedCostCentreId: String?
     public var attributedCostCentreName: String?
     public var shortfall: SavingsShortfall?
-    /// `full` — a manual entry (PUT); `annotate` — an automatic event takes a
-    /// note, a cost centre, a horizon and an end date (PATCH); `none` — derived
-    /// rows.
+    /// `full`: a manual entry (PUT); `annotate`: an automatic event takes a note,
+    /// a cost centre, a horizon and an end date (PATCH); `none`: derived rows.
     public var editable: Editable
 
     public init(

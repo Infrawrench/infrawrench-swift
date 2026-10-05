@@ -35,7 +35,7 @@ public final class ChangesNamespace: Sendable {
     /// run-rate delta.
     ///
     /// A POST because it takes a list of ids, not because it writes: nothing is
-    /// stored. The answer is recomputed on every call, deliberately — provider
+    /// stored. The answer is recomputed on every call, deliberately; provider
     /// cost arrives late and is then restated, so a stored number would be a
     /// wrong number that never corrects itself.
     ///
@@ -72,7 +72,7 @@ public final class ChangesNamespace: Sendable {
     /// Change events recorded by the resource poller: each poll cycle diffs the
     /// freshly fetched state against the stored snapshot and records resources
     /// that appeared, changed a stored field, or disappeared upstream.
-    /// Cross-provider by construction — the diff runs on the generic stored
+    /// Cross-provider by construction; the diff runs on the generic stored
     /// record, so every plugin's resources show up here.
     ///
     /// _Requires permission: `resources:read`._
@@ -152,7 +152,7 @@ public final class ChangesAlertSettingsNamespace: Sendable {
     /// `cooldownMinutes`, covering every change since the previous one. These
     /// settings decide which changes count and how often a message may go out.
     /// Who receives it is the `resourceDrift` opt-in on push preferences, Slack
-    /// channels and Teams webhooks — off by default on all three.
+    /// channels and Teams webhooks; off by default on all three.
     ///
     /// GET /api/org/{orgId}/changes/alert-settings
     ///
@@ -214,7 +214,7 @@ public final class ChangesRevertNamespace: Sendable {
     /// Revert one change event
     ///
     /// Applies the inverse patch through the plugin's ordinary `updateResource`
-    /// path — the same call the Edit form makes — and only for the fields the dry
+    /// path (the same call the Edit form makes) and only for the fields the dry
     /// run marked `revertible`.
     ///
     /// The plan is rebuilt against a fresh live read immediately before the
@@ -240,14 +240,14 @@ public final class ChangesRevertNamespace: Sendable {
     ///
     /// The claim carries an owner token, and every write that ends a revert is
     /// fenced on it. An attempt whose provider call outlives the lease can
-    /// therefore neither release nor complete the claim that replaced it — it
-    /// gets `409` with `appliedFields` naming what it did write, so the caller
-    /// can reconcile rather than assume. Two attempts can overlap in that case,
-    /// but they cannot disagree: both invert the same recorded event to the same
+    /// therefore neither release nor complete the claim that replaced it; it gets
+    /// `409` with `appliedFields` naming what it did write, so the caller can
+    /// reconcile rather than assume. Two attempts can overlap in that case, but
+    /// they cannot disagree: both invert the same recorded event to the same
     /// values, so the second one's patch is a subset of the first's.
     ///
     /// If a write reaches the provider but recording it fails, the response is
-    /// `500` with `appliedFields` — the resource moved and the timeline has not
+    /// `500` with `appliedFields`: the resource moved and the timeline has not
     /// caught up. The claim is deliberately held in that case, and the next
     /// attempt after the lease expires finds every field already back and records
     /// the revert without touching the provider again, answering `200` with
@@ -259,13 +259,13 @@ public final class ChangesRevertNamespace: Sendable {
     /// Blocked with `423` while an org change freeze is in effect. Every attempt
     /// whose write reached the provider is audit-logged as
     /// `resource.change_revert`, including one that lost its claim or could not
-    /// record — the entry's `outcome` is `recorded`, `superseded`, `unrecorded`
-    /// or `reconciled`, so a contested outcome reads as one mutation rather than
-    /// as several reverts. An attempt that neither wrote nor recorded anything
-    /// logs nothing. Attribution is best-effort: no transaction spans a
-    /// third-party cloud API and Infrawrench's database, so if the audit insert
-    /// itself fails the response carries `auditRecorded: false` and the details
-    /// go to the server log rather than being silently dropped.
+    /// record; the entry's `outcome` is `recorded`, `superseded`, `unrecorded` or
+    /// `reconciled`, so a contested outcome reads as one mutation rather than as
+    /// several reverts. An attempt that neither wrote nor recorded anything logs
+    /// nothing. Attribution is best-effort: no transaction spans a third-party
+    /// cloud API and Infrawrench's database, so if the audit insert itself fails
+    /// the response carries `auditRecorded: false` and the details go to the
+    /// server log rather than being silently dropped.
     ///
     /// The stored resource snapshot is deliberately left untouched, so the next
     /// poll observes the reverted state and records it as an ordinary change
@@ -314,7 +314,7 @@ public final class ChangesRevertNamespace: Sendable {
     ///
     /// Inverts the recorded diff and reconciles it against the resource's
     /// *current* live fields, which is the whole point: the poller may have
-    /// recorded this hours ago and the world may have moved on. Read-only — it
+    /// recorded this hours ago and the world may have moved on. Read-only: it
     /// reads from the provider and writes nothing.
     ///
     /// Only `updated` events with a field diff can be reverted. `outputs.*`

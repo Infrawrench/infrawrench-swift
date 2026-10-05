@@ -30,7 +30,7 @@ public final class SessionRecordingsNamespace: Sendable {
     /// The session as an [asciicast
     /// v2](https://docs.asciinema.org/manual/asciicast/v2/) document: a JSON
     /// header line followed by one `[time, code, data]` event per line.
-    /// Deliberately somebody else's format — the same bytes play in `asciinema
+    /// Deliberately somebody else's format; the same bytes play in `asciinema
     /// play` and in the reference web player, so a recording is useful to an
     /// auditor who has never seen this product. `?download=1` returns it as an
     /// attachment. **Every fetch is audit-logged**, including this one: an
@@ -118,7 +118,7 @@ public final class SessionRecordingsNamespace: Sendable {
     /// List recorded SSH sessions
     ///
     /// Recorded sessions, newest first. Only SSH opened through the cloud is
-    /// recorded — those sessions are already proxied by the server, so recording
+    /// recorded; those sessions are already proxied by the server, so recording
     /// tees a stream it holds rather than requiring an agent on the host. A
     /// desktop session that dials a host directly never reaches the server and
     /// cannot appear here.
@@ -133,7 +133,7 @@ public final class SessionRecordingsNamespace: Sendable {
     /// created with.
     ///
     /// - Parameter status: `recording` (live), `complete` (closed cleanly),
-    /// `truncated` (hit the per-session capture ceiling — the tape is a genuine
+    /// `truncated` (hit the per-session capture ceiling: the tape is a genuine
     /// partial and says so), or `abandoned` (the server handling the session went
     /// away before it could close the row). One of `recording`, `complete`,
     /// `truncated`, `abandoned`.
@@ -201,7 +201,7 @@ public final class SessionRecordingsSettingsNamespace: Sendable {
 
     /// Update the recording policy
     ///
-    /// Partial update — omitted fields keep their current value. Recording is
+    /// Partial update: omitted fields keep their current value. Recording is
     /// opt-in and off by default. Audit-logged with the before/after policy.
     ///
     /// _Requires permission: `session-recordings:write`._

@@ -24,7 +24,7 @@ public struct ShowbackReport: Codable, Hashable, Sendable {
         public var totals: [String: Double]
         /// This centre's own spend plus every descendant's. Equal to `totals` for
         /// a leaf and for every centre in an organization that does not nest. Do
-        /// not sum this across entries — parents already contain their children.
+        /// not sum this across entries: parents already contain their children.
         public var subtreeTotals: [String: Double]
         /// The centre this one sits under; null for a root and for Unallocated.
         public var parentId: String?

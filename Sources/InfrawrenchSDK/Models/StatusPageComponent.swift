@@ -64,7 +64,7 @@ public struct StatusPageComponent: Codable, Hashable, Sendable {
     public var groupName: String?
     /// Ascending display order.
     public var position: Int
-    /// The probe's internal name — editor-only.
+    /// The probe's internal name, editor-only.
     public var probeName: String
     public var probeStatus: ProbeStatus2
     /// False when the probe is paused.

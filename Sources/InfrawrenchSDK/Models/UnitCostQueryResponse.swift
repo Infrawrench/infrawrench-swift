@@ -147,7 +147,7 @@ public struct UnitCostQueryResponse: Codable, Hashable, Sendable {
     /// spend (a raw metric grouped by an unmapped label), so draw that spend
     /// once.
     public var costPerLabel: Bool?
-    /// One series per currency the numerator ended up in — usually one. More than
+    /// One series per currency the numerator ended up in, usually one. More than
     /// one means the organization has spend in a currency it holds no rate for;
     /// rather than dropping that spend (understating every unit cost) or adding
     /// it to another currency (inventing a number), each currency divides the

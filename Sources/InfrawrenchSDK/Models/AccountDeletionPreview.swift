@@ -14,7 +14,7 @@
 import Foundation
 
 public struct AccountDeletionPreview: Codable, Hashable, Sendable {
-    /// Deleted with the account — the caller is their only member.
+    /// Deleted with the account; the caller is their only member.
     public var organizationsToDelete: [OrganizationRef]
     /// Survive; the caller's membership is removed.
     public var organizationsToLeave: [OrganizationRef]

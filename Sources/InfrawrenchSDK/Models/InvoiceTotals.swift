@@ -13,9 +13,9 @@
  */
 import Foundation
 
-/// **Null for a draft** — null, not zero. A draft's figures are recomputed on
-/// read and the list does not recompute; fetch the invoice by id for a draft's
-/// current numbers.
+/// **Null for a draft**, null, not zero. A draft's figures are recomputed on read
+/// and the list does not recompute; fetch the invoice by id for a draft's current
+/// numbers.
 ///
 /// The API may send `null` in place of this, which is why references to it are
 /// optional.
@@ -27,7 +27,7 @@ public struct InvoiceTotals: Codable, Hashable, Sendable {
     /// Currency code → amount in the currency's major unit.
     public var adjusted: [String: Double]
     /// Keyed by the invoice currency, plus any currency that could not be
-    /// converted — which keeps its own key so the total is never quietly short.
+    /// converted; which keeps its own key so the total is never quietly short.
     public var billed: [String: Double]
 
     public init(

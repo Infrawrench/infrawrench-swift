@@ -13,7 +13,7 @@
  */
 import Foundation
 
-/// A provider incident whose span overlaps the window — returned alongside the
+/// A provider incident whose span overlaps the window; returned alongside the
 /// events so clients can badge events that fall inside it ("during DigitalOcean
 /// incident").
 public struct MomentIncidentSpan: Codable, Hashable, Sendable {

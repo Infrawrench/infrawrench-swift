@@ -13,10 +13,10 @@
  */
 import Foundation
 
-/// `in_app` — recorded when Infrawrench performed the action; `detected` —
-/// inferred from an inventory diff on sync (the action was taken in the
-/// provider's console); `manual`; `derived` — computed from billing with no
-/// stored event (commitments).
+/// `in_app`: recorded when Infrawrench performed the action; `detected`: inferred
+/// from an inventory diff on sync (the action was taken in the provider's
+/// console); `manual`; `derived`: computed from billing with no stored event
+/// (commitments).
 public enum SavingsEventSource: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
     case inApp
     case detected

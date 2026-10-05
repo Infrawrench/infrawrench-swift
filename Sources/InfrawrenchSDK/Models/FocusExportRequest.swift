@@ -56,7 +56,7 @@ public struct FocusExportRequest: Codable, Hashable, Sendable {
     public var from: String
     public var to: String
     public var filters: [CostFilter]?
-    /// The same filter written as text, in the cost query language — an
+    /// The same filter written as text, in the cost query language; an
     /// alternative to `filters`, compiled server-side into exactly that
     /// structure.
     ///
@@ -79,12 +79,12 @@ public struct FocusExportRequest: Codable, Hashable, Sendable {
     public var query: String?
     /// A saved cost filter (see /saved-cost-filters) applied by reference.
     /// Resolved server-side at query time and AND-composed with whichever of
-    /// `filters`/`query` is present — unlike those two it is a composition, not
-    /// an alternative. An id that does not resolve to a live filter is a 400; the
+    /// `filters`/`query` is present: unlike those two it is a composition, not an
+    /// alternative. An id that does not resolve to a live filter is a 400; the
     /// query is never silently run unfiltered.
     public var savedFilterId: String?
     /// Restrict to these kinds of charge. Omitted is all of them, which is what
-    /// makes an unfiltered total net rather than gross — credits, refunds and
+    /// makes an unfiltered total net rather than gross; credits, refunds and
     /// commitment discounts are included. Rows collected before charge types
     /// existed, and rows from providers that cannot distinguish them, are
     /// `usage`.

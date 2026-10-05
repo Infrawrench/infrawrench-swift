@@ -14,7 +14,7 @@
 import Foundation
 
 public struct CommitmentCoverage: Codable, Hashable, Sendable {
-    /// False when every in-scope account was excluded — 'we cannot tell' reported
+    /// False when every in-scope account was excluded; 'we cannot tell' reported
     /// as unavailable, never as 0%.
     public var available: Bool
     public var currencies: [CommitmentCoverageCurrency]

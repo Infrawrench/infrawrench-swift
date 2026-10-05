@@ -79,7 +79,7 @@ public struct ResourceLease: Codable, Hashable, Sendable {
     /// Why/who-for; shown on the expiry radar.
     public var note: String?
     /// Lease lifecycle: `active` (counting down), `deleted` (auto-delete
-    /// completed), `failed` (auto-delete was retried and given up on — see
+    /// completed), `failed` (auto-delete was retried and given up on, see
     /// `lastError`), or `canceled` (called off; the resource stays).
     public var status: Status
     /// When the first auto-delete announcement went out; null until sent.

@@ -18,7 +18,7 @@ public struct CostCentre: Codable, Hashable, Sendable {
     public var name: String
     public var description: String?
     /// The centre this one sits under; null is a top-level centre. Nesting is a
-    /// reporting structure only — allocation still resolves each cost row to
+    /// reporting structure only: allocation still resolves each cost row to
     /// exactly one centre.
     public var parentId: String?
     public var createdAt: String

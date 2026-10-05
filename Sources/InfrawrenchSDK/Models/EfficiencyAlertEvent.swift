@@ -102,7 +102,7 @@ public struct EfficiencyAlertEvent: Codable, Hashable, Sendable {
     public var accountName: String?
     /// ISO 4217 of `amount`, or null when it carries none.
     public var currency: String?
-    /// The money at stake, in **units of `currency`** rather than cents —
+    /// The money at stake, in **units of `currency`** rather than cents;
     /// commitment amounts are provider-reported in currency units. Per kind: the
     /// monthly on-demand exposure for an expiry, the wasted amount for an idle
     /// commitment, the current window's spend for a regression.

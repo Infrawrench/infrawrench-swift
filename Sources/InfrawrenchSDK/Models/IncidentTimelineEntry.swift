@@ -211,13 +211,13 @@ public struct IncidentTimelineEntry: Codable, Hashable, Sendable {
     }
 
     public var id: String
-    /// `moment` covers everything the moment union already indexes — resource
+    /// `moment` covers everything the moment union already indexes; resource
     /// changes, deployments, cost anomalies, provider status incidents, audit
     /// entries, change freezes and workflow runs. Nothing is copied into the
     /// incident's own tables; the timeline is a join, so re-reading it reflects
     /// the record as it stands today.
     public var source: Source
-    /// `<noun>.<verb>`. Open set — render unknown kinds generically.
+    /// `<noun>.<verb>`. Open set: render unknown kinds generically.
     public var kind: String
     public var at: String
     public var title: String

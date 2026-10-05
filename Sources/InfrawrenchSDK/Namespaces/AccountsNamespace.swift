@@ -88,7 +88,7 @@ public final class AccountsNamespace: Sendable {
     ///
     /// Raises on 400: Bad request
     ///
-    /// Raises on 402: Payment required — the organization's plan does not include
+    /// Raises on 402: Payment required: the organization's plan does not include
     /// this
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
@@ -329,7 +329,7 @@ public final class AccountsCredentialsNamespace: Sendable {
 
     /// Fetch the decrypted credentials for an account
     ///
-    /// Returns the credentials map as it was originally submitted. Sensitive —
+    /// Returns the credentials map as it was originally submitted. Sensitive:
     /// gate access carefully.
     ///
     /// _Requires permission: `secrets:read`._
@@ -471,7 +471,7 @@ public final class AccountsPreflightNamespace: Sendable {
     /// Probe credentials before creating an account
     ///
     /// Runs the plugin's per-capability permission checks against the submitted
-    /// credentials. Nothing is stored — use it from the add-account flow before
+    /// credentials. Nothing is stored; use it from the add-account flow before
     /// committing.
     ///
     /// _Requires permission: `accounts:write`._

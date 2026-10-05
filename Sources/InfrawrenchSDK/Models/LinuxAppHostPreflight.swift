@@ -123,7 +123,7 @@ public struct LinuxAppHostPreflight: Codable, Hashable, Sendable {
     public var privilege: Privilege
     public var requirements: [LinuxAppRequirement]
     /// A writable, exec-capable directory was found to stage the app server in.
-    /// False means every candidate is missing, unwritable, or mounted noexec —
+    /// False means every candidate is missing, unwritable, or mounted noexec,
     /// which no package fixes.
     public var staging: Bool
     public var appCount: Int

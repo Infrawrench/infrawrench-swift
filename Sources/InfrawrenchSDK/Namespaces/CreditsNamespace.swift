@@ -26,7 +26,7 @@ public final class CreditsNamespace: Sendable {
     ///
     /// Every prepaid pot the organization holds, most urgent first. A provider
     /// that bills in arrears sends an invoice you can argue with; a prepaid pot
-    /// that empties simply stops answering — so this is an availability number as
+    /// that empties simply stops answering: so this is an availability number as
     /// much as a finance one.
     ///
     /// The burn rate is measured from the server's own series of readings rather

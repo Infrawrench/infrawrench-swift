@@ -76,7 +76,7 @@ public struct QuotaRow: Codable, Hashable, Sendable {
     public var limit: Double
     /// How much of `limit` is consumed, in the same unit.
     public var used: Double
-    /// used / limit. Not clamped at 1 — an over-quota reading is a real state.
+    /// used / limit. Not clamped at 1; an over-quota reading is a real state.
     public var utilization: Double
     /// What is being counted, in the provider's own word.
     public var unit: String?
@@ -87,7 +87,7 @@ public struct QuotaRow: Codable, Hashable, Sendable {
     public var docsUrl: String?
     /// When this reading was collected.
     public var observedAt: String
-    /// Where the quota sits: `exhausted` (used >= limit — the provider is already
+    /// Where the quota sits: `exhausted` (used >= limit; the provider is already
     /// refusing requests), `critical` (at or over the organization's threshold),
     /// `trending` (under the threshold, but the fitted trend reaches the limit
     /// within 30 days), or `ok`. Ordered: an exhausted quota is also over

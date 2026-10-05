@@ -14,7 +14,7 @@
 import Foundation
 
 public struct ProbeSuggestion: Codable, Hashable, Sendable {
-    /// Normalized to an absolute URL — bare hosts get https://.
+    /// Normalized to an absolute URL, bare hosts get https://.
     public var url: String
     public var resourceId: String
     public var displayName: String

@@ -57,14 +57,14 @@ public struct CommitmentRecommendation: Codable, Hashable, Sendable {
     public var service: String
     public var region: String
     public var currency: String
-    /// p10 of daily uncovered usage spend, nearest-rank — the floor, not the
+    /// p10 of daily uncovered usage spend, nearest-rank; the floor, not the
     /// average.
     public var recommendedDailyCommitment: Double
     public var recommendedHourlyCommitment: Double
     public var annualCommitment: Double
     public var p50DailySpend: Double
     /// Published discounts are "up to" figures. `range` renders "$X–$Y";
-    /// `upper_bound` renders "up to $Y" — never a bare "$Y".
+    /// `upper_bound` renders "up to $Y"; never a bare "$Y".
     public var savingBasis: SavingBasis
     public var discountRateMin: Double?
     public var discountRateMax: Double
@@ -75,7 +75,7 @@ public struct CommitmentRecommendation: Codable, Hashable, Sendable {
     /// was a mistake.
     public var breakEvenUtilization: Double
     /// max(0, annualCommitment × (0.5 − discount)) at the shallow end of the
-    /// published discount — a ceiling on regret where no floor rate is published.
+    /// published discount: a ceiling on regret where no floor rate is published.
     public var annualLossIfUsageHalves: Double
 
     public init(

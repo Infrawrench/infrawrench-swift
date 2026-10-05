@@ -25,7 +25,7 @@ public final class StatusIncidentsNamespace: Sendable {
     /// Provider incidents overlapping your resources
     ///
     /// The "is it me or is it them?" feed. The poller watches each provider
-    /// plugin's public status feed (declared on its manifest — zero credentials,
+    /// plugin's public status feed (declared on its manifest; zero credentials,
     /// zero rate-limit risk), caches active incidents, and this endpoint
     /// correlates them against the resources the organization holds: an incident
     /// matches a resource when it is provider-wide, names the resource's region,

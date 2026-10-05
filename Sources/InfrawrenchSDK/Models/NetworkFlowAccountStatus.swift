@@ -19,8 +19,8 @@ public struct NetworkFlowAccountStatus: Codable, Hashable, Sendable {
     public var displayName: String
     /// False when the account's provider has no flow source we can read. Such
     /// accounts are listed and excluded from the totals rather than contributing
-    /// zero bytes — zero would be a claim about their network, this is a
-    /// statement about our coverage.
+    /// zero bytes; zero would be a claim about their network, this is a statement
+    /// about our coverage.
     public var supportsFlows: Bool
     /// True when the account's flows re-cut traffic another account may already
     /// report (a Kubernetes cluster's pods). Left out of this feed's totals

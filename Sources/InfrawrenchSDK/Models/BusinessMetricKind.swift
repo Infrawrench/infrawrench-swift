@@ -16,7 +16,7 @@ import Foundation
 /// What the metric's numbers are. `count` is a unit-less quantity (customers,
 /// requests, GB) and supports unit cost only. `currency` is money the business
 /// took in, denominated in the metric's own `currency`, and is the only kind
-/// margin can be computed against — `(revenue − cost) ÷ revenue` subtracts money
+/// margin can be computed against, `(revenue − cost) ÷ revenue` subtracts money
 /// from money and is undefined otherwise.
 public enum BusinessMetricKind: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
     case count

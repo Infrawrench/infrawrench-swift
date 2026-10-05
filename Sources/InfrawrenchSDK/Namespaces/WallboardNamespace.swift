@@ -27,13 +27,13 @@ public final class WallboardNamespace: Sendable {
     /// A different reading of data the product already holds, built on one rule:
     /// a wallboard may only show things that are true **right now** and that
     /// somebody would cross a room to look at. There is deliberately no history,
-    /// no trend and no breakdown — those belong on the page you open when you do
+    /// no trend and no breakdown; those belong on the page you open when you do
     /// walk over.
     ///
-    /// Four sources — declared incidents, synthetic probes, query monitors and
-    /// account sync health — each guarded independently, because a television
-    /// that goes blank because one query threw is showing nothing to a room that
-    /// was relying on it.
+    /// Four sources (declared incidents, synthetic probes, query monitors and
+    /// account sync health) each guarded independently, because a television that
+    /// goes blank because one query threw is showing nothing to a room that was
+    /// relying on it.
     ///
     /// Session-authenticated on purpose: unlike the calendar feed or a public
     /// status page, this carries incident titles, probe names and account names,

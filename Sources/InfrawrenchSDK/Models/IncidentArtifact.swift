@@ -154,11 +154,11 @@ public struct IncidentArtifact: Codable, Hashable, Sendable {
     /// `close_failed` one re-closes it. Collapsing the two would either strand
     /// the incident with a live freeze nothing can lift, or open a second freeze.
     public var status: Status
-    /// Human label — the freeze name, the destination count.
+    /// Human label: the freeze name, the destination count.
     public var label: String?
     /// Freeze id, notice id, Slack channel id…
     public var refId: RefId?
-    /// Second half of a compound reference — a Slack message ts, a window width.
+    /// Second half of a compound reference; a Slack message ts, a window width.
     public var refSecondary: String?
     /// Why it failed. Null unless `status` is `failed` or `close_failed`.
     public var error: String?

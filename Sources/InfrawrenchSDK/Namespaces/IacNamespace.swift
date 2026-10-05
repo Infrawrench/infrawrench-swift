@@ -101,7 +101,7 @@ public final class IacNamespace: Sendable {
     ///
     /// The managed/unmanaged badge for a resource detail page, computed against
     /// the newest state document. `status` is null when the organization has
-    /// uploaded none — absence of a state is not evidence of ClickOps. A query
+    /// uploaded none; absence of a state is not evidence of ClickOps. A query
     /// parameter rather than a path segment because composite resource ids
     /// contain slashes.
     ///
@@ -195,7 +195,7 @@ public final class IacStatesNamespace: Sendable {
     /// List uploaded Terraform state documents
     ///
     /// Every state document the organization has uploaded, newest first. The
-    /// documents themselves are never stored — only the parsed, redacted
+    /// documents themselves are never stored; only the parsed, redacted
     /// projection.
     ///
     /// GET /api/org/{orgId}/iac/states

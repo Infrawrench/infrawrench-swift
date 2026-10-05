@@ -25,8 +25,8 @@ public final class OrphansNamespace: Sendable {
     /// List likely-orphaned and idle resources
     ///
     /// Scans the organization's already-synced resources against each plugin's
-    /// declarative orphan heuristics — unattached volumes, unassigned
-    /// floating/elastic IPs, reserved-but-unused static IPs — and returns the
+    /// declarative orphan heuristics (unattached volumes, unassigned
+    /// floating/elastic IPs, reserved-but-unused static IPs) and returns the
     /// matches grouped by account, each with the plugin's reason. Purely a read
     /// over stored state: no provider API calls are made, so results reflect the
     /// last sync. Where the org's collected cost data has per-resource rows,

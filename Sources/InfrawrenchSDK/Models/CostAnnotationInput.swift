@@ -15,13 +15,13 @@ import Foundation
 
 public struct CostAnnotationInput: Codable, Hashable, Sendable {
     /// Inclusive first day (UTC) the note is about. Mapped to whichever bucket
-    /// holds it at the chart's binning — daily and cumulative use the day itself,
+    /// holds it at the chart's binning: daily and cumulative use the day itself,
     /// weekly the Monday that starts its week, monthly the first of its month.
     public var startDate: String
     /// Inclusive last day, or null for a note about a single moment. A deploy is
     /// a moment; a migration is a week, and a week spelled as seven notes
     /// misstates how many things happened. An end equal to the start is stored as
-    /// null — the same fact has one spelling.
+    /// null; the same fact has one spelling.
     public var endDate: String?
     public var text: String
     /// The report this note is scoped to, or null for **org-wide**. Null is the

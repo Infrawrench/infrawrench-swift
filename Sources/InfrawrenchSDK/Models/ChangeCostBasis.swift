@@ -17,7 +17,7 @@ import Foundation
 /// the provider charged on the day it charged it; `amortized` spreads a
 /// commitment's up-front fee across the term it buys; `blended` also spreads each
 /// commitment's discount evenly over the usage it could cover. It is echoed on
-/// every response because a delta whose basis is unstated is unreadable — an
+/// every response because a delta whose basis is unstated is unreadable: an
 /// amortized 'after' against a cash 'before' looks exactly like a saving.
 public enum ChangeCostBasis: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
     case cash

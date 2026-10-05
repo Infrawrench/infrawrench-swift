@@ -14,7 +14,7 @@
 import Foundation
 
 /// What an adjusted answer did. Present whenever the request asked to be
-/// adjusted, even for an organisation with no rules — its absence means, and can
+/// adjusted, even for an organisation with no rules; its absence means, and can
 /// only mean, that every figure in the response is exactly what the providers
 /// charged.
 public struct CostAdjustmentSummary: Codable, Hashable, Sendable {
@@ -91,7 +91,7 @@ public struct CostAdjustmentSummary: Codable, Hashable, Sendable {
     /// The enabled rules in force for this answer, in evaluation order.
     public var rules: [Rule]
     /// The collected, unadjusted totals for exactly the same rows, summed in the
-    /// same scan. Always present on an adjusted answer — this is the figure that
+    /// same scan. Always present on an adjusted answer; this is the figure that
     /// reconciles against an invoice. Per-series raw figures are deliberately not
     /// offered: after a reallocation the series are a different partition of the
     /// same money.

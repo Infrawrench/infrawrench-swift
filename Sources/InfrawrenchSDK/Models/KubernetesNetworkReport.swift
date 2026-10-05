@@ -188,7 +188,7 @@ public struct KubernetesNetworkReport: Codable, Hashable, Sendable {
         }
 
         /// Which billing boundary the traffic crossed. `unknown` means the
-        /// provider's record did not determine one — it is priced at zero and
+        /// provider's record did not determine one; it is priced at zero and
         /// labelled rather than folded into a neighbouring boundary.
         public var scope: Scope2
         public var bytes: Double

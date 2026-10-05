@@ -74,7 +74,7 @@ public final class AccessReviewNamespace: Sendable {
     /// budget their plugin declares, carrying no recorded owner, or signing in
     /// without a second factor.
     ///
-    /// This is about principals in **your** clouds — it is neither your
+    /// This is about principals in **your** clouds; it is neither your
     /// Infrawrench team's roles (`/team`) nor the credentials Infrawrench stores
     /// for you (`/credential-hygiene`).
     ///
@@ -122,7 +122,7 @@ public final class AccessReviewDismissalsNamespace: Sendable {
 
     /// Dismiss an access review finding
     ///
-    /// Accept a finding — that break-glass role really is meant to be admin, that
+    /// Accept a finding; that break-glass role really is meant to be admin, that
     /// shared key really is rotated out of band. The finding leaves `findings`
     /// and stops feeding the security alerts, but the rule keeps being evaluated
     /// and the finding is reported back under `dismissed` for as long as it still

@@ -17,7 +17,7 @@ public struct SharedConsoleCreated: Codable, Hashable, Sendable {
     public var share: SharedConsole
     public var participants: [SharedConsoleParticipant]
     /// The invite, returned exactly once. Only its sha256 is stored, so it cannot
-    /// be shown again — mint a replacement instead.
+    /// be shown again: mint a replacement instead.
     public var inviteToken: String
 
     public init(

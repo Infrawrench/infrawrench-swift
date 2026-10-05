@@ -18,7 +18,7 @@ public struct IncidentNote: Codable, Hashable, Sendable {
     public var body: String
     public var authorUserId: String?
     public var authorName: String?
-    /// When the note is *about*, which may precede when it was written — a note
+    /// When the note is *about*, which may precede when it was written; a note
     /// typed at 04:00 can be dated to 03:14 and lands there on the timeline.
     public var occurredAt: String
     public var createdAt: String

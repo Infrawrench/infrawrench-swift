@@ -37,7 +37,7 @@ public struct UnitCostSeries: Codable, Hashable, Sendable {
     public var label: Label?
     public var points: [UnitCostPoint]
     /// The period ratio: **summed numerator ÷ summed denominator**, not the mean
-    /// of the per-bucket ratios — the mean weights a quiet Sunday exactly as
+    /// of the per-bucket ratios: the mean weights a quiet Sunday exactly as
     /// heavily as a peak Monday. Only buckets that produced a ratio contribute,
     /// on both sides.
     public var overallValue: Double?

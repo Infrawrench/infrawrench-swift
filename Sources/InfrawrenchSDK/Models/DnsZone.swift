@@ -27,7 +27,7 @@ public struct DnsZone: Codable, Hashable, Sendable {
     public var isPrivate: Bool
     /// Records synced into this zone.
     public var recordCount: Int
-    /// The provider's own record count, when reported. May exceed `recordCount` —
+    /// The provider's own record count, when reported. May exceed `recordCount`:
     /// several plugins list zones without listing their records.
     public var providerRecordCount: Int?
     public var danglingCount: Int

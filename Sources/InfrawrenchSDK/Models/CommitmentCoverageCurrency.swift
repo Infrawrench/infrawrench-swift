@@ -18,8 +18,8 @@ public struct CommitmentCoverageCurrency: Codable, Hashable, Sendable {
     /// Usage spend on rows stamped with a commitment id.
     public var coveredAmount: Double
     public var uncoveredAmount: Double
-    /// Uncovered usage in cells where a commitment landed in the window —
-    /// provider evidence of committability, not a hand-maintained service table.
+    /// Uncovered usage in cells where a commitment landed in the window; provider
+    /// evidence of committability, not a hand-maintained service table.
     public var uncoveredEligibleAmount: Double
     /// Lower bound: covered ÷ (covered + all uncovered usage).
     public var broadRatio: Double?

@@ -66,8 +66,8 @@ public struct BlastRadiusDependant: Codable, Hashable, Sendable {
         public var fieldKey: String
         /// The output or identity the reference reads.
         public var outputKey: String
-        /// Where the edge came from. Absent means `output-ref` — a reference
-        /// wired by hand.
+        /// Where the edge came from. Absent means `output-ref`: a reference wired
+        /// by hand.
         public var kind: Kind?
         /// How the plugin words the relationship ("in VPC"), when it declared
         /// one.

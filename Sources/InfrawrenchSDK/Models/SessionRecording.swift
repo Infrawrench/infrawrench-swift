@@ -144,7 +144,7 @@ public struct SessionRecording: Codable, Hashable, Sendable {
     public var hasInput: Bool
     /// Set when this session was shared with colleagues while it ran.
     public var sharedConsoleId: String?
-    /// Everyone who was attached to this session and in what role — the
+    /// Everyone who was attached to this session and in what role; the
     /// **highest** role they held, not their role at the end. Null or empty for
     /// an ordinary solo session. Once a session can be shared, `userId` alone
     /// stops answering 'whose hands were on this box'; this does. The cast
@@ -152,7 +152,7 @@ public struct SessionRecording: Codable, Hashable, Sendable {
     /// viewer sees *when* the keyboard moved.
     public var participants: [Participant]?
     /// `recording` (live), `complete` (closed cleanly), `truncated` (hit the
-    /// per-session capture ceiling — the tape is a genuine partial and says so),
+    /// per-session capture ceiling: the tape is a genuine partial and says so),
     /// or `abandoned` (the server handling the session went away before it could
     /// close the row).
     public var status: Status

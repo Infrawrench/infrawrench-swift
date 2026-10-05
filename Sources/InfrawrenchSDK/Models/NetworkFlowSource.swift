@@ -15,7 +15,7 @@ import Foundation
 
 public struct NetworkFlowSource: Codable, Hashable, Sendable {
     public var id: String
-    /// What the flow log is attached to — a VPC id, a network.
+    /// What the flow log is attached to; a VPC id, a network.
     public var target: String
     public var region: String?
     public var destinationType: String

@@ -13,7 +13,7 @@
  */
 import Foundation
 
-/// An organization's configuration. Every section is optional — a document that
+/// An organization's configuration. Every section is optional; a document that
 /// omits one leaves it entirely alone, in both apply modes.
 public struct OrgConfigDocument: Codable, Hashable, Sendable {
     public struct ExportedFrom: Codable, Hashable, Sendable {

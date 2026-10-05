@@ -14,7 +14,7 @@
 import Foundation
 
 public struct ReportDeliveryTargetOption: Codable, Hashable, Sendable {
-    /// The stored row id — what the schedule input carries.
+    /// The stored row id; what the schedule input carries.
     public var id: String
     /// Display label: `#channel` for Slack, the saved label for Teams.
     public var label: String

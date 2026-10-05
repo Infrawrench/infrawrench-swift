@@ -16,7 +16,7 @@ import Foundation
 public struct DriftAlertSettings: Codable, Hashable, Sendable {
     /// Alert on resources that appeared.
     public var notifyCreated: Bool
-    /// Alert on field-level updates. Defaults to false — updates are the bulk of
+    /// Alert on field-level updates. Defaults to false; updates are the bulk of
     /// the volume and are usually a provider restating a value.
     public var notifyUpdated: Bool
     /// Alert on resources that disappeared.

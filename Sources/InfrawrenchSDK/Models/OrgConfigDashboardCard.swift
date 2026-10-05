@@ -13,7 +13,7 @@
  */
 import Foundation
 
-/// One card. Position is the index in the dashboard's `cards` array — the grid
+/// One card. Position is the index in the dashboard's `cards` array; the grid
 /// order all three card kinds share.
 ///
 /// The spec allows several shapes here. Decoding tries the branches in spec

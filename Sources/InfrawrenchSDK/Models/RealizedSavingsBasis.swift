@@ -13,10 +13,10 @@
  */
 import Foundation
 
-/// `billing` — baseline and post-action spend both read from this resource's cost
-/// rows; `estimate` — no per-resource billing, so the list-price estimate is
-/// accrued over elapsed days; `manual` — the logged amount accrued; `unmeasured`
-/// — nothing to measure against (never summed as zero).
+/// `billing`: baseline and post-action spend both read from this resource's cost
+/// rows; `estimate`: no per-resource billing, so the list-price estimate is
+/// accrued over elapsed days; `manual`: the logged amount accrued; `unmeasured`:
+/// nothing to measure against (never summed as zero).
 public enum RealizedSavingsBasis: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
     case billing
     case estimate

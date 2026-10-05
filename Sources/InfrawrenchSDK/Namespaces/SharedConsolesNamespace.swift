@@ -64,12 +64,12 @@ public final class SharedConsolesNamespace: Sendable {
     /// invite. You become the driver.
     ///
     /// Returns 409 `console_not_here` when the pty is held by a different server
-    /// replica than the one answering this call — reopen the terminal and share
+    /// replica than the one answering this call; reopen the terminal and share
     /// again. Writing the share anyway would produce a link that authorises
     /// correctly and then finds nothing to attach to.
     ///
-    /// Requires `resources:execute` — the same permission as opening the
-    /// terminal. Closed to API keys: sharing a shell is an act a person performs.
+    /// Requires `resources:execute`: the same permission as opening the terminal.
+    /// Closed to API keys: sharing a shell is an act a person performs.
     ///
     /// _Requires permission: `resources:execute`._
     ///
@@ -102,7 +102,7 @@ public final class SharedConsolesNamespace: Sendable {
     /// Revoke a share
     ///
     /// Disconnects every guest and stops the fan-out. The sharer's own SSH
-    /// session carries on — revoking a share is not killing a terminal.
+    /// session carries on : revoking a share is not killing a terminal.
     ///
     /// The sharer or a holder of `org:settings:write`. Deliberately does **not**
     /// require `resources:execute`: ending access must never be gated on still
@@ -135,7 +135,7 @@ public final class SharedConsolesNamespace: Sendable {
     /// Get one shared console
     ///
     /// Visible to participants and to anyone who could revoke it (the sharer, or
-    /// a holder of `org:settings:write`). Others get 404 — that a named colleague
+    /// a holder of `org:settings:write`). Others get 404: that a named colleague
     /// has a root shell open on a named production host right now is operational
     /// information.
     ///
@@ -167,7 +167,7 @@ public final class SharedConsolesNamespace: Sendable {
     /// Authorised by the **current driver** (the keyboard is theirs to give) or
     /// by the **sharer** (it is their box, and asking permission from somebody
     /// who has stopped responding is not a control). An observer cannot promote
-    /// themselves — that is `/request-driver`.
+    /// themselves; that is `/request-driver`.
     ///
     /// Two simultaneous grants cannot both win: the database's partial unique
     /// index decides the order, and the loser gets 409 `driver-race-lost`.
@@ -207,7 +207,7 @@ public final class SharedConsolesNamespace: Sendable {
 
     /// Redeem an invite and join
     ///
-    /// Admission needs live org membership **and** `resources:execute` — the
+    /// Admission needs live org membership **and** `resources:execute`: the
     /// invite is a locator, never a capability, so a leaked link admits nobody
     /// who could not have opened the shell themselves.
     ///
@@ -308,8 +308,8 @@ public final class SharedConsolesNamespace: Sendable {
 
     /// Ask for the keyboard
     ///
-    /// Raises a flag the driver and the sharer can see. Grants nothing on its own
-    /// — that is the point.
+    /// Raises a flag the driver and the sharer can see. Grants nothing on its
+    /// own; that is the point.
     ///
     /// _Requires permission: `resources:execute`._
     ///
@@ -412,7 +412,7 @@ public final class SharedConsolesInvitesNamespace: Sendable {
     ///
     /// What the join screen shows before anyone commits: which host, whose
     /// session, and whether you may join it. Reachable with a valid token by a
-    /// signed-in member who already holds `resources:execute` — the token says
+    /// signed-in member who already holds `resources:execute`: the token says
     /// *which* session, never *whether*. Returns nothing from the session itself.
     ///
     /// _Requires permission: `resources:execute`._
@@ -453,7 +453,7 @@ public final class SharedConsolesParticipantsNamespace: Sendable {
     /// Their socket is closed immediately on the replica holding the pty, and
     /// within one two-second sweep on any other. They are marked `removed` rather
     /// than `left`, so they cannot resume without a fresh invite. The sharer
-    /// cannot be removed — revoke the share.
+    /// cannot be removed, revoke the share.
     ///
     /// DELETE
     /// /api/org/{orgId}/shared-consoles/{consoleId}/participants/{participantId}

@@ -61,7 +61,7 @@ public struct SyntheticProbe: Codable, Hashable, Sendable {
     public var name: String
     /// Absolute http(s) URL the check hits from the edge proxy.
     public var url: String
-    /// HTTP method the probe uses — GET, HEAD or OPTIONS. Unknown values become
+    /// HTTP method the probe uses, GET, HEAD or OPTIONS. Unknown values become
     /// GET.
     public var method: String
     /// Seconds between checks. Clamped server-side to 60–86400.

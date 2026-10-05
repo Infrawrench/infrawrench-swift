@@ -61,7 +61,7 @@ public struct AgentClaimRequest: Codable, Hashable, Sendable {
     /// Required when `mode` is merge.
     public var targetOrganizationId: String?
     /// Merge only: also re-parent the trial's metrics and cost history. Off by
-    /// default — it changes numbers the target organization may already be
+    /// default; it changes numbers the target organization may already be
     /// reporting on. Needs `costs:write`.
     public var moveHistory: Bool?
 

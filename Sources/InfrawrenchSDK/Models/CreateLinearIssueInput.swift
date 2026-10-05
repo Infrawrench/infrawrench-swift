@@ -20,7 +20,7 @@ public struct CreateLinearIssueInput: Codable, Hashable, Sendable {
     /// Team to file into. Every Linear issue belongs to exactly one team.
     public var teamId: String
     public var title: String
-    /// Markdown, passed to Linear as-is — unlike Jira, where the server converts
+    /// Markdown, passed to Linear as-is; unlike Jira, where the server converts
     /// plain text to Atlassian Document Format.
     public var description: String?
     /// Ids of existing labels in the workspace. Linear cannot create labels here.

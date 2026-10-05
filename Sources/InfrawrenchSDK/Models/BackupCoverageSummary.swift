@@ -27,7 +27,7 @@ public struct BackupCoverageSummary: Codable, Hashable, Sendable {
     public var unknownCount: Int
     public var backupCount: Int
     public var orphanedBackupCount: Int
-    /// Backups whose source could not be determined — the plugin syncs no source
+    /// Backups whose source could not be determined; the plugin syncs no source
     /// field, the field was empty, or more than one resource answered to it.
     /// Reported rather than hidden: 'we found no orphans' and 'we could not tell'
     /// are different answers.

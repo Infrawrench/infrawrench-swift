@@ -42,7 +42,7 @@ public struct OrgStatusIncident: Codable, Hashable, Sendable {
     /// Up to five of the overlapped resources, for display.
     public var sampleResources: [ProviderIncidentResourceSample]
     /// Change-timeline events recorded on this provider during the incident
-    /// window — "these N changes happened during an incident".
+    /// window; "these N changes happened during an incident".
     public var overlappingChangeCount: Int
 
     public init(

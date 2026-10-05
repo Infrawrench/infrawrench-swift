@@ -27,7 +27,7 @@ public final class DnsNamespace: Sendable {
     /// One view over every zone and record across the connected DNS providers
     /// (Cloudflare, Route 53, Cloud DNS, DigitalOcean, Netlify, Azure DNS,
     /// Vercel), with each record target classified against the rest of the
-    /// workspace. No provider API calls are made and no DNS is resolved — results
+    /// workspace. No provider API calls are made and no DNS is resolved: results
     /// reflect the last sync.
     ///
     /// A `dangling` target is a subdomain-takeover candidate: the record points

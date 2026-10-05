@@ -15,7 +15,7 @@ import Foundation
 
 /// One clause of a rule. A rule matches when every condition matches; 'or' is
 /// expressed by writing a second rule. A condition on a fact the alert does not
-/// carry never matches — in either direction, so `accountId notIn [x]` does not
+/// carry never matches; in either direction, so `accountId notIn [x]` does not
 /// match an alert with no account.
 ///
 /// The spec allows several shapes here. Decoding tries the branches in spec

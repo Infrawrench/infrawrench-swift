@@ -124,7 +124,7 @@ public final class SshKeysNamespace: Sendable {
     ///
     /// Signs one publickey-authentication challenge with a server-generated org
     /// key whose private half never leaves Infrawrench Cloud. Requires the
-    /// `resources:execute` permission — producing an auth signature is the same
+    /// `resources:execute` permission: producing an auth signature is the same
     /// authority as opening a shell. Imported keys cannot sign (only their public
     /// half is stored). Every call is audited.
     ///

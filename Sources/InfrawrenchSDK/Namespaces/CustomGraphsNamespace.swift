@@ -56,7 +56,7 @@ public final class CustomGraphsNamespace: Sendable {
     ///
     /// Raises on 400: Bad request
     ///
-    /// Raises on 402: Payment required — the organization's plan does not include
+    /// Raises on 402: Payment required: the organization's plan does not include
     /// this
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
@@ -157,7 +157,7 @@ public final class CustomGraphsNamespace: Sendable {
     ///
     /// Raises on 400: Bad request
     ///
-    /// Raises on 402: Payment required — the organization's plan does not include
+    /// Raises on 402: Payment required: the organization's plan does not include
     /// this
     ///
     /// Raises on 404: Not found
@@ -211,7 +211,7 @@ public final class CustomGraphsNamespace: Sendable {
     ///
     /// Raises on 400: Bad request
     ///
-    /// Raises on 402: Payment required — the organization's plan does not include
+    /// Raises on 402: Payment required: the organization's plan does not include
     /// this
     ///
     /// Raises on 404: Not found

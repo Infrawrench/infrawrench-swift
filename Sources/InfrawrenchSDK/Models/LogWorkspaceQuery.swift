@@ -28,7 +28,7 @@ public struct LogWorkspaceQuery: Codable, Hashable, Sendable {
     public var lastEvalAt: String?
     /// Last evaluation that found at least one matching line.
     public var lastMatchAt: String?
-    /// Last dispatched notification — the cooldown anchor.
+    /// Last dispatched notification; the cooldown anchor.
     public var lastAlertedAt: String?
     /// Failure detail from the last evaluation.
     public var lastEvalError: String?

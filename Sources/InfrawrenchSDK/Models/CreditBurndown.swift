@@ -16,7 +16,7 @@ import Foundation
 public struct CreditBurndown: Codable, Hashable, Sendable {
     public var pots: [CreditPot]
     public var failures: [CreditPollFailure]
-    /// Credit-capable accounts never yet collected — named rather than omitted.
+    /// Credit-capable accounts never yet collected, named rather than omitted.
     public var pendingAccountIds: [String]
     public var burnWindowDays: Int
 

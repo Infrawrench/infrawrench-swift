@@ -20,7 +20,7 @@ public struct Runbook: Codable, Hashable, Sendable {
     public var steps: [RunbookStep]
     /// Resource types this runbook is about; empty means it is not scoped to a
     /// type. Used to answer 'which runbooks apply here', **never** to restrict
-    /// who may open it — a runbook nobody can find is the failure this feature
+    /// who may open it; a runbook nobody can find is the failure this feature
     /// exists to fix.
     public var resourceTypeIds: [String]
     /// Optional tag narrowing. Matched case-insensitively.

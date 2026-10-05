@@ -130,7 +130,7 @@ public final class JiraNamespace: Sendable {
     /// created with.
     ///
     /// - Parameter sourceId: Repeat to narrow to specific findings. Omit to
-    /// return every link of the kind — this is the batch lookup a list view makes
+    /// return every link of the kind; this is the batch lookup a list view makes
     /// once instead of one request per row.
     public func links(
         orgId: String? = nil,

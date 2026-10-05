@@ -20,7 +20,7 @@ public struct ChangeCostImpactSeries: Codable, Hashable, Sendable {
     public var afterPerDay: Double
     /// `afterPerDay - beforePerDay`. Positive means the change costs more.
     public var deltaPerDay: Double
-    /// Null when the before window spent nothing — there is no percentage.
+    /// Null when the before window spent nothing; there is no percentage.
     public var deltaPercent: Double?
     public var beforeTotal: Double
     public var afterTotal: Double

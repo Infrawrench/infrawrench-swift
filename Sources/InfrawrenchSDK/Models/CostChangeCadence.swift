@@ -16,7 +16,7 @@ import Foundation
 /// Which window is compared to which, in complete UTC days (the accruing current
 /// day never counts). daily: one complete day vs the same weekday one week
 /// earlier. weekly: the last 7 complete days vs the 7 before them. monthly:
-/// month-to-date vs the same number of days at the start of the prior month —
+/// month-to-date vs the same number of days at the start of the prior month;
 /// never MTD vs the full prior month.
 public enum CostChangeCadence: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
     case daily

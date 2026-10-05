@@ -21,7 +21,7 @@ public struct MomentResponse: Codable, Hashable, Sendable {
     /// The half-window actually applied, after clamping to 1–4320 minutes.
     public var windowMinutes: Int
     public var generatedAt: String
-    /// One entry per feed, in canonical order — including omitted and errored
+    /// One entry per feed, in canonical order; including omitted and errored
     /// feeds.
     public var feeds: [MomentFeedStatus]
     /// Chronological, oldest first.

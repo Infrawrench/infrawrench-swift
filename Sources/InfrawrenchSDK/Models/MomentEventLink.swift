@@ -89,7 +89,7 @@ public struct MomentEventLink: Codable, Hashable, Sendable {
     public var id: String?
     /// Parent id where the target needs one (workflow id for a run).
     public var parentId: String?
-    /// Absolute external URL — a provider's incident page. Wins when present.
+    /// Absolute external URL; a provider's incident page. Wins when present.
     public var url: String?
 
     public init(

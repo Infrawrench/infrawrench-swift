@@ -112,18 +112,18 @@ public struct Incident: Codable, Hashable, Sendable {
     /// `mitigated` is a real state, not a synonym for resolved: impact has
     /// stopped but the incident is still open for follow-up. Keeping it separate
     /// is what makes time-to-mitigate a measurement rather than a guess.
-    /// Resolving runs the resolve path — the change freeze this incident opened
-    /// is lifted, and the status-page update it posted is closed.
+    /// Resolving runs the resolve path; the change freeze this incident opened is
+    /// lifted, and the status-page update it posted is closed.
     public var status: Status
     public var summary: String?
-    /// Backdatable — people declare after they start firefighting.
+    /// Backdatable: people declare after they start firefighting.
     public var startedAt: String
     public var mitigatedAt: String?
     public var resolvedAt: String?
     public var declaredByUserId: String?
     public var declaredByName: String?
     public var resolvedByUserId: String?
-    /// Advisory. Not foreign keys — the claim must survive the resource being
+    /// Advisory. Not foreign keys; the claim must survive the resource being
     /// deleted.
     public var affectedResourceIds: [String]
     public var affectedAccountIds: [String]

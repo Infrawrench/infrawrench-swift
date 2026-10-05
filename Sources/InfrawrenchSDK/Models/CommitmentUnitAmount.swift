@@ -14,7 +14,7 @@
 import Foundation
 
 public struct CommitmentUnitAmount: Codable, Hashable, Sendable {
-    /// Provider-native unit label, untranslated — "VCPU", "MEMORY_MB",
+    /// Provider-native unit label, untranslated, "VCPU", "MEMORY_MB",
     /// "LOCAL_SSD_GB".
     public var unit: String
     public var amount: Double

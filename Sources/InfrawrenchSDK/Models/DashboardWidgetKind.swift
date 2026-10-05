@@ -13,7 +13,7 @@
  */
 import Foundation
 
-/// `cost_graph` stores its whole config inline — a one-off card. `cost_report`
+/// `cost_graph` stores its whole config inline; a one-off card. `cost_report`
 /// points at a saved cost report by id, so editing the report updates every
 /// dashboard showing it. `cost_canvas` points at a cost canvas by id (`{version:
 /// 1, canvasId}`) the same way. `realized_savings` shows the org's realized

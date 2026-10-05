@@ -162,7 +162,7 @@ public struct NetworkFlowPair: Codable, Hashable, Sendable {
     public var source: NetworkFlowEndpoint
     public var destination: NetworkFlowEndpoint
     /// Which billing boundary the traffic crossed. `unknown` means the provider's
-    /// record did not determine one — it is priced at zero and labelled rather
+    /// record did not determine one; it is priced at zero and labelled rather
     /// than folded into a neighbouring boundary.
     public var scope: Scope
     public var direction: Direction

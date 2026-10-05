@@ -19,8 +19,8 @@ public struct AgentClaimStarted: Codable, Hashable, Sendable {
     public var user_code: String
     public var verification_uri: String
     /// The verification page with the code pre-filled. Convenient, but it puts a
-    /// live bearer secret in a URL — prefer `verification_uri` plus the code
-    /// shown separately.
+    /// live bearer secret in a URL; prefer `verification_uri` plus the code shown
+    /// separately.
     public var verification_uri_complete: String
     public var expires_at: String
     /// Minimum seconds between status polls.
