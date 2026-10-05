@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.59.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.60.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.59.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.60.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -13,6 +13,62 @@
  */
 import Foundation
 
+public struct BusinessMetricsImporterOptionsBody: Codable, Hashable, Sendable {
+    public var accountId: String
+    public var fieldKey: String
+    /// The source plugin's form values, keyed by field (see `GET
+    /// /business-metrics/importer-sources`). SQL fields must be a single SELECT
+    /// or WITH statement; `{{from}}`, `{{to}}`, `{{to_exclusive}}` and
+    /// `{{timezone}}` are replaced with quoted literals.
+    public var params: [String: String]
+
+    public init(
+        accountId: String,
+        fieldKey: String,
+        params: [String: String]
+    ) {
+        self.accountId = accountId
+        self.fieldKey = fieldKey
+        self.params = params
+    }
+}
+
+public struct BusinessMetricsImporterOptionsResult: Codable, Hashable, Sendable {
+    public struct Option: Codable, Hashable, Sendable {
+        public var id: String
+        public var label: String
+        public var description: String?
+
+        public init(
+            id: String,
+            label: String,
+            description: String? = nil
+        ) {
+            self.id = id
+            self.label = label
+            self.description = description
+        }
+    }
+
+    public var options: [Option]
+
+    public init(
+        options: [Option]
+    ) {
+        self.options = options
+    }
+}
+
+public struct BusinessMetricsImporterSourcesResult: Codable, Hashable, Sendable {
+    public var sources: [BusinessMetricSourceAccount]
+
+    public init(
+        sources: [BusinessMetricSourceAccount]
+    ) {
+        self.sources = sources
+    }
+}
+
 public struct BusinessMetricsGetGetResult: Codable, Hashable, Sendable {
     public var metrics: [BusinessMetric]
 
@@ -20,6 +76,39 @@ public struct BusinessMetricsGetGetResult: Codable, Hashable, Sendable {
         metrics: [BusinessMetric]
     ) {
         self.metrics = metrics
+    }
+}
+
+public struct BusinessMetricsImporterGetResult: Codable, Hashable, Sendable {
+    public var importer: BusinessMetricImporter?
+
+    public init(
+        importer: BusinessMetricImporter? = nil
+    ) {
+        self.importer = importer
+    }
+}
+
+public struct BusinessMetricsImporterRunBody: Codable, Hashable, Sendable {
+    public var from: String?
+    public var to: String?
+
+    public init(
+        from: String? = nil,
+        to: String? = nil
+    ) {
+        self.from = from
+        self.to = to
+    }
+}
+
+public struct BusinessMetricsImporterRunsResult: Codable, Hashable, Sendable {
+    public var runs: [BusinessMetricImportRun]
+
+    public init(
+        runs: [BusinessMetricImportRun]
+    ) {
+        self.runs = runs
     }
 }
 
@@ -50,12 +139,15 @@ public final class BusinessMetricsNamespace: Sendable {
     let transport: ApiTransport
     /// `client.businessMetrics.get`
     public let get: BusinessMetricsGetNamespace
+    /// `client.businessMetrics.importer`
+    public let importer: BusinessMetricsImporterNamespace
     /// `client.businessMetrics.values`
     public let values: BusinessMetricsValuesNamespace
 
     init(transport: ApiTransport) {
         self.transport = transport
         self.get = BusinessMetricsGetNamespace(transport: transport)
+        self.importer = BusinessMetricsImporterNamespace(transport: transport)
         self.values = BusinessMetricsValuesNamespace(transport: transport)
     }
 
@@ -117,6 +209,97 @@ public final class BusinessMetricsNamespace: Sendable {
                 method: "DELETE",
                 path: "/api/org/{orgId}/business-metrics/{id}",
                 pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// List an importer picker's choices
+    ///
+    /// Choices for one `select` field of a source's form, given the values picked
+    /// so far. Needs `resources:execute` and `costs:write`: it calls the provider
+    /// with the account's credentials.
+    ///
+    /// _Requires permission: `resources:execute`._
+    ///
+    /// POST /api/org/{orgId}/business-metrics/importer-options
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func importerOptions(
+        orgId: String? = nil,
+        body: BusinessMetricsImporterOptionsBody,
+        options: RequestOptions? = nil
+    ) async throws -> BusinessMetricsImporterOptionsResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/business-metrics/importer-options",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+
+    /// Preview an importer
+    ///
+    /// Run a source over a window and return the values it would write, writing
+    /// nothing; or, with `dryRun`, validate the query with the provider without
+    /// reading data. Read-only queries only, with the same row limit and timeout
+    /// as a scheduled run.
+    ///
+    /// _Requires permission: `resources:execute`._
+    ///
+    /// POST /api/org/{orgId}/business-metrics/importer-preview
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func importerPreview(
+        orgId: String? = nil,
+        body: BusinessMetricImportPreviewRequest,
+        options: RequestOptions? = nil
+    ) async throws -> BusinessMetricImportPreview {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/business-metrics/importer-preview",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+
+    /// List importer sources
+    ///
+    /// Connected accounts whose plugin can feed a business metric on a schedule,
+    /// each with the plugin's importer form: which fields to fill and which are
+    /// pickers.
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// GET /api/org/{orgId}/business-metrics/importer-sources
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func importerSources(
+        orgId: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> BusinessMetricsImporterSourcesResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/business-metrics/importer-sources",
+                pathParameters: ["orgId": orgId?.parameterValue]
             ),
             options: options
         )
@@ -266,6 +449,181 @@ public final class BusinessMetricsGetNamespace: Sendable {
                 method: "GET",
                 path: "/api/org/{orgId}/business-metrics/{id}",
                 pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue]
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.businessMetrics.importer`
+public final class BusinessMetricsImporterNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// Delete a metric's importer
+    ///
+    /// Stops importing and drops the run history. Values already imported stay.
+    ///
+    /// _Requires permission: `costs:write`._
+    ///
+    /// DELETE /api/org/{orgId}/business-metrics/{id}/importer
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter id: Metric id or key.
+    public func delete(
+        orgId: String? = nil,
+        id: String,
+        options: RequestOptions? = nil
+    ) async throws -> Ok {
+        return try await transport.send(
+            RequestSpec(
+                method: "DELETE",
+                path: "/api/org/{orgId}/business-metrics/{id}/importer",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Get a metric's importer
+    ///
+    /// `importer` is null when the metric's values are only pushed.
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// GET /api/org/{orgId}/business-metrics/{id}/importer
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter id: Metric id or key.
+    public func get(
+        orgId: String? = nil,
+        id: String,
+        options: RequestOptions? = nil
+    ) async throws -> BusinessMetricsImporterGetResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/business-metrics/{id}/importer",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Run a metric's importer now
+    ///
+    /// Runs synchronously and returns the finished run, failed or not. With no
+    /// body it reads the importer's own window; `from`/`to` backfill a wider one
+    /// (at most 730 days).
+    ///
+    /// _Requires permission: `resources:execute`._
+    ///
+    /// POST /api/org/{orgId}/business-metrics/{id}/importer/run
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter id: Metric id or key.
+    public func run(
+        orgId: String? = nil,
+        id: String,
+        body: BusinessMetricsImporterRunBody? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> BusinessMetricImportRun {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/business-metrics/{id}/importer/run",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue],
+                body: body.map { AnyEncodable($0) }
+            ),
+            options: options
+        )
+    }
+
+    /// List a metric's import runs
+    ///
+    /// Newest first; the most recent 50 are kept.
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// GET /api/org/{orgId}/business-metrics/{id}/importer/runs
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter id: Metric id or key.
+    ///
+    /// - Parameter limit: Default 20.
+    public func runs(
+        orgId: String? = nil,
+        id: String,
+        limit: Int? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> BusinessMetricsImporterRunsResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/business-metrics/{id}/importer/runs",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue],
+                query: [QueryParameter("limit", limit)]
+            ),
+            options: options
+        )
+    }
+
+    /// Create or replace a metric's importer
+    ///
+    /// One importer per metric. A full replace: omitted fields take their
+    /// defaults. Each run restates whole days (every label a day carried is
+    /// replaced by what the source returned), never touches days the source
+    /// returned nothing for, and ignores points outside the window. Changing the
+    /// account, the params or the schedule makes it due immediately.
+    ///
+    /// _Requires permission: `resources:execute`._
+    ///
+    /// PUT /api/org/{orgId}/business-metrics/{id}/importer
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter id: Metric id or key.
+    public func update(
+        orgId: String? = nil,
+        id: String,
+        body: BusinessMetricImporterInput,
+        options: RequestOptions? = nil
+    ) async throws -> BusinessMetricImporter? {
+        return try await transport.send(
+            RequestSpec(
+                method: "PUT",
+                path: "/api/org/{orgId}/business-metrics/{id}/importer",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue],
+                body: AnyEncodable(body)
             ),
             options: options
         )

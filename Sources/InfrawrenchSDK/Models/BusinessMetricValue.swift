@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.59.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.60.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.59.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.60.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -17,6 +17,7 @@ public struct BusinessMetricValue: Codable, Hashable, Sendable {
     public enum Source: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
         case api
         case workflow
+        case `import`
         /// A value the API added after this SDK was generated. Kept rather than
         /// rejected, so a new server-side value cannot break decoding.
         case unrecognized(String)
@@ -25,6 +26,7 @@ public struct BusinessMetricValue: Codable, Hashable, Sendable {
             switch rawValue {
             case "api": self = .api
             case "workflow": self = .workflow
+            case "import": self = .`import`
             default: self = .unrecognized(rawValue)
             }
         }
@@ -33,6 +35,7 @@ public struct BusinessMetricValue: Codable, Hashable, Sendable {
             switch self {
             case .api: return "api"
             case .workflow: return "workflow"
+            case .`import`: return "import"
             case .unrecognized(let value): return value
             }
         }
@@ -41,6 +44,7 @@ public struct BusinessMetricValue: Codable, Hashable, Sendable {
         public static let allKnownCases: [Source] = [
             .api,
             .workflow,
+            .`import`,
         ]
 
         public init(from decoder: any Decoder) throws {
@@ -56,17 +60,21 @@ public struct BusinessMetricValue: Codable, Hashable, Sendable {
     /// UTC day, YYYY-MM-DD.
     public var day: String
     public var value: Double
+    /// Optional breakdown label; a day's total is the sum across its labels.
+    public var label: String?
     public var source: Source
     public var updatedAt: String
 
     public init(
         day: String,
         value: Double,
+        label: String? = nil,
         source: Source,
         updatedAt: String
     ) {
         self.day = day
         self.value = value
+        self.label = label
         self.source = source
         self.updatedAt = updatedAt
     }

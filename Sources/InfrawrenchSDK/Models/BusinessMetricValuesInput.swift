@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.59.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.60.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.59.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.60.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -17,13 +17,16 @@ public struct BusinessMetricValuesInput: Codable, Hashable, Sendable {
     public struct Value: Codable, Hashable, Sendable {
         public var date: String
         public var value: Double
+        public var label: String?
 
         public init(
             date: String,
-            value: Double
+            value: Double,
+            label: String? = nil
         ) {
             self.date = date
             self.value = value
+            self.label = label
         }
     }
 

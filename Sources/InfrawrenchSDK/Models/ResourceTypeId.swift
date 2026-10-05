@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.59.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.60.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.59.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.60.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -111,6 +111,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case bigqueryDataset
     case bigqueryTable
     case bigtableInstance
+    case billableMetric
     case billingAccount
     case billingGroup
     case blockVolume
@@ -178,6 +179,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case customEnrichment
     case customHostname
     case customVoice
+    case customer
     case d1Database
     case dashboard
     case database
@@ -751,6 +753,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "bigquery-dataset": self = .bigqueryDataset
         case "bigquery-table": self = .bigqueryTable
         case "bigtable-instance": self = .bigtableInstance
+        case "billable-metric": self = .billableMetric
         case "billing-account": self = .billingAccount
         case "billing-group": self = .billingGroup
         case "block-volume": self = .blockVolume
@@ -818,6 +821,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "custom-enrichment": self = .customEnrichment
         case "custom-hostname": self = .customHostname
         case "custom-voice": self = .customVoice
+        case "customer": self = .customer
         case "d1-database": self = .d1Database
         case "dashboard": self = .dashboard
         case "database": self = .database
@@ -1391,6 +1395,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .bigqueryDataset: return "bigquery-dataset"
         case .bigqueryTable: return "bigquery-table"
         case .bigtableInstance: return "bigtable-instance"
+        case .billableMetric: return "billable-metric"
         case .billingAccount: return "billing-account"
         case .billingGroup: return "billing-group"
         case .blockVolume: return "block-volume"
@@ -1458,6 +1463,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .customEnrichment: return "custom-enrichment"
         case .customHostname: return "custom-hostname"
         case .customVoice: return "custom-voice"
+        case .customer: return "customer"
         case .d1Database: return "d1-database"
         case .dashboard: return "dashboard"
         case .database: return "database"
@@ -2031,6 +2037,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .bigqueryDataset,
         .bigqueryTable,
         .bigtableInstance,
+        .billableMetric,
         .billingAccount,
         .billingGroup,
         .blockVolume,
@@ -2098,6 +2105,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .customEnrichment,
         .customHostname,
         .customVoice,
+        .customer,
         .d1Database,
         .dashboard,
         .database,

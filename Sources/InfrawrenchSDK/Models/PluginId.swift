@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.59.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.60.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.59.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.60.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -56,6 +56,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
     case kubernetes
     case linode
     case memcached
+    case metronome
     case mistral
     case modal
     case mongodb
@@ -137,6 +138,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
         case "kubernetes": self = .kubernetes
         case "linode": self = .linode
         case "memcached": self = .memcached
+        case "metronome": self = .metronome
         case "mistral": self = .mistral
         case "modal": self = .modal
         case "mongodb": self = .mongodb
@@ -218,6 +220,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
         case .kubernetes: return "kubernetes"
         case .linode: return "linode"
         case .memcached: return "memcached"
+        case .metronome: return "metronome"
         case .mistral: return "mistral"
         case .modal: return "modal"
         case .mongodb: return "mongodb"
@@ -299,6 +302,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
         .kubernetes,
         .linode,
         .memcached,
+        .metronome,
         .mistral,
         .modal,
         .mongodb,

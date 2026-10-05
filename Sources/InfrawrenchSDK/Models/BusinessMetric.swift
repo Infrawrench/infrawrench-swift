@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.59.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.60.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.59.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.60.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -27,6 +27,7 @@ public struct BusinessMetric: Codable, Hashable, Sendable {
     public var createdAt: String
     public var updatedAt: String
     public var coverage: BusinessMetricCoverage?
+    public var importer: BusinessMetricImporterSummary?
 
     public init(
         id: String,
@@ -41,7 +42,8 @@ public struct BusinessMetric: Codable, Hashable, Sendable {
         createdByUserId: String? = nil,
         createdAt: String,
         updatedAt: String,
-        coverage: BusinessMetricCoverage? = nil
+        coverage: BusinessMetricCoverage? = nil,
+        importer: BusinessMetricImporterSummary? = nil
     ) {
         self.id = id
         self.key = key
@@ -56,5 +58,6 @@ public struct BusinessMetric: Codable, Hashable, Sendable {
         self.createdAt = createdAt
         self.updatedAt = updatedAt
         self.coverage = coverage
+        self.importer = importer
     }
 }
