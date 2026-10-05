@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.50.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.52.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.50.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.52.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -43,6 +43,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
         case probes
         case statusPages
         case quotas
+        case priceCatalog
         case incidents
         case workflows
         case deployments
@@ -83,6 +84,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case "probes": self = .probes
             case "status-pages": self = .statusPages
             case "quotas": self = .quotas
+            case "price-catalog": self = .priceCatalog
             case "incidents": self = .incidents
             case "workflows": self = .workflows
             case "deployments": self = .deployments
@@ -123,6 +125,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case .probes: return "probes"
             case .statusPages: return "status-pages"
             case .quotas: return "quotas"
+            case .priceCatalog: return "price-catalog"
             case .incidents: return "incidents"
             case .workflows: return "workflows"
             case .deployments: return "deployments"
@@ -163,6 +166,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             .probes,
             .statusPages,
             .quotas,
+            .priceCatalog,
             .incidents,
             .workflows,
             .deployments,

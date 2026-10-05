@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.50.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.52.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.50.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.52.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -174,8 +174,71 @@ public enum CostExportDestination: Codable, Hashable, Sendable {
         }
     }
 
+    public struct CostExportDestinationObject3: Codable, Hashable, Sendable {
+        public enum Kind: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
+            case warehouse
+            /// A value the API added after this SDK was generated. Kept rather
+            /// than rejected, so a new server-side value cannot break decoding.
+            case unrecognized(String)
+
+            public init(rawValue: String) {
+                switch rawValue {
+                case "warehouse": self = .warehouse
+                default: self = .unrecognized(rawValue)
+                }
+            }
+
+            public var rawValue: String {
+                switch self {
+                case .warehouse: return "warehouse"
+                case .unrecognized(let value): return value
+                }
+            }
+
+            /// Every value the spec declares. `unrecognized` is deliberately absent.
+            public static let allKnownCases: [Kind] = [
+                .warehouse,
+            ]
+
+            public init(from decoder: any Decoder) throws {
+                self.init(rawValue: try decoder.singleValueContainer().decode(String.self))
+            }
+
+            public func encode(to encoder: any Encoder) throws {
+                var container = encoder.singleValueContainer()
+                try container.encode(rawValue)
+            }
+        }
+
+        public var kind: Kind
+        /// Plugin whose warehouse receives the rows: `snowflake` or `databricks`.
+        /// See `GET /cost-exports/warehouse-sinks`.
+        public var pluginId: String
+        /// Connected account of that plugin. Its stored credentials load the
+        /// rows; the export carries no credential of its own.
+        public var accountId: String
+        /// The plugin's target fields. Snowflake: `warehouse` (optional),
+        /// `database`, `schema`, `table`. Databricks: `warehouseId`, `catalog`,
+        /// `schema`, `table`. A table that does not exist is created on the first
+        /// run.
+        public var target: [String: String]
+
+        public init(
+            kind: Kind,
+            pluginId: String,
+            accountId: String,
+            target: [String: String]
+        ) {
+            self.kind = kind
+            self.pluginId = pluginId
+            self.accountId = accountId
+            self.target = target
+        }
+    }
+
     case object(CostExportDestinationObject)
     case object2(CostExportDestinationObject2)
+    case object3(CostExportDestinationObject3)
     /// A shape none of the branches above matched.
     case other(JSONValue)
 
@@ -189,6 +252,10 @@ public enum CostExportDestination: Codable, Hashable, Sendable {
             self = .object2(value)
             return
         }
+        if let value = try? container.decode(CostExportDestinationObject3.self) {
+            self = .object3(value)
+            return
+        }
         self = .other(try container.decode(JSONValue.self))
     }
 
@@ -197,6 +264,7 @@ public enum CostExportDestination: Codable, Hashable, Sendable {
         switch self {
         case .object(let value): try container.encode(value)
         case .object2(let value): try container.encode(value)
+        case .object3(let value): try container.encode(value)
         case .other(let value): try container.encode(value)
         }
     }

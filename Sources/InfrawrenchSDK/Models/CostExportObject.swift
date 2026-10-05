@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.50.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.52.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.50.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.52.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -20,7 +20,8 @@ public struct CostExportObject: Codable, Hashable, Sendable {
     public var to: String
     /// `{prefix}/cost-export/{exportId}/{cadence}/{periodStart}.{format}`.
     /// Deterministic, so re-exporting a restated period overwrites this object
-    /// instead of adding a second copy.
+    /// instead of adding a second copy. For a warehouse destination, the table
+    /// and the period's days (`byteCount` is 0).
     public var key: String
     public var rowCount: Int
     public var byteCount: Int
