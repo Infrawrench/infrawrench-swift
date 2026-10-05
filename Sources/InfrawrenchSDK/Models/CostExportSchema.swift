@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.73.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.74.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.73.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.74.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -14,13 +14,15 @@
 import Foundation
 
 /// Which columns an object carries. `native` is Infrawrench's own layout, shaped
-/// by `query.dimensions` and `query.tagKeys`. `focus-1.3` writes the FinOps Open
-/// Cost and Usage Specification v1.3 columns at the full row grain, with
-/// `BilledCost` (cash) and `EffectiveCost` (amortized) side by side;
+/// by `query.dimensions` and `query.tagKeys`. `focus-1.4` and `focus-1.3` write
+/// the FinOps Open Cost and Usage Specification columns of that version at the
+/// full row grain (1.4 drops the deprecated `ProviderName` and `PublisherName`),
+/// with `BilledCost` (cash) and `EffectiveCost` (amortized) side by side;
 /// `query.dimensions`, `query.tagKeys` and `query.costBasis` do not apply to it,
 /// `query.filters` and `query.chargeTypes` still do.
 public enum CostExportSchema: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
     case native
+    case focus14
     case focus13
     /// A value the API added after this SDK was generated. Kept rather than
     /// rejected, so a new server-side value cannot break decoding.
@@ -29,6 +31,7 @@ public enum CostExportSchema: RawRepresentable, Codable, Hashable, Sendable, Par
     public init(rawValue: String) {
         switch rawValue {
         case "native": self = .native
+        case "focus-1.4": self = .focus14
         case "focus-1.3": self = .focus13
         default: self = .unrecognized(rawValue)
         }
@@ -37,6 +40,7 @@ public enum CostExportSchema: RawRepresentable, Codable, Hashable, Sendable, Par
     public var rawValue: String {
         switch self {
         case .native: return "native"
+        case .focus14: return "focus-1.4"
         case .focus13: return "focus-1.3"
         case .unrecognized(let value): return value
         }
@@ -45,6 +49,7 @@ public enum CostExportSchema: RawRepresentable, Codable, Hashable, Sendable, Par
     /// Every value the spec declares. `unrecognized` is deliberately absent.
     public static let allKnownCases: [CostExportSchema] = [
         .native,
+        .focus14,
         .focus13,
     ]
 

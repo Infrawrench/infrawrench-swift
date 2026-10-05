@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.73.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.74.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.73.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.74.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -14,6 +14,45 @@
 import Foundation
 
 public struct FocusExportRequest: Codable, Hashable, Sendable {
+    public enum Version: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
+        case 14
+        case 13
+        /// A value the API added after this SDK was generated. Kept rather than
+        /// rejected, so a new server-side value cannot break decoding.
+        case unrecognized(String)
+
+        public init(rawValue: String) {
+            switch rawValue {
+            case "1.4": self = .14
+            case "1.3": self = .13
+            default: self = .unrecognized(rawValue)
+            }
+        }
+
+        public var rawValue: String {
+            switch self {
+            case .14: return "1.4"
+            case .13: return "1.3"
+            case .unrecognized(let value): return value
+            }
+        }
+
+        /// Every value the spec declares. `unrecognized` is deliberately absent.
+        public static let allKnownCases: [Version] = [
+            .14,
+            .13,
+        ]
+
+        public init(from decoder: any Decoder) throws {
+            self.init(rawValue: try decoder.singleValueContainer().decode(String.self))
+        }
+
+        public func encode(to encoder: any Encoder) throws {
+            var container = encoder.singleValueContainer()
+            try container.encode(rawValue)
+        }
+    }
+
     public var from: String
     public var to: String
     public var filters: [CostFilter]?
@@ -50,6 +89,8 @@ public struct FocusExportRequest: Codable, Hashable, Sendable {
     /// existed, and rows from providers that cannot distinguish them, are
     /// `usage`.
     public var chargeTypes: [CostChargeType]?
+    /// The FOCUS version to write. Omitted means `1.3`.
+    public var version: Version?
 
     public init(
         from: String,
@@ -57,7 +98,8 @@ public struct FocusExportRequest: Codable, Hashable, Sendable {
         filters: [CostFilter]? = nil,
         query: String? = nil,
         savedFilterId: String? = nil,
-        chargeTypes: [CostChargeType]? = nil
+        chargeTypes: [CostChargeType]? = nil,
+        version: Version? = nil
     ) {
         self.from = from
         self.to = to
@@ -65,5 +107,6 @@ public struct FocusExportRequest: Codable, Hashable, Sendable {
         self.query = query
         self.savedFilterId = savedFilterId
         self.chargeTypes = chargeTypes
+        self.version = version
     }
 }
