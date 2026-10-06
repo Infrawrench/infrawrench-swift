@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.74.1 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.75.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.74.1).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.75.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -58,6 +58,9 @@ public struct CredentialField: Codable, Hashable, Sendable {
     /// them.
     public var providerOptions: ProviderOptions?
     public var helpLink: HelpLink?
+    /// A rarely needed optional setting (a custom CA bundle, say) that forms show
+    /// under a collapsed advanced section.
+    public var advanced: Bool?
 
     public init(
         key: String,
@@ -69,7 +72,8 @@ public struct CredentialField: Codable, Hashable, Sendable {
         defaultValue: String? = nil,
         regions: [CredentialFieldRegion]? = nil,
         providerOptions: ProviderOptions? = nil,
-        helpLink: HelpLink? = nil
+        helpLink: HelpLink? = nil,
+        advanced: Bool? = nil
     ) {
         self.key = key
         self.label = label
@@ -81,5 +85,6 @@ public struct CredentialField: Codable, Hashable, Sendable {
         self.regions = regions
         self.providerOptions = providerOptions
         self.helpLink = helpLink
+        self.advanced = advanced
     }
 }
