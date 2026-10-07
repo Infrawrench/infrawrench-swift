@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.75.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.76.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.75.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.76.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -180,6 +180,12 @@ public final class APIV1Client: Sendable {
     public let ownership: OwnershipNamespace
     /// `client.pages`
     public let pages: PagesNamespace
+    /// `client.pagingIncidents`
+    public let pagingIncidents: PagingIncidentsNamespace
+    /// `client.pagingProviders`
+    public let pagingProviders: PagingProvidersNamespace
+    /// `client.pagingWebhooks`
+    public let pagingWebhooks: PagingWebhooksNamespace
     /// `client.posture`
     public let posture: PostureNamespace
     /// `client.priceCatalog`
@@ -329,6 +335,9 @@ public final class APIV1Client: Sendable {
         self.orphans = OrphansNamespace(transport: transport)
         self.ownership = OwnershipNamespace(transport: transport)
         self.pages = PagesNamespace(transport: transport)
+        self.pagingIncidents = PagingIncidentsNamespace(transport: transport)
+        self.pagingProviders = PagingProvidersNamespace(transport: transport)
+        self.pagingWebhooks = PagingWebhooksNamespace(transport: transport)
         self.posture = PostureNamespace(transport: transport)
         self.priceCatalog = PriceCatalogNamespace(transport: transport)
         self.probes = ProbesNamespace(transport: transport)

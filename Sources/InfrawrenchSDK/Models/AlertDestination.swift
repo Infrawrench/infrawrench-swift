@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.75.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.76.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.75.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.76.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -32,6 +32,13 @@ import Foundation
 /// `email-member` and `email-address` send an HTML and plain-text email with a
 /// link back into the app and a one-click unsubscribe link. Email carries no
 /// acknowledge button, so a rule routed only to email always escalates.
+///
+/// `paging-provider` opens an alert on a provider target under a stable dedup
+/// key. The alert's own recovery (a probe coming back, a declared incident
+/// resolving, a page being cleared) resolves it upstream, an Infrawrench
+/// acknowledgement acknowledges it, and an acknowledgement upstream settles the
+/// Infrawrench escalation. `provider-on-call` asks the provider who is on call
+/// and pushes to the members whose email matches.
 ///
 /// The spec allows several shapes here. Decoding tries the branches in spec
 /// order, so the most specific match wins.
@@ -325,6 +332,114 @@ public enum AlertDestination: Codable, Hashable, Sendable {
 
     public struct AlertDestinationObject7: Codable, Hashable, Sendable {
         public enum Kind: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
+            case pagingProvider
+            /// A value the API added after this SDK was generated. Kept rather
+            /// than rejected, so a new server-side value cannot break decoding.
+            case unrecognized(String)
+
+            public init(rawValue: String) {
+                switch rawValue {
+                case "paging-provider": self = .pagingProvider
+                default: self = .unrecognized(rawValue)
+                }
+            }
+
+            public var rawValue: String {
+                switch self {
+                case .pagingProvider: return "paging-provider"
+                case .unrecognized(let value): return value
+                }
+            }
+
+            /// Every value the spec declares. `unrecognized` is deliberately absent.
+            public static let allKnownCases: [Kind] = [
+                .pagingProvider,
+            ]
+
+            public init(from decoder: any Decoder) throws {
+                self.init(rawValue: try decoder.singleValueContainer().decode(String.self))
+            }
+
+            public func encode(to encoder: any Encoder) throws {
+                var container = encoder.singleValueContainer()
+                try container.encode(rawValue)
+            }
+        }
+
+        public var kind: Kind
+        /// A connected account whose plugin can page (GET /paging-providers)
+        public var accountId: String
+        /// The provider's id for the target (a PagerDuty service, an incident.io
+        /// alert source), from GET /paging-providers/destinations
+        public var targetId: String
+
+        public init(
+            kind: Kind,
+            accountId: String,
+            targetId: String
+        ) {
+            self.kind = kind
+            self.accountId = accountId
+            self.targetId = targetId
+        }
+    }
+
+    public struct AlertDestinationObject8: Codable, Hashable, Sendable {
+        public enum Kind: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
+            case providerOnCall
+            /// A value the API added after this SDK was generated. Kept rather
+            /// than rejected, so a new server-side value cannot break decoding.
+            case unrecognized(String)
+
+            public init(rawValue: String) {
+                switch rawValue {
+                case "provider-on-call": self = .providerOnCall
+                default: self = .unrecognized(rawValue)
+                }
+            }
+
+            public var rawValue: String {
+                switch self {
+                case .providerOnCall: return "provider-on-call"
+                case .unrecognized(let value): return value
+                }
+            }
+
+            /// Every value the spec declares. `unrecognized` is deliberately absent.
+            public static let allKnownCases: [Kind] = [
+                .providerOnCall,
+            ]
+
+            public init(from decoder: any Decoder) throws {
+                self.init(rawValue: try decoder.singleValueContainer().decode(String.self))
+            }
+
+            public func encode(to encoder: any Encoder) throws {
+                var container = encoder.singleValueContainer()
+                try container.encode(rawValue)
+            }
+        }
+
+        public var kind: Kind
+        /// A connected account whose plugin can say who is on call
+        public var accountId: String
+        /// A provider schedule or escalation policy id, from GET
+        /// /paging-providers/destinations
+        public var sourceId: String
+
+        public init(
+            kind: Kind,
+            accountId: String,
+            sourceId: String
+        ) {
+            self.kind = kind
+            self.accountId = accountId
+            self.sourceId = sourceId
+        }
+    }
+
+    public struct AlertDestinationObject9: Codable, Hashable, Sendable {
+        public enum Kind: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
             case emailAddress
             /// A value the API added after this SDK was generated. Kept rather
             /// than rejected, so a new server-side value cannot break decoding.
@@ -380,6 +495,8 @@ public enum AlertDestination: Codable, Hashable, Sendable {
     case object5(AlertDestinationObject5)
     case object6(AlertDestinationObject6)
     case object7(AlertDestinationObject7)
+    case object8(AlertDestinationObject8)
+    case object9(AlertDestinationObject9)
     /// A shape none of the branches above matched.
     case other(JSONValue)
 
@@ -413,6 +530,14 @@ public enum AlertDestination: Codable, Hashable, Sendable {
             self = .object7(value)
             return
         }
+        if let value = try? container.decode(AlertDestinationObject8.self) {
+            self = .object8(value)
+            return
+        }
+        if let value = try? container.decode(AlertDestinationObject9.self) {
+            self = .object9(value)
+            return
+        }
         self = .other(try container.decode(JSONValue.self))
     }
 
@@ -426,6 +551,8 @@ public enum AlertDestination: Codable, Hashable, Sendable {
         case .object5(let value): try container.encode(value)
         case .object6(let value): try container.encode(value)
         case .object7(let value): try container.encode(value)
+        case .object8(let value): try container.encode(value)
+        case .object9(let value): try container.encode(value)
         case .other(let value): try container.encode(value)
         }
     }
