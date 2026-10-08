@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.77.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.78.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.77.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.78.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -63,9 +63,9 @@ public final class ConfigNamespace: Sendable {
     /// Export the organization's configuration as one document
     ///
     /// Dashboards, workflows, custom graphs, budgets, metric alerts, synthetic
-    /// probes, cost centres, the tag policy and the org-wide alert settings,
-    /// addressed by stable keys rather than row ids so the result applies to any
-    /// organization.
+    /// probes, SLOs, cost centres, the tag policy and the org-wide alert
+    /// settings, addressed by stable keys rather than row ids so the result
+    /// applies to any organization.
     ///
     /// Credentials, accounts, resources and workflow signing secrets are never
     /// included. Ordering is stable, so re-exporting an unchanged organization
@@ -88,7 +88,7 @@ public final class ConfigNamespace: Sendable {
     ///
     /// - Parameter sections: Comma-separated subset of sections to export.
     /// Defaults to all of: budgets, customGraphs, workflows, dashboards,
-    /// metricAlerts, probes, costCentres, tagPolicy, alertSettings.
+    /// metricAlerts, probes, slos, costCentres, tagPolicy, alertSettings.
     public func export(
         orgId: String? = nil,
         sections: String? = nil,

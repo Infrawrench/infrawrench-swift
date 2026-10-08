@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.77.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.78.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.77.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.78.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -20,6 +20,7 @@ public enum OrgConfigSection: RawRepresentable, Codable, Hashable, Sendable, Par
     case dashboards
     case metricAlerts
     case probes
+    case slos
     case costCentres
     case tagPolicy
     case alertSettings
@@ -35,6 +36,7 @@ public enum OrgConfigSection: RawRepresentable, Codable, Hashable, Sendable, Par
         case "dashboards": self = .dashboards
         case "metricAlerts": self = .metricAlerts
         case "probes": self = .probes
+        case "slos": self = .slos
         case "costCentres": self = .costCentres
         case "tagPolicy": self = .tagPolicy
         case "alertSettings": self = .alertSettings
@@ -50,6 +52,7 @@ public enum OrgConfigSection: RawRepresentable, Codable, Hashable, Sendable, Par
         case .dashboards: return "dashboards"
         case .metricAlerts: return "metricAlerts"
         case .probes: return "probes"
+        case .slos: return "slos"
         case .costCentres: return "costCentres"
         case .tagPolicy: return "tagPolicy"
         case .alertSettings: return "alertSettings"
@@ -65,6 +68,7 @@ public enum OrgConfigSection: RawRepresentable, Codable, Hashable, Sendable, Par
         .dashboards,
         .metricAlerts,
         .probes,
+        .slos,
         .costCentres,
         .tagPolicy,
         .alertSettings,

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.77.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.78.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.77.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.78.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -31,6 +31,7 @@ public enum AlertTrigger: RawRepresentable, Codable, Hashable, Sendable, Paramet
     case logMatchAlerts
     case postureAlerts
     case probeAlerts
+    case sloAlerts
     case quotaAlerts
     case extendedSupportAlerts
     case incidentAlerts
@@ -57,6 +58,7 @@ public enum AlertTrigger: RawRepresentable, Codable, Hashable, Sendable, Paramet
         case "logMatchAlerts": self = .logMatchAlerts
         case "postureAlerts": self = .postureAlerts
         case "probeAlerts": self = .probeAlerts
+        case "sloAlerts": self = .sloAlerts
         case "quotaAlerts": self = .quotaAlerts
         case "extendedSupportAlerts": self = .extendedSupportAlerts
         case "incidentAlerts": self = .incidentAlerts
@@ -83,6 +85,7 @@ public enum AlertTrigger: RawRepresentable, Codable, Hashable, Sendable, Paramet
         case .logMatchAlerts: return "logMatchAlerts"
         case .postureAlerts: return "postureAlerts"
         case .probeAlerts: return "probeAlerts"
+        case .sloAlerts: return "sloAlerts"
         case .quotaAlerts: return "quotaAlerts"
         case .extendedSupportAlerts: return "extendedSupportAlerts"
         case .incidentAlerts: return "incidentAlerts"
@@ -109,6 +112,7 @@ public enum AlertTrigger: RawRepresentable, Codable, Hashable, Sendable, Paramet
         .logMatchAlerts,
         .postureAlerts,
         .probeAlerts,
+        .sloAlerts,
         .quotaAlerts,
         .extendedSupportAlerts,
         .incidentAlerts,

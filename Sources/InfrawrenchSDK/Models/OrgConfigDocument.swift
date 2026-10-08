@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.77.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.78.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.77.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.78.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -64,6 +64,7 @@ public struct OrgConfigDocument: Codable, Hashable, Sendable {
     public var dashboards: [OrgConfigDashboard]?
     public var metricAlerts: [OrgConfigMetricAlert]?
     public var probes: [OrgConfigProbe]?
+    public var slos: [OrgConfigSlo]?
     public var costCentres: [OrgConfigCostCentre]?
     public var tagPolicy: TagPolicy2?
     public var alertSettings: OrgConfigAlertSettings?
@@ -78,6 +79,7 @@ public struct OrgConfigDocument: Codable, Hashable, Sendable {
         dashboards: [OrgConfigDashboard]? = nil,
         metricAlerts: [OrgConfigMetricAlert]? = nil,
         probes: [OrgConfigProbe]? = nil,
+        slos: [OrgConfigSlo]? = nil,
         costCentres: [OrgConfigCostCentre]? = nil,
         tagPolicy: TagPolicy2? = nil,
         alertSettings: OrgConfigAlertSettings? = nil
@@ -91,6 +93,7 @@ public struct OrgConfigDocument: Codable, Hashable, Sendable {
         self.dashboards = dashboards
         self.metricAlerts = metricAlerts
         self.probes = probes
+        self.slos = slos
         self.costCentres = costCentres
         self.tagPolicy = tagPolicy
         self.alertSettings = alertSettings
