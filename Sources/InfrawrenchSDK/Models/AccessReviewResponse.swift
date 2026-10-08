@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.76.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.77.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.76.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.77.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -36,6 +36,9 @@ public struct AccessReviewResponse: Codable, Hashable, Sendable {
     /// The staleness window this review was computed against.
     public var staleDays: Int
     public var generatedAt: String
+    /// Just-in-time grants whose revocation failed, that the provider still
+    /// reports after a revoke, or that are still marked held past their window.
+    public var jitGrantIssues: [JitGrantIssue]?
 
     public init(
         principals: [AccessPrincipal],
@@ -48,7 +51,8 @@ public struct AccessReviewResponse: Codable, Hashable, Sendable {
         dismissedCount: Int,
         unknownActivityCount: Int,
         staleDays: Int,
-        generatedAt: String
+        generatedAt: String,
+        jitGrantIssues: [JitGrantIssue]? = nil
     ) {
         self.principals = principals
         self.findings = findings
@@ -61,5 +65,6 @@ public struct AccessReviewResponse: Codable, Hashable, Sendable {
         self.unknownActivityCount = unknownActivityCount
         self.staleDays = staleDays
         self.generatedAt = generatedAt
+        self.jitGrantIssues = jitGrantIssues
     }
 }

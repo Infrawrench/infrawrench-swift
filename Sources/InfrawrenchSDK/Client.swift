@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.76.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.77.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.76.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.77.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -152,6 +152,8 @@ public final class APIV1Client: Sendable {
     public let invoices: InvoicesNamespace
     /// `client.jira`
     public let jira: JiraNamespace
+    /// `client.jitAccess`
+    public let jitAccess: JitAccessNamespace
     /// `client.kv`
     public let kv: KvNamespace
     /// `client.leases`
@@ -321,6 +323,7 @@ public final class APIV1Client: Sendable {
         self.invitations = InvitationsNamespace(transport: transport)
         self.invoices = InvoicesNamespace(transport: transport)
         self.jira = JiraNamespace(transport: transport)
+        self.jitAccess = JitAccessNamespace(transport: transport)
         self.kv = KvNamespace(transport: transport)
         self.leases = LeasesNamespace(transport: transport)
         self.linear = LinearNamespace(transport: transport)

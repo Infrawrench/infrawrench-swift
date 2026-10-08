@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.76.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.77.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.76.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.77.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -30,6 +30,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
         case expiring
         case posture
         case accessReview
+        case jitAccess
         case backups
         case wallboard
         case calendar
@@ -72,6 +73,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case "expiring": self = .expiring
             case "posture": self = .posture
             case "access-review": self = .accessReview
+            case "jit-access": self = .jitAccess
             case "backups": self = .backups
             case "wallboard": self = .wallboard
             case "calendar": self = .calendar
@@ -114,6 +116,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case .expiring: return "expiring"
             case .posture: return "posture"
             case .accessReview: return "access-review"
+            case .jitAccess: return "jit-access"
             case .backups: return "backups"
             case .wallboard: return "wallboard"
             case .calendar: return "calendar"
@@ -156,6 +159,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             .expiring,
             .posture,
             .accessReview,
+            .jitAccess,
             .backups,
             .wallboard,
             .calendar,
