@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.79.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.80.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.79.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.80.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -18,15 +18,18 @@ public struct AccountDetail: Codable, Hashable, Sendable {
         public var id: String
         public var pluginId: String
         public var displayName: String
+        public var oauthStatus: AccountOAuthStatus?
 
         public init(
             id: String,
             pluginId: String,
-            displayName: String
+            displayName: String,
+            oauthStatus: AccountOAuthStatus? = nil
         ) {
             self.id = id
             self.pluginId = pluginId
             self.displayName = displayName
+            self.oauthStatus = oauthStatus
         }
     }
 

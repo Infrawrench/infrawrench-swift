@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.79.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.80.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.79.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.80.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -16,6 +16,11 @@ import Foundation
 public struct CreateAccountRequest: Codable, Hashable, Sendable {
     public var pluginId: String
     public var displayName: String
+    /// An `__oauth` key may only carry the sealed grant returned by the provider
+    /// OAuth callback (for this organization, the calling user and this plugin,
+    /// within 30 minutes) or the redacted grant `GET .../credentials` returned,
+    /// which counts as no grant (the stored one is kept while the token is
+    /// unchanged). Any other value is rejected with 400.
     public var credentials: [String: String]
     /// Optional bastion id to route this account's cloud API traffic through.
     public var bastionId: String?

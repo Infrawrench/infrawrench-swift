@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.79.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.80.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.79.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.80.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -16,6 +16,11 @@ import Foundation
 public struct AccountsCreateBody: Codable, Hashable, Sendable {
     public var pluginId: PluginId?
     public var displayName: String
+    /// An `__oauth` key may only carry the sealed grant returned by the provider
+    /// OAuth callback (for this organization, the calling user and this plugin,
+    /// within 30 minutes) or the redacted grant `GET .../credentials` returned,
+    /// which counts as no grant (the stored one is kept while the token is
+    /// unchanged). Any other value is rejected with 400.
     public var credentials: [String: String]
     /// Optional bastion id to route this account's cloud API traffic through.
     public var bastionId: String?
@@ -36,7 +41,14 @@ public struct AccountsCreateBody: Codable, Hashable, Sendable {
 public struct AccountsCredentialsUpdateBody: Codable, Hashable, Sendable {
     /// Complete credentials map. Sensitive fields the caller doesn't want to
     /// change should be re-sent with their previous value (the server doesn't
-    /// merge with the existing blob).
+    /// merge with the existing blob). For an account connected through provider
+    /// OAuth, the stored connection is kept when the token field is omitted or
+    /// unchanged; a different token switches the account to that pasted token. An
+    /// `__oauth` key may only carry the sealed grant returned by the provider
+    /// OAuth callback (for this organization, the calling user and this plugin,
+    /// within 30 minutes) or the redacted grant `GET .../credentials` returned,
+    /// which counts as no grant (the stored one is kept while the token is
+    /// unchanged). Any other value is rejected with 400.
     public var credentials: [String: String]
 
     public init(
@@ -330,7 +342,14 @@ public final class AccountsCredentialsNamespace: Sendable {
     /// Fetch the decrypted credentials for an account
     ///
     /// Returns the credentials map as it was originally submitted. Sensitive:
-    /// gate access carefully.
+    /// gate access carefully. For an account connected through provider OAuth,
+    /// the access token is refreshed first when it is about to expire, and
+    /// `__oauth` comes back redacted: the grant state without its refresh token
+    /// (or a registered client secret), so plugins can tell an OAuth token from a
+    /// pasted one. Sending that redacted value back on `PUT .../credentials`
+    /// keeps the stored connection. An account whose connection was revoked
+    /// (`oauthStatus: reconnect_required`) returns its stored credentials without
+    /// refreshing.
     ///
     /// _Requires permission: `secrets:read`._
     ///

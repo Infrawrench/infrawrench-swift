@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.79.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.80.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.79.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.80.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -198,6 +198,8 @@ public final class APIV1Client: Sendable {
     public let probes: ProbesNamespace
     /// `client.profile`
     public let profile: ProfileNamespace
+    /// `client.providerOauth`
+    public let providerOauth: ProviderOauthNamespace
     /// `client.queryMonitors`
     public let queryMonitors: QueryMonitorsNamespace
     /// `client.quotas`
@@ -350,6 +352,7 @@ public final class APIV1Client: Sendable {
         self.priceCatalog = PriceCatalogNamespace(transport: transport)
         self.probes = ProbesNamespace(transport: transport)
         self.profile = ProfileNamespace(transport: transport)
+        self.providerOauth = ProviderOauthNamespace(transport: transport)
         self.queryMonitors = QueryMonitorsNamespace(transport: transport)
         self.quotas = QuotasNamespace(transport: transport)
         self.resources = ResourcesNamespace(transport: transport)

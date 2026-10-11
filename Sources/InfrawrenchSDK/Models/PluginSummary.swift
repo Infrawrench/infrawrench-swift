@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.79.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.80.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.79.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.80.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -19,18 +19,21 @@ public struct PluginSummary: Codable, Hashable, Sendable {
     public var logoSvg: String
     public var credentialFields: [CredentialField]
     public var preflight: PreflightDeclaration?
+    public var oauth: PluginOAuthSummary?
 
     public init(
         id: String,
         displayName: String,
         logoSvg: String,
         credentialFields: [CredentialField],
-        preflight: PreflightDeclaration? = nil
+        preflight: PreflightDeclaration? = nil,
+        oauth: PluginOAuthSummary? = nil
     ) {
         self.id = id
         self.displayName = displayName
         self.logoSvg = logoSvg
         self.credentialFields = credentialFields
         self.preflight = preflight
+        self.oauth = oauth
     }
 }
