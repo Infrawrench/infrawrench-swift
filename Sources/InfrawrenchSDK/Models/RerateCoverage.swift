@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.80.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.80.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -35,7 +35,7 @@ public struct RerateCoverage: Codable, Hashable, Sendable {
         }
     }
 
-    public struct Service: Codable, Hashable, Sendable {
+    public struct Service2: Codable, Hashable, Sendable {
         public var pluginId: String
         public var service: String
         public var currency: String
@@ -58,11 +58,11 @@ public struct RerateCoverage: Codable, Hashable, Sendable {
     }
 
     public var byCurrency: [String: ByCurrencyValue]
-    public var services: [Service]
+    public var services: [Service2]
 
     public init(
         byCurrency: [String: ByCurrencyValue],
-        services: [Service]
+        services: [Service2]
     ) {
         self.byCurrency = byCurrency
         self.services = services

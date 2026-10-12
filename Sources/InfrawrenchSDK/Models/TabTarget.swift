@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.80.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.80.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -29,6 +29,8 @@ public struct TabTarget: Codable, Hashable, Sendable {
         case changes
         case expiring
         case posture
+        case vulnerabilities
+        case compliance
         case accessReview
         case jitAccess
         case backups
@@ -48,6 +50,8 @@ public struct TabTarget: Codable, Hashable, Sendable {
         case priceCatalog
         case incidents
         case slos
+        case services
+        case delivery
         case workflows
         case deployments
         case settings
@@ -73,6 +77,8 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case "changes": self = .changes
             case "expiring": self = .expiring
             case "posture": self = .posture
+            case "vulnerabilities": self = .vulnerabilities
+            case "compliance": self = .compliance
             case "access-review": self = .accessReview
             case "jit-access": self = .jitAccess
             case "backups": self = .backups
@@ -92,6 +98,8 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case "price-catalog": self = .priceCatalog
             case "incidents": self = .incidents
             case "slos": self = .slos
+            case "services": self = .services
+            case "delivery": self = .delivery
             case "workflows": self = .workflows
             case "deployments": self = .deployments
             case "settings": self = .settings
@@ -117,6 +125,8 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case .changes: return "changes"
             case .expiring: return "expiring"
             case .posture: return "posture"
+            case .vulnerabilities: return "vulnerabilities"
+            case .compliance: return "compliance"
             case .accessReview: return "access-review"
             case .jitAccess: return "jit-access"
             case .backups: return "backups"
@@ -136,6 +146,8 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case .priceCatalog: return "price-catalog"
             case .incidents: return "incidents"
             case .slos: return "slos"
+            case .services: return "services"
+            case .delivery: return "delivery"
             case .workflows: return "workflows"
             case .deployments: return "deployments"
             case .settings: return "settings"
@@ -161,6 +173,8 @@ public struct TabTarget: Codable, Hashable, Sendable {
             .changes,
             .expiring,
             .posture,
+            .vulnerabilities,
+            .compliance,
             .accessReview,
             .jitAccess,
             .backups,
@@ -180,11 +194,64 @@ public struct TabTarget: Codable, Hashable, Sendable {
             .priceCatalog,
             .incidents,
             .slos,
+            .services,
+            .delivery,
             .workflows,
             .deployments,
             .settings,
             .chat,
             .linuxApp,
+        ]
+
+        public init(from decoder: any Decoder) throws {
+            self.init(rawValue: try decoder.singleValueContainer().decode(String.self))
+        }
+
+        public func encode(to encoder: any Encoder) throws {
+            var container = encoder.singleValueContainer()
+            try container.encode(rawValue)
+        }
+    }
+
+    public enum View: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
+        case details
+        case ssh
+        case sftp
+        case apps
+        case scorecards
+        /// A value the API added after this SDK was generated. Kept rather than
+        /// rejected, so a new server-side value cannot break decoding.
+        case unrecognized(String)
+
+        public init(rawValue: String) {
+            switch rawValue {
+            case "details": self = .details
+            case "ssh": self = .ssh
+            case "sftp": self = .sftp
+            case "apps": self = .apps
+            case "scorecards": self = .scorecards
+            default: self = .unrecognized(rawValue)
+            }
+        }
+
+        public var rawValue: String {
+            switch self {
+            case .details: return "details"
+            case .ssh: return "ssh"
+            case .sftp: return "sftp"
+            case .apps: return "apps"
+            case .scorecards: return "scorecards"
+            case .unrecognized(let value): return value
+            }
+        }
+
+        /// Every value the spec declares. `unrecognized` is deliberately absent.
+        public static let allKnownCases: [View] = [
+            .details,
+            .ssh,
+            .sftp,
+            .apps,
+            .scorecards,
         ]
 
         public init(from decoder: any Decoder) throws {
@@ -206,6 +273,9 @@ public struct TabTarget: Codable, Hashable, Sendable {
     public var invoiceId: String?
     public var canvasId: String?
     public var sloId: String?
+    public var serviceId: String?
+    public var view: View?
+    public var framework: String?
     public var sessionId: String?
     public var windowId: Int?
     public var appId: String?
@@ -220,6 +290,9 @@ public struct TabTarget: Codable, Hashable, Sendable {
         invoiceId: String? = nil,
         canvasId: String? = nil,
         sloId: String? = nil,
+        serviceId: String? = nil,
+        view: View? = nil,
+        framework: String? = nil,
         sessionId: String? = nil,
         windowId: Int? = nil,
         appId: String? = nil
@@ -233,6 +306,9 @@ public struct TabTarget: Codable, Hashable, Sendable {
         self.invoiceId = invoiceId
         self.canvasId = canvasId
         self.sloId = sloId
+        self.serviceId = serviceId
+        self.view = view
+        self.framework = framework
         self.sessionId = sessionId
         self.windowId = windowId
         self.appId = appId

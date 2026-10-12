@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.80.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.80.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -30,8 +30,11 @@ public enum AlertTrigger: RawRepresentable, Codable, Hashable, Sendable, Paramet
     case expiryAlerts
     case logMatchAlerts
     case postureAlerts
+    case leakedSecretAlerts
+    case vulnerabilityAlerts
     case probeAlerts
     case sloAlerts
+    case scorecardAlerts
     case quotaAlerts
     case extendedSupportAlerts
     case incidentAlerts
@@ -57,8 +60,11 @@ public enum AlertTrigger: RawRepresentable, Codable, Hashable, Sendable, Paramet
         case "expiryAlerts": self = .expiryAlerts
         case "logMatchAlerts": self = .logMatchAlerts
         case "postureAlerts": self = .postureAlerts
+        case "leakedSecretAlerts": self = .leakedSecretAlerts
+        case "vulnerabilityAlerts": self = .vulnerabilityAlerts
         case "probeAlerts": self = .probeAlerts
         case "sloAlerts": self = .sloAlerts
+        case "scorecardAlerts": self = .scorecardAlerts
         case "quotaAlerts": self = .quotaAlerts
         case "extendedSupportAlerts": self = .extendedSupportAlerts
         case "incidentAlerts": self = .incidentAlerts
@@ -84,8 +90,11 @@ public enum AlertTrigger: RawRepresentable, Codable, Hashable, Sendable, Paramet
         case .expiryAlerts: return "expiryAlerts"
         case .logMatchAlerts: return "logMatchAlerts"
         case .postureAlerts: return "postureAlerts"
+        case .leakedSecretAlerts: return "leakedSecretAlerts"
+        case .vulnerabilityAlerts: return "vulnerabilityAlerts"
         case .probeAlerts: return "probeAlerts"
         case .sloAlerts: return "sloAlerts"
+        case .scorecardAlerts: return "scorecardAlerts"
         case .quotaAlerts: return "quotaAlerts"
         case .extendedSupportAlerts: return "extendedSupportAlerts"
         case .incidentAlerts: return "incidentAlerts"
@@ -111,8 +120,11 @@ public enum AlertTrigger: RawRepresentable, Codable, Hashable, Sendable, Paramet
         .expiryAlerts,
         .logMatchAlerts,
         .postureAlerts,
+        .leakedSecretAlerts,
+        .vulnerabilityAlerts,
         .probeAlerts,
         .sloAlerts,
+        .scorecardAlerts,
         .quotaAlerts,
         .extendedSupportAlerts,
         .incidentAlerts,

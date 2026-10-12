@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.80.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.80.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -22,6 +22,7 @@ public enum SavingsEventKind: RawRepresentable, Codable, Hashable, Sendable, Par
     case orphanDeletion
     case sleepSchedule
     case commitment
+    case saasSeat
     case manual
     /// A value the API added after this SDK was generated. Kept rather than
     /// rejected, so a new server-side value cannot break decoding.
@@ -33,6 +34,7 @@ public enum SavingsEventKind: RawRepresentable, Codable, Hashable, Sendable, Par
         case "orphan_deletion": self = .orphanDeletion
         case "sleep_schedule": self = .sleepSchedule
         case "commitment": self = .commitment
+        case "saas_seat": self = .saasSeat
         case "manual": self = .manual
         default: self = .unrecognized(rawValue)
         }
@@ -44,6 +46,7 @@ public enum SavingsEventKind: RawRepresentable, Codable, Hashable, Sendable, Par
         case .orphanDeletion: return "orphan_deletion"
         case .sleepSchedule: return "sleep_schedule"
         case .commitment: return "commitment"
+        case .saasSeat: return "saas_seat"
         case .manual: return "manual"
         case .unrecognized(let value): return value
         }
@@ -55,6 +58,7 @@ public enum SavingsEventKind: RawRepresentable, Codable, Hashable, Sendable, Par
         .orphanDeletion,
         .sleepSchedule,
         .commitment,
+        .saasSeat,
         .manual,
     ]
 

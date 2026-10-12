@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.80.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.80.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -14,14 +14,37 @@
 import Foundation
 
 public struct IncidentDetail: Codable, Hashable, Sendable {
+    public struct AffectedService: Codable, Hashable, Sendable {
+        public var id: String
+        public var name: String
+        public var slug: String
+        public var tier: Double?
+
+        public init(
+            id: String,
+            name: String,
+            slug: String,
+            tier: Double? = nil
+        ) {
+            self.id = id
+            self.name = name
+            self.slug = slug
+            self.tier = tier
+        }
+    }
+
     public var incident: Incident
     public var notes: [IncidentNote]
+    /// Services the affected resources belong to, resolved on read.
+    public var affectedServices: [AffectedService]
 
     public init(
         incident: Incident,
-        notes: [IncidentNote]
+        notes: [IncidentNote],
+        affectedServices: [AffectedService]
     ) {
         self.incident = incident
         self.notes = notes
+        self.affectedServices = affectedServices
     }
 }

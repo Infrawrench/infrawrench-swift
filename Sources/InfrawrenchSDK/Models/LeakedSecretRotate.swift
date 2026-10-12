@@ -1,0 +1,30 @@
+/*
+ * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * https://github.com/Infrawrench/Infrawrench
+ *
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ *
+ * DO NOT EDIT. Regenerate with:
+ *   pnpm --filter @infrawrench/web generate:sdk
+ *
+ * Internal routes are absent by construction: the generator consumes the same
+ * published spec that /openapi.json serves, which drops every operation
+ * marked x-internal.
+ */
+import Foundation
+
+public struct LeakedSecretRotate: Codable, Hashable, Sendable {
+    /// The new value, for a `replace` rotation.
+    public var value: String?
+    /// Close the finding on the scanner afterwards, when it can. Defaults to
+    /// true.
+    public var resolveUpstream: Bool?
+
+    public init(
+        value: String? = nil,
+        resolveUpstream: Bool? = nil
+    ) {
+        self.value = value
+        self.resolveUpstream = resolveUpstream
+    }
+}

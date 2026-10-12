@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.80.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.80.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -27,7 +27,7 @@ public struct PriceCatalogProviderStatus: Codable, Hashable, Sendable {
         }
     }
 
-    public struct Service: Codable, Hashable, Sendable {
+    public struct Service2: Codable, Hashable, Sendable {
         public var id: String
         public var label: String
         public var family: PriceCatalogProductFamily
@@ -65,7 +65,7 @@ public struct PriceCatalogProviderStatus: Codable, Hashable, Sendable {
     public var permission: String?
     public var source: Source
     public var refreshHours: Double
-    public var services: [Service]
+    public var services: [Service2]
     public var regions: [Region]
     public var state: PriceCatalogProviderState
     public var region: String?
@@ -80,7 +80,7 @@ public struct PriceCatalogProviderStatus: Codable, Hashable, Sendable {
         permission: String? = nil,
         source: Source,
         refreshHours: Double,
-        services: [Service],
+        services: [Service2],
         regions: [Region],
         state: PriceCatalogProviderState,
         region: String? = nil,

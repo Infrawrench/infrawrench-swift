@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.80.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.80.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -82,6 +82,8 @@ public final class APIV1Client: Sendable {
     public let chat: ChatNamespace
     /// `client.commitments`
     public let commitments: CommitmentsNamespace
+    /// `client.compliance`
+    public let compliance: ComplianceNamespace
     /// `client.config`
     public let config: ConfigNamespace
     /// `client.connect`
@@ -132,10 +134,14 @@ public final class APIV1Client: Sendable {
     public let dns: DnsNamespace
     /// `client.docker`
     public let docker: DockerNamespace
+    /// `client.dora`
+    public let dora: DoraNamespace
     /// `client.environmentDiff`
     public let environmentDiff: EnvironmentDiffNamespace
     /// `client.environments`
     public let environments: EnvironmentsNamespace
+    /// `client.eventSubscriptions`
+    public let eventSubscriptions: EventSubscriptionsNamespace
     /// `client.expiring`
     public let expiring: ExpiringNamespace
     /// `client.extendedSupport`
@@ -156,6 +162,8 @@ public final class APIV1Client: Sendable {
     public let jitAccess: JitAccessNamespace
     /// `client.kv`
     public let kv: KvNamespace
+    /// `client.leakedSecrets`
+    public let leakedSecrets: LeakedSecretsNamespace
     /// `client.leases`
     public let leases: LeasesNamespace
     /// `client.linear`
@@ -216,8 +224,14 @@ public final class APIV1Client: Sendable {
     public let savings: SavingsNamespace
     /// `client.schedules`
     public let schedules: SchedulesNamespace
+    /// `client.scorecards`
+    public let scorecards: ScorecardsNamespace
     /// `client.search`
     public let search: SearchNamespace
+    /// `client.seats`
+    public let seats: SeatsNamespace
+    /// `client.services`
+    public let services: ServicesNamespace
     /// `client.sessionRecordings`
     public let sessionRecordings: SessionRecordingsNamespace
     /// `client.sftp`
@@ -254,6 +268,8 @@ public final class APIV1Client: Sendable {
     public let team: TeamNamespace
     /// `client.virtualTags`
     public let virtualTags: VirtualTagsNamespace
+    /// `client.vulnerabilities`
+    public let vulnerabilities: VulnerabilitiesNamespace
     /// `client.wallboard`
     public let wallboard: WallboardNamespace
     /// `client.workflowApprovals`
@@ -294,6 +310,7 @@ public final class APIV1Client: Sendable {
         self.changes = ChangesNamespace(transport: transport)
         self.chat = ChatNamespace(transport: transport)
         self.commitments = CommitmentsNamespace(transport: transport)
+        self.compliance = ComplianceNamespace(transport: transport)
         self.config = ConfigNamespace(transport: transport)
         self.connect = ConnectNamespace(transport: transport)
         self.costAlerts = CostAlertsNamespace(transport: transport)
@@ -319,8 +336,10 @@ public final class APIV1Client: Sendable {
         self.digest = DigestNamespace(transport: transport)
         self.dns = DnsNamespace(transport: transport)
         self.docker = DockerNamespace(transport: transport)
+        self.dora = DoraNamespace(transport: transport)
         self.environmentDiff = EnvironmentDiffNamespace(transport: transport)
         self.environments = EnvironmentsNamespace(transport: transport)
+        self.eventSubscriptions = EventSubscriptionsNamespace(transport: transport)
         self.expiring = ExpiringNamespace(transport: transport)
         self.extendedSupport = ExtendedSupportNamespace(transport: transport)
         self.githubIssues = GithubIssuesNamespace(transport: transport)
@@ -331,6 +350,7 @@ public final class APIV1Client: Sendable {
         self.jira = JiraNamespace(transport: transport)
         self.jitAccess = JitAccessNamespace(transport: transport)
         self.kv = KvNamespace(transport: transport)
+        self.leakedSecrets = LeakedSecretsNamespace(transport: transport)
         self.leases = LeasesNamespace(transport: transport)
         self.linear = LinearNamespace(transport: transport)
         self.logWorkspaces = LogWorkspacesNamespace(transport: transport)
@@ -361,7 +381,10 @@ public final class APIV1Client: Sendable {
         self.savedCostFilters = SavedCostFiltersNamespace(transport: transport)
         self.savings = SavingsNamespace(transport: transport)
         self.schedules = SchedulesNamespace(transport: transport)
+        self.scorecards = ScorecardsNamespace(transport: transport)
         self.search = SearchNamespace(transport: transport)
+        self.seats = SeatsNamespace(transport: transport)
+        self.services = ServicesNamespace(transport: transport)
         self.sessionRecordings = SessionRecordingsNamespace(transport: transport)
         self.sftp = SftpNamespace(transport: transport)
         self.sharedConsoles = SharedConsolesNamespace(transport: transport)
@@ -380,6 +403,7 @@ public final class APIV1Client: Sendable {
         self.tagPolicy = TagPolicyNamespace(transport: transport)
         self.team = TeamNamespace(transport: transport)
         self.virtualTags = VirtualTagsNamespace(transport: transport)
+        self.vulnerabilities = VulnerabilitiesNamespace(transport: transport)
         self.wallboard = WallboardNamespace(transport: transport)
         self.workflowApprovals = WorkflowApprovalsNamespace(transport: transport)
         self.workflowSecrets = WorkflowSecretsNamespace(transport: transport)
