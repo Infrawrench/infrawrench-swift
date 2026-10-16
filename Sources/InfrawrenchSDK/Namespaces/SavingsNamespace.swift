@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -13,18 +13,34 @@
  */
 import Foundation
 
+public struct SavingsFindingsStatusResult: Codable, Hashable, Sendable {
+    public var updated: [SavingsFindingStatusChange]
+    public var missing: [String]
+
+    public init(
+        updated: [SavingsFindingStatusChange],
+        missing: [String]
+    ) {
+        self.updated = updated
+        self.missing = missing
+    }
+}
+
 /// `client.savings`
 public final class SavingsNamespace: Sendable {
     /// Shared request plumbing.
     let transport: ApiTransport
     /// `client.savings.events`
     public let events: SavingsEventsNamespace
+    /// `client.savings.findings`
+    public let findings: SavingsFindingsNamespace
     /// `client.savings.settings`
     public let settings: SavingsSettingsNamespace
 
     init(transport: ApiTransport) {
         self.transport = transport
         self.events = SavingsEventsNamespace(transport: transport)
+        self.findings = SavingsFindingsNamespace(transport: transport)
         self.settings = SavingsSettingsNamespace(transport: transport)
     }
 
@@ -194,6 +210,129 @@ public final class SavingsEventsUpdateNamespace: Sendable {
                 method: "PUT",
                 path: "/api/org/{orgId}/savings/events/{id}",
                 pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.savings.findings`
+public final class SavingsFindingsNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// List savings findings
+    ///
+    /// Every savings finder's findings (orphaned and idle resources, oversized
+    /// resources, extended support surcharges, unused SaaS seats) with a
+    /// lifecycle status, a detected date and summary tiles. Open findings that a
+    /// scan stops reporting move to Completed automatically (`resolution:
+    /// resolved`); a finding that returns after that reopens as Ready with a new
+    /// detected date. A cost-scoped caller sees only findings on accounts granted
+    /// to them outright.
+    ///
+    /// _Requires permission: `resources:read`._
+    ///
+    /// GET /api/org/{orgId}/savings/findings
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter view: Apply a saved view, by id or name. Explicit params
+    /// override it.
+    ///
+    /// - Parameter status: A status, `open` (Ready or In progress), or `all`.
+    ///
+    /// - Parameter kind: Comma-separated finding kinds.
+    ///
+    /// - Parameter provider: Comma-separated plugin ids.
+    ///
+    /// - Parameter account: Comma-separated account ids.
+    ///
+    /// - Parameter region: Comma-separated regions.
+    ///
+    /// - Parameter tag: `key` or `key=value`; repeat for more terms (all must
+    /// match).
+    ///
+    /// - Parameter minSavings: Minimum monthly savings, in each finding's own
+    /// currency. Unpriced findings never pass.
+    ///
+    /// - Parameter detectedFrom: Detected on or after (UTC day).
+    ///
+    /// - Parameter detectedTo: Detected on or before (UTC day).
+    ///
+    /// - Parameter q: Case-insensitive text match over title, resource and
+    /// account.
+    ///
+    /// - Parameter sort: `<field>:<asc|desc>`; fields savings, detected, name,
+    /// status_changed.
+    ///
+    /// - Parameter refresh: `true` bypasses the right-sizing and extended support
+    /// caches.
+    public func get(
+        orgId: String? = nil,
+        view: String? = nil,
+        status: SavingsFindingStatusFilter? = nil,
+        kind: String? = nil,
+        provider: String? = nil,
+        account: String? = nil,
+        region: String? = nil,
+        tag: String? = nil,
+        minSavings: String? = nil,
+        detectedFrom: String? = nil,
+        detectedTo: String? = nil,
+        q: String? = nil,
+        sort: String? = nil,
+        refresh: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> SavingsFindingsResponse {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/savings/findings",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                query: [QueryParameter("view", view), QueryParameter("status", status), QueryParameter("kind", kind), QueryParameter("provider", provider), QueryParameter("account", account), QueryParameter("region", region), QueryParameter("tag", tag), QueryParameter("minSavings", minSavings), QueryParameter("detectedFrom", detectedFrom), QueryParameter("detectedTo", detectedTo), QueryParameter("q", q), QueryParameter("sort", sort), QueryParameter("refresh", refresh)]
+            ),
+            options: options
+        )
+    }
+
+    /// Change savings finding status
+    ///
+    /// Moves findings to a status, recording who, when and an optional note;
+    /// Completed by hand records `resolution: manual`. Audited per finding and
+    /// published as the `savings.finding.status_changed` event. Keys the caller
+    /// cannot see come back in `missing`; a 404 when none matched.
+    ///
+    /// _Requires permission: `resources:write`._
+    ///
+    /// POST /api/org/{orgId}/savings/findings/status
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func status(
+        orgId: String? = nil,
+        body: SavingsFindingStatusInput,
+        options: RequestOptions? = nil
+    ) async throws -> SavingsFindingsStatusResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/savings/findings/status",
+                pathParameters: ["orgId": orgId?.parameterValue],
                 body: AnyEncodable(body)
             ),
             options: options

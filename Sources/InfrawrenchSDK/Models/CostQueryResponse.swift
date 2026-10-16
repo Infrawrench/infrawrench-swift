@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -58,7 +58,9 @@ public struct CostQueryResponse: Codable, Hashable, Sendable {
     /// The **unadjusted trend** projection. Stays the trend even when a scenario
     /// is applied, so a reader can always see what the fit said before anybody's
     /// assumptions touched it.
-    public var forecast: [CostSeriesPoint]?
+    public var forecast: [CostForecastSeriesPoint]?
+    /// Two-sided level, in percent, of the `low`/`high` band on `forecast` (80).
+    public var forecastConfidenceLevel: Int?
     public var scenario: CostScenarioResult?
     public var currencies: [String]
     /// Period total per currency, and always exactly the sum of `series`.
@@ -74,22 +76,26 @@ public struct CostQueryResponse: Codable, Hashable, Sendable {
     public var measure: Measure?
     /// The unit a `usage` response is in.
     public var usageUnit: String?
+    public var xAxis: CostXAxisInfo?
 
     public init(
         series: [CostQuerySeries],
         comparison: [CostQuerySeries]? = nil,
-        forecast: [CostSeriesPoint]? = nil,
+        forecast: [CostForecastSeriesPoint]? = nil,
+        forecastConfidenceLevel: Int? = nil,
         scenario: CostScenarioResult? = nil,
         currencies: [String],
         totals: [String: Double],
         previousTotals: [String: Double]? = nil,
         adjustment: CostAdjustmentSummary? = nil,
         measure: Measure? = nil,
-        usageUnit: String? = nil
+        usageUnit: String? = nil,
+        xAxis: CostXAxisInfo? = nil
     ) {
         self.series = series
         self.comparison = comparison
         self.forecast = forecast
+        self.forecastConfidenceLevel = forecastConfidenceLevel
         self.scenario = scenario
         self.currencies = currencies
         self.totals = totals
@@ -97,5 +103,6 @@ public struct CostQueryResponse: Codable, Hashable, Sendable {
         self.adjustment = adjustment
         self.measure = measure
         self.usageUnit = usageUnit
+        self.xAxis = xAxis
     }
 }

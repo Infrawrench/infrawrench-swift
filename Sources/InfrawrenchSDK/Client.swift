@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -62,6 +62,8 @@ public final class APIV1Client: Sendable {
     public let bastions: BastionsNamespace
     /// `client.billing`
     public let billing: BillingNamespace
+    /// `client.billingProfiles`
+    public let billingProfiles: BillingProfilesNamespace
     /// `client.billingRules`
     public let billingRules: BillingRulesNamespace
     /// `client.blastRadius`
@@ -98,6 +100,8 @@ public final class APIV1Client: Sendable {
     public let costCentres: CostCentresNamespace
     /// `client.costExports`
     public let costExports: CostExportsNamespace
+    /// `client.costReportAnomalyAlerts`
+    public let costReportAnomalyAlerts: CostReportAnomalyAlertsNamespace
     /// `client.costReportFolders`
     public let costReportFolders: CostReportFoldersNamespace
     /// `client.costReportNotifications`
@@ -150,16 +154,22 @@ public final class APIV1Client: Sendable {
     public let githubIssues: GithubIssuesNamespace
     /// `client.iac`
     public let iac: IacNamespace
+    /// `client.idleFindings`
+    public let idleFindings: IdleFindingsNamespace
     /// `client.incidents`
     public let incidents: IncidentsNamespace
     /// `client.invitations`
     public let invitations: InvitationsNamespace
     /// `client.invoices`
     public let invoices: InvoicesNamespace
+    /// `client.issueWebhooks`
+    public let issueWebhooks: IssueWebhooksNamespace
     /// `client.jira`
     public let jira: JiraNamespace
     /// `client.jitAccess`
     public let jitAccess: JitAccessNamespace
+    /// `client.k8sEfficiencyReports`
+    public let k8sEfficiencyReports: K8sEfficiencyReportsNamespace
     /// `client.kv`
     public let kv: KvNamespace
     /// `client.leakedSecrets`
@@ -212,6 +222,8 @@ public final class APIV1Client: Sendable {
     public let queryMonitors: QueryMonitorsNamespace
     /// `client.quotas`
     public let quotas: QuotasNamespace
+    /// `client.resourceReports`
+    public let resourceReports: ResourceReportsNamespace
     /// `client.resources`
     public let resources: ResourcesNamespace
     /// `client.rightsizing`
@@ -222,6 +234,8 @@ public final class APIV1Client: Sendable {
     public let savedCostFilters: SavedCostFiltersNamespace
     /// `client.savings`
     public let savings: SavingsNamespace
+    /// `client.savingsViews`
+    public let savingsViews: SavingsViewsNamespace
     /// `client.schedules`
     public let schedules: SchedulesNamespace
     /// `client.scorecards`
@@ -252,6 +266,8 @@ public final class APIV1Client: Sendable {
     public let sshKeys: SshKeysNamespace
     /// `client.sshTunnels`
     public let sshTunnels: SshTunnelsNamespace
+    /// `client.starred`
+    public let starred: StarredNamespace
     /// `client.status`
     public let status: StatusNamespace
     /// `client.statusIncidents`
@@ -300,6 +316,7 @@ public final class APIV1Client: Sendable {
         self.backups = BackupsNamespace(transport: transport)
         self.bastions = BastionsNamespace(transport: transport)
         self.billing = BillingNamespace(transport: transport)
+        self.billingProfiles = BillingProfilesNamespace(transport: transport)
         self.billingRules = BillingRulesNamespace(transport: transport)
         self.blastRadius = BlastRadiusNamespace(transport: transport)
         self.budgets = BudgetsNamespace(transport: transport)
@@ -318,6 +335,7 @@ public final class APIV1Client: Sendable {
         self.costCanvases = CostCanvasesNamespace(transport: transport)
         self.costCentres = CostCentresNamespace(transport: transport)
         self.costExports = CostExportsNamespace(transport: transport)
+        self.costReportAnomalyAlerts = CostReportAnomalyAlertsNamespace(transport: transport)
         self.costReportFolders = CostReportFoldersNamespace(transport: transport)
         self.costReportNotifications = CostReportNotificationsNamespace(transport: transport)
         self.costReports = CostReportsNamespace(transport: transport)
@@ -344,11 +362,14 @@ public final class APIV1Client: Sendable {
         self.extendedSupport = ExtendedSupportNamespace(transport: transport)
         self.githubIssues = GithubIssuesNamespace(transport: transport)
         self.iac = IacNamespace(transport: transport)
+        self.idleFindings = IdleFindingsNamespace(transport: transport)
         self.incidents = IncidentsNamespace(transport: transport)
         self.invitations = InvitationsNamespace(transport: transport)
         self.invoices = InvoicesNamespace(transport: transport)
+        self.issueWebhooks = IssueWebhooksNamespace(transport: transport)
         self.jira = JiraNamespace(transport: transport)
         self.jitAccess = JitAccessNamespace(transport: transport)
+        self.k8sEfficiencyReports = K8sEfficiencyReportsNamespace(transport: transport)
         self.kv = KvNamespace(transport: transport)
         self.leakedSecrets = LeakedSecretsNamespace(transport: transport)
         self.leases = LeasesNamespace(transport: transport)
@@ -375,11 +396,13 @@ public final class APIV1Client: Sendable {
         self.providerOauth = ProviderOauthNamespace(transport: transport)
         self.queryMonitors = QueryMonitorsNamespace(transport: transport)
         self.quotas = QuotasNamespace(transport: transport)
+        self.resourceReports = ResourceReportsNamespace(transport: transport)
         self.resources = ResourcesNamespace(transport: transport)
         self.rightsizing = RightsizingNamespace(transport: transport)
         self.runbooks = RunbooksNamespace(transport: transport)
         self.savedCostFilters = SavedCostFiltersNamespace(transport: transport)
         self.savings = SavingsNamespace(transport: transport)
+        self.savingsViews = SavingsViewsNamespace(transport: transport)
         self.schedules = SchedulesNamespace(transport: transport)
         self.scorecards = ScorecardsNamespace(transport: transport)
         self.search = SearchNamespace(transport: transport)
@@ -395,6 +418,7 @@ public final class APIV1Client: Sendable {
         self.sshFanout = SshFanoutNamespace(transport: transport)
         self.sshKeys = SshKeysNamespace(transport: transport)
         self.sshTunnels = SshTunnelsNamespace(transport: transport)
+        self.starred = StarredNamespace(transport: transport)
         self.status = StatusNamespace(transport: transport)
         self.statusIncidents = StatusIncidentsNamespace(transport: transport)
         self.statusPages = StatusPagesNamespace(transport: transport)

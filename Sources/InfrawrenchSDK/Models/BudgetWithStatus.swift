@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -139,6 +139,13 @@ public struct BudgetWithStatus: Codable, Hashable, Sendable {
     /// The **unadjusted trend** forecast, whether or not a scenario is applied;
     /// so both numbers are always comparable.
     public var forecastCents: Int?
+    /// Lower end of the 80% prediction interval around `forecastCents` (the
+    /// trend's, before any scenario), never below the spend already observed.
+    /// Null when there was too little history to fit. Display only: thresholds
+    /// are judged on `forecastCents`.
+    public var forecastLowCents: Int?
+    /// Upper end of the 80% prediction interval around `forecastCents`.
+    public var forecastHighCents: Int?
     /// The scenario-adjusted month forecast, set only for a budget that opted
     /// into a model, and the number its forecast thresholds are judged against.
     /// Null means the thresholds used `forecastCents`.
@@ -194,6 +201,8 @@ public struct BudgetWithStatus: Codable, Hashable, Sendable {
         month: String,
         actualCents: Int,
         forecastCents: Int? = nil,
+        forecastLowCents: Int? = nil,
+        forecastHighCents: Int? = nil,
         scenarioForecastCents: Int? = nil,
         currentMonthEvents: [CurrentMonthEvent],
         placements: [Placement],
@@ -227,6 +236,8 @@ public struct BudgetWithStatus: Codable, Hashable, Sendable {
         self.month = month
         self.actualCents = actualCents
         self.forecastCents = forecastCents
+        self.forecastLowCents = forecastLowCents
+        self.forecastHighCents = forecastHighCents
         self.scenarioForecastCents = scenarioForecastCents
         self.currentMonthEvents = currentMonthEvents
         self.placements = placements

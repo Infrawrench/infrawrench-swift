@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -153,6 +153,13 @@ public struct CostQueryRequest: Codable, Hashable, Sendable {
     /// Running totals from the start of the range, at any bin size. Omitted is
     /// off. Totals then report the last point rather than the sum.
     public var cumulative: Bool?
+    public var xAxis: CostDimension?
+    /// Required when `xAxis` is `tag` or `virtual_tag`: which key's values go on
+    /// the axis.
+    public var xAxisTagKey: String?
+    /// With `xAxis` and `groupBy: none`: segment each bar by date bin (one series
+    /// per bin). Refused alongside a `groupBy`; ignored without `xAxis`.
+    public var segmentByDate: Bool?
 
     public init(
         from: String,
@@ -172,7 +179,10 @@ public struct CostQueryRequest: Codable, Hashable, Sendable {
         adjusted: Bool? = nil,
         measure: CostMeasure? = nil,
         usageUnit: String? = nil,
-        cumulative: Bool? = nil
+        cumulative: Bool? = nil,
+        xAxis: CostDimension? = nil,
+        xAxisTagKey: String? = nil,
+        segmentByDate: Bool? = nil
     ) {
         self.from = from
         self.to = to
@@ -192,5 +202,8 @@ public struct CostQueryRequest: Codable, Hashable, Sendable {
         self.measure = measure
         self.usageUnit = usageUnit
         self.cumulative = cumulative
+        self.xAxis = xAxis
+        self.xAxisTagKey = xAxisTagKey
+        self.segmentByDate = segmentByDate
     }
 }

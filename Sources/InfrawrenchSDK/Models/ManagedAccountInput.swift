@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -79,6 +79,9 @@ public struct ManagedAccountInput: Codable, Hashable, Sendable {
     public var applyBillingRules: Bool?
     public var pricing: ManagedAccountPricing?
     public var notes: String?
+    /// The billing profile this customer's invoices are addressed, taxed and
+    /// numbered by. Absent on update leaves the saved profile; null removes it.
+    public var billingProfileId: String?
     /// Cost centres whose spend belongs to this customer. **Subtrees are
     /// included**; naming a parent bills every descendant, and naming both a
     /// parent and its child bills the child once, not twice.
@@ -105,6 +108,7 @@ public struct ManagedAccountInput: Codable, Hashable, Sendable {
         applyBillingRules: Bool? = nil,
         pricing: ManagedAccountPricing? = nil,
         notes: String? = nil,
+        billingProfileId: String? = nil,
         costCentreIds: [String]? = nil,
         accountIds: [String]? = nil
     ) {
@@ -117,6 +121,7 @@ public struct ManagedAccountInput: Codable, Hashable, Sendable {
         self.applyBillingRules = applyBillingRules
         self.pricing = pricing
         self.notes = notes
+        self.billingProfileId = billingProfileId
         self.costCentreIds = costCentreIds
         self.accountIds = accountIds
     }

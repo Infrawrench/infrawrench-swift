@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -14,7 +14,8 @@
 import Foundation
 
 public struct OrphanedResource: Codable, Hashable, Sendable {
-    /// Infrawrench resource id.
+    /// Infrawrench resource id; for an idle finding whose `idle.hasResource` is
+    /// false, a finding id prefixed `idle:`.
     public var id: String
     public var pluginId: PluginId
     public var resourceTypeId: String
@@ -28,6 +29,8 @@ public struct OrphanedResource: Codable, Hashable, Sendable {
     public var owner: ResourceOwnerAnnotation?
     public var lastSyncedAt: String?
     public var remediation: FindingRemediation?
+    public var idle: OrphanIdleDetail?
+    public var estimate: IdleSavingsEstimate?
 
     public init(
         id: String,
@@ -40,7 +43,9 @@ public struct OrphanedResource: Codable, Hashable, Sendable {
         cost: OrphanCostAnnotation? = nil,
         owner: ResourceOwnerAnnotation? = nil,
         lastSyncedAt: String? = nil,
-        remediation: FindingRemediation? = nil
+        remediation: FindingRemediation? = nil,
+        idle: OrphanIdleDetail? = nil,
+        estimate: IdleSavingsEstimate? = nil
     ) {
         self.id = id
         self.pluginId = pluginId
@@ -53,5 +58,7 @@ public struct OrphanedResource: Codable, Hashable, Sendable {
         self.owner = owner
         self.lastSyncedAt = lastSyncedAt
         self.remediation = remediation
+        self.idle = idle
+        self.estimate = estimate
     }
 }

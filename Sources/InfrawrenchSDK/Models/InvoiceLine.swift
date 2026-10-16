@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -21,6 +21,7 @@ public struct InvoiceLine: Codable, Hashable, Sendable {
         case costCentre
         case account
         case fixed
+        case tax
         /// A value the API added after this SDK was generated. Kept rather than
         /// rejected, so a new server-side value cannot break decoding.
         case unrecognized(String)
@@ -30,6 +31,7 @@ public struct InvoiceLine: Codable, Hashable, Sendable {
             case "cost_centre": self = .costCentre
             case "account": self = .account
             case "fixed": self = .fixed
+            case "tax": self = .tax
             default: self = .unrecognized(rawValue)
             }
         }
@@ -39,6 +41,7 @@ public struct InvoiceLine: Codable, Hashable, Sendable {
             case .costCentre: return "cost_centre"
             case .account: return "account"
             case .fixed: return "fixed"
+            case .tax: return "tax"
             case .unrecognized(let value): return value
             }
         }
@@ -48,6 +51,7 @@ public struct InvoiceLine: Codable, Hashable, Sendable {
             .costCentre,
             .account,
             .fixed,
+            .tax,
         ]
 
         public init(from decoder: any Decoder) throws {
@@ -73,8 +77,11 @@ public struct InvoiceLine: Codable, Hashable, Sendable {
         }
     }
 
+    /// `tax` lines come from the customer's billing profile: one per tax rate, on
+    /// the converted subtotal of every other line, always last.
     public var kind: Kind
-    /// Cost-centre id, account id, or null for an org-level fixed charge.
+    /// Cost-centre id, account id, or null for an org-level fixed charge or a
+    /// tax.
     public var refId: String?
     /// The name at issue time, frozen with the numbers; renaming a cost centre in
     /// March must not retitle a line on January's invoice.

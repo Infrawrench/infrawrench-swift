@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -129,6 +129,36 @@ public struct OrgConfigAlertSettings: Codable, Hashable, Sendable {
         }
     }
 
+    public struct IdleFindings: Codable, Hashable, Sendable {
+        public struct RulesValue: Codable, Hashable, Sendable {
+            public var enabled: Bool?
+            public var thresholds: [String: Double]?
+
+            public init(
+                enabled: Bool? = nil,
+                thresholds: [String: Double]? = nil
+            ) {
+                self.enabled = enabled
+                self.thresholds = thresholds
+            }
+        }
+
+        public var enabled: Bool
+        public var lookbackDays: Int
+        /// Idle rule overrides keyed by `pluginId:ruleId`.
+        public var rules: [String: RulesValue]
+
+        public init(
+            enabled: Bool,
+            lookbackDays: Int,
+            rules: [String: RulesValue]
+        ) {
+            self.enabled = enabled
+            self.lookbackDays = lookbackDays
+            self.rules = rules
+        }
+    }
+
     public struct Digest: Codable, Hashable, Sendable {
         public var enabled: Bool
         public var timezone: String
@@ -158,6 +188,7 @@ public struct OrgConfigAlertSettings: Codable, Hashable, Sendable {
     public var drift: Drift?
     public var expiry: Expiry?
     public var posture: Posture?
+    public var idleFindings: IdleFindings?
     public var digest: Digest?
 
     public init(
@@ -165,12 +196,14 @@ public struct OrgConfigAlertSettings: Codable, Hashable, Sendable {
         drift: Drift? = nil,
         expiry: Expiry? = nil,
         posture: Posture? = nil,
+        idleFindings: IdleFindings? = nil,
         digest: Digest? = nil
     ) {
         self.costAnomaly = costAnomaly
         self.drift = drift
         self.expiry = expiry
         self.posture = posture
+        self.idleFindings = idleFindings
         self.digest = digest
     }
 }

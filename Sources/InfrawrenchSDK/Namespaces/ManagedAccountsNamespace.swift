@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -17,9 +17,12 @@ import Foundation
 public final class ManagedAccountsNamespace: Sendable {
     /// Shared request plumbing.
     let transport: ApiTransport
+    /// `client.managedAccounts.assignments`
+    public let assignments: ManagedAccountsAssignmentsNamespace
 
     init(transport: ApiTransport) {
         self.transport = transport
+        self.assignments = ManagedAccountsAssignmentsNamespace(transport: transport)
     }
 
     /// Create a managed account
@@ -136,6 +139,39 @@ public final class ManagedAccountsNamespace: Sendable {
         )
     }
 
+    /// Find spend no customer is billed for
+    ///
+    /// Spend in the period, by cost centre and account, that no managed account's
+    /// scope covers. Requires `costs:read` as well as `invoices:read`: it is a
+    /// cost breakdown of the whole organisation.
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// GET /api/org/{orgId}/managed-accounts/unassigned
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter from: Defaults, with `to`, to the last full calendar month.
+    public func unassigned(
+        orgId: String? = nil,
+        from: String? = nil,
+        to: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> UnassignedSpendReport {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/managed-accounts/unassigned",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                query: [QueryParameter("from", from), QueryParameter("to", to)]
+            ),
+            options: options
+        )
+    }
+
     /// Update a managed account
     ///
     /// A full replace. Editing the scope changes what **future** drafts are drawn
@@ -166,6 +202,76 @@ public final class ManagedAccountsNamespace: Sendable {
                 method: "PUT",
                 path: "/api/org/{orgId}/managed-accounts/{id}",
                 pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.managedAccounts.assignments`
+public final class ManagedAccountsAssignmentsNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// Assign cost centres and accounts to a customer in bulk
+    ///
+    /// Takes each item off whichever customer holds it and gives it to
+    /// `managedAccountId`, or to nobody when that is null, in one transaction.
+    /// Only drafts change: an approved invoice carries its own copy of its scope.
+    ///
+    /// _Requires permission: `invoices:write`._
+    ///
+    /// POST /api/org/{orgId}/managed-accounts/assignments
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func create(
+        orgId: String? = nil,
+        body: ManagedAccountAssignment,
+        options: RequestOptions? = nil
+    ) async throws -> ManagedAccountAssignmentResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/managed-accounts/assignments",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+
+    /// Preview a bulk assignment
+    ///
+    /// What moving these cost centres and accounts would do: who holds each one
+    /// today, the spend that moves with it in the period, the totals leaving each
+    /// customer, and how many draft invoices will change. Nothing is written.
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// POST /api/org/{orgId}/managed-accounts/assignments/preview
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func preview(
+        orgId: String? = nil,
+        body: ManagedAccountAssignmentPreviewRequest,
+        options: RequestOptions? = nil
+    ) async throws -> ManagedAccountAssignmentPreview {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/managed-accounts/assignments/preview",
+                pathParameters: ["orgId": orgId?.parameterValue],
                 body: AnyEncodable(body)
             ),
             options: options

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -112,6 +112,20 @@ public struct EventData_cost_anomaly_detected_v1: Codable, Hashable, Sendable {
     public var currency: String
     /// What the change timeline and audit log say happened around then.
     public var hints: [String]
+    /// Provider-native id of the resource that drove the rise; null when the
+    /// provider reports no resource ids or no resource rose.
+    public var driverResourceId: String?
+    /// The driving resource's name in the synced inventory, else its provider id;
+    /// null with `driverResourceId`.
+    public var driverResourceName: String?
+    /// How far the driving resource rose over its own baseline, in `currency`.
+    public var driverDelta: Double?
+    /// The driving resource's share of the whole rise, 0 to 1 (above 1 when other
+    /// spend fell).
+    public var driverShare: Double?
+    /// The largest contributors to the rise across resources, accounts, regions,
+    /// usage units, charge types and tags, one line each, largest first.
+    public var contributors: [String]
 
     public init(
         anomalyId: String,
@@ -122,7 +136,12 @@ public struct EventData_cost_anomaly_detected_v1: Codable, Hashable, Sendable {
         actual: Double,
         baseline: Double,
         currency: String,
-        hints: [String]
+        hints: [String],
+        driverResourceId: String? = nil,
+        driverResourceName: String? = nil,
+        driverDelta: Double? = nil,
+        driverShare: Double? = nil,
+        contributors: [String]
     ) {
         self.anomalyId = anomalyId
         self.day = day
@@ -133,5 +152,10 @@ public struct EventData_cost_anomaly_detected_v1: Codable, Hashable, Sendable {
         self.baseline = baseline
         self.currency = currency
         self.hints = hints
+        self.driverResourceId = driverResourceId
+        self.driverResourceName = driverResourceName
+        self.driverDelta = driverDelta
+        self.driverShare = driverShare
+        self.contributors = contributors
     }
 }

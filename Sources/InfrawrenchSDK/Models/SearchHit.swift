@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -15,9 +15,15 @@ import Foundation
 
 public struct SearchHit: Codable, Hashable, Sendable {
     public var id: ResourceId
+    public var kind: SearchResultKind?
+    /// The provider plugin; `__workflows__` for workflows, `__objects__` for
+    /// saved objects.
     public var pluginId: String
     public var pluginDisplayName: String
+    /// Inline SVG markup; empty for saved objects.
     public var pluginLogoSvg: String
+    /// The resource type; `__workflow__` for workflows, the kind for saved
+    /// objects.
     public var resourceTypeId: String
     public var resourceTypeLabel: String
     public var accountId: String
@@ -27,6 +33,7 @@ public struct SearchHit: Codable, Hashable, Sendable {
 
     public init(
         id: ResourceId,
+        kind: SearchResultKind? = nil,
         pluginId: String,
         pluginDisplayName: String,
         pluginLogoSvg: String,
@@ -38,6 +45,7 @@ public struct SearchHit: Codable, Hashable, Sendable {
         subtitle: String? = nil
     ) {
         self.id = id
+        self.kind = kind
         self.pluginId = pluginId
         self.pluginDisplayName = pluginDisplayName
         self.pluginLogoSvg = pluginLogoSvg

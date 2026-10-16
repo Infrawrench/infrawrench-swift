@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -25,18 +25,22 @@ public struct JiraIntegrationInput: Codable, Hashable, Sendable {
     public var apiToken: String?
     public var defaultProjectKey: String?
     public var defaultIssueTypeId: String?
+    /// Omit to keep the stored value (off on first connect).
+    public var acknowledgeOnDone: Bool?
 
     public init(
         siteUrl: String,
         accountEmail: String,
         apiToken: String? = nil,
         defaultProjectKey: String? = nil,
-        defaultIssueTypeId: String? = nil
+        defaultIssueTypeId: String? = nil,
+        acknowledgeOnDone: Bool? = nil
     ) {
         self.siteUrl = siteUrl
         self.accountEmail = accountEmail
         self.apiToken = apiToken
         self.defaultProjectKey = defaultProjectKey
         self.defaultIssueTypeId = defaultIssueTypeId
+        self.acknowledgeOnDone = acknowledgeOnDone
     }
 }

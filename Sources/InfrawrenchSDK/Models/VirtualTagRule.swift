@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -105,8 +105,10 @@ public struct VirtualTagRule: Codable, Hashable, Sendable {
     }
 
     /// Cost-query-language filter a row must match, e.g. `provider = 'aws' AND
-    /// service = 'AmazonRDS'`. Empty matches every row. May not reference another
-    /// virtual tag.
+    /// service = 'AmazonRDS'`. Empty matches every row. May filter on another
+    /// virtual tag (`virtual_tag['team'] = 'payments'`) that gives each row one
+    /// value (no split rules), as long as the references form no cycle and no
+    /// chain is more than five tags deep.
     public var query: String?
     public var description: String?
     /// Inclusive UTC day the rule starts applying; null for no start.

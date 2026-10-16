@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -197,6 +197,69 @@ public final class CurrencyRatesNamespace: Sendable {
                 method: "DELETE",
                 path: "/api/org/{orgId}/currency/rates/{rateId}",
                 pathParameters: ["orgId": orgId?.parameterValue, "rateId": rateId.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Upload many exchange rates from a CSV
+    ///
+    /// Upserts every row on (`fromCurrency`, `toCurrency`, `effectiveFrom`),
+    /// exactly as the single-rate PUT does, in one transaction. Send `dryRun:
+    /// true` first to see each row classified (`create`, `update`, `unchanged`,
+    /// `error` with the reason); an upload with an invalid row writes nothing
+    /// unless `skipInvalid` is set. Uploaded rates are ordinary stated rates:
+    /// they win over the automatic feed for the days they cover, and a
+    /// `billing_period` row (or an `effective_to`) hands the days after it back
+    /// to the next rate or the feed. Requires `org:settings:write`; applied
+    /// uploads are audit-logged as `exchange_rate.import`.
+    ///
+    /// _Requires permission: `org:settings:write`._
+    ///
+    /// POST /api/org/{orgId}/currency/rates/import
+    ///
+    /// Raises on 400: A malformed body, or a whole-file problem; the body is then
+    /// the result with `fileError` and `error` set.
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func `import`(
+        orgId: String? = nil,
+        body: ExchangeRateImportRequest,
+        options: RequestOptions? = nil
+    ) async throws -> ExchangeRateImportResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/currency/rates/import",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+
+    /// CSV template for uploading exchange rates
+    ///
+    /// The header row `POST /currency/rates/import` reads, plus one example row
+    /// per shape: an open-ended rate, a bounded override, and a `billing_period`
+    /// row.
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// GET /api/org/{orgId}/currency/rates/template
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func template(
+        orgId: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> Data {
+        return try await transport.sendData(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/currency/rates/template",
+                pathParameters: ["orgId": orgId?.parameterValue]
             ),
             options: options
         )

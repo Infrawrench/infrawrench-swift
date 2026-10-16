@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -22,7 +22,9 @@ public struct TabTarget: Codable, Hashable, Sendable {
         case costs
         case savings
         case costReports
+        case resourceReports
         case costCanvases
+        case k8sEfficiency
         case invoices
         case graph
         case logs
@@ -70,7 +72,9 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case "costs": self = .costs
             case "savings": self = .savings
             case "cost-reports": self = .costReports
+            case "resource-reports": self = .resourceReports
             case "cost-canvases": self = .costCanvases
+            case "k8s-efficiency": self = .k8sEfficiency
             case "invoices": self = .invoices
             case "graph": self = .graph
             case "logs": self = .logs
@@ -118,7 +122,9 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case .costs: return "costs"
             case .savings: return "savings"
             case .costReports: return "cost-reports"
+            case .resourceReports: return "resource-reports"
             case .costCanvases: return "cost-canvases"
+            case .k8sEfficiency: return "k8s-efficiency"
             case .invoices: return "invoices"
             case .graph: return "graph"
             case .logs: return "logs"
@@ -166,7 +172,9 @@ public struct TabTarget: Codable, Hashable, Sendable {
             .costs,
             .savings,
             .costReports,
+            .resourceReports,
             .costCanvases,
+            .k8sEfficiency,
             .invoices,
             .graph,
             .logs,

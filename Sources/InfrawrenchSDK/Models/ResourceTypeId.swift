@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -215,6 +215,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case check
     case checkGroup
     case cksCluster
+    case classicElb
     case clientKey
     case cloud
     case cloudArmorPolicy
@@ -1455,6 +1456,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "check": self = .check
         case "check-group": self = .checkGroup
         case "cks-cluster": self = .cksCluster
+        case "classic-elb": self = .classicElb
         case "client-key": self = .clientKey
         case "cloud": self = .cloud
         case "cloud-armor-policy": self = .cloudArmorPolicy
@@ -2695,6 +2697,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .check: return "check"
         case .checkGroup: return "check-group"
         case .cksCluster: return "cks-cluster"
+        case .classicElb: return "classic-elb"
         case .clientKey: return "client-key"
         case .cloud: return "cloud"
         case .cloudArmorPolicy: return "cloud-armor-policy"
@@ -3935,6 +3938,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .check,
         .checkGroup,
         .cksCluster,
+        .classicElb,
         .clientKey,
         .cloud,
         .cloudArmorPolicy,

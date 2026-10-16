@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -29,12 +29,15 @@ public final class NetworkFlowsNamespace: Sendable {
     let transport: ApiTransport
     /// `client.networkFlows.kubernetes`
     public let kubernetes: NetworkFlowsKubernetesNamespace
+    /// `client.networkFlows.reports`
+    public let reports: NetworkFlowsReportsNamespace
     /// `client.networkFlows.settings`
     public let settings: NetworkFlowsSettingsNamespace
 
     init(transport: ApiTransport) {
         self.transport = transport
         self.kubernetes = NetworkFlowsKubernetesNamespace(transport: transport)
+        self.reports = NetworkFlowsReportsNamespace(transport: transport)
         self.settings = NetworkFlowsSettingsNamespace(transport: transport)
     }
 
@@ -92,6 +95,61 @@ public final class NetworkFlowsNamespace: Sendable {
                 path: "/api/org/{orgId}/network-flows",
                 pathParameters: ["orgId": orgId?.parameterValue],
                 query: [QueryParameter("from", from), QueryParameter("to", to), QueryParameter("scope", scope), QueryParameter("accountId", accountId), QueryParameter("limit", limit)]
+            ),
+            options: options
+        )
+    }
+
+    /// Picker values for the network flow report editor
+    ///
+    /// Accounts whose provider can report flows, and every VPC, region, zone,
+    /// peer service, peer resource type and endpoint seen in the store's 90-day
+    /// retention. Scoped to what the caller may see.
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// GET /api/org/{orgId}/network-flows/report-options
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func reportOptions(
+        orgId: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> NetworkFlowReportOptions {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/network-flows/report-options",
+                pathParameters: ["orgId": orgId?.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Run an unsaved network flow report config
+    ///
+    /// Bytes and estimated cost over time, per group, with the top talking pairs.
+    /// A read despite the method.
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// POST /api/org/{orgId}/network-flows/report-query
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func reportQuery(
+        orgId: String? = nil,
+        body: NetworkFlowReportConfig,
+        options: RequestOptions? = nil
+    ) async throws -> NetworkFlowReportResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/network-flows/report-query",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: AnyEncodable(body)
             ),
             options: options
         )
@@ -219,6 +277,174 @@ public final class NetworkFlowsKubernetesSettingsNamespace: Sendable {
                 method: "PUT",
                 path: "/api/org/{orgId}/network-flows/kubernetes/{accountId}/settings",
                 pathParameters: ["orgId": orgId?.parameterValue, "accountId": accountId.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.networkFlows.reports`
+public final class NetworkFlowsReportsNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// Create a network flow report
+    ///
+    /// _Requires permission: `costs:write`._
+    ///
+    /// POST /api/org/{orgId}/network-flows/reports
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 403: Forbidden
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func create(
+        orgId: String? = nil,
+        body: NetworkFlowReportInput,
+        options: RequestOptions? = nil
+    ) async throws -> NetworkFlowReport {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/network-flows/reports",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+
+    /// Delete a network flow report
+    ///
+    /// _Requires permission: `costs:write`._
+    ///
+    /// DELETE /api/org/{orgId}/network-flows/reports/{id}
+    ///
+    /// Raises on 403: Forbidden
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Defaults to the `orgId` the client was created with.
+    public func delete(
+        orgId: String? = nil,
+        id: String,
+        options: RequestOptions? = nil
+    ) async throws -> Ok {
+        return try await transport.send(
+            RequestSpec(
+                method: "DELETE",
+                path: "/api/org/{orgId}/network-flows/reports/{id}",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Get a network flow report
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// GET /api/org/{orgId}/network-flows/reports/{id}
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Defaults to the `orgId` the client was created with.
+    public func get(
+        orgId: String? = nil,
+        id: String,
+        options: RequestOptions? = nil
+    ) async throws -> NetworkFlowReport {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/network-flows/reports/{id}",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// List saved network flow reports
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// GET /api/org/{orgId}/network-flows/reports
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func list(
+        orgId: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> [NetworkFlowReport] {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/network-flows/reports",
+                pathParameters: ["orgId": orgId?.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Run a saved network flow report
+    ///
+    /// A relative date range resolves against today on every run.
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// POST /api/org/{orgId}/network-flows/reports/{id}/run
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Defaults to the `orgId` the client was created with.
+    public func run(
+        orgId: String? = nil,
+        id: String,
+        options: RequestOptions? = nil
+    ) async throws -> NetworkFlowReportRunResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/network-flows/reports/{id}/run",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Replace a network flow report
+    ///
+    /// _Requires permission: `costs:write`._
+    ///
+    /// PUT /api/org/{orgId}/network-flows/reports/{id}
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 403: Forbidden
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Defaults to the `orgId` the client was created with.
+    public func update(
+        orgId: String? = nil,
+        id: String,
+        body: NetworkFlowReportInput,
+        options: RequestOptions? = nil
+    ) async throws -> NetworkFlowReport {
+        return try await transport.send(
+            RequestSpec(
+                method: "PUT",
+                path: "/api/org/{orgId}/network-flows/reports/{id}",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue],
                 body: AnyEncodable(body)
             ),
             options: options

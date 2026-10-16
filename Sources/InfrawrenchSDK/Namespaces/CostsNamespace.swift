@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -65,6 +65,16 @@ public struct CostsAnomalySuppressionsGetResult: Codable, Hashable, Sendable {
     }
 }
 
+public struct CostsExportsJobsGetResult: Codable, Hashable, Sendable {
+    public var jobs: [CostExportJob]
+
+    public init(
+        jobs: [CostExportJob]
+    ) {
+        self.jobs = jobs
+    }
+}
+
 /// `client.costs`
 public final class CostsNamespace: Sendable {
     /// Shared request plumbing.
@@ -77,6 +87,8 @@ public final class CostsNamespace: Sendable {
     public let anomalySuppressions: CostsAnomalySuppressionsNamespace
     /// `client.costs.efficiencyAlertSettings`
     public let efficiencyAlertSettings: CostsEfficiencyAlertSettingsNamespace
+    /// `client.costs.exports`
+    public let exports: CostsExportsNamespace
 
     init(transport: ApiTransport) {
         self.transport = transport
@@ -84,6 +96,7 @@ public final class CostsNamespace: Sendable {
         self.anomalySettings = CostsAnomalySettingsNamespace(transport: transport)
         self.anomalySuppressions = CostsAnomalySuppressionsNamespace(transport: transport)
         self.efficiencyAlertSettings = CostsEfficiencyAlertSettingsNamespace(transport: transport)
+        self.exports = CostsExportsNamespace(transport: transport)
     }
 
     /// Anomaly detection precision over time
@@ -951,6 +964,182 @@ public final class CostsEfficiencyAlertSettingsNamespace: Sendable {
                 path: "/api/org/{orgId}/costs/efficiency-alert-settings",
                 pathParameters: ["orgId": orgId?.parameterValue],
                 body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.costs.exports`
+public final class CostsExportsNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+    /// `client.costs.exports.jobs`
+    public let jobs: CostsExportsJobsNamespace
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+        self.jobs = CostsExportsJobsNamespace(transport: transport)
+    }
+}
+
+/// `client.costs.exports.jobs`
+public final class CostsExportsJobsNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// Start a background cost export
+    ///
+    /// Queues an export of a saved report (`reportId`) or an ad-hoc scope
+    /// (`query`) as CSV, NDJSON or FOCUS CSV, and answers at once with the job.
+    /// The file is written on the gateway in the background; poll `GET
+    /// /costs/exports/jobs/{jobId}` for `progress` and download from
+    /// `downloadUrl` once `status` is `succeeded`. Up to 731 days per job and 256
+    /// MB per file; three queued or running jobs per person. Rows are read inside
+    /// the caller's cost visibility, and what is exported is fixed when the job
+    /// is created, so editing the report afterwards does not change the file.
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// POST /api/org/{orgId}/costs/exports/jobs
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// Raises on 409: Conflict
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func create(
+        orgId: String? = nil,
+        body: CostExportJobRequest,
+        options: RequestOptions? = nil
+    ) async throws -> CostExportJob {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/costs/exports/jobs",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+
+    /// Cancel an export job or delete its file
+    ///
+    /// Cancels a queued or running job (the writer stops at its next chunk), or
+    /// deletes a finished file before it expires. Answers with the job's new
+    /// state.
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// DELETE /api/org/{orgId}/costs/exports/jobs/{jobId}
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func delete(
+        orgId: String? = nil,
+        jobId: String,
+        options: RequestOptions? = nil
+    ) async throws -> CostExportJob {
+        return try await transport.send(
+            RequestSpec(
+                method: "DELETE",
+                path: "/api/org/{orgId}/costs/exports/jobs/{jobId}",
+                pathParameters: ["orgId": orgId?.parameterValue, "jobId": jobId.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Download an export job's file
+    ///
+    /// The finished file, streamed. 409 while the job is still queued or running
+    /// (or failed); 410 once the file has expired or been deleted.
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// GET /api/org/{orgId}/costs/exports/jobs/{jobId}/download
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// Raises on 409: Conflict
+    ///
+    /// Raises on 410: Gone: the file expired or was deleted
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func download(
+        orgId: String? = nil,
+        jobId: String,
+        options: RequestOptions? = nil
+    ) async throws -> String {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/costs/exports/jobs/{jobId}/download",
+                pathParameters: ["orgId": orgId?.parameterValue, "jobId": jobId.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// List your recent export jobs
+    ///
+    /// The caller's 20 most recent export jobs, newest first. Jobs are private to
+    /// their creator.
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// GET /api/org/{orgId}/costs/exports/jobs
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func get(
+        orgId: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> CostsExportsJobsGetResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/costs/exports/jobs",
+                pathParameters: ["orgId": orgId?.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Get an export job's status
+    ///
+    /// Status, progress, row count, error and, once finished, the download path
+    /// and expiry.
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// GET /api/org/{orgId}/costs/exports/jobs/{jobId}
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func getOrgOrgIdCostsExportsJobsJobId(
+        orgId: String? = nil,
+        jobId: String,
+        options: RequestOptions? = nil
+    ) async throws -> CostExportJob {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/costs/exports/jobs/{jobId}",
+                pathParameters: ["orgId": orgId?.parameterValue, "jobId": jobId.parameterValue]
             ),
             options: options
         )

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -27,12 +27,18 @@ public struct JiraGetResult: Codable, Hashable, Sendable {
 public final class JiraNamespace: Sendable {
     /// Shared request plumbing.
     let transport: ApiTransport
+    /// `client.jira.links`
+    public let links: JiraLinksNamespace
     /// `client.jira.projects`
     public let projects: JiraProjectsNamespace
+    /// `client.jira.webhook`
+    public let webhook: JiraWebhookNamespace
 
     init(transport: ApiTransport) {
         self.transport = transport
+        self.links = JiraLinksNamespace(transport: transport)
         self.projects = JiraProjectsNamespace(transport: transport)
+        self.webhook = JiraWebhookNamespace(transport: transport)
     }
 
     /// Disconnect Jira
@@ -118,37 +124,6 @@ public final class JiraNamespace: Sendable {
         )
     }
 
-    /// Look up filed issues for a set of findings
-    ///
-    /// _Requires permission: `jira:read`._
-    ///
-    /// GET /api/org/{orgId}/jira/links
-    ///
-    /// Raises on 400: Bad request
-    ///
-    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
-    /// created with.
-    ///
-    /// - Parameter sourceId: Repeat to narrow to specific findings. Omit to
-    /// return every link of the kind; this is the batch lookup a list view makes
-    /// once instead of one request per row.
-    public func links(
-        orgId: String? = nil,
-        sourceKind: JiraSourceKind? = nil,
-        sourceId: [String]? = nil,
-        options: RequestOptions? = nil
-    ) async throws -> [JiraIssueLink] {
-        return try await transport.send(
-            RequestSpec(
-                method: "GET",
-                path: "/api/org/{orgId}/jira/links",
-                pathParameters: ["orgId": orgId?.parameterValue],
-                query: [QueryParameter("sourceKind", sourceKind), QueryParameter("sourceId", sourceId)]
-            ),
-            options: options
-        )
-    }
-
     /// Connect Jira, or update the connection
     ///
     /// _Requires permission: `jira:write`._
@@ -202,6 +177,76 @@ public final class JiraNamespace: Sendable {
                 path: "/api/org/{orgId}/jira/verify",
                 pathParameters: ["orgId": orgId?.parameterValue],
                 body: body.map { AnyEncodable($0) }
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.jira.links`
+public final class JiraLinksNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// Look up filed issues for a set of findings
+    ///
+    /// _Requires permission: `jira:read`._
+    ///
+    /// GET /api/org/{orgId}/jira/links
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter sourceId: Repeat to narrow to specific findings. Omit to
+    /// return every link of the kind; this is the batch lookup a list view makes
+    /// once instead of one request per row.
+    public func list(
+        orgId: String? = nil,
+        sourceKind: JiraSourceKind? = nil,
+        sourceId: [String]? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> [JiraIssueLink] {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/jira/links",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                query: [QueryParameter("sourceKind", sourceKind), QueryParameter("sourceId", sourceId)]
+            ),
+            options: options
+        )
+    }
+
+    /// Refresh the status of filed Jira issues now
+    ///
+    /// Reads up to 200 of the org's filed issues from Jira (least recently
+    /// checked first) instead of waiting for a webhook or the poll.
+    ///
+    /// _Requires permission: `jira:read`._
+    ///
+    /// POST /api/org/{orgId}/jira/links/refresh
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 502: Jira refused or was unreachable
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func refresh(
+        orgId: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> IssueStatusRefreshResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/jira/links/refresh",
+                pathParameters: ["orgId": orgId?.parameterValue]
             ),
             options: options
         )
@@ -266,6 +311,80 @@ public final class JiraProjectsNamespace: Sendable {
             RequestSpec(
                 method: "GET",
                 path: "/api/org/{orgId}/jira/projects",
+                pathParameters: ["orgId": orgId?.parameterValue]
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.jira.webhook`
+public final class JiraWebhookNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// Set up the issue status webhook
+    ///
+    /// `auto` (the default) registers a webhook in Jira for `jira:issue_updated`
+    /// and `jira:issue_deleted` through the stored account, which Jira allows for
+    /// administrators only. When Jira refuses, the reply falls back to manual and
+    /// carries the URL and a one-time `secret` for an administrator to paste into
+    /// Jira's webhook form. `manual` skips the attempt. Replaces any webhook set
+    /// up before.
+    ///
+    /// _Requires permission: `jira:write`._
+    ///
+    /// POST /api/org/{orgId}/jira/webhook
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 502: Jira refused or was unreachable
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func create(
+        orgId: String? = nil,
+        body: JiraWebhookInput? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> IssueWebhookSetupResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/jira/webhook",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: body.map { AnyEncodable($0) }
+            ),
+            options: options
+        )
+    }
+
+    /// Remove the issue status webhook
+    ///
+    /// Deletes the webhook in Jira when Infrawrench registered it. Statuses keep
+    /// refreshing through the poll.
+    ///
+    /// _Requires permission: `jira:write`._
+    ///
+    /// DELETE /api/org/{orgId}/jira/webhook
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// Raises on 502: Jira refused or was unreachable
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func delete(
+        orgId: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> Ok {
+        return try await transport.send(
+            RequestSpec(
+                method: "DELETE",
+                path: "/api/org/{orgId}/jira/webhook",
                 pathParameters: ["orgId": orgId?.parameterValue]
             ),
             options: options

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -43,6 +43,8 @@ public final class DashboardsNamespace: Sendable {
     public let notifications: DashboardsNotificationsNamespace
     /// `client.dashboards.pin`
     public let pin: DashboardsPinNamespace
+    /// `client.dashboards.roleDefaults`
+    public let roleDefaults: DashboardsRoleDefaultsNamespace
     /// `client.dashboards.widgets`
     public let widgets: DashboardsWidgetsNamespace
 
@@ -51,6 +53,7 @@ public final class DashboardsNamespace: Sendable {
         self.`default` = DashboardsDefaultNamespace(transport: transport)
         self.notifications = DashboardsNotificationsNamespace(transport: transport)
         self.pin = DashboardsPinNamespace(transport: transport)
+        self.roleDefaults = DashboardsRoleDefaultsNamespace(transport: transport)
         self.widgets = DashboardsWidgetsNamespace(transport: transport)
     }
 
@@ -127,6 +130,38 @@ public final class DashboardsNamespace: Sendable {
                 method: "GET",
                 path: "/api/org/{orgId}/dashboards/{id}",
                 pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Evaluate a KPI widget config
+    ///
+    /// Answers one KPI config: a saved card posts its own, an editor posts one to
+    /// preview it. Needs `costs:read`, plus `budgets:read` for a budget source;
+    /// figures are measured inside the caller's cost visibility scope.
+    ///
+    /// POST /api/org/{orgId}/dashboards/kpi
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 403: Forbidden
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func kpi(
+        orgId: String? = nil,
+        body: DashboardKpiRequest,
+        options: RequestOptions? = nil
+    ) async throws -> DashboardKpiResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/dashboards/kpi",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: AnyEncodable(body)
             ),
             options: options
         )
@@ -374,12 +409,18 @@ public final class DashboardsNamespace: Sendable {
 public final class DashboardsDefaultNamespace: Sendable {
     /// Shared request plumbing.
     let transport: ApiTransport
+    /// `client.dashboards.default.me`
+    public let me: DashboardsDefaultMeNamespace
 
     init(transport: ApiTransport) {
         self.transport = transport
+        self.me = DashboardsDefaultMeNamespace(transport: transport)
     }
 
-    /// Get-or-create the default dashboard with its pins
+    /// Get the caller's default dashboard with its pins
+    ///
+    /// The dashboard `GET /dashboards/default` resolves to, with its cards. The
+    /// organization default is created as `Home` on first read.
     ///
     /// _Requires permission: `dashboards:read`._
     ///
@@ -396,6 +437,96 @@ public final class DashboardsDefaultNamespace: Sendable {
                 method: "GET",
                 path: "/api/org/{orgId}/dashboards/default/full",
                 pathParameters: ["orgId": orgId?.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Which dashboard the caller lands on, and why
+    ///
+    /// Resolves the caller's default dashboard: their own default, else the
+    /// default set for their role, else the organization default (created as
+    /// `Home` on first read). A layer whose dashboard is no longer shared with
+    /// the caller is skipped and listed in `skipped`.
+    ///
+    /// _Requires permission: `dashboards:read`._
+    ///
+    /// GET /api/org/{orgId}/dashboards/default
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func get(
+        orgId: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> DefaultDashboardResolution {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/dashboards/default",
+                pathParameters: ["orgId": orgId?.parameterValue]
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.dashboards.default.me`
+public final class DashboardsDefaultMeNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// Clear my default dashboard
+    ///
+    /// _Requires permission: `dashboards:read`._
+    ///
+    /// DELETE /api/org/{orgId}/dashboards/default/me
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func delete(
+        orgId: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> DefaultDashboardResolution {
+        return try await transport.send(
+            RequestSpec(
+                method: "DELETE",
+                path: "/api/org/{orgId}/dashboards/default/me",
+                pathParameters: ["orgId": orgId?.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Set my default dashboard
+    ///
+    /// Overrides the role and organization defaults for the caller in this
+    /// organization. The dashboard must be one the caller can open.
+    ///
+    /// _Requires permission: `dashboards:read`._
+    ///
+    /// PUT /api/org/{orgId}/dashboards/default/me
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func update(
+        orgId: String? = nil,
+        body: SetDefaultDashboardRequest,
+        options: RequestOptions? = nil
+    ) async throws -> DefaultDashboardResolution {
+        return try await transport.send(
+            RequestSpec(
+                method: "PUT",
+                path: "/api/org/{orgId}/dashboards/default/me",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: AnyEncodable(body)
             ),
             options: options
         )
@@ -676,6 +807,100 @@ public final class DashboardsPinNamespace: Sendable {
     }
 }
 
+/// `client.dashboards.roleDefaults`
+public final class DashboardsRoleDefaultsNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// Clear a role's default dashboard
+    ///
+    /// _Requires permission: `org:settings:write`._
+    ///
+    /// DELETE /api/org/{orgId}/dashboards/role-defaults/{roleId}
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func delete(
+        orgId: String? = nil,
+        roleId: String,
+        options: RequestOptions? = nil
+    ) async throws -> Ok {
+        return try await transport.send(
+            RequestSpec(
+                method: "DELETE",
+                path: "/api/org/{orgId}/dashboards/role-defaults/{roleId}",
+                pathParameters: ["orgId": orgId?.parameterValue, "roleId": roleId.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// List each role's default dashboard
+    ///
+    /// _Requires permission: `team:read`._
+    ///
+    /// GET /api/org/{orgId}/dashboards/role-defaults
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func list(
+        orgId: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> [RoleDefaultDashboard] {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/dashboards/role-defaults",
+                pathParameters: ["orgId": orgId?.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Set a role's default dashboard
+    ///
+    /// Members holding the role land on this dashboard unless they picked their
+    /// own. Refused with 422 when the role lacks `dashboards:read` or the
+    /// dashboard is not shared with the role (org-wide or by a role grant). Works
+    /// for system and custom roles. Needs `org:settings:write` (not
+    /// `team:role:write`), so an API key can manage it.
+    ///
+    /// _Requires permission: `org:settings:write`._
+    ///
+    /// PUT /api/org/{orgId}/dashboards/role-defaults/{roleId}
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// Raises on 422: Bad request
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func update(
+        orgId: String? = nil,
+        roleId: String,
+        body: SetDefaultDashboardRequest,
+        options: RequestOptions? = nil
+    ) async throws -> RoleDefaultDashboard {
+        return try await transport.send(
+            RequestSpec(
+                method: "PUT",
+                path: "/api/org/{orgId}/dashboards/role-defaults/{roleId}",
+                pathParameters: ["orgId": orgId?.parameterValue, "roleId": roleId.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+}
+
 /// `client.dashboards.widgets`
 public final class DashboardsWidgetsNamespace: Sendable {
     /// Shared request plumbing.
@@ -685,7 +910,7 @@ public final class DashboardsWidgetsNamespace: Sendable {
         self.transport = transport
     }
 
-    /// Add a cost-graph or budget widget to a dashboard
+    /// Add a widget (cost graph, report, budget, KPI, text, ...) to a dashboard
     ///
     /// POST /api/org/{orgId}/dashboards/widgets
     ///
@@ -728,6 +953,36 @@ public final class DashboardsWidgetsNamespace: Sendable {
             RequestSpec(
                 method: "DELETE",
                 path: "/api/org/{orgId}/dashboards/widgets/{widgetId}",
+                pathParameters: ["orgId": orgId?.parameterValue, "widgetId": widgetId.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Copy a widget in place
+    ///
+    /// Inserts a copy with the same kind, config and size directly after the
+    /// original, moving every card behind it one slot along. A copy of a budget
+    /// or report card is a second view onto the same budget or report.
+    /// Audit-logged.
+    ///
+    /// POST /api/org/{orgId}/dashboards/widgets/{widgetId}/duplicate
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func duplicate(
+        orgId: String? = nil,
+        widgetId: String,
+        options: RequestOptions? = nil
+    ) async throws -> DashboardWidgetFull {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/dashboards/widgets/{widgetId}/duplicate",
                 pathParameters: ["orgId": orgId?.parameterValue, "widgetId": widgetId.parameterValue]
             ),
             options: options

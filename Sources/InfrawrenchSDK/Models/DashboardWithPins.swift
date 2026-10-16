@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -15,17 +15,20 @@ import Foundation
 
 public struct DashboardWithPins: Codable, Hashable, Sendable {
     public var dashboard: DashboardFull
+    public var resolution: DefaultDashboardResolution?
     public var pins: [DashboardPin]
     public var workflowPins: [DashboardWorkflowPin]
     public var widgets: [DashboardWidget]
 
     public init(
         dashboard: DashboardFull,
+        resolution: DefaultDashboardResolution? = nil,
         pins: [DashboardPin],
         workflowPins: [DashboardWorkflowPin],
         widgets: [DashboardWidget]
     ) {
         self.dashboard = dashboard
+        self.resolution = resolution
         self.pins = pins
         self.workflowPins = workflowPins
         self.widgets = widgets

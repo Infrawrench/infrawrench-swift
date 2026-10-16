@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -66,6 +66,15 @@ public struct GithubIssueLink: Codable, Hashable, Sendable {
     public var autoFiled: Bool
     public var pullRequestNumber: Int?
     public var pullRequestUrl: String?
+    /// The tracker's own status name, e.g. `In Progress`, `Backlog`, `Closed`.
+    public var status: String?
+    public var statusCategory: IssueStatusCategory?
+    /// Assignee display name (Jira, Linear) or login (GitHub).
+    public var assignee: String?
+    /// When the issue last changed, as the tracker reports it.
+    public var issueUpdatedAt: String?
+    /// When Infrawrench last learned the status, by webhook or poll.
+    public var statusSyncedAt: String?
     public var createdByUserId: String?
     public var createdAt: String
     public var resolvedAt: String?
@@ -83,6 +92,11 @@ public struct GithubIssueLink: Codable, Hashable, Sendable {
         autoFiled: Bool,
         pullRequestNumber: Int? = nil,
         pullRequestUrl: String? = nil,
+        status: String? = nil,
+        statusCategory: IssueStatusCategory? = nil,
+        assignee: String? = nil,
+        issueUpdatedAt: String? = nil,
+        statusSyncedAt: String? = nil,
         createdByUserId: String? = nil,
         createdAt: String,
         resolvedAt: String? = nil
@@ -99,6 +113,11 @@ public struct GithubIssueLink: Codable, Hashable, Sendable {
         self.autoFiled = autoFiled
         self.pullRequestNumber = pullRequestNumber
         self.pullRequestUrl = pullRequestUrl
+        self.status = status
+        self.statusCategory = statusCategory
+        self.assignee = assignee
+        self.issueUpdatedAt = issueUpdatedAt
+        self.statusSyncedAt = statusSyncedAt
         self.createdByUserId = createdByUserId
         self.createdAt = createdAt
         self.resolvedAt = resolvedAt

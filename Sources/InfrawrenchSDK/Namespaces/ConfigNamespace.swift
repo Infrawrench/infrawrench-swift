@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -88,7 +88,8 @@ public final class ConfigNamespace: Sendable {
     ///
     /// - Parameter sections: Comma-separated subset of sections to export.
     /// Defaults to all of: budgets, customGraphs, workflows, dashboards,
-    /// metricAlerts, probes, slos, costCentres, tagPolicy, alertSettings.
+    /// metricAlerts, probes, slos, costCentres, tagPolicy, alertSettings,
+    /// savingsViews.
     public func export(
         orgId: String? = nil,
         sections: String? = nil,

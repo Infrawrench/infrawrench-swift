@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -105,6 +105,36 @@ public struct BusinessMetricsUsageUnitsResult: Codable, Hashable, Sendable {
     }
 }
 
+public struct BusinessMetricsForecastValuesCreateResult: Codable, Hashable, Sendable {
+    public var written: Int
+
+    public init(
+        written: Int
+    ) {
+        self.written = written
+    }
+}
+
+public struct BusinessMetricsForecastValuesDeleteResult: Codable, Hashable, Sendable {
+    public var deleted: Int
+
+    public init(
+        deleted: Int
+    ) {
+        self.deleted = deleted
+    }
+}
+
+public struct BusinessMetricsForecastValuesGetResult: Codable, Hashable, Sendable {
+    public var values: [BusinessMetricForecastValue]
+
+    public init(
+        values: [BusinessMetricForecastValue]
+    ) {
+        self.values = values
+    }
+}
+
 public struct BusinessMetricsGetGetResult: Codable, Hashable, Sendable {
     public var metrics: [BusinessMetric]
 
@@ -173,17 +203,26 @@ public struct BusinessMetricsValuesGetResult: Codable, Hashable, Sendable {
 public final class BusinessMetricsNamespace: Sendable {
     /// Shared request plumbing.
     let transport: ApiTransport
+    /// `client.businessMetrics.forecastValues`
+    public let forecastValues: BusinessMetricsForecastValuesNamespace
     /// `client.businessMetrics.get`
     public let get: BusinessMetricsGetNamespace
     /// `client.businessMetrics.importer`
     public let importer: BusinessMetricsImporterNamespace
+    /// `client.businessMetrics.unitCosts`
+    public let unitCosts: BusinessMetricsUnitCostsNamespace
+    /// `client.businessMetrics.usageUnitCosts`
+    public let usageUnitCosts: BusinessMetricsUsageUnitCostsNamespace
     /// `client.businessMetrics.values`
     public let values: BusinessMetricsValuesNamespace
 
     init(transport: ApiTransport) {
         self.transport = transport
+        self.forecastValues = BusinessMetricsForecastValuesNamespace(transport: transport)
         self.get = BusinessMetricsGetNamespace(transport: transport)
         self.importer = BusinessMetricsImporterNamespace(transport: transport)
+        self.unitCosts = BusinessMetricsUnitCostsNamespace(transport: transport)
+        self.usageUnitCosts = BusinessMetricsUsageUnitCostsNamespace(transport: transport)
         self.values = BusinessMetricsValuesNamespace(transport: transport)
     }
 
@@ -370,55 +409,6 @@ public final class BusinessMetricsNamespace: Sendable {
         )
     }
 
-    /// Query unit costs or margin
-    ///
-    /// Divide spend by the metric, bucketed as asked. Three properties of the
-    /// answer are worth knowing before reading it:
-    ///
-    /// - **The ratio is computed at the requested bucket**, from a summed
-    /// numerator and a summed denominator: never a mean of daily ratios, which
-    /// weights a quiet day as heavily as a peak one. The same holds for
-    /// `overallValue`.
-    /// - **A missing or non-positive denominator is a gap** (`value: null` with a
-    /// `gap` reason), never 0 and never infinite.
-    /// - **Currencies are never merged.** Spend in a currency with no stated rate
-    /// keeps its own series rather than being dropped or added to another.
-    ///
-    /// There is no spend `groupBy`: a per-group ratio needs a per-group
-    /// denominator. Split by a metric label with `groupByLabel` instead; in a
-    /// ratio mode the label must be mapped to the cost dimension its values name
-    /// (`labelMappings` on the metric), so each label value's spend is divided by
-    /// its own volume.
-    ///
-    /// _Requires permission: `costs:read`._
-    ///
-    /// POST /api/org/{orgId}/business-metrics/{id}/unit-costs
-    ///
-    /// Raises on 400: Bad request
-    ///
-    /// Raises on 404: Not found
-    ///
-    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
-    /// created with.
-    ///
-    /// - Parameter id: Metric id or key.
-    public func unitCosts(
-        orgId: String? = nil,
-        id: String,
-        body: UnitCostQueryRequest,
-        options: RequestOptions? = nil
-    ) async throws -> UnitCostQueryResponse {
-        return try await transport.send(
-            RequestSpec(
-                method: "POST",
-                path: "/api/org/{orgId}/business-metrics/{id}/unit-costs",
-                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue],
-                body: AnyEncodable(body)
-            ),
-            options: options
-        )
-    }
-
     /// Update a business metric
     ///
     /// Replaces the whole definition. Changing `key` never orphans history
@@ -457,36 +447,6 @@ public final class BusinessMetricsNamespace: Sendable {
         )
     }
 
-    /// Query cost per usage unit
-    ///
-    /// Spend divided by the usage quantity providers report in one `usageUnit`,
-    /// with no business metric involved. Both halves come from the same cost rows
-    /// (those reported in that unit), so the numerator is exactly the spend that
-    /// bought the denominator. A bucket with no usage is a gap (`no_usage`),
-    /// never 0. Labels do not apply.
-    ///
-    /// POST /api/org/{orgId}/business-metrics/usage-unit-costs
-    ///
-    /// Raises on 400: Bad request
-    ///
-    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
-    /// created with.
-    public func usageUnitCosts(
-        orgId: String? = nil,
-        body: UnitCostQueryRequest,
-        options: RequestOptions? = nil
-    ) async throws -> UnitCostQueryResponse {
-        return try await transport.send(
-            RequestSpec(
-                method: "POST",
-                path: "/api/org/{orgId}/business-metrics/usage-unit-costs",
-                pathParameters: ["orgId": orgId?.parameterValue],
-                body: AnyEncodable(body)
-            ),
-            options: options
-        )
-    }
-
     /// List usage units
     ///
     /// The provider usage units the organization's cost rows carry over the last
@@ -506,6 +466,119 @@ public final class BusinessMetricsNamespace: Sendable {
                 method: "GET",
                 path: "/api/org/{orgId}/business-metrics/usage-units",
                 pathParameters: ["orgId": orgId?.parameterValue]
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.businessMetrics.forecastValues`
+public final class BusinessMetricsForecastValuesNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// Write forecasted metric values
+    ///
+    /// Re-sending a day restates it. Values must be non-negative.
+    ///
+    /// _Requires permission: `costs:write`._
+    ///
+    /// POST /api/org/{orgId}/business-metrics/{id}/forecast-values
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter id: Metric id or key.
+    public func create(
+        orgId: String? = nil,
+        id: String,
+        body: BusinessMetricForecastValuesInput,
+        options: RequestOptions? = nil
+    ) async throws -> BusinessMetricsForecastValuesCreateResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/business-metrics/{id}/forecast-values",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+
+    /// Delete forecasted metric values
+    ///
+    /// Removes planned days in `[from, to]`; omit both to clear every planned
+    /// day.
+    ///
+    /// _Requires permission: `costs:write`._
+    ///
+    /// DELETE /api/org/{orgId}/business-metrics/{id}/forecast-values
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter id: Metric id or key.
+    public func delete(
+        orgId: String? = nil,
+        id: String,
+        from: String? = nil,
+        to: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> BusinessMetricsForecastValuesDeleteResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "DELETE",
+                path: "/api/org/{orgId}/business-metrics/{id}/forecast-values",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue],
+                query: [QueryParameter("from", from), QueryParameter("to", to)]
+            ),
+            options: options
+        )
+    }
+
+    /// List a metric's forecasted values
+    ///
+    /// Planned values, kept apart from the reported actuals: no unit cost,
+    /// threshold or coverage figure ever reads them. Day order.
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// GET /api/org/{orgId}/business-metrics/{id}/forecast-values
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter id: Metric id or key.
+    public func get(
+        orgId: String? = nil,
+        id: String,
+        from: String? = nil,
+        to: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> BusinessMetricsForecastValuesGetResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/business-metrics/{id}/forecast-values",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue],
+                query: [QueryParameter("from", from), QueryParameter("to", to)]
             ),
             options: options
         )
@@ -744,6 +817,186 @@ public final class BusinessMetricsImporterNamespace: Sendable {
                 method: "PUT",
                 path: "/api/org/{orgId}/business-metrics/{id}/importer",
                 pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.businessMetrics.unitCosts`
+public final class BusinessMetricsUnitCostsNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// Query unit costs or margin
+    ///
+    /// Divide spend by the metric, bucketed as asked. Three properties of the
+    /// answer are worth knowing before reading it:
+    ///
+    /// - **The ratio is computed at the requested bucket**, from a summed
+    /// numerator and a summed denominator: never a mean of daily ratios, which
+    /// weights a quiet day as heavily as a peak one. The same holds for
+    /// `overallValue`.
+    /// - **A missing or non-positive denominator is a gap** (`value: null` with a
+    /// `gap` reason), never 0 and never infinite.
+    /// - **Currencies are never merged.** Spend in a currency with no stated rate
+    /// keeps its own series rather than being dropped or added to another.
+    ///
+    /// There is no spend `groupBy`: a per-group ratio needs a per-group
+    /// denominator. Split by a metric label with `groupByLabel` instead; in a
+    /// ratio mode the label must be mapped to the cost dimension its values name
+    /// (`labelMappings` on the metric), so each label value's spend is divided by
+    /// its own volume.
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// POST /api/org/{orgId}/business-metrics/{id}/unit-costs
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter id: Metric id or key.
+    public func create(
+        orgId: String? = nil,
+        id: String,
+        body: UnitCostQueryRequest,
+        options: RequestOptions? = nil
+    ) async throws -> UnitCostQueryResponse {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/business-metrics/{id}/unit-costs",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+
+    /// Export unit costs or margin as a file
+    ///
+    /// The query `POST /business-metrics/{id}/unit-costs` answers, as CSV or
+    /// NDJSON. One row per bucket per series (and per label value when grouped),
+    /// columns in this order: `bucket`, `bucket_days`, `reported_days`,
+    /// `partial`, `label_key`, `label_value`, `label_other`, `currency`, `mode`,
+    /// `scale`, `metric_key`, `metric_unit`, `usage_unit`, `cost` (summed spend),
+    /// `metric_value` (summed denominator, unscaled), `value` (the ratio, already
+    /// scaled), `absolute_margin`, `gap`. A gap is an **empty** `value` with its
+    /// reason in `gap`, never 0, and `partial` flags a bucket whose denominator
+    /// covers only some of its days. Text cells starting with `=`, `+`, `-` or
+    /// `@` are prefixed with `'` so a spreadsheet does not run them. NDJSON
+    /// carries the same keys, with `null` for empty.
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// POST /api/org/{orgId}/business-metrics/{id}/unit-costs/export
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter id: Metric id or key.
+    public func export(
+        orgId: String? = nil,
+        id: String,
+        body: UnitCostExportRequest,
+        options: RequestOptions? = nil
+    ) async throws -> String {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/business-metrics/{id}/unit-costs/export",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.businessMetrics.usageUnitCosts`
+public final class BusinessMetricsUsageUnitCostsNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// Query cost per usage unit
+    ///
+    /// Spend divided by the usage quantity providers report in one `usageUnit`,
+    /// with no business metric involved. Both halves come from the same cost rows
+    /// (those reported in that unit), so the numerator is exactly the spend that
+    /// bought the denominator. A bucket with no usage is a gap (`no_usage`),
+    /// never 0. Labels do not apply.
+    ///
+    /// POST /api/org/{orgId}/business-metrics/usage-unit-costs
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func create(
+        orgId: String? = nil,
+        body: UnitCostQueryRequest,
+        options: RequestOptions? = nil
+    ) async throws -> UnitCostQueryResponse {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/business-metrics/usage-unit-costs",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+
+    /// Export cost per usage unit as a file
+    ///
+    /// The query `POST /business-metrics/usage-unit-costs` answers, as CSV or
+    /// NDJSON. One row per bucket per series (and per label value when grouped),
+    /// columns in this order: `bucket`, `bucket_days`, `reported_days`,
+    /// `partial`, `label_key`, `label_value`, `label_other`, `currency`, `mode`,
+    /// `scale`, `metric_key`, `metric_unit`, `usage_unit`, `cost` (summed spend),
+    /// `metric_value` (summed denominator, unscaled), `value` (the ratio, already
+    /// scaled), `absolute_margin`, `gap`. A gap is an **empty** `value` with its
+    /// reason in `gap`, never 0, and `partial` flags a bucket whose denominator
+    /// covers only some of its days. Text cells starting with `=`, `+`, `-` or
+    /// `@` are prefixed with `'` so a spreadsheet does not run them. NDJSON
+    /// carries the same keys, with `null` for empty.
+    ///
+    /// _Requires permission: `costs:read`._
+    ///
+    /// POST /api/org/{orgId}/business-metrics/usage-unit-costs/export
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func export(
+        orgId: String? = nil,
+        body: UnitCostExportRequest,
+        options: RequestOptions? = nil
+    ) async throws -> String {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/business-metrics/usage-unit-costs/export",
+                pathParameters: ["orgId": orgId?.parameterValue],
                 body: AnyEncodable(body)
             ),
             options: options

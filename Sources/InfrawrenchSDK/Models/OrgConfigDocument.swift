@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -68,6 +68,7 @@ public struct OrgConfigDocument: Codable, Hashable, Sendable {
     public var costCentres: [OrgConfigCostCentre]?
     public var tagPolicy: TagPolicy2?
     public var alertSettings: OrgConfigAlertSettings?
+    public var savingsViews: [OrgConfigSavingsView]?
 
     public init(
         version: Int? = nil,
@@ -82,7 +83,8 @@ public struct OrgConfigDocument: Codable, Hashable, Sendable {
         slos: [OrgConfigSlo]? = nil,
         costCentres: [OrgConfigCostCentre]? = nil,
         tagPolicy: TagPolicy2? = nil,
-        alertSettings: OrgConfigAlertSettings? = nil
+        alertSettings: OrgConfigAlertSettings? = nil,
+        savingsViews: [OrgConfigSavingsView]? = nil
     ) {
         self.version = version
         self.exportedAt = exportedAt
@@ -97,5 +99,6 @@ public struct OrgConfigDocument: Codable, Hashable, Sendable {
         self.costCentres = costCentres
         self.tagPolicy = tagPolicy
         self.alertSettings = alertSettings
+        self.savingsViews = savingsViews
     }
 }

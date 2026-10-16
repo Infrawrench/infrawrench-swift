@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -22,6 +22,7 @@ public enum JiraSourceKind: RawRepresentable, Codable, Hashable, Sendable, Param
     case expiring
     case probe
     case extendedSupport
+    case budgetAlert
     /// A value the API added after this SDK was generated. Kept rather than
     /// rejected, so a new server-side value cannot break decoding.
     case unrecognized(String)
@@ -35,6 +36,7 @@ public enum JiraSourceKind: RawRepresentable, Codable, Hashable, Sendable, Param
         case "expiring": self = .expiring
         case "probe": self = .probe
         case "extended_support": self = .extendedSupport
+        case "budget_alert": self = .budgetAlert
         default: self = .unrecognized(rawValue)
         }
     }
@@ -48,6 +50,7 @@ public enum JiraSourceKind: RawRepresentable, Codable, Hashable, Sendable, Param
         case .expiring: return "expiring"
         case .probe: return "probe"
         case .extendedSupport: return "extended_support"
+        case .budgetAlert: return "budget_alert"
         case .unrecognized(let value): return value
         }
     }
@@ -61,6 +64,7 @@ public enum JiraSourceKind: RawRepresentable, Codable, Hashable, Sendable, Param
         .expiring,
         .probe,
         .extendedSupport,
+        .budgetAlert,
     ]
 
     public init(from decoder: any Decoder) throws {

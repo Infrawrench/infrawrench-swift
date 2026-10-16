@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -147,8 +147,17 @@ public struct CostAnomaly: Codable, Hashable, Sendable {
     /// before (e.g. "12 gce-instance resources appeared", a workflow run, a
     /// lifted change freeze), ranked by likely relevance and capped at three.
     /// Empty when nothing notable happened in the window or the anomaly predates
-    /// hint collection.
+    /// hint collection. When the contributor breakdown found a clear lead, the
+    /// first hint names it.
     public var hints: [String]
+    /// What moved underneath the flagged provider or service: the anomalous day's
+    /// rise over its baseline decomposed by resource, account, region, usage
+    /// unit, charge type and tag value, a few per facet, largest first within
+    /// each. The driving resource is the `resource` row with the largest delta
+    /// that carries at least 20% of the rise. Computed at detection (and on first
+    /// read for older findings) and stored. Contributors outside the caller's
+    /// cost visibility scope are folded into one `other` row per facet.
+    public var contributors: [CostAnomalyContributor]
     /// Present once somebody has explained this finding, null while it is still
     /// an open question. Acknowledging does not suppress detection; the same key
     /// spiking again on a later day is a new anomaly and fires as normal.
@@ -172,6 +181,7 @@ public struct CostAnomaly: Codable, Hashable, Sendable {
         detectedAt: String,
         notifiedAt: String? = nil,
         hints: [String],
+        contributors: [CostAnomalyContributor],
         acknowledgement: Acknowledgement? = nil,
         feedback: CostAnomalyFeedback? = nil,
         suppressionId: String? = nil
@@ -188,6 +198,7 @@ public struct CostAnomaly: Codable, Hashable, Sendable {
         self.detectedAt = detectedAt
         self.notifiedAt = notifiedAt
         self.hints = hints
+        self.contributors = contributors
         self.acknowledgement = acknowledgement
         self.feedback = feedback
         self.suppressionId = suppressionId

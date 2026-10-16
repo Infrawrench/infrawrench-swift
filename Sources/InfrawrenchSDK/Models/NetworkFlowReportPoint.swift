@@ -1,0 +1,51 @@
+/*
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * https://github.com/Infrawrench/Infrawrench
+ *
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
+ *
+ * DO NOT EDIT. Regenerate with:
+ *   pnpm --filter @infrawrench/web generate:sdk
+ *
+ * Internal routes are absent by construction: the generator consumes the same
+ * published spec that /openapi.json serves, which drops every operation
+ * marked x-internal.
+ */
+import Foundation
+
+public struct NetworkFlowReportPoint: Codable, Hashable, Sendable {
+    public var bucket: String
+    /// Observed bytes (decimal: a GB is 10^9 bytes).
+    public var bytes: Double
+    /// Bytes priced at the provider's published list rate for the boundary
+    /// crossed. Always an estimate: free allowances, volume tiers and negotiated
+    /// rates are not modelled.
+    public var estimatedCost: Double
+    /// Of `bytes`, those from a flow source that samples. The plugin already
+    /// scaled them up; they are counted and labelled, never dropped.
+    public var sampledBytes: Double
+    /// Of `estimatedCost`, the part priced from sampled bytes.
+    public var sampledCost: Double
+    /// Of `bytes`, those that could not be tied to a workload at one end.
+    public var unattributedBytes: Double
+    /// Of `bytes`, the per-day remainder below the stored pair cap.
+    public var truncatedBytes: Double
+
+    public init(
+        bucket: String,
+        bytes: Double,
+        estimatedCost: Double,
+        sampledBytes: Double,
+        sampledCost: Double,
+        unattributedBytes: Double,
+        truncatedBytes: Double
+    ) {
+        self.bucket = bucket
+        self.bytes = bytes
+        self.estimatedCost = estimatedCost
+        self.sampledBytes = sampledBytes
+        self.sampledCost = sampledCost
+        self.unattributedBytes = unattributedBytes
+        self.truncatedBytes = truncatedBytes
+    }
+}

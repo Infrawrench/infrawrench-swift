@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -222,11 +222,41 @@ public final class InvoicesNamespace: Sendable {
         )
     }
 
+    /// Download an invoice as PDF
+    ///
+    /// The document a customer files: addressee, lines, tax, total, due date and
+    /// remittance details, from the billing block frozen at approval. A draft is
+    /// watermarked. The collected-versus-adjusted derivation stays in the CSV.
+    ///
+    /// _Requires permission: `invoices:read`._
+    ///
+    /// GET /api/org/{orgId}/invoices/{id}/pdf
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func pdf(
+        orgId: String? = nil,
+        id: String,
+        options: RequestOptions? = nil
+    ) async throws -> Data {
+        return try await transport.sendData(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/invoices/{id}/pdf",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue]
+            ),
+            options: options
+        )
+    }
+
     /// Send an invoice to its customer
     ///
     /// Changes no figure; the document was frozen at approval. It records the
     /// **release** (this may go to the customer, and this person said so), then
-    /// emails the invoice to the customer's contact addresses with the CSV
+    /// emails the invoice to the customer's contact addresses and its billing
+    /// profile's To and Cc, as frozen at approval, with the PDF and the CSV
     /// attached.
     ///
     /// **200 even when delivery failed.** The release happened and is recorded

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -62,6 +62,8 @@ public enum OrgConfigDashboardCard: Codable, Hashable, Sendable {
             case customGraph
             case costCanvas
             case realizedSavings
+            case kpi
+            case text
             /// A value the API added after this SDK was generated. Kept rather
             /// than rejected, so a new server-side value cannot break decoding.
             case unrecognized(String)
@@ -74,6 +76,8 @@ public enum OrgConfigDashboardCard: Codable, Hashable, Sendable {
                 case "custom_graph": self = .customGraph
                 case "cost_canvas": self = .costCanvas
                 case "realized_savings": self = .realizedSavings
+                case "kpi": self = .kpi
+                case "text": self = .text
                 default: self = .unrecognized(rawValue)
                 }
             }
@@ -86,6 +90,8 @@ public enum OrgConfigDashboardCard: Codable, Hashable, Sendable {
                 case .customGraph: return "custom_graph"
                 case .costCanvas: return "cost_canvas"
                 case .realizedSavings: return "realized_savings"
+                case .kpi: return "kpi"
+                case .text: return "text"
                 case .unrecognized(let value): return value
                 }
             }
@@ -98,6 +104,8 @@ public enum OrgConfigDashboardCard: Codable, Hashable, Sendable {
                 .customGraph,
                 .costCanvas,
                 .realizedSavings,
+                .kpi,
+                .text,
             ]
 
             public init(from decoder: any Decoder) throws {

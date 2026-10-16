@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -23,13 +23,29 @@ public struct LinearGetResult: Codable, Hashable, Sendable {
     }
 }
 
+public struct LinearWebhookUrlResult: Codable, Hashable, Sendable {
+    public var url: String
+
+    public init(
+        url: String
+    ) {
+        self.url = url
+    }
+}
+
 /// `client.linear`
 public final class LinearNamespace: Sendable {
     /// Shared request plumbing.
     let transport: ApiTransport
+    /// `client.linear.links`
+    public let links: LinearLinksNamespace
+    /// `client.linear.webhook`
+    public let webhook: LinearWebhookNamespace
 
     init(transport: ApiTransport) {
         self.transport = transport
+        self.links = LinearLinksNamespace(transport: transport)
+        self.webhook = LinearWebhookNamespace(transport: transport)
     }
 
     /// Disconnect Linear
@@ -115,37 +131,6 @@ public final class LinearNamespace: Sendable {
         )
     }
 
-    /// Look up filed issues for a set of findings
-    ///
-    /// _Requires permission: `linear:read`._
-    ///
-    /// GET /api/org/{orgId}/linear/links
-    ///
-    /// Raises on 400: Bad request
-    ///
-    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
-    /// created with.
-    ///
-    /// - Parameter sourceId: Repeat to narrow to specific findings. Omit to
-    /// return every link of the kind; this is the batch lookup a list view makes
-    /// once instead of one request per row.
-    public func links(
-        orgId: String? = nil,
-        sourceKind: LinearSourceKind? = nil,
-        sourceId: [String]? = nil,
-        options: RequestOptions? = nil
-    ) async throws -> [LinearIssueLink] {
-        return try await transport.send(
-            RequestSpec(
-                method: "GET",
-                path: "/api/org/{orgId}/linear/links",
-                pathParameters: ["orgId": orgId?.parameterValue],
-                query: [QueryParameter("sourceKind", sourceKind), QueryParameter("sourceId", sourceId)]
-            ),
-            options: options
-        )
-    }
-
     /// List Linear teams
     ///
     /// Backs the team picker, so nobody has to know a team id by hand;
@@ -226,6 +211,177 @@ public final class LinearNamespace: Sendable {
                 path: "/api/org/{orgId}/linear/verify",
                 pathParameters: ["orgId": orgId?.parameterValue],
                 body: body.map { AnyEncodable($0) }
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.linear.links`
+public final class LinearLinksNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// Look up filed issues for a set of findings
+    ///
+    /// _Requires permission: `linear:read`._
+    ///
+    /// GET /api/org/{orgId}/linear/links
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter sourceId: Repeat to narrow to specific findings. Omit to
+    /// return every link of the kind; this is the batch lookup a list view makes
+    /// once instead of one request per row.
+    public func list(
+        orgId: String? = nil,
+        sourceKind: LinearSourceKind? = nil,
+        sourceId: [String]? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> [LinearIssueLink] {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/linear/links",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                query: [QueryParameter("sourceKind", sourceKind), QueryParameter("sourceId", sourceId)]
+            ),
+            options: options
+        )
+    }
+
+    /// Refresh the status of filed Linear issues now
+    ///
+    /// Reads up to 200 of the org's filed issues from Linear (least recently
+    /// checked first) instead of waiting for a webhook or the poll.
+    ///
+    /// _Requires permission: `linear:read`._
+    ///
+    /// POST /api/org/{orgId}/linear/links/refresh
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 502: Linear refused or was unreachable
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func refresh(
+        orgId: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> IssueStatusRefreshResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/linear/links/refresh",
+                pathParameters: ["orgId": orgId?.parameterValue]
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.linear.webhook`
+public final class LinearWebhookNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// Set up the issue status webhook
+    ///
+    /// `auto` creates a webhook in Linear for `Issue` events on all public teams,
+    /// signed with a secret Infrawrench generates (Linear allows this for
+    /// workspace admins only). `manual` records a webhook somebody created in
+    /// Linear's settings at the URL from `POST /linear/webhook/url`, with the
+    /// signing secret Linear showed them. Replaces any webhook set up before.
+    ///
+    /// _Requires permission: `linear:write`._
+    ///
+    /// POST /api/org/{orgId}/linear/webhook
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 502: Linear refused or was unreachable
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func create(
+        orgId: String? = nil,
+        body: LinearWebhookInput,
+        options: RequestOptions? = nil
+    ) async throws -> IssueWebhookSetupResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/linear/webhook",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+
+    /// Remove the issue status webhook
+    ///
+    /// Deletes the webhook in Linear when Infrawrench created it. Statuses keep
+    /// refreshing through the poll.
+    ///
+    /// _Requires permission: `linear:write`._
+    ///
+    /// DELETE /api/org/{orgId}/linear/webhook
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// Raises on 502: Linear refused or was unreachable
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func delete(
+        orgId: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> Ok {
+        return try await transport.send(
+            RequestSpec(
+                method: "DELETE",
+                path: "/api/org/{orgId}/linear/webhook",
+                pathParameters: ["orgId": orgId?.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Get the receiver URL for a hand-made Linear webhook
+    ///
+    /// Linear shows a webhook's signing secret only after it exists, so the URL
+    /// comes first; record the secret afterwards with `POST /linear/webhook` in
+    /// `manual` mode.
+    ///
+    /// _Requires permission: `linear:write`._
+    ///
+    /// POST /api/org/{orgId}/linear/webhook/url
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func url(
+        orgId: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> LinearWebhookUrlResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/linear/webhook/url",
+                pathParameters: ["orgId": orgId?.parameterValue]
             ),
             options: options
         )

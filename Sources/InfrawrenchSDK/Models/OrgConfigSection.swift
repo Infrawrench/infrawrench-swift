@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -24,6 +24,7 @@ public enum OrgConfigSection: RawRepresentable, Codable, Hashable, Sendable, Par
     case costCentres
     case tagPolicy
     case alertSettings
+    case savingsViews
     /// A value the API added after this SDK was generated. Kept rather than
     /// rejected, so a new server-side value cannot break decoding.
     case unrecognized(String)
@@ -40,6 +41,7 @@ public enum OrgConfigSection: RawRepresentable, Codable, Hashable, Sendable, Par
         case "costCentres": self = .costCentres
         case "tagPolicy": self = .tagPolicy
         case "alertSettings": self = .alertSettings
+        case "savingsViews": self = .savingsViews
         default: self = .unrecognized(rawValue)
         }
     }
@@ -56,6 +58,7 @@ public enum OrgConfigSection: RawRepresentable, Codable, Hashable, Sendable, Par
         case .costCentres: return "costCentres"
         case .tagPolicy: return "tagPolicy"
         case .alertSettings: return "alertSettings"
+        case .savingsViews: return "savingsViews"
         case .unrecognized(let value): return value
         }
     }
@@ -72,6 +75,7 @@ public enum OrgConfigSection: RawRepresentable, Codable, Hashable, Sendable, Par
         .costCentres,
         .tagPolicy,
         .alertSettings,
+        .savingsViews,
     ]
 
     public init(from decoder: any Decoder) throws {

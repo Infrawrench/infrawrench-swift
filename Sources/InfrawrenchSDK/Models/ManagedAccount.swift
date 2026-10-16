@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -70,6 +70,7 @@ public struct ManagedAccount: Codable, Hashable, Sendable {
     public var applyBillingRules: Bool
     public var pricing: ManagedAccountPricing?
     public var notes: String?
+    public var billingProfileId: String?
     public var costCentreIds: [String]
     public var accountIds: [String]
     public var invoiceCount: Int
@@ -88,6 +89,7 @@ public struct ManagedAccount: Codable, Hashable, Sendable {
         applyBillingRules: Bool,
         pricing: ManagedAccountPricing? = nil,
         notes: String? = nil,
+        billingProfileId: String? = nil,
         costCentreIds: [String],
         accountIds: [String],
         invoiceCount: Int,
@@ -105,6 +107,7 @@ public struct ManagedAccount: Codable, Hashable, Sendable {
         self.applyBillingRules = applyBillingRules
         self.pricing = pricing
         self.notes = notes
+        self.billingProfileId = billingProfileId
         self.costCentreIds = costCentreIds
         self.accountIds = accountIds
         self.invoiceCount = invoiceCount

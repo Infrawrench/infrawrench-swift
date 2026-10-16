@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -23,6 +23,10 @@ public struct JiraIntegration: Codable, Hashable, Sendable {
     public var tokenHint: String
     public var defaultProjectKey: String?
     public var defaultIssueTypeId: String?
+    /// When an issue filed for a cost anomaly moves to done, record the anomaly
+    /// as explained.
+    public var acknowledgeOnDone: Bool
+    public var webhook: IssueWebhookState
     public var updatedAt: String
 
     public init(
@@ -31,6 +35,8 @@ public struct JiraIntegration: Codable, Hashable, Sendable {
         tokenHint: String,
         defaultProjectKey: String? = nil,
         defaultIssueTypeId: String? = nil,
+        acknowledgeOnDone: Bool,
+        webhook: IssueWebhookState,
         updatedAt: String
     ) {
         self.siteUrl = siteUrl
@@ -38,6 +44,8 @@ public struct JiraIntegration: Codable, Hashable, Sendable {
         self.tokenHint = tokenHint
         self.defaultProjectKey = defaultProjectKey
         self.defaultIssueTypeId = defaultIssueTypeId
+        self.acknowledgeOnDone = acknowledgeOnDone
+        self.webhook = webhook
         self.updatedAt = updatedAt
     }
 }

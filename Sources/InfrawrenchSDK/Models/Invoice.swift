@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -37,6 +37,7 @@ public struct Invoice: Codable, Hashable, Sendable {
     public var notes: String?
     public var lines: [InvoiceLine]
     public var derivation: InvoiceDerivation
+    public var billing: InvoiceBilling?
     /// True when the figures in this response were recomputed for it; true for a
     /// draft, false for everything else. Say so: “these numbers will move” and
     /// “these numbers are what we sent” are different claims about the same
@@ -70,6 +71,7 @@ public struct Invoice: Codable, Hashable, Sendable {
         notes: String? = nil,
         lines: [InvoiceLine],
         derivation: InvoiceDerivation,
+        billing: InvoiceBilling? = nil,
         live: Bool,
         computedAt: String,
         approvedByUserId: String? = nil,
@@ -98,6 +100,7 @@ public struct Invoice: Codable, Hashable, Sendable {
         self.notes = notes
         self.lines = lines
         self.derivation = derivation
+        self.billing = billing
         self.live = live
         self.computedAt = computedAt
         self.approvedByUserId = approvedByUserId

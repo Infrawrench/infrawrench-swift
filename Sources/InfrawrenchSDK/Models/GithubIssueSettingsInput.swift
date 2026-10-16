@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -26,6 +26,9 @@ public struct GithubIssueSettingsInput: Codable, Hashable, Sendable {
     /// Terraform for IaC-managed findings. Never auto-merged.
     public var pullRequestsEnabled: Bool
     public var iacSources: [GithubIacSourceInput]
+    /// When an issue filed for a cost anomaly is closed as completed, record the
+    /// anomaly as explained. Omit to keep the stored value.
+    public var acknowledgeOnDone: Bool?
 
     public init(
         enabled: Bool,
@@ -35,7 +38,8 @@ public struct GithubIssueSettingsInput: Codable, Hashable, Sendable {
         routes: [GithubIssueRouteInput],
         resolveAction: GithubResolveAction,
         pullRequestsEnabled: Bool,
-        iacSources: [GithubIacSourceInput]
+        iacSources: [GithubIacSourceInput],
+        acknowledgeOnDone: Bool? = nil
     ) {
         self.enabled = enabled
         self.defaultRepo = defaultRepo
@@ -45,5 +49,6 @@ public struct GithubIssueSettingsInput: Codable, Hashable, Sendable {
         self.resolveAction = resolveAction
         self.pullRequestsEnabled = pullRequestsEnabled
         self.iacSources = iacSources
+        self.acknowledgeOnDone = acknowledgeOnDone
     }
 }

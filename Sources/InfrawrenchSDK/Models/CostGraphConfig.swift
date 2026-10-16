@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -189,6 +189,45 @@ public struct CostGraphConfig: Codable, Hashable, Sendable {
         }
     }
 
+    public enum ComparisonStyle: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
+        case line
+        case bars
+        /// A value the API added after this SDK was generated. Kept rather than
+        /// rejected, so a new server-side value cannot break decoding.
+        case unrecognized(String)
+
+        public init(rawValue: String) {
+            switch rawValue {
+            case "line": self = .line
+            case "bars": self = .bars
+            default: self = .unrecognized(rawValue)
+            }
+        }
+
+        public var rawValue: String {
+            switch self {
+            case .line: return "line"
+            case .bars: return "bars"
+            case .unrecognized(let value): return value
+            }
+        }
+
+        /// Every value the spec declares. `unrecognized` is deliberately absent.
+        public static let allKnownCases: [ComparisonStyle] = [
+            .line,
+            .bars,
+        ]
+
+        public init(from decoder: any Decoder) throws {
+            self.init(rawValue: try decoder.singleValueContainer().decode(String.self))
+        }
+
+        public func encode(to encoder: any Encoder) throws {
+            var container = encoder.singleValueContainer()
+            try container.encode(rawValue)
+        }
+    }
+
     public enum UnitCostMode2: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
         case unitCost
         case margin
@@ -323,6 +362,17 @@ public struct CostGraphConfig: Codable, Hashable, Sendable {
     /// Running totals from the start of the range, at any bin size. Omitted is
     /// off. Totals then report the last point rather than the sum.
     public var cumulative: Bool?
+    public var xAxis: CostDimension?
+    /// Required when `xAxis` is `tag` or `virtual_tag`: which key's values go on
+    /// the axis.
+    public var xAxisTagKey: String?
+    /// With `xAxis` and `groupBy: none`: segment each bar by date bin (one series
+    /// per bin). Refused alongside a `groupBy`; ignored without `xAxis`.
+    public var segmentByDate: Bool?
+    /// How `comparePreviousPeriod` is drawn: `line` (omitted) is the dashed
+    /// totals line, `bars` a previous-period bar beside each bar (bar charts
+    /// only). Tables always list previous, change and change % columns.
+    public var comparisonStyle: ComparisonStyle?
     /// Divide spend by this business metric (an id, so a key rename never
     /// re-points the graph).
     public var unitCostMetricId: String?
@@ -358,6 +408,10 @@ public struct CostGraphConfig: Codable, Hashable, Sendable {
         measure: CostMeasure? = nil,
         usageUnit: String? = nil,
         cumulative: Bool? = nil,
+        xAxis: CostDimension? = nil,
+        xAxisTagKey: String? = nil,
+        segmentByDate: Bool? = nil,
+        comparisonStyle: ComparisonStyle? = nil,
         unitCostMetricId: String? = nil,
         unitCostMode: UnitCostMode2? = nil,
         unitCostScale: Double? = nil,
@@ -382,6 +436,10 @@ public struct CostGraphConfig: Codable, Hashable, Sendable {
         self.measure = measure
         self.usageUnit = usageUnit
         self.cumulative = cumulative
+        self.xAxis = xAxis
+        self.xAxisTagKey = xAxisTagKey
+        self.segmentByDate = segmentByDate
+        self.comparisonStyle = comparisonStyle
         self.unitCostMetricId = unitCostMetricId
         self.unitCostMode = unitCostMode
         self.unitCostScale = unitCostScale

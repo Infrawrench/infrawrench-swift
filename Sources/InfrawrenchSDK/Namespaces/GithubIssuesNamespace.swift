@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -17,11 +17,14 @@ import Foundation
 public final class GithubIssuesNamespace: Sendable {
     /// Shared request plumbing.
     let transport: ApiTransport
+    /// `client.githubIssues.links`
+    public let links: GithubIssuesLinksNamespace
     /// `client.githubIssues.pullRequests`
     public let pullRequests: GithubIssuesPullRequestsNamespace
 
     init(transport: ApiTransport) {
         self.transport = transport
+        self.links = GithubIssuesLinksNamespace(transport: transport)
         self.pullRequests = GithubIssuesPullRequestsNamespace(transport: transport)
     }
 
@@ -184,36 +187,6 @@ public final class GithubIssuesNamespace: Sendable {
         )
     }
 
-    /// Look up filed GitHub issues for a set of findings
-    ///
-    /// _Requires permission: `github-issues:read`._
-    ///
-    /// GET /api/org/{orgId}/github-issues/links
-    ///
-    /// Raises on 400: Bad request
-    ///
-    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
-    /// created with.
-    ///
-    /// - Parameter state: One of `open`, `closed`.
-    public func links(
-        orgId: String? = nil,
-        sourceKind: GithubIssueSourceKind? = nil,
-        state: String? = nil,
-        sourceId: [String]? = nil,
-        options: RequestOptions? = nil
-    ) async throws -> [GithubIssueLink] {
-        return try await transport.send(
-            RequestSpec(
-                method: "GET",
-                path: "/api/org/{orgId}/github-issues/links",
-                pathParameters: ["orgId": orgId?.parameterValue],
-                query: [QueryParameter("sourceKind", sourceKind), QueryParameter("state", state), QueryParameter("sourceId", sourceId)]
-            ),
-            options: options
-        )
-    }
-
     /// Resolve where a finding would be filed
     ///
     /// _Requires permission: `github-issues:read`._
@@ -262,6 +235,79 @@ public final class GithubIssuesNamespace: Sendable {
                 path: "/api/org/{orgId}/github-issues/settings",
                 pathParameters: ["orgId": orgId?.parameterValue],
                 body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.githubIssues.links`
+public final class GithubIssuesLinksNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// Look up filed GitHub issues for a set of findings
+    ///
+    /// _Requires permission: `github-issues:read`._
+    ///
+    /// GET /api/org/{orgId}/github-issues/links
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter state: One of `open`, `closed`.
+    public func list(
+        orgId: String? = nil,
+        sourceKind: GithubIssueSourceKind? = nil,
+        state: String? = nil,
+        sourceId: [String]? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> [GithubIssueLink] {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/github-issues/links",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                query: [QueryParameter("sourceKind", sourceKind), QueryParameter("state", state), QueryParameter("sourceId", sourceId)]
+            ),
+            options: options
+        )
+    }
+
+    /// Refresh the status of filed GitHub issues now
+    ///
+    /// Reads up to 200 of the org's filed issues from GitHub (least recently
+    /// checked first) instead of waiting for the App's webhook or the poll. An
+    /// issue GitHub no longer has is recorded as deleted.
+    ///
+    /// _Requires permission: `github-issues:read`._
+    ///
+    /// POST /api/org/{orgId}/github-issues/links/refresh
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 409: The GitHub App installation needs a permission an owner has
+    /// not approved yet
+    ///
+    /// Raises on 502: GitHub refused the request or was unreachable
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func refresh(
+        orgId: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> IssueStatusRefreshResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/github-issues/links/refresh",
+                pathParameters: ["orgId": orgId?.parameterValue]
             ),
             options: options
         )

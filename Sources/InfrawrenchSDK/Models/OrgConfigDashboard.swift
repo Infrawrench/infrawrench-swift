@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -20,17 +20,23 @@ public struct OrgConfigDashboard: Codable, Hashable, Sendable {
     public var key: String
     public var name: String
     public var isDefault: Bool?
+    /// Role names (case-insensitive) whose members land on this dashboard unless
+    /// they picked their own. Omitted leaves role defaults untouched; `[]` clears
+    /// the roles defaulting here. A role may be named by one dashboard only.
+    public var defaultForRoles: [String]?
     public var cards: [OrgConfigDashboardCard]?
 
     public init(
         key: String,
         name: String,
         isDefault: Bool? = nil,
+        defaultForRoles: [String]? = nil,
         cards: [OrgConfigDashboardCard]? = nil
     ) {
         self.key = key
         self.name = name
         self.isDefault = isDefault
+        self.defaultForRoles = defaultForRoles
         self.cards = cards
     }
 }

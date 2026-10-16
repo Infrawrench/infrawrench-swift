@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.81.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.81.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -18,6 +18,10 @@ public enum ShareableObjectType: RawRepresentable, Codable, Hashable, Sendable, 
     case costReportFolder
     case dashboard
     case costCanvas
+    case kubernetesEfficiencyReport
+    case savingsView
+    case resourceReport
+    case networkFlowReport
     /// A value the API added after this SDK was generated. Kept rather than
     /// rejected, so a new server-side value cannot break decoding.
     case unrecognized(String)
@@ -28,6 +32,10 @@ public enum ShareableObjectType: RawRepresentable, Codable, Hashable, Sendable, 
         case "cost_report_folder": self = .costReportFolder
         case "dashboard": self = .dashboard
         case "cost_canvas": self = .costCanvas
+        case "kubernetes_efficiency_report": self = .kubernetesEfficiencyReport
+        case "savings_view": self = .savingsView
+        case "resource_report": self = .resourceReport
+        case "network_flow_report": self = .networkFlowReport
         default: self = .unrecognized(rawValue)
         }
     }
@@ -38,6 +46,10 @@ public enum ShareableObjectType: RawRepresentable, Codable, Hashable, Sendable, 
         case .costReportFolder: return "cost_report_folder"
         case .dashboard: return "dashboard"
         case .costCanvas: return "cost_canvas"
+        case .kubernetesEfficiencyReport: return "kubernetes_efficiency_report"
+        case .savingsView: return "savings_view"
+        case .resourceReport: return "resource_report"
+        case .networkFlowReport: return "network_flow_report"
         case .unrecognized(let value): return value
         }
     }
@@ -48,6 +60,10 @@ public enum ShareableObjectType: RawRepresentable, Codable, Hashable, Sendable, 
         .costReportFolder,
         .dashboard,
         .costCanvas,
+        .kubernetesEfficiencyReport,
+        .savingsView,
+        .resourceReport,
+        .networkFlowReport,
     ]
 
     public init(from decoder: any Decoder) throws {
