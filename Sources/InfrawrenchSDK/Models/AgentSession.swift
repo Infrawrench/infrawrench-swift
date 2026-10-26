@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.84.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.84.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -56,6 +56,7 @@ public struct AgentSession: Codable, Hashable, Sendable {
     public enum Surface: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
         case terminal
         case t3Code
+        case nibblets
         /// A value the API added after this SDK was generated. Kept rather than
         /// rejected, so a new server-side value cannot break decoding.
         case unrecognized(String)
@@ -64,6 +65,7 @@ public struct AgentSession: Codable, Hashable, Sendable {
             switch rawValue {
             case "terminal": self = .terminal
             case "t3-code": self = .t3Code
+            case "nibblets": self = .nibblets
             default: self = .unrecognized(rawValue)
             }
         }
@@ -72,6 +74,7 @@ public struct AgentSession: Codable, Hashable, Sendable {
             switch self {
             case .terminal: return "terminal"
             case .t3Code: return "t3-code"
+            case .nibblets: return "nibblets"
             case .unrecognized(let value): return value
             }
         }
@@ -80,6 +83,7 @@ public struct AgentSession: Codable, Hashable, Sendable {
         public static let allKnownCases: [Surface] = [
             .terminal,
             .t3Code,
+            .nibblets,
         ]
 
         public init(from decoder: any Decoder) throws {
@@ -200,6 +204,10 @@ public struct AgentSession: Codable, Hashable, Sendable {
     public var serviceAccountIds: [String]?
     public var t3Access: T3Access?
     public var serviceInstalls: [AgentServiceInstall]?
+    /// Nibblets sessions: the agent link that starts the server linked to this
+    /// organization (see Agent links). Revoked, with its agents, when the session
+    /// is deleted.
+    public var agentLinkId: String?
     public var branchName: String
     public var status: Status
     public var vmResourceId: String?
@@ -220,6 +228,7 @@ public struct AgentSession: Codable, Hashable, Sendable {
         serviceAccountIds: [String]? = nil,
         t3Access: T3Access? = nil,
         serviceInstalls: [AgentServiceInstall]? = nil,
+        agentLinkId: String? = nil,
         branchName: String,
         status: Status,
         vmResourceId: String? = nil,
@@ -239,6 +248,7 @@ public struct AgentSession: Codable, Hashable, Sendable {
         self.serviceAccountIds = serviceAccountIds
         self.t3Access = t3Access
         self.serviceInstalls = serviceInstalls
+        self.agentLinkId = agentLinkId
         self.branchName = branchName
         self.status = status
         self.vmResourceId = vmResourceId

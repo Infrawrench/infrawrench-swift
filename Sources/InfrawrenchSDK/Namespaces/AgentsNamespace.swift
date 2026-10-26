@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.82.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.84.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.82.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.84.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -91,6 +91,30 @@ public final class AgentsNamespace: Sendable {
             options: options
         )
     }
+
+    /// What you could give a Nibblets session's agent link
+    ///
+    /// `scopes` is null when you cannot approve links here (no `team:invite`).
+    ///
+    /// _Requires permission: `resources:write`._
+    ///
+    /// GET /api/org/{orgId}/agents/link-scopes
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func linkScopes(
+        orgId: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> AgentLinkableScopes {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/agents/link-scopes",
+                pathParameters: ["orgId": orgId?.parameterValue]
+            ),
+            options: options
+        )
+    }
 }
 
 /// `client.agents.sessions`
@@ -109,6 +133,8 @@ public final class AgentsSessionsNamespace: Sendable {
     /// POST /api/org/{orgId}/agents/sessions
     ///
     /// Raises on 400: Bad request
+    ///
+    /// Raises on 403: Forbidden
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
