@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.87.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.88.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.87.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.88.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -164,6 +164,8 @@ public final class APIV1Client: Sendable {
     public let idleFindings: IdleFindingsNamespace
     /// `client.incidents`
     public let incidents: IncidentsNamespace
+    /// `client.instancePricing`
+    public let instancePricing: InstancePricingNamespace
     /// `client.invitations`
     public let invitations: InvitationsNamespace
     /// `client.invoices`
@@ -375,6 +377,7 @@ public final class APIV1Client: Sendable {
         self.iac = IacNamespace(transport: transport)
         self.idleFindings = IdleFindingsNamespace(transport: transport)
         self.incidents = IncidentsNamespace(transport: transport)
+        self.instancePricing = InstancePricingNamespace(transport: transport)
         self.invitations = InvitationsNamespace(transport: transport)
         self.invoices = InvoicesNamespace(transport: transport)
         self.issueWebhooks = IssueWebhooksNamespace(transport: transport)

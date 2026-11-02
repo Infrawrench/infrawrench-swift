@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.87.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.88.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.87.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.88.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -17,7 +17,7 @@ public struct AwsPricingSource: Codable, Hashable, Sendable {
     /// A platform name, or `spot` for EC2 spot prices.
     public var source: String
     public var version: String
-    /// Newest AWS price list in the data (UTC).
+    /// Newest price list in the data (UTC).
     public var priceListTo: String?
     /// When it was loaded (UTC).
     public var syncedAt: String
