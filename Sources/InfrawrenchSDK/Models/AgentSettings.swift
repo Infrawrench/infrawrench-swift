@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.89.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.90.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.89.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.90.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -147,6 +147,7 @@ public struct AgentSettings: Codable, Hashable, Sendable {
     /// (e.g. Tailscale). See GET /resources/ssh-install/accounts.
     public var serviceAccountIds: [String]?
     public var t3Access: T3Access?
+    public var t3Policy: T3CodePolicy?
 
     public init(
         accountId: String,
@@ -156,7 +157,8 @@ public struct AgentSettings: Codable, Hashable, Sendable {
         surface: Surface? = nil,
         fields: [String: String],
         serviceAccountIds: [String]? = nil,
-        t3Access: T3Access? = nil
+        t3Access: T3Access? = nil,
+        t3Policy: T3CodePolicy? = nil
     ) {
         self.accountId = accountId
         self.pluginId = pluginId
@@ -166,5 +168,6 @@ public struct AgentSettings: Codable, Hashable, Sendable {
         self.fields = fields
         self.serviceAccountIds = serviceAccountIds
         self.t3Access = t3Access
+        self.t3Policy = t3Policy
     }
 }

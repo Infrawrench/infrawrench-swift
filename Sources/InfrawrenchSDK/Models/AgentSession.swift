@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.89.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.90.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.89.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.90.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -203,6 +203,11 @@ public struct AgentSession: Codable, Hashable, Sendable {
     /// (e.g. Tailscale). See GET /resources/ssh-install/accounts.
     public var serviceAccountIds: [String]?
     public var t3Access: T3Access?
+    public var t3Policy: T3CodePolicy?
+    /// T3 Code sessions: `t3Policy` is installed but T3 Code has not restarted
+    /// since, so the server still enforces the policy it started with. Cleared by
+    /// a restarting rollout or Authorize server.
+    public var t3PolicyRestartPending: Bool?
     public var serviceInstalls: [AgentServiceInstall]?
     /// Nibblets sessions: the agent link that starts the server linked to this
     /// organization (see Agent links). Revoked, with its agents, when the session
@@ -227,6 +232,8 @@ public struct AgentSession: Codable, Hashable, Sendable {
         surface: Surface? = nil,
         serviceAccountIds: [String]? = nil,
         t3Access: T3Access? = nil,
+        t3Policy: T3CodePolicy? = nil,
+        t3PolicyRestartPending: Bool? = nil,
         serviceInstalls: [AgentServiceInstall]? = nil,
         agentLinkId: String? = nil,
         branchName: String,
@@ -247,6 +254,8 @@ public struct AgentSession: Codable, Hashable, Sendable {
         self.surface = surface
         self.serviceAccountIds = serviceAccountIds
         self.t3Access = t3Access
+        self.t3Policy = t3Policy
+        self.t3PolicyRestartPending = t3PolicyRestartPending
         self.serviceInstalls = serviceInstalls
         self.agentLinkId = agentLinkId
         self.branchName = branchName

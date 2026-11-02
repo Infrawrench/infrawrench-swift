@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.89.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.90.0 | MIT | Copyright (c) 2026 Infrawrench LLC
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.89.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.90.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -63,11 +63,14 @@ public final class AgentsNamespace: Sendable {
     public let sessions: AgentsSessionsNamespace
     /// `client.agents.settings`
     public let settings: AgentsSettingsNamespace
+    /// `client.agents.t3Policy`
+    public let t3Policy: AgentsT3PolicyNamespace
 
     init(transport: ApiTransport) {
         self.transport = transport
         self.sessions = AgentsSessionsNamespace(transport: transport)
         self.settings = AgentsSettingsNamespace(transport: transport)
+        self.t3Policy = AgentsT3PolicyNamespace(transport: transport)
     }
 
     /// List accounts whose plugins can create agent VMs
@@ -302,6 +305,51 @@ public final class AgentsSettingsNamespace: Sendable {
             RequestSpec(
                 method: "PUT",
                 path: "/api/org/{orgId}/agents/settings",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.agents.t3Policy`
+public final class AgentsT3PolicyNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// Roll the T3 Code policy out to existing servers
+    ///
+    /// Installs the organization's current T3 Code managed policy (or removes the
+    /// one Infrawrench installed, when there is none) on existing T3 Code
+    /// servers. T3 Code reads its policy only at startup: `restart: true`
+    /// restarts it so the policy applies now, interrupting running agent turns,
+    /// terminals and connected clients; `restart: false` installs the file and
+    /// marks the session `t3PolicyRestartPending`. Servers that already have the
+    /// policy, that the policy does not fit, or that are still setting up are not
+    /// dialled. Requires `resources:execute`.
+    ///
+    /// POST /api/org/{orgId}/agents/t3-policy/apply
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func apply(
+        orgId: String? = nil,
+        body: AgentT3PolicyApplyRequest,
+        options: RequestOptions? = nil
+    ) async throws -> AgentT3PolicyApplyResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/agents/t3-policy/apply",
                 pathParameters: ["orgId": orgId?.parameterValue],
                 body: AnyEncodable(body)
             ),
