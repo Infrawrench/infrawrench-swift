@@ -1,6 +1,6 @@
 # InfrawrenchSDK
 
-Generated Swift client for the Infrawrench API (API version `1.90.0`).
+Generated Swift client for the Infrawrench API (API version `1.91.0`).
 
 **Do not edit this package by hand** — it is regenerated from `openapi.json` and
 is not checked into the repository. Run
@@ -14,7 +14,7 @@ nowhere to record which API this code matches. It is recorded in the code
 instead:
 
 ```swift
-InfrawrenchSDKInfo.apiVersion      // "1.90.0"
+InfrawrenchSDKInfo.apiVersion      // "1.91.0"
 InfrawrenchSDKInfo.defaultBaseURL  // "https://app.infrawrench.com"
 ```
 
@@ -93,13 +93,13 @@ configuration whose `protocolClasses` is your stub, and hand it to
 
 ## License
 
-MIT — see [`LICENSE`](./LICENSE). Copyright (c) 2026 Infrawrench LLC.
+MIT — see [`LICENSE`](./LICENSE). Copyright (c) 2026 Infrawrench Services, Inc..
 
 Note that this client is more permissively licensed than the service it talks
 to: the Infrawrench source is BUSL-1.1, but the generated clients are MIT so you
 can link one into your own software without inheriting those terms.
 
 Keywords: infrawrench, sdk, api-client, openapi, infrastructure, cloud, devops.
-Author: Infrawrench LLC <astrid@infrawrench.com>, with Astrid Gealer.
+Author: Infrawrench Services, Inc. <astrid@infrawrench.com>, with Astrid Gealer.
 Homepage: <https://infrawrench.com/docs/team-and-billing/client-sdks>
 Issues: <https://github.com/Infrawrench/Infrawrench/issues>

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.90.0 | MIT | Copyright (c) 2026 Infrawrench LLC
+ * InfrawrenchSDK v1.91.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.90.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.91.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -41,13 +41,46 @@ public final class BillingNamespace: Sendable {
     /// created with.
     public func checkout(
         orgId: String? = nil,
+        body: SubscriptionCheckoutRequest? = nil,
         options: RequestOptions? = nil
     ) async throws -> StripeRedirectUrl {
         return try await transport.send(
             RequestSpec(
                 method: "POST",
                 path: "/api/org/{orgId}/billing/checkout",
-                pathParameters: ["orgId": orgId?.parameterValue]
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: body.map { AnyEncodable($0) }
+            ),
+            options: options
+        )
+    }
+
+    /// Update consent on unpaid checkouts for this visitor
+    ///
+    /// Rewrites the saved analytics consent on this user's Checkout Sessions that
+    /// are not yet paid. A withdrawal reaches all of them; any other answer
+    /// reaches the matching visitor's sessions and any still pending with no
+    /// visitor id. A paid session is left as it was queued.
+    ///
+    /// _Requires permission: `billing:write`._
+    ///
+    /// POST /api/org/{orgId}/billing/measurement-consent
+    ///
+    /// Raises on 403: Forbidden
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func measurementConsent(
+        orgId: String? = nil,
+        body: SubscriptionCheckoutRequest,
+        options: RequestOptions? = nil
+    ) async throws -> RevnuConsentRefresh {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/billing/measurement-consent",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: AnyEncodable(body)
             ),
             options: options
         )
