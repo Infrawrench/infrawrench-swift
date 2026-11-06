@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.93.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.94.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.93.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.94.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -14,6 +14,19 @@
 import Foundation
 
 public struct PinFull: Codable, Hashable, Sendable {
+    public struct Showcase: Codable, Hashable, Sendable {
+        public var key: String
+        public var label: String
+
+        public init(
+            key: String,
+            label: String
+        ) {
+            self.key = key
+            self.label = label
+        }
+    }
+
     public var pinId: String
     public var resourceId: ResourceId
     public var gridX: Int
@@ -27,6 +40,8 @@ public struct PinFull: Codable, Hashable, Sendable {
     public var fieldsJson: JsonObject
     public var outputsJson: JsonObject
     public var pluginLogoSvg: String
+    public var iconKey: String?
+    public var showcase: [Showcase]?
     public var pluginDisplayName: String
     public var status: ProbeStatus
 
@@ -44,6 +59,8 @@ public struct PinFull: Codable, Hashable, Sendable {
         fieldsJson: JsonObject,
         outputsJson: JsonObject,
         pluginLogoSvg: String,
+        iconKey: String? = nil,
+        showcase: [Showcase]? = nil,
         pluginDisplayName: String,
         status: ProbeStatus
     ) {
@@ -60,6 +77,8 @@ public struct PinFull: Codable, Hashable, Sendable {
         self.fieldsJson = fieldsJson
         self.outputsJson = outputsJson
         self.pluginLogoSvg = pluginLogoSvg
+        self.iconKey = iconKey
+        self.showcase = showcase
         self.pluginDisplayName = pluginDisplayName
         self.status = status
     }

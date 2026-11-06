@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.93.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.94.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.93.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.94.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -14,9 +14,24 @@
 import Foundation
 
 public struct ChildTypeRef: Codable, Hashable, Sendable {
+    public struct Showcase: Codable, Hashable, Sendable {
+        public var key: String
+        public var label: String
+
+        public init(
+            key: String,
+            label: String
+        ) {
+            self.key = key
+            self.label = label
+        }
+    }
+
     public var id: String
     public var displayName: String
     public var pluralDisplayName: String?
+    public var iconKey: String?
+    public var showcase: [Showcase]?
     public var supportsCreate: Bool
     public var fields: [JsonObject]?
 
@@ -24,12 +39,16 @@ public struct ChildTypeRef: Codable, Hashable, Sendable {
         id: String,
         displayName: String,
         pluralDisplayName: String? = nil,
+        iconKey: String? = nil,
+        showcase: [Showcase]? = nil,
         supportsCreate: Bool,
         fields: [JsonObject]? = nil
     ) {
         self.id = id
         self.displayName = displayName
         self.pluralDisplayName = pluralDisplayName
+        self.iconKey = iconKey
+        self.showcase = showcase
         self.supportsCreate = supportsCreate
         self.fields = fields
     }

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.93.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.94.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.93.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.94.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -14,6 +14,19 @@
 import Foundation
 
 public struct ResourceTypeSummary: Codable, Hashable, Sendable {
+    public struct Showcase: Codable, Hashable, Sendable {
+        public var key: String
+        public var label: String
+
+        public init(
+            key: String,
+            label: String
+        ) {
+            self.key = key
+            self.label = label
+        }
+    }
+
     public struct AttachTarget: Codable, Hashable, Sendable {
         public var pluginId: String
         public var resourceTypeId: String
@@ -36,6 +49,12 @@ public struct ResourceTypeSummary: Codable, Hashable, Sendable {
     public var id: String
     public var displayName: String
     public var pluralDisplayName: String?
+    /// What this type of resource is, in a shared vocabulary (`cpu`, `database`,
+    /// ...).
+    public var iconKey: String?
+    /// The fields this type marked to show on its tile, read from each resource's
+    /// synced fields.
+    public var showcase: [Showcase]?
     public var parentTypeId: String?
     public var supportsCreate: Bool
     public var attachTargets: [AttachTarget]?
@@ -51,6 +70,8 @@ public struct ResourceTypeSummary: Codable, Hashable, Sendable {
         id: String,
         displayName: String,
         pluralDisplayName: String? = nil,
+        iconKey: String? = nil,
+        showcase: [Showcase]? = nil,
         parentTypeId: String? = nil,
         supportsCreate: Bool,
         attachTargets: [AttachTarget]? = nil,
@@ -63,6 +84,8 @@ public struct ResourceTypeSummary: Codable, Hashable, Sendable {
         self.id = id
         self.displayName = displayName
         self.pluralDisplayName = pluralDisplayName
+        self.iconKey = iconKey
+        self.showcase = showcase
         self.parentTypeId = parentTypeId
         self.supportsCreate = supportsCreate
         self.attachTargets = attachTargets
