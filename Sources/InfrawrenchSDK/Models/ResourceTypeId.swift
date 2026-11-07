@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.95.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.96.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.95.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.96.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -1016,7 +1016,6 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case serverlessContainer
     case serverlessEndpoint
     case serverlessFunction
-    case serverlessInstance
     case serverlessTrafficFilter
     case service
     case serviceAccount
@@ -2257,7 +2256,6 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "serverless-container": self = .serverlessContainer
         case "serverless-endpoint": self = .serverlessEndpoint
         case "serverless-function": self = .serverlessFunction
-        case "serverless-instance": self = .serverlessInstance
         case "serverless-traffic-filter": self = .serverlessTrafficFilter
         case "service": self = .service
         case "service-account": self = .serviceAccount
@@ -3498,7 +3496,6 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .serverlessContainer: return "serverless-container"
         case .serverlessEndpoint: return "serverless-endpoint"
         case .serverlessFunction: return "serverless-function"
-        case .serverlessInstance: return "serverless-instance"
         case .serverlessTrafficFilter: return "serverless-traffic-filter"
         case .service: return "service"
         case .serviceAccount: return "service-account"
@@ -4739,7 +4736,6 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .serverlessContainer,
         .serverlessEndpoint,
         .serverlessFunction,
-        .serverlessInstance,
         .serverlessTrafficFilter,
         .service,
         .serviceAccount,
