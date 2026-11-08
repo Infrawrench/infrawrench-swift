@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -126,6 +126,8 @@ public final class AiAttributionNamespace: Sendable {
 
     /// Discover locations (buckets, log groups, gateways) for a source kind
     ///
+    /// _Requires permission: `org:settings:write`._
+    ///
     /// GET /api/org/{orgId}/ai-attribution/locations
     ///
     /// Raises on 400: Bad request
@@ -133,6 +135,8 @@ public final class AiAttributionNamespace: Sendable {
     /// Raises on 403: Forbidden
     ///
     /// Raises on 404: Not found
+    ///
+    /// Raises on 502: Bad gateway: an upstream service failed
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -154,6 +158,8 @@ public final class AiAttributionNamespace: Sendable {
     }
 
     /// Re-split a range of days now
+    ///
+    /// _Requires permission: `costs:write`._
     ///
     /// POST /api/org/{orgId}/ai-attribution/reattribute
     ///
@@ -181,6 +187,8 @@ public final class AiAttributionNamespace: Sendable {
 
     /// List the request-log source kinds the org can add
     ///
+    /// _Requires permission: `costs:read`._
+    ///
     /// GET /api/org/{orgId}/ai-attribution/source-kinds
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
@@ -204,6 +212,8 @@ public final class AiAttributionNamespace: Sendable {
     /// Includes the `(unattributed)` remainder and `(not set)` for matched
     /// requests that lacked every mapped key. For time series, group a cost
     /// report by the tag key `caller:<dimension>`.
+    ///
+    /// _Requires permission: `costs:read`._
     ///
     /// GET /api/org/{orgId}/ai-attribution/spend
     ///
@@ -234,6 +244,8 @@ public final class AiAttributionNamespace: Sendable {
     }
 
     /// Match-rate statistics per source and coverage per provider
+    ///
+    /// _Requires permission: `costs:read`._
     ///
     /// GET /api/org/{orgId}/ai-attribution/stats
     ///
@@ -274,6 +286,8 @@ public final class AiAttributionDimensionsNamespace: Sendable {
 
     /// Map request-metadata keys to a caller dimension
     ///
+    /// _Requires permission: `costs:write`._
+    ///
     /// POST /api/org/{orgId}/ai-attribution/dimensions
     ///
     /// Raises on 400: Bad request
@@ -300,6 +314,8 @@ public final class AiAttributionDimensionsNamespace: Sendable {
 
     /// Delete a caller dimension
     ///
+    /// _Requires permission: `costs:write`._
+    ///
     /// DELETE /api/org/{orgId}/ai-attribution/dimensions/{id}
     ///
     /// Raises on 403: Forbidden
@@ -325,6 +341,8 @@ public final class AiAttributionDimensionsNamespace: Sendable {
 
     /// List caller dimensions
     ///
+    /// _Requires permission: `costs:read`._
+    ///
     /// GET /api/org/{orgId}/ai-attribution/dimensions
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
@@ -344,6 +362,8 @@ public final class AiAttributionDimensionsNamespace: Sendable {
     }
 
     /// Update a caller dimension
+    ///
+    /// _Requires permission: `costs:write`._
     ///
     /// PUT /api/org/{orgId}/ai-attribution/dimensions/{id}
     ///
@@ -388,6 +408,8 @@ public final class AiAttributionSourcesNamespace: Sendable {
     /// org's request logs, and the Bedrock CloudWatch kind runs a Logs Insights
     /// query billed to the org's own AWS account per GB scanned. Audit-logged.
     ///
+    /// _Requires permission: `org:settings:write`._
+    ///
     /// POST /api/org/{orgId}/ai-attribution/sources
     ///
     /// Raises on 400: Bad request
@@ -416,6 +438,8 @@ public final class AiAttributionSourcesNamespace: Sendable {
 
     /// Delete a request-log source
     ///
+    /// _Requires permission: `org:settings:write`._
+    ///
     /// DELETE /api/org/{orgId}/ai-attribution/sources/{id}
     ///
     /// Raises on 403: Forbidden
@@ -441,6 +465,8 @@ public final class AiAttributionSourcesNamespace: Sendable {
 
     /// List request-log sources
     ///
+    /// _Requires permission: `costs:read`._
+    ///
     /// GET /api/org/{orgId}/ai-attribution/sources
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
@@ -460,6 +486,8 @@ public final class AiAttributionSourcesNamespace: Sendable {
     }
 
     /// Read one request-log source
+    ///
+    /// _Requires permission: `costs:read`._
     ///
     /// GET /api/org/{orgId}/ai-attribution/sources/{id}
     ///
@@ -487,6 +515,8 @@ public final class AiAttributionSourcesNamespace: Sendable {
     /// Aggregates keep only mapped metadata keys, so a newly mapped dimension
     /// reaches history only by re-reading it. Clamped to the source kind's
     /// history limit.
+    ///
+    /// _Requires permission: `org:settings:write`._
     ///
     /// POST /api/org/{orgId}/ai-attribution/sources/{id}/recollect
     ///
@@ -516,6 +546,8 @@ public final class AiAttributionSourcesNamespace: Sendable {
     /// Update a request-log source
     ///
     /// Pointing a source at a different location restarts its collection history.
+    ///
+    /// _Requires permission: `org:settings:write`._
     ///
     /// PUT /api/org/{orgId}/ai-attribution/sources/{id}
     ///

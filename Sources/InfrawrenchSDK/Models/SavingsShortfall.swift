@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -13,8 +13,6 @@
  */
 import Foundation
 
-/// The API may send `null` in place of this, which is why references to it are
-/// optional.
 public struct SavingsShortfall: Codable, Hashable, Sendable {
     public enum Kind: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
         case belowProjection
@@ -61,7 +59,6 @@ public struct SavingsShortfall: Codable, Hashable, Sendable {
     public var kind: Kind
     /// Currency units (not cents), in the row's currency.
     public var realizedPerDay: Double
-    /// Currency units (not cents), in the row's currency.
     public var projectedPerDay: Double?
 
     public init(

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -43,11 +43,15 @@ public final class IncidentsNamespace: Sendable {
     ///
     /// Raises on 403: Forbidden
     ///
+    /// Raises on 404: Not found
+    ///
+    /// Raises on 409: Conflict
+    ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
     public func create(
         orgId: String? = nil,
-        body: IncidentDeclare? = nil,
+        body: IncidentDeclare,
         options: RequestOptions? = nil
     ) async throws -> Incident {
         return try await transport.send(
@@ -55,7 +59,7 @@ public final class IncidentsNamespace: Sendable {
                 method: "POST",
                 path: "/api/org/{orgId}/incidents",
                 pathParameters: ["orgId": orgId?.parameterValue],
-                body: body.map { AnyEncodable($0) }
+                body: AnyEncodable(body)
             ),
             options: options
         )
@@ -102,7 +106,11 @@ public final class IncidentsNamespace: Sendable {
     ///
     /// GET /api/org/{orgId}/incidents/{incidentId}/postmortem
     ///
+    /// Raises on 400: Bad request
+    ///
     /// Raises on 404: Not found
+    ///
+    /// Raises on 409: Conflict
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -136,7 +144,11 @@ public final class IncidentsNamespace: Sendable {
     ///
     /// POST /api/org/{orgId}/incidents/{incidentId}/retry-artifacts
     ///
+    /// Raises on 400: Bad request
+    ///
     /// Raises on 404: Not found
+    ///
+    /// Raises on 409: Conflict
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -173,7 +185,11 @@ public final class IncidentsNamespace: Sendable {
     ///
     /// GET /api/org/{orgId}/incidents/{incidentId}/timeline
     ///
+    /// Raises on 400: Bad request
+    ///
     /// Raises on 404: Not found
+    ///
+    /// Raises on 409: Conflict
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -208,12 +224,14 @@ public final class IncidentsNamespace: Sendable {
     ///
     /// Raises on 404: Not found
     ///
+    /// Raises on 409: Conflict
+    ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
     public func update(
         orgId: String? = nil,
         incidentId: String,
-        body: IncidentPatch? = nil,
+        body: IncidentPatch,
         options: RequestOptions? = nil
     ) async throws -> Incident {
         return try await transport.send(
@@ -221,7 +239,7 @@ public final class IncidentsNamespace: Sendable {
                 method: "PATCH",
                 path: "/api/org/{orgId}/incidents/{incidentId}",
                 pathParameters: ["orgId": orgId?.parameterValue, "incidentId": incidentId.parameterValue],
-                body: body.map { AnyEncodable($0) }
+                body: AnyEncodable(body)
             ),
             options: options
         )
@@ -245,6 +263,12 @@ public final class IncidentsGetNamespace: Sendable {
     /// _Requires permission: `incidents:read`._
     ///
     /// GET /api/org/{orgId}/incidents
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// Raises on 409: Conflict
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -317,12 +341,14 @@ public final class IncidentsNotesNamespace: Sendable {
     ///
     /// Raises on 404: Not found
     ///
+    /// Raises on 409: Conflict
+    ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
     public func create(
         orgId: String? = nil,
         incidentId: String,
-        body: IncidentNoteCreate? = nil,
+        body: IncidentNoteCreate,
         options: RequestOptions? = nil
     ) async throws -> IncidentNote {
         return try await transport.send(
@@ -330,7 +356,7 @@ public final class IncidentsNotesNamespace: Sendable {
                 method: "POST",
                 path: "/api/org/{orgId}/incidents/{incidentId}/notes",
                 pathParameters: ["orgId": orgId?.parameterValue, "incidentId": incidentId.parameterValue],
-                body: body.map { AnyEncodable($0) }
+                body: AnyEncodable(body)
             ),
             options: options
         )

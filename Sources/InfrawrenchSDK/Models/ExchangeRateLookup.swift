@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -105,9 +105,6 @@ public struct ExchangeRateLookup: Codable, Hashable, Sendable {
     public var rateBasis: RateBasis
     /// Multiply an amount in `fromCurrency` by this. `null`: no rate applies.
     public var rate: Double?
-    /// `manual`: a rate your organization stated. `ecb`: the automatic European
-    /// Central Bank euro reference rate (crossed through EUR when neither side is
-    /// EUR).
     public var source: Source?
     /// The stated rate's effective date, or the ECB publication date used.
     public var rateDate: String?

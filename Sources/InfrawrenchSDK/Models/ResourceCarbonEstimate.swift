@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -13,11 +13,6 @@
  */
 import Foundation
 
-/// Estimated monthly CO2e of the same configuration, beside its price. Null for a
-/// peer resource or when the size catalogue could not be read.
-///
-/// The API may send `null` in place of this, which is why references to it are
-/// optional.
 public struct ResourceCarbonEstimate: Codable, Hashable, Sendable {
     public enum Reason: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
         case unsupportedProvider
@@ -126,10 +121,8 @@ public struct ResourceCarbonEstimate: Codable, Hashable, Sendable {
         }
     }
 
+    /// Monthly (730 h) footprint, or null.
     public var estimate: CarbonFootprint?
-    /// Why a resource has no estimate. Reported per resource rather than folded
-    /// into the total: a figure that quietly excluded a third of the estate would
-    /// read as a complete answer.
     public var reason: Reason?
     /// False when the type declares nothing to read: a bucket, a DNS record.
     public var inScope: Bool

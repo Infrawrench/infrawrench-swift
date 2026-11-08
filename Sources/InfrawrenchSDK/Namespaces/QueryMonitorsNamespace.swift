@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -12,6 +12,146 @@
  * marked x-internal.
  */
 import Foundation
+
+public struct QueryMonitorsTestBody: Codable, Hashable, Sendable {
+    public enum Mode: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
+        case scalar
+        case rowCount
+        /// A value the API added after this SDK was generated. Kept rather than
+        /// rejected, so a new server-side value cannot break decoding.
+        case unrecognized(String)
+
+        public init(rawValue: String) {
+            switch rawValue {
+            case "scalar": self = .scalar
+            case "rowCount": self = .rowCount
+            default: self = .unrecognized(rawValue)
+            }
+        }
+
+        public var rawValue: String {
+            switch self {
+            case .scalar: return "scalar"
+            case .rowCount: return "rowCount"
+            case .unrecognized(let value): return value
+            }
+        }
+
+        /// Every value the spec declares. `unrecognized` is deliberately absent.
+        public static let allKnownCases: [Mode] = [
+            .scalar,
+            .rowCount,
+        ]
+
+        public init(from decoder: any Decoder) throws {
+            self.init(rawValue: try decoder.singleValueContainer().decode(String.self))
+        }
+
+        public func encode(to encoder: any Encoder) throws {
+            var container = encoder.singleValueContainer()
+            try container.encode(rawValue)
+        }
+    }
+
+    public enum Operator: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
+        case gt
+        case gte
+        case lt
+        case lte
+        case eq
+        case neq
+        /// A value the API added after this SDK was generated. Kept rather than
+        /// rejected, so a new server-side value cannot break decoding.
+        case unrecognized(String)
+
+        public init(rawValue: String) {
+            switch rawValue {
+            case "gt": self = .gt
+            case "gte": self = .gte
+            case "lt": self = .lt
+            case "lte": self = .lte
+            case "eq": self = .eq
+            case "neq": self = .neq
+            default: self = .unrecognized(rawValue)
+            }
+        }
+
+        public var rawValue: String {
+            switch self {
+            case .gt: return "gt"
+            case .gte: return "gte"
+            case .lt: return "lt"
+            case .lte: return "lte"
+            case .eq: return "eq"
+            case .neq: return "neq"
+            case .unrecognized(let value): return value
+            }
+        }
+
+        /// Every value the spec declares. `unrecognized` is deliberately absent.
+        public static let allKnownCases: [Operator] = [
+            .gt,
+            .gte,
+            .lt,
+            .lte,
+            .eq,
+            .neq,
+        ]
+
+        public init(from decoder: any Decoder) throws {
+            self.init(rawValue: try decoder.singleValueContainer().decode(String.self))
+        }
+
+        public func encode(to encoder: any Encoder) throws {
+            var container = encoder.singleValueContainer()
+            try container.encode(rawValue)
+        }
+    }
+
+    public var name: String?
+    public var description: String?
+    public var accountId: String?
+    public var resourceId: String?
+    public var resourceTypeId: String?
+    public var sql: String?
+    /// How the result is reduced to one number. `scalar` reads the first column
+    /// of the first row; `rowCount` counts the rows, which is what lets `SELECT …
+    /// WHERE broken` be a monitor.
+    public var mode: Mode?
+    public var `operator`: Operator?
+    public var threshold: Double?
+    public var intervalMinutes: Int?
+    public var consecutiveBreaches: Int?
+    public var enabled: Bool?
+
+    public init(
+        name: String? = nil,
+        description: String? = nil,
+        accountId: String? = nil,
+        resourceId: String? = nil,
+        resourceTypeId: String? = nil,
+        sql: String? = nil,
+        mode: Mode? = nil,
+        `operator`: Operator? = nil,
+        threshold: Double? = nil,
+        intervalMinutes: Int? = nil,
+        consecutiveBreaches: Int? = nil,
+        enabled: Bool? = nil
+    ) {
+        self.name = name
+        self.description = description
+        self.accountId = accountId
+        self.resourceId = resourceId
+        self.resourceTypeId = resourceTypeId
+        self.sql = sql
+        self.mode = mode
+        self.`operator` = `operator`
+        self.threshold = threshold
+        self.intervalMinutes = intervalMinutes
+        self.consecutiveBreaches = consecutiveBreaches
+        self.enabled = enabled
+    }
+}
 
 /// `client.queryMonitors`
 public final class QueryMonitorsNamespace: Sendable {
@@ -39,6 +179,8 @@ public final class QueryMonitorsNamespace: Sendable {
     /// for a query to run against a customer database on a schedule, forever,
     /// which is a strictly larger act than running one while watching it.
     ///
+    /// _Requires permission: `resources:execute`._
+    ///
     /// POST /api/org/{orgId}/query-monitors
     ///
     /// Raises on 400: Bad request
@@ -51,7 +193,7 @@ public final class QueryMonitorsNamespace: Sendable {
     /// created with.
     public func create(
         orgId: String? = nil,
-        body: QueryMonitorCreate? = nil,
+        body: QueryMonitorCreate,
         options: RequestOptions? = nil
     ) async throws -> QueryMonitor {
         return try await transport.send(
@@ -59,13 +201,15 @@ public final class QueryMonitorsNamespace: Sendable {
                 method: "POST",
                 path: "/api/org/{orgId}/query-monitors",
                 pathParameters: ["orgId": orgId?.parameterValue],
-                body: body.map { AnyEncodable($0) }
+                body: AnyEncodable(body)
             ),
             options: options
         )
     }
 
     /// Delete a query monitor
+    ///
+    /// _Requires permission: `resources:execute`._
     ///
     /// DELETE /api/org/{orgId}/query-monitors/{monitorId}
     ///
@@ -99,6 +243,8 @@ public final class QueryMonitorsNamespace: Sendable {
     /// fills it from the synced resource either way) when creating a monitor to
     /// scope the query to that resource.
     ///
+    /// _Requires permission: `resources:read`._
+    ///
     /// GET /api/org/{orgId}/query-monitors/targets
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
@@ -125,6 +271,8 @@ public final class QueryMonitorsNamespace: Sendable {
     /// the answer says whether it *would* be breaching rather than leaving the
     /// reader to compare two numbers.
     ///
+    /// _Requires permission: `resources:execute`._
+    ///
     /// POST /api/org/{orgId}/query-monitors/test
     ///
     /// Raises on 400: Bad request
@@ -133,7 +281,7 @@ public final class QueryMonitorsNamespace: Sendable {
     /// created with.
     public func test(
         orgId: String? = nil,
-        body: QueryMonitorCreate? = nil,
+        body: QueryMonitorsTestBody,
         options: RequestOptions? = nil
     ) async throws -> QueryMonitorTestResult {
         return try await transport.send(
@@ -141,7 +289,7 @@ public final class QueryMonitorsNamespace: Sendable {
                 method: "POST",
                 path: "/api/org/{orgId}/query-monitors/test",
                 pathParameters: ["orgId": orgId?.parameterValue],
-                body: body.map { AnyEncodable($0) }
+                body: AnyEncodable(body)
             ),
             options: options
         )
@@ -154,6 +302,8 @@ public final class QueryMonitorsNamespace: Sendable {
     /// the monitor: the stored breach streak was accumulated against a different
     /// question, and carrying it forward would fire an alert on the first run of
     /// a rule nobody has tested.
+    ///
+    /// _Requires permission: `resources:execute`._
     ///
     /// PATCH /api/org/{orgId}/query-monitors/{monitorId}
     ///
@@ -168,7 +318,7 @@ public final class QueryMonitorsNamespace: Sendable {
     public func update(
         orgId: String? = nil,
         monitorId: String,
-        body: QueryMonitorUpdate? = nil,
+        body: QueryMonitorUpdate,
         options: RequestOptions? = nil
     ) async throws -> QueryMonitor {
         return try await transport.send(
@@ -176,7 +326,7 @@ public final class QueryMonitorsNamespace: Sendable {
                 method: "PATCH",
                 path: "/api/org/{orgId}/query-monitors/{monitorId}",
                 pathParameters: ["orgId": orgId?.parameterValue, "monitorId": monitorId.parameterValue],
-                body: body.map { AnyEncodable($0) }
+                body: AnyEncodable(body)
             ),
             options: options
         )
@@ -193,6 +343,8 @@ public final class QueryMonitorsGetNamespace: Sendable {
     }
 
     /// List query monitors
+    ///
+    /// _Requires permission: `resources:read`._
     ///
     /// GET /api/org/{orgId}/query-monitors
     ///
@@ -213,6 +365,8 @@ public final class QueryMonitorsGetNamespace: Sendable {
     }
 
     /// Get one query monitor
+    ///
+    /// _Requires permission: `resources:read`._
     ///
     /// GET /api/org/{orgId}/query-monitors/{monitorId}
     ///

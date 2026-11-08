@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -71,7 +71,9 @@ public struct DnsRecordTarget: Codable, Hashable, Sendable {
     /// is no declaration for; not a finding. `not-analysed`: the record type
     /// carries no host target that is reasoned about (TXT, MX, SOA, CAA, SRV).
     public var classification: Classification
+    /// Set only when classification is "owned".
     public var resource: DnsTargetResource?
+    /// Set only when classification is "dangling".
     public var service: DnsTargetService?
 
     public init(

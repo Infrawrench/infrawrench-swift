@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -17,14 +17,14 @@ public struct OrgScorecardTrendPoint: Codable, Hashable, Sendable {
     /// UTC calendar day.
     public var day: String
     public var score: Int
-    public var grade: OrgScorecardGrade?
+    public var grade: OrgScorecardGrade
     /// Per-pillar scores that day. A pillar unassessed then is absent, not zero.
     public var pillars: [String: Int]
 
     public init(
         day: String,
         score: Int,
-        grade: OrgScorecardGrade? = nil,
+        grade: OrgScorecardGrade,
         pillars: [String: Int]
     ) {
         self.day = day

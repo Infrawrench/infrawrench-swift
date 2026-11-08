@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -49,6 +49,8 @@ public final class MsteamsNamespace: Sendable {
     /// Returns the Teams channels alerts can be routed to. Which alerts reach
     /// each one is decided by /alert-rules. Webhook URLs are never included.
     ///
+    /// _Requires permission: `org:settings:write`._
+    ///
     /// GET /api/org/{orgId}/msteams/status
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
@@ -72,6 +74,8 @@ public final class MsteamsNamespace: Sendable {
     /// Ignores routing rules; every channel gets the test. Fails with the error
     /// Microsoft returned when nothing could be delivered (HTTP 404 usually means
     /// the Workflow was deleted or turned off).
+    ///
+    /// _Requires permission: `org:settings:write`._
     ///
     /// POST /api/org/{orgId}/msteams/test
     ///
@@ -110,6 +114,8 @@ public final class MsteamsWebhooksNamespace: Sendable {
     /// channel routes nothing to it on its own. Responds 400 when the URL is not
     /// https or its host is not Microsoft-operated.
     ///
+    /// _Requires permission: `org:settings:write`._
+    ///
     /// POST /api/org/{orgId}/msteams/webhooks
     ///
     /// Raises on 400: Bad request
@@ -133,6 +139,8 @@ public final class MsteamsWebhooksNamespace: Sendable {
     }
 
     /// Disconnect a Teams channel
+    ///
+    /// _Requires permission: `org:settings:write`._
     ///
     /// DELETE /api/org/{orgId}/msteams/webhooks/{id}
     ///
@@ -159,6 +167,8 @@ public final class MsteamsWebhooksNamespace: Sendable {
     ///
     /// The webhook URL is immutable; remove the channel and re-add it to change
     /// it.
+    ///
+    /// _Requires permission: `org:settings:write`._
     ///
     /// PATCH /api/org/{orgId}/msteams/webhooks/{id}
     ///

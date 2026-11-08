@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -41,6 +41,10 @@ public struct PriceCatalogRow: Codable, Hashable, Sendable {
     public var price: PriceCatalogPrice
     /// `price` as a 730-hour month.
     public var monthlyAmount: Double?
+    /// Monthly amount in the org's display currency (converted at the org's
+    /// stated rate), or in the native currency when no display currency is
+    /// configured; null when there is no rate. Sorting and `maxMonthlyPrice` use
+    /// it.
     public var comparable: PriceCatalogComparable?
     /// The product's other rates in the same region.
     public var otherPrices: [PriceCatalogPrice]

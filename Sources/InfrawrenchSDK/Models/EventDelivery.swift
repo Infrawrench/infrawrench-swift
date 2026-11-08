@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -81,8 +81,7 @@ public struct EventDelivery: Codable, Hashable, Sendable {
     public var redeliveryOf: String?
     public var attempts: [EventDeliveryAttempt]
     public var createdAt: String
-    /// The envelope as sent.
-    public var payload: [String: JSONValue]
+    public var payload: JSONValue
 
     public init(
         id: String,
@@ -101,7 +100,7 @@ public struct EventDelivery: Codable, Hashable, Sendable {
         redeliveryOf: String? = nil,
         attempts: [EventDeliveryAttempt],
         createdAt: String,
-        payload: [String: JSONValue]
+        payload: JSONValue
     ) {
         self.id = id
         self.subscriptionId = subscriptionId

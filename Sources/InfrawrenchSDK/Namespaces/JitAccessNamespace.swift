@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -122,7 +122,9 @@ public final class JitAccessAccountsNamespace: Sendable {
     ///
     /// GET /api/org/{orgId}/jit-access/accounts/{accountId}/roles
     ///
-    /// Raises on 502: Provider error
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 502: JitError
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -152,7 +154,7 @@ public final class JitAccessAccountsNamespace: Sendable {
     ///
     /// GET /api/org/{orgId}/jit-access/accounts/{accountId}/scopes
     ///
-    /// Raises on 502: Provider error
+    /// Raises on 502: JitError
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -293,7 +295,9 @@ public final class JitAccessPoliciesNamespace: Sendable {
     ///
     /// GET /api/org/{orgId}/jit-access/policies/{policyId}/principal
     ///
-    /// Raises on 403: Not a requester
+    /// Raises on 401: Unauthenticated
+    ///
+    /// Raises on 403: JitError
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -318,6 +322,8 @@ public final class JitAccessPoliciesNamespace: Sendable {
     ///
     /// GET /api/org/{orgId}/jit-access/policies/{policyId}/principals
     ///
+    /// Raises on 401: Unauthenticated
+    ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
     public func principals(
@@ -325,7 +331,7 @@ public final class JitAccessPoliciesNamespace: Sendable {
         policyId: String,
         q: String? = nil,
         options: RequestOptions? = nil
-    ) async throws -> [JitPrincipalOption?] {
+    ) async throws -> [JitPrincipalOption] {
         return try await transport.send(
             RequestSpec(
                 method: "GET",
@@ -390,11 +396,15 @@ public final class JitAccessRequestsNamespace: Sendable {
     ///
     /// POST /api/org/{orgId}/jit-access/requests/{requestId}/approve
     ///
-    /// Raises on 403: Not allowed
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 401: Unauthenticated
+    ///
+    /// Raises on 403: JitError
     ///
     /// Raises on 404: Not found
     ///
-    /// Raises on 409: Already decided, timed out, or not in a state for this
+    /// Raises on 409: JitError
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -423,11 +433,15 @@ public final class JitAccessRequestsNamespace: Sendable {
     ///
     /// POST /api/org/{orgId}/jit-access/requests/{requestId}/cancel
     ///
-    /// Raises on 403: Not allowed
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 401: Unauthenticated
+    ///
+    /// Raises on 403: JitError
     ///
     /// Raises on 404: Not found
     ///
-    /// Raises on 409: Already decided, timed out, or not in a state for this
+    /// Raises on 409: JitError
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -458,11 +472,13 @@ public final class JitAccessRequestsNamespace: Sendable {
     ///
     /// POST /api/org/{orgId}/jit-access/requests
     ///
-    /// Raises on 400: Invalid
+    /// Raises on 400: JitError
     ///
-    /// Raises on 403: Not a requester under this policy
+    /// Raises on 401: Unauthenticated
     ///
-    /// Raises on 409: A pending or active request already covers this
+    /// Raises on 403: JitError
+    ///
+    /// Raises on 409: JitError
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -491,11 +507,15 @@ public final class JitAccessRequestsNamespace: Sendable {
     ///
     /// POST /api/org/{orgId}/jit-access/requests/{requestId}/deny
     ///
-    /// Raises on 403: Not allowed
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 401: Unauthenticated
+    ///
+    /// Raises on 403: JitError
     ///
     /// Raises on 404: Not found
     ///
-    /// Raises on 409: Already decided, timed out, or not in a state for this
+    /// Raises on 409: JitError
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -526,11 +546,13 @@ public final class JitAccessRequestsNamespace: Sendable {
     ///
     /// POST /api/org/{orgId}/jit-access/requests/{requestId}/extend
     ///
-    /// Raises on 400: Beyond the policy maximum
+    /// Raises on 400: JitError
     ///
-    /// Raises on 403: Not an approver
+    /// Raises on 401: Unauthenticated
     ///
-    /// Raises on 409: Not active
+    /// Raises on 403: JitError
+    ///
+    /// Raises on 409: JitError
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -556,6 +578,8 @@ public final class JitAccessRequestsNamespace: Sendable {
     /// _Requires permission: `access:read`._
     ///
     /// GET /api/org/{orgId}/jit-access/requests/{requestId}
+    ///
+    /// Raises on 401: Unauthenticated
     ///
     /// Raises on 404: Not found
     ///
@@ -585,6 +609,8 @@ public final class JitAccessRequestsNamespace: Sendable {
     /// GET /api/org/{orgId}/jit-access/requests
     ///
     /// Raises on 400: Bad request
+    ///
+    /// Raises on 401: Unauthenticated
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -618,11 +644,15 @@ public final class JitAccessRequestsNamespace: Sendable {
     ///
     /// POST /api/org/{orgId}/jit-access/requests/{requestId}/revoke
     ///
-    /// Raises on 403: Not allowed
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 401: Unauthenticated
+    ///
+    /// Raises on 403: JitError
     ///
     /// Raises on 404: Not found
     ///
-    /// Raises on 409: Already decided, timed out, or not in a state for this
+    /// Raises on 409: JitError
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.

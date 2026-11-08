@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -83,9 +83,12 @@ public struct SavingsFinding: Codable, Hashable, Sendable {
     public var resourceTypeId: String?
     public var resourceTypeName: String?
     public var tags: [String: String]
+    /// What acting on it saves per month; null when the finder has no price (and,
+    /// for orphans, when the caller lacks `costs:read`, as on `/orphans`).
     public var monthlySavings: SavingsFindingMoney?
     public var status: SavingsFindingStatus
     public var statusChangedAt: String?
+    /// Null for the initial Ready and automatic changes.
     public var statusChangedBy: SavingsFindingActor?
     public var statusNote: String?
     /// For Completed: `manual` when a person completed it, `resolved` when a scan

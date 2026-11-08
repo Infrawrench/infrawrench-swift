@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -23,6 +23,7 @@ public struct EventSubscription: Codable, Hashable, Sendable {
     /// Event types to receive (see /event-subscriptions/catalog). Empty means
     /// all.
     public var eventTypes: [String]
+    /// Lowest severity to receive. Null means every severity.
     public var minSeverity: EventSeverity?
     /// Only events about these accounts. Empty does not filter; an event with no
     /// account never matches a non-empty list.

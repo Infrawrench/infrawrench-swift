@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -20,13 +20,13 @@ public struct CostScenarioModelInput: Codable, Hashable, Sendable {
     /// mixed two would produce a projection that is the sum of two kinds of
     /// money, so this is refused rather than converted behind the caller's back.
     public var currency: String
-    public var adjustments: [CostScenarioAdjustment]
+    public var adjustments: [CostScenarioAdjustment]?
 
     public init(
         name: String,
         description: String? = nil,
         currency: String,
-        adjustments: [CostScenarioAdjustment]
+        adjustments: [CostScenarioAdjustment]? = nil
     ) {
         self.name = name
         self.description = description

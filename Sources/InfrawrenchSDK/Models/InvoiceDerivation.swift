@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -204,6 +204,7 @@ public struct InvoiceDerivation: Codable, Hashable, Sendable {
     /// Every rule or setting that moved money, in pipeline order, with its total
     /// per currency: the per-invoice answer to which rule changed what.
     public var effects: [PricingEffect]?
+    /// How much in-scope usage was re-rated from a list price. Null when off.
     public var rerateCoverage: RerateCoverage?
     public var warnings: [String]?
     public var expressionFailures: [PricingExpressionFailure]?

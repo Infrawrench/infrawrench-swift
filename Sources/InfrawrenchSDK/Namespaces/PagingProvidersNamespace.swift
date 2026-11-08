@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -31,6 +31,8 @@ public final class PagingProvidersNamespace: Sendable {
     /// failure is reported per account in `error` rather than failing the
     /// response.
     ///
+    /// _Requires permission: `org:settings:write`._
+    ///
     /// GET /api/org/{orgId}/paging-providers/destinations
     ///
     /// Raises on 400: Bad request
@@ -48,10 +50,9 @@ public final class PagingProvidersNamespace: Sendable {
     ///
     /// Raises on 500: Server error
     ///
-    /// Raises on 503: A backing service this endpoint depends on is not available
+    /// Raises on 502: Bad gateway: an upstream service failed
     ///
-    /// Raises on reauth: Recent sign-in required. Send the user through sign-in
-    /// again and retry; the request itself was well-formed.
+    /// Raises on 503: A backing service this endpoint depends on is not available
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -75,6 +76,8 @@ public final class PagingProvidersNamespace: Sendable {
     /// and its resolution are one alert upstream. `pendingAction` is set while a
     /// send is queued or being retried.
     ///
+    /// _Requires permission: `org:settings:write`._
+    ///
     /// GET /api/org/{orgId}/paging-providers/events
     ///
     /// Raises on 400: Bad request
@@ -92,10 +95,9 @@ public final class PagingProvidersNamespace: Sendable {
     ///
     /// Raises on 500: Server error
     ///
-    /// Raises on 503: A backing service this endpoint depends on is not available
+    /// Raises on 502: Bad gateway: an upstream service failed
     ///
-    /// Raises on reauth: Recent sign-in required. Send the user through sign-in
-    /// again and retry; the request itself was well-formed.
+    /// Raises on 503: A backing service this endpoint depends on is not available
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -117,6 +119,8 @@ public final class PagingProvidersNamespace: Sendable {
 
     /// List paging provider accounts and their settings
     ///
+    /// _Requires permission: `org:settings:write`._
+    ///
     /// GET /api/org/{orgId}/paging-providers
     ///
     /// Raises on 400: Bad request
@@ -134,10 +138,9 @@ public final class PagingProvidersNamespace: Sendable {
     ///
     /// Raises on 500: Server error
     ///
-    /// Raises on 503: A backing service this endpoint depends on is not available
+    /// Raises on 502: Bad gateway: an upstream service failed
     ///
-    /// Raises on reauth: Recent sign-in required. Send the user through sign-in
-    /// again and retry; the request itself was well-formed.
+    /// Raises on 503: A backing service this endpoint depends on is not available
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -162,6 +165,8 @@ public final class PagingProvidersNamespace: Sendable {
     /// mirrored incidents. A webhook that cannot be subscribed is reported in
     /// `warning` and mirroring falls back to reconciling on a timer.
     ///
+    /// _Requires permission: `org:settings:write`._
+    ///
     /// PUT /api/org/{orgId}/paging-providers/{accountId}/settings
     ///
     /// Raises on 400: Bad request
@@ -179,10 +184,9 @@ public final class PagingProvidersNamespace: Sendable {
     ///
     /// Raises on 500: Server error
     ///
-    /// Raises on 503: A backing service this endpoint depends on is not available
+    /// Raises on 502: Bad gateway: an upstream service failed
     ///
-    /// Raises on reauth: Recent sign-in required. Send the user through sign-in
-    /// again and retry; the request itself was well-formed.
+    /// Raises on 503: A backing service this endpoint depends on is not available
     ///
     /// - Parameter orgId: Defaults to the `orgId` the client was created with.
     ///
@@ -190,7 +194,7 @@ public final class PagingProvidersNamespace: Sendable {
     public func settings(
         orgId: String? = nil,
         accountId: String,
-        body: PagingProviderSettingsInput? = nil,
+        body: PagingProviderSettingsInput,
         options: RequestOptions? = nil
     ) async throws -> PagingProviderSettingsResult {
         return try await transport.send(
@@ -198,13 +202,15 @@ public final class PagingProvidersNamespace: Sendable {
                 method: "PUT",
                 path: "/api/org/{orgId}/paging-providers/{accountId}/settings",
                 pathParameters: ["orgId": orgId?.parameterValue, "accountId": accountId.parameterValue],
-                body: body.map { AnyEncodable($0) }
+                body: AnyEncodable(body)
             ),
             options: options
         )
     }
 
     /// Reconcile an account's incidents now
+    ///
+    /// _Requires permission: `org:settings:write`._
     ///
     /// POST /api/org/{orgId}/paging-providers/{accountId}/sync
     ///
@@ -223,10 +229,9 @@ public final class PagingProvidersNamespace: Sendable {
     ///
     /// Raises on 500: Server error
     ///
-    /// Raises on 503: A backing service this endpoint depends on is not available
+    /// Raises on 502: Bad gateway: an upstream service failed
     ///
-    /// Raises on reauth: Recent sign-in required. Send the user through sign-in
-    /// again and retry; the request itself was well-formed.
+    /// Raises on 503: A backing service this endpoint depends on is not available
     ///
     /// - Parameter orgId: Defaults to the `orgId` the client was created with.
     ///
@@ -262,6 +267,8 @@ public final class PagingProvidersOnCallNamespace: Sendable {
     /// organization member by email; `memberUserId` is null for somebody who is
     /// on call upstream but not a member here.
     ///
+    /// _Requires permission: `team:read`._
+    ///
     /// GET /api/org/{orgId}/paging-providers/{accountId}/on-call/{sourceId}
     ///
     /// Raises on 400: Bad request
@@ -279,10 +286,9 @@ public final class PagingProvidersOnCallNamespace: Sendable {
     ///
     /// Raises on 500: Server error
     ///
-    /// Raises on 503: A backing service this endpoint depends on is not available
+    /// Raises on 502: Bad gateway: an upstream service failed
     ///
-    /// Raises on reauth: Recent sign-in required. Send the user through sign-in
-    /// again and retry; the request itself was well-formed.
+    /// Raises on 503: A backing service this endpoint depends on is not available
     ///
     /// - Parameter orgId: Defaults to the `orgId` the client was created with.
     ///

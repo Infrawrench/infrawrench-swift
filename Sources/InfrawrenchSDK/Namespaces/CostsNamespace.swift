@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -56,10 +56,10 @@ public struct CostsAnomaliesGetResult: Codable, Hashable, Sendable {
 }
 
 public struct CostsAnomalySuppressionsGetResult: Codable, Hashable, Sendable {
-    public var suppressions: [CostAnomalySuppression?]
+    public var suppressions: [CostAnomalySuppression]
 
     public init(
-        suppressions: [CostAnomalySuppression?]
+        suppressions: [CostAnomalySuppression]
     ) {
         self.suppressions = suppressions
     }
@@ -529,6 +529,8 @@ public final class CostsAnomaliesNamespace: Sendable {
     /// again on a later day, that is a new anomaly and it is detected and alerted
     /// on as normal.
     ///
+    /// _Requires permission: `costs:write`._
+    ///
     /// POST /api/org/{orgId}/costs/anomalies/{anomalyId}/acknowledge
     ///
     /// Raises on 400: Bad request
@@ -770,6 +772,8 @@ public final class CostsAnomalySuppressionsNamespace: Sendable {
     ///
     /// Raises on 400: Bad request
     ///
+    /// Raises on 404: Not found
+    ///
     /// Raises on 409: Conflict
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
@@ -778,7 +782,7 @@ public final class CostsAnomalySuppressionsNamespace: Sendable {
         orgId: String? = nil,
         body: CostAnomalySuppressionInput,
         options: RequestOptions? = nil
-    ) async throws -> CostAnomalySuppression? {
+    ) async throws -> CostAnomalySuppression {
         return try await transport.send(
             RequestSpec(
                 method: "POST",
@@ -859,7 +863,7 @@ public final class CostsAnomalySuppressionsNamespace: Sendable {
         orgId: String? = nil,
         suppressionId: String,
         options: RequestOptions? = nil
-    ) async throws -> CostAnomalySuppression? {
+    ) async throws -> CostAnomalySuppression {
         return try await transport.send(
             RequestSpec(
                 method: "GET",
@@ -882,6 +886,8 @@ public final class CostsAnomalySuppressionsNamespace: Sendable {
     ///
     /// Raises on 404: Not found
     ///
+    /// Raises on 409: Conflict
+    ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
     public func update(
@@ -889,7 +895,7 @@ public final class CostsAnomalySuppressionsNamespace: Sendable {
         suppressionId: String,
         body: CostAnomalySuppressionInput,
         options: RequestOptions? = nil
-    ) async throws -> CostAnomalySuppression? {
+    ) async throws -> CostAnomalySuppression {
         return try await transport.send(
             RequestSpec(
                 method: "PUT",

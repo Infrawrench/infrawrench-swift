@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -112,6 +112,77 @@ public struct UnitCostExportRequest: Codable, Hashable, Sendable {
         }
     }
 
+    public enum ChargeType: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
+        case usage
+        case commitmentCoveredUsage
+        case commitmentFee
+        case commitmentDiscount
+        case credit
+        case tax
+        case refund
+        case adjustment
+        case support
+        case other
+        /// A value the API added after this SDK was generated. Kept rather than
+        /// rejected, so a new server-side value cannot break decoding.
+        case unrecognized(String)
+
+        public init(rawValue: String) {
+            switch rawValue {
+            case "usage": self = .usage
+            case "commitment_covered_usage": self = .commitmentCoveredUsage
+            case "commitment_fee": self = .commitmentFee
+            case "commitment_discount": self = .commitmentDiscount
+            case "credit": self = .credit
+            case "tax": self = .tax
+            case "refund": self = .refund
+            case "adjustment": self = .adjustment
+            case "support": self = .support
+            case "other": self = .other
+            default: self = .unrecognized(rawValue)
+            }
+        }
+
+        public var rawValue: String {
+            switch self {
+            case .usage: return "usage"
+            case .commitmentCoveredUsage: return "commitment_covered_usage"
+            case .commitmentFee: return "commitment_fee"
+            case .commitmentDiscount: return "commitment_discount"
+            case .credit: return "credit"
+            case .tax: return "tax"
+            case .refund: return "refund"
+            case .adjustment: return "adjustment"
+            case .support: return "support"
+            case .other: return "other"
+            case .unrecognized(let value): return value
+            }
+        }
+
+        /// Every value the spec declares. `unrecognized` is deliberately absent.
+        public static let allKnownCases: [ChargeType] = [
+            .usage,
+            .commitmentCoveredUsage,
+            .commitmentFee,
+            .commitmentDiscount,
+            .credit,
+            .tax,
+            .refund,
+            .adjustment,
+            .support,
+            .other,
+        ]
+
+        public init(from decoder: any Decoder) throws {
+            self.init(rawValue: try decoder.singleValueContainer().decode(String.self))
+        }
+
+        public func encode(to encoder: any Encoder) throws {
+            var container = encoder.singleValueContainer()
+            try container.encode(rawValue)
+        }
+    }
+
     public enum Format: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
         case csv
         case ndjson
@@ -174,7 +245,7 @@ public struct UnitCostExportRequest: Codable, Hashable, Sendable {
     public var query: String?
     public var savedFilterId: String?
     public var costBasis: CostBasis2?
-    public var chargeTypes: [String]?
+    public var chargeTypes: [ChargeType]?
     /// Fold spend currencies the organization holds a rate for into this one
     /// before dividing. Ignored for `margin`, which always converts to the
     /// metric's own currency.
@@ -195,7 +266,7 @@ public struct UnitCostExportRequest: Codable, Hashable, Sendable {
         query: String? = nil,
         savedFilterId: String? = nil,
         costBasis: CostBasis2? = nil,
-        chargeTypes: [String]? = nil,
+        chargeTypes: [ChargeType]? = nil,
         displayCurrency: String? = nil,
         format: Format? = nil
     ) {

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -44,6 +44,8 @@ public final class DigestNamespace: Sendable {
     /// The response also carries the outcome of the most recent delivery attempt
     /// so a silently failing digest is visible.
     ///
+    /// _Requires permission: `org:settings:write`._
+    ///
     /// GET /api/org/{orgId}/digest
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
@@ -69,6 +71,8 @@ public final class DigestNamespace: Sendable {
     /// recipient. This is also the manual recovery for a partial delivery, which
     /// is never retried automatically. Fails when nothing is routed to receive
     /// the digest, or when every destination rejected it.
+    ///
+    /// _Requires permission: `org:settings:write`._
     ///
     /// POST /api/org/{orgId}/digest/send
     ///
@@ -98,6 +102,8 @@ public final class DigestNamespace: Sendable {
     /// so the reported window is always the organization's own local
     /// Monday-to-Sunday week. Changing the schedule clears any parked failure
     /// state but never replays a week that already went out.
+    ///
+    /// _Requires permission: `org:settings:write`._
     ///
     /// PUT /api/org/{orgId}/digest
     ///
@@ -136,6 +142,8 @@ public final class DigestRecipientsNamespace: Sendable {
     /// Adding an address the organization already has is a no-op that returns the
     /// existing entry, so a double submit cannot double-deliver.
     ///
+    /// _Requires permission: `org:settings:write`._
+    ///
     /// POST /api/org/{orgId}/digest/recipients
     ///
     /// Raises on 400: Bad request
@@ -159,6 +167,8 @@ public final class DigestRecipientsNamespace: Sendable {
     }
 
     /// Remove a digest email recipient
+    ///
+    /// _Requires permission: `org:settings:write`._
     ///
     /// DELETE /api/org/{orgId}/digest/recipients/{recipientId}
     ///
@@ -189,6 +199,8 @@ public final class DigestRecipientsNamespace: Sendable {
     /// organization-level address list rather than a per-channel trigger.
     /// Addresses need not belong to Infrawrench users; a finance alias is a valid
     /// recipient.
+    ///
+    /// _Requires permission: `org:settings:write`._
     ///
     /// GET /api/org/{orgId}/digest/recipients
     ///

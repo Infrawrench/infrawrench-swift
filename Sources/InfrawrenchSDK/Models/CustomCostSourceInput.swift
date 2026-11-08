@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -18,8 +18,6 @@ public struct CustomCostSourceInput: Codable, Hashable, Sendable {
     /// name in every cost report; renaming relabels the source's whole history.
     public var name: String
     public var description: String?
-    /// ISO 4217 code applied to rows whose file has no currency column. Null
-    /// means every file must carry one.
     public var defaultCurrency: String?
 
     public init(

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -96,17 +96,11 @@ public final class ComplianceNamespace: Sendable {
     /// created with.
     ///
     /// - Parameter framework: Framework registry id: `soc2` or `iso27001`.
-    ///
-    /// - Parameter from: First day of the period (UTC). Defaults to 90 days
-    /// before `to`.
-    ///
-    /// - Parameter to: Last day of the period, inclusive (UTC). Defaults to
-    /// today.
     public func get(
         orgId: String? = nil,
         framework: String,
-        from: String? = nil,
-        to: String? = nil,
+        from: JSONValue? = nil,
+        to: JSONValue? = nil,
         options: RequestOptions? = nil
     ) async throws -> ComplianceStatus {
         return try await transport.send(
@@ -140,17 +134,11 @@ public final class ComplianceNamespace: Sendable {
     /// created with.
     ///
     /// - Parameter framework: Framework registry id: `soc2` or `iso27001`.
-    ///
-    /// - Parameter from: First day of the period (UTC). Defaults to 90 days
-    /// before `to`.
-    ///
-    /// - Parameter to: Last day of the period, inclusive (UTC). Defaults to
-    /// today.
     public func pack(
         orgId: String? = nil,
         framework: String,
-        from: String? = nil,
-        to: String? = nil,
+        from: JSONValue? = nil,
+        to: JSONValue? = nil,
         options: RequestOptions? = nil
     ) async throws -> Data {
         return try await transport.sendData(
@@ -179,6 +167,8 @@ public final class ComplianceControlsNamespace: Sendable {
     /// _Requires permission: `org:settings:write`._
     ///
     /// DELETE /api/org/{orgId}/compliance/controls/{frameworkId}/{controlId}
+    ///
+    /// Raises on 400: Bad request
     ///
     /// Raises on 404: Not found
     ///
@@ -211,6 +201,8 @@ public final class ComplianceControlsNamespace: Sendable {
     ///
     /// GET /api/org/{orgId}/compliance/controls
     ///
+    /// Raises on 400: Bad request
+    ///
     /// Raises on 404: Not found
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
@@ -238,6 +230,8 @@ public final class ComplianceControlsNamespace: Sendable {
     /// _Requires permission: `audit:read`._
     ///
     /// GET /api/org/{orgId}/compliance/controls/{frameworkId}/{controlId}
+    ///
+    /// Raises on 400: Bad request
     ///
     /// Raises on 404: Not found
     ///
@@ -345,6 +339,8 @@ public final class ComplianceSchedulesNamespace: Sendable {
     ///
     /// DELETE /api/org/{orgId}/compliance/schedules/{id}
     ///
+    /// Raises on 400: Bad request
+    ///
     /// Raises on 404: Not found
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
@@ -369,6 +365,8 @@ public final class ComplianceSchedulesNamespace: Sendable {
     /// _Requires permission: `audit:read`._
     ///
     /// GET /api/org/{orgId}/compliance/schedules/{id}
+    ///
+    /// Raises on 400: Bad request
     ///
     /// Raises on 404: Not found
     ///

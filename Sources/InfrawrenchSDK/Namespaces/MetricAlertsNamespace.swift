@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -28,6 +28,8 @@ public final class MetricAlertsNamespace: Sendable {
     /// id list, so a rule automatically covers resources created after it was
     /// written. The poller evaluates enabled rules about once a minute and alerts
     /// when the condition held for the whole trailing window.
+    ///
+    /// _Requires permission: `metric-alerts:write`._
     ///
     /// POST /api/org/{orgId}/metric-alerts
     ///
@@ -56,6 +58,8 @@ public final class MetricAlertsNamespace: Sendable {
     /// Soft delete. The rule's firing history stays readable via
     /// /metric-alerts/events.
     ///
+    /// _Requires permission: `metric-alerts:write`._
+    ///
     /// DELETE /api/org/{orgId}/metric-alerts/{id}
     ///
     /// Raises on 404: Not found
@@ -78,6 +82,8 @@ public final class MetricAlertsNamespace: Sendable {
     }
 
     /// Recent metric alert firings
+    ///
+    /// _Requires permission: `metric-alerts:read`._
     ///
     /// GET /api/org/{orgId}/metric-alerts/events
     ///
@@ -102,6 +108,8 @@ public final class MetricAlertsNamespace: Sendable {
 
     /// Get a metric alert rule
     ///
+    /// _Requires permission: `metric-alerts:read`._
+    ///
     /// GET /api/org/{orgId}/metric-alerts/{id}
     ///
     /// Raises on 404: Not found
@@ -124,6 +132,8 @@ public final class MetricAlertsNamespace: Sendable {
     }
 
     /// List metric alert rules with live firing status
+    ///
+    /// _Requires permission: `metric-alerts:read`._
     ///
     /// GET /api/org/{orgId}/metric-alerts
     ///
@@ -149,6 +159,8 @@ public final class MetricAlertsNamespace: Sendable {
     /// narrowed to one plugin and resource type; what the rule builder's metric
     /// picker is fed from.
     ///
+    /// _Requires permission: `metric-alerts:read`._
+    ///
     /// GET /api/org/{orgId}/metric-alerts/metric-keys
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
@@ -172,6 +184,8 @@ public final class MetricAlertsNamespace: Sendable {
 
     /// List what the organization's resources offer to select on
     ///
+    /// _Requires permission: `metric-alerts:read`._
+    ///
     /// GET /api/org/{orgId}/metric-alerts/selector-options
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
@@ -191,6 +205,8 @@ public final class MetricAlertsNamespace: Sendable {
     }
 
     /// Preview which resources a selector matches right now
+    ///
+    /// _Requires permission: `metric-alerts:read`._
     ///
     /// GET /api/org/{orgId}/metric-alerts/selector-preview
     ///
@@ -218,6 +234,8 @@ public final class MetricAlertsNamespace: Sendable {
     }
 
     /// Update a metric alert rule
+    ///
+    /// _Requires permission: `metric-alerts:write`._
     ///
     /// PUT /api/org/{orgId}/metric-alerts/{id}
     ///

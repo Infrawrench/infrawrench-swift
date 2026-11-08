@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -145,6 +145,8 @@ public struct AccessPrincipal: Codable, Hashable, Sendable {
     public var mfa: Bool?
     /// The principal this one hangs off; a key's owner, a binding's subject.
     public var parent: String?
+    /// Who owns the resource, from the resource-ownership record. Null when
+    /// nobody is named.
     public var owner: AccessPrincipalOwner?
     /// The plugin action that revokes this principal, when the type declares one.
     /// Dispatch it through POST /resources/invoke-action; null means the provider

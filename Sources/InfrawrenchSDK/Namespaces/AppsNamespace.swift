@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -28,6 +28,8 @@ public final class AppsNamespace: Sendable {
     /// missing, plus the packages and commands that would fix it. A POST because
     /// it opens a connection to the named host and must never be cached; its
     /// whole value is saying what the host is now.
+    ///
+    /// _Requires permission: `resources:execute`._
     ///
     /// POST /api/org/{orgId}/apps/check
     ///
@@ -70,14 +72,17 @@ public final class AppsNamespace: Sendable {
     /// as `{"error":"…"}` inside the stream, because the status line has already
     /// been sent by then.
     ///
+    /// _Requires permission: `resources:execute`._
+    ///
     /// POST /api/org/{orgId}/apps/setup
     ///
     /// Raises on 400: Bad request
     ///
     /// Raises on 404: Not found
     ///
-    /// Raises on 409: A change freeze is in effect, or the host key needs
-    /// trusting
+    /// Raises on 423: Blocked by an active change freeze. Retry with the
+    /// `x-change-freeze-override: true` header if you hold `freezes:override`;
+    /// both blocks and overrides are audit-logged.
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.

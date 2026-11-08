@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -24,9 +24,13 @@ public struct Invoice: Codable, Hashable, Sendable {
     public var periodFrom: String
     public var periodTo: String
     public var currency: String
-    public var totals: InvoiceTotals?
+    public var totals: InvoiceTotals
     public var issuedAt: String?
     public var sentAt: String?
+    /// The last delivery attempt, or null when none has been made; including on
+    /// an invoice marked sent by a deployment with no mail provider. “A person
+    /// released this” and “we delivered it” are different claims, and this field
+    /// is only ever the second.
     public var delivery: InvoiceDelivery?
     public var voidedAt: String?
     public var voidReason: String?
@@ -37,6 +41,8 @@ public struct Invoice: Codable, Hashable, Sendable {
     public var notes: String?
     public var lines: [InvoiceLine]
     public var derivation: InvoiceDerivation
+    /// Addressee, recipients, terms and remittance details. Null on invoices
+    /// approved before billing profiles existed.
     public var billing: InvoiceBilling?
     /// True when the figures in this response were recomputed for it; true for a
     /// draft, false for everything else. Say so: “these numbers will move” and
@@ -58,7 +64,7 @@ public struct Invoice: Codable, Hashable, Sendable {
         periodFrom: String,
         periodTo: String,
         currency: String,
-        totals: InvoiceTotals? = nil,
+        totals: InvoiceTotals,
         issuedAt: String? = nil,
         sentAt: String? = nil,
         delivery: InvoiceDelivery? = nil,

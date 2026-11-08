@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -52,6 +52,8 @@ public final class SavingsNamespace: Sendable {
     /// as restated billing lands. Days collection has not covered are not
     /// accrued. Per-currency throughout; never converted or merged.
     ///
+    /// _Requires permission: `costs:read`._
+    ///
     /// GET /api/org/{orgId}/savings/realized
     ///
     /// Raises on 400: Bad request
@@ -98,6 +100,8 @@ public final class SavingsEventsNamespace: Sendable {
     /// Record a saving by hand, with the monthly amount and the day it began.
     /// Leaves an org-wide cost annotation on that day. Requires `costs:write`.
     ///
+    /// _Requires permission: `costs:write`._
+    ///
     /// POST /api/org/{orgId}/savings/events
     ///
     /// Raises on 400: Bad request
@@ -124,6 +128,8 @@ public final class SavingsEventsNamespace: Sendable {
     ///
     /// Hard delete, together with the cost annotation the event left on the
     /// charts.
+    ///
+    /// _Requires permission: `costs:write`._
     ///
     /// DELETE /api/org/{orgId}/savings/events/{id}
     ///
@@ -162,6 +168,8 @@ public final class SavingsEventsUpdateNamespace: Sendable {
     /// override, or an end date. The facts of an automatic event (what was done,
     /// when, the projection) stay as observed.
     ///
+    /// _Requires permission: `costs:write`._
+    ///
     /// PATCH /api/org/{orgId}/savings/events/{id}
     ///
     /// Raises on 400: Bad request
@@ -190,6 +198,8 @@ public final class SavingsEventsUpdateNamespace: Sendable {
     /// Rewrite a manual saving
     ///
     /// Full replace of a manual entry. Automatic events are a 400; use PATCH.
+    ///
+    /// _Requires permission: `costs:write`._
     ///
     /// PUT /api/org/{orgId}/savings/events/{id}
     ///
@@ -250,7 +260,7 @@ public final class SavingsFindingsNamespace: Sendable {
     /// - Parameter view: Apply a saved view, by id or name. Explicit params
     /// override it.
     ///
-    /// - Parameter status: A status, `open` (Ready or In progress), or `all`.
+    /// - Parameter status: Status tab. Defaults to `all` (or the view's).
     ///
     /// - Parameter kind: Comma-separated finding kinds.
     ///
@@ -286,7 +296,7 @@ public final class SavingsFindingsNamespace: Sendable {
         provider: String? = nil,
         account: String? = nil,
         region: String? = nil,
-        tag: String? = nil,
+        tag: [String]? = nil,
         minSavings: String? = nil,
         detectedFrom: String? = nil,
         detectedTo: String? = nil,
@@ -354,6 +364,8 @@ public final class SavingsSettingsNamespace: Sendable {
     /// The org's horizon, shortfall threshold and baseline window; defaults when
     /// never saved.
     ///
+    /// _Requires permission: `costs:read`._
+    ///
     /// GET /api/org/{orgId}/savings/settings
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
@@ -375,6 +387,8 @@ public final class SavingsSettingsNamespace: Sendable {
     /// Update realized savings settings
     ///
     /// Requires `costs:write`. Changes every figure in the report, retroactively.
+    ///
+    /// _Requires permission: `costs:write`._
     ///
     /// PUT /api/org/{orgId}/savings/settings
     ///

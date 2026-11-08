@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -16,25 +16,16 @@ import Foundation
 public struct BillingProfileInput: Codable, Hashable, Sendable {
     /// What the profile is called in pickers. Not printed on the invoice.
     public var name: String
-    /// The legal entity invoices are addressed to. Null leaves each customer's
-    /// name.
     public var legalName: String?
-    /// Printed under the legal name. Null leaves each customer's billing address.
     public var address: String?
-    /// Tax ID or VAT number.
     public var taxId: String?
-    /// Purchase-order reference.
     public var poNumber: String?
     /// Addresses invoices are emailed to, **in addition to** each customer's own
     /// contact email.
     public var toEmails: [String]?
     /// Addresses that receive a copy. Each address gets its own message.
     public var ccEmails: [String]?
-    /// ISO 4217. When set, invoices for every assigned customer are issued in
-    /// this currency instead of the customer's billing currency.
     public var currency: String?
-    /// Net N days from the issue date. Null prints no due date; 0 is due on
-    /// receipt.
     public var paymentTermsDays: Int?
     /// Starts with a letter; letters, digits and hyphens. Defaults to `INV`.
     /// Profiles sharing a prefix share a sequence.
@@ -47,11 +38,7 @@ public struct BillingProfileInput: Codable, Hashable, Sendable {
     public var numberStart: Int?
     public var taxRates: [BillingProfileTaxRate]?
     public var bank: BillingProfileBankInput?
-    /// Printed at the bottom of every page of the PDF.
     public var footer: String?
-    /// A PNG or JPEG `data:` URL of at most 100 KB, printed at the top of the
-    /// PDF. Interlaced and 16-bit PNGs and CMYK JPEGs are refused. Absent on
-    /// update leaves the saved logo; null removes it.
     public var logo: String?
 
     public init(

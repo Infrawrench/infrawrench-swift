@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -106,12 +106,12 @@ public struct SloUpdate: Codable, Hashable, Sendable {
 
     /// Unique in the organization; at most 120 characters.
     public var name: String?
-    /// At most 500 characters.
-    public var description: String?
     /// Where the SLI comes from: a synthetic probe's success ratio, the share of
     /// a probe's checks at or under a latency threshold, or the share of minutes
     /// a resource's metric series satisfies a comparison.
     public var sliKind: SliKind?
+    /// At most 500 characters.
+    public var description: String?
     /// `probe_*`: the synthetic probe the SLI is read from.
     public var probeId: String?
     /// `probe_latency`: a check is good at or under this many ms (1-60000).
@@ -121,8 +121,6 @@ public struct SloUpdate: Codable, Hashable, Sendable {
     /// `metric_threshold`: the series label as the resource reports it, e.g. "CPU
     /// %".
     public var metricKey: String?
-    /// `metric_threshold` only: a minute is good when `value <comparator>
-    /// threshold`.
     public var comparator: Comparator?
     /// `metric_threshold`: the comparison's right side.
     public var threshold: Double?
@@ -136,8 +134,8 @@ public struct SloUpdate: Codable, Hashable, Sendable {
 
     public init(
         name: String? = nil,
-        description: String? = nil,
         sliKind: SliKind? = nil,
+        description: String? = nil,
         probeId: String? = nil,
         latencyThresholdMs: Int? = nil,
         resourceId: String? = nil,
@@ -151,8 +149,8 @@ public struct SloUpdate: Codable, Hashable, Sendable {
         enabled: Bool? = nil
     ) {
         self.name = name
-        self.description = description
         self.sliKind = sliKind
+        self.description = description
         self.probeId = probeId
         self.latencyThresholdMs = latencyThresholdMs
         self.resourceId = resourceId

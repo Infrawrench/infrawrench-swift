@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -12,31 +12,6 @@
  * marked x-internal.
  */
 import Foundation
-
-public struct AccountsCreateBody: Codable, Hashable, Sendable {
-    public var pluginId: PluginId?
-    public var displayName: String
-    /// An `__oauth` key may only carry the sealed grant returned by the provider
-    /// OAuth callback (for this organization, the calling user and this plugin,
-    /// within 30 minutes) or the redacted grant `GET .../credentials` returned,
-    /// which counts as no grant (the stored one is kept while the token is
-    /// unchanged). Any other value is rejected with 400.
-    public var credentials: [String: String]
-    /// Optional bastion id to route this account's cloud API traffic through.
-    public var bastionId: String?
-
-    public init(
-        pluginId: PluginId? = nil,
-        displayName: String,
-        credentials: [String: String],
-        bastionId: String? = nil
-    ) {
-        self.pluginId = pluginId
-        self.displayName = displayName
-        self.credentials = credentials
-        self.bastionId = bastionId
-    }
-}
 
 public struct AccountsCredentialsUpdateBody: Codable, Hashable, Sendable {
     /// Complete credentials map. Sensitive fields the caller doesn't want to
@@ -107,7 +82,7 @@ public final class AccountsNamespace: Sendable {
     /// created with.
     public func create(
         orgId: String? = nil,
-        body: AccountsCreateBody,
+        body: CreateAccountRequest,
         options: RequestOptions? = nil
     ) async throws -> CreateAccountResponse {
         return try await transport.send(

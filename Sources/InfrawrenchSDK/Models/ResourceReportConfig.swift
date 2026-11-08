@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -18,7 +18,7 @@ public struct ResourceReportConfig: Codable, Hashable, Sendable {
     public var filters: ResourceReportFilters
     /// Shown columns, in display order.
     public var columns: [String]
-    public var sort: ResourceReportSort?
+    public var sort: JSONValue
     public var costRange: CostDateRange
     public var costBasis: CostBasis
     public var pageSize: Int
@@ -27,7 +27,7 @@ public struct ResourceReportConfig: Codable, Hashable, Sendable {
         version: Double,
         filters: ResourceReportFilters,
         columns: [String],
-        sort: ResourceReportSort? = nil,
+        sort: JSONValue,
         costRange: CostDateRange,
         costBasis: CostBasis,
         pageSize: Int

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -48,6 +48,8 @@ public final class BackupsNamespace: Sendable {
     /// Orphaned backups carry a trailing-30-day spend quote when billing data is
     /// available.
     ///
+    /// _Requires permission: `resources:read`._
+    ///
     /// GET /api/org/{orgId}/backups
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
@@ -87,9 +89,13 @@ public final class BackupsDrillsNamespace: Sendable {
     /// reporting what you did, and the person who spent Saturday restoring a
     /// database is rarely the person who set the recovery objective.
     ///
+    /// _Requires permission: `resources:write`._
+    ///
     /// POST /api/org/{orgId}/backups/drills
     ///
     /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -114,6 +120,8 @@ public final class BackupsDrillsNamespace: Sendable {
     /// For one recorded against the wrong resource or the wrong date. Audited:
     /// deleting evidence that a restore failed is exactly the edit a reviewer
     /// would want to know about.
+    ///
+    /// _Requires permission: `resources:write`._
     ///
     /// DELETE /api/org/{orgId}/backups/drills/{drillId}
     ///
@@ -147,6 +155,8 @@ public final class BackupsDrillsNamespace: Sendable {
     /// with production, and cannot be generically verified. What the product can
     /// do is make the exercise scheduled, recorded and visible when it lapses.
     ///
+    /// _Requires permission: `resources:read`._
+    ///
     /// GET /api/org/{orgId}/backups/drills
     ///
     /// Raises on 400: Bad request
@@ -173,6 +183,8 @@ public final class BackupsDrillsNamespace: Sendable {
     }
 
     /// List recorded restore drills
+    ///
+    /// _Requires permission: `resources:read`._
     ///
     /// GET /api/org/{orgId}/backups/drills/log
     ///
@@ -211,9 +223,13 @@ public final class BackupsPoliciesNamespace: Sendable {
     /// protection while providing none. An empty `resourceTypeIds` selects every
     /// stateful resource type.
     ///
+    /// _Requires permission: `org:settings:write`._
+    ///
     /// POST /api/org/{orgId}/backups/policies
     ///
     /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
     ///
     /// Raises on 409: Conflict
     ///
@@ -239,6 +255,8 @@ public final class BackupsPoliciesNamespace: Sendable {
     ///
     /// Removes the objective. To stop a policy judging without losing it, set
     /// `enabled` to false instead.
+    ///
+    /// _Requires permission: `org:settings:write`._
     ///
     /// DELETE /api/org/{orgId}/backups/policies/{policyId}
     ///
@@ -267,6 +285,8 @@ public final class BackupsPoliciesNamespace: Sendable {
     /// resources by type and/or tag and demands a maximum RPO, a minimum
     /// retention, or both.
     ///
+    /// _Requires permission: `resources:read`._
+    ///
     /// GET /api/org/{orgId}/backups/policies
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
@@ -292,11 +312,15 @@ public final class BackupsPoliciesNamespace: Sendable {
     /// after merging, so a patch that would leave the policy demanding nothing is
     /// rejected.
     ///
+    /// _Requires permission: `org:settings:write`._
+    ///
     /// PATCH /api/org/{orgId}/backups/policies/{policyId}
     ///
     /// Raises on 400: Bad request
     ///
     /// Raises on 404: Not found
+    ///
+    /// Raises on 409: Conflict
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.

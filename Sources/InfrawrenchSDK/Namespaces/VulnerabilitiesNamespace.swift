@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -41,6 +41,8 @@ public final class VulnerabilitiesNamespace: Sendable {
     /// `serviceId` and `resourceId` narrow the findings (and `dismissed`) to
     /// those running there and recompute the counts; `sources` always describes
     /// every scanner.
+    ///
+    /// _Requires permission: `resources:read`._
     ///
     /// GET /api/org/{orgId}/vulnerabilities
     ///
@@ -87,6 +89,8 @@ public final class VulnerabilitiesDismissalsNamespace: Sendable {
     /// repository, so it survives rebuilds) or, with `artifactKey: "*"`,
     /// everywhere. Idempotent.
     ///
+    /// _Requires permission: `resources:write`._
+    ///
     /// POST /api/org/{orgId}/vulnerabilities/dismissals
     ///
     /// Raises on 400: Bad request
@@ -112,6 +116,8 @@ public final class VulnerabilitiesDismissalsNamespace: Sendable {
     /// Restore a dismissed vulnerability
     ///
     /// The key is in the query string because artifact keys contain slashes.
+    ///
+    /// _Requires permission: `resources:write`._
     ///
     /// DELETE /api/org/{orgId}/vulnerabilities/dismissals
     ///
@@ -152,6 +158,8 @@ public final class VulnerabilitiesSettingsNamespace: Sendable {
     ///
     /// Defaults when never saved: alerts on, critical only, running only.
     ///
+    /// _Requires permission: `org:settings:write`._
+    ///
     /// GET /api/org/{orgId}/vulnerabilities/settings
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
@@ -173,6 +181,8 @@ public final class VulnerabilitiesSettingsNamespace: Sendable {
     /// Update the vulnerability alert settings
     ///
     /// Saving never resets the alert cooldown.
+    ///
+    /// _Requires permission: `org:settings:write`._
     ///
     /// PUT /api/org/{orgId}/vulnerabilities/settings
     ///

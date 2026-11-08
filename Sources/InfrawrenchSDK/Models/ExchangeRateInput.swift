@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -18,10 +18,6 @@ public struct ExchangeRateInput: Codable, Hashable, Sendable {
     public var fromCurrency: String
     /// ISO 4217 code, upper-case.
     public var toCurrency: String
-    /// Multiply an amount in `fromCurrency` by this to get `toCurrency`. A
-    /// decimal **string**, not a number: it is stored in a `numeric(20, 10)`
-    /// column so the digits your finance system used survive the round trip
-    /// exactly, and a JSON number could not promise that.
     public var rate: String
     public var effectiveFrom: String
     /// Omitted or `null` for open-ended. Must not be before `effectiveFrom`.

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -61,17 +61,11 @@ public struct MetricAlertRuleWithStatus: Codable, Hashable, Sendable {
         }
     }
 
+    public var pluginId: JSONValue
+    public var resourceTypeId: JSONValue
+    public var tagKey: JSONValue
+    public var tagValue: JSONValue
     public var name: String
-    /// Selector: plugin the resource must belong to. Null matches any plugin.
-    public var pluginId: String?
-    /// Selector: resource type within the plugin. Null matches any type.
-    public var resourceTypeId: String?
-    /// Selector: tag key the resource must carry (matched case-insensitively).
-    /// Null applies no tag filter. Resources are always selected by this query,
-    /// never by id, so rules cover resources created later.
-    public var tagKey: String?
-    /// Selector: exact value tagKey must have. Null matches any value.
-    public var tagValue: String?
     /// The metric series label as the resource's charts report it (see
     /// /metric-alerts/metric-keys).
     public var metricKey: String
@@ -92,11 +86,11 @@ public struct MetricAlertRuleWithStatus: Codable, Hashable, Sendable {
     public var matchingResourceCount: Int
 
     public init(
+        pluginId: JSONValue,
+        resourceTypeId: JSONValue,
+        tagKey: JSONValue,
+        tagValue: JSONValue,
         name: String,
-        pluginId: String? = nil,
-        resourceTypeId: String? = nil,
-        tagKey: String? = nil,
-        tagValue: String? = nil,
         metricKey: String,
         comparator: Comparator,
         threshold: Double,
@@ -110,11 +104,11 @@ public struct MetricAlertRuleWithStatus: Codable, Hashable, Sendable {
         firingCount: Int,
         matchingResourceCount: Int
     ) {
-        self.name = name
         self.pluginId = pluginId
         self.resourceTypeId = resourceTypeId
         self.tagKey = tagKey
         self.tagValue = tagValue
+        self.name = name
         self.metricKey = metricKey
         self.comparator = comparator
         self.threshold = threshold

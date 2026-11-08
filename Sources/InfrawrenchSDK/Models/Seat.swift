@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -260,9 +260,6 @@ public struct Seat: Codable, Hashable, Sendable {
     /// Per month; null when unpriced.
     public var monthlyPrice: Double?
     public var currency: String?
-    /// `billing`/`catalog`: read from the provider. `configured`: the price set
-    /// on the account. `list-price`: the provider's published list price, an
-    /// estimate.
     public var priceSource: PriceSource?
     public var priceNote: String?
     /// How the provider evidences use: `last-activity` (last use of the product),

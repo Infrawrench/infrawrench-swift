@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -12,6 +12,16 @@
  * marked x-internal.
  */
 import Foundation
+
+public struct IssueWebhooksGithubResult: Codable, Hashable, Sendable {
+    public var ok: Bool
+
+    public init(
+        ok: Bool
+    ) {
+        self.ok = ok
+    }
+}
 
 /// `client.issueWebhooks`
 public final class IssueWebhooksNamespace: Sendable {
@@ -44,8 +54,8 @@ public final class IssueWebhooksNamespace: Sendable {
     /// Raises on 500: Processing failed; the tracker retries
     public func github(
         options: RequestOptions? = nil
-    ) async throws {
-        try await transport.sendVoid(
+    ) async throws -> IssueWebhooksGithubResult {
+        return try await transport.send(
             RequestSpec(
                 method: "POST",
                 path: "/api/issue-webhooks/github"

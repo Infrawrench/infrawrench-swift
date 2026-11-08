@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -14,7 +14,7 @@
 import Foundation
 
 public struct PricingPreviewRequest: Codable, Hashable, Sendable {
-    public var rule: BillingRuleInput?
+    public var rule: JSONValue?
     /// With `rule`, the saved rule it replaces (an edit being previewed). Alone,
     /// previews the saved rule as it stands. Either way `before` is priced
     /// without this rule.
@@ -23,15 +23,15 @@ public struct PricingPreviewRequest: Codable, Hashable, Sendable {
     /// organisation's whole spend as one customer. Naming a customer also needs
     /// `invoices:read`.
     public var managedAccountId: String?
-    public var pricing: ManagedAccountPricing?
+    public var pricing: JSONValue?
     /// `YYYY-MM`; defaults to last calendar month.
     public var month: String?
 
     public init(
-        rule: BillingRuleInput? = nil,
+        rule: JSONValue? = nil,
         ruleId: String? = nil,
         managedAccountId: String? = nil,
-        pricing: ManagedAccountPricing? = nil,
+        pricing: JSONValue? = nil,
         month: String? = nil
     ) {
         self.rule = rule

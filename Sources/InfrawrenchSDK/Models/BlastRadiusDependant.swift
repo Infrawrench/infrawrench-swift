@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -86,7 +86,7 @@ public struct BlastRadiusDependant: Codable, Hashable, Sendable {
         }
     }
 
-    public var node: BlastRadiusNode?
+    public var node: BlastRadiusNode
     /// Shortest hop count from the resource: 1 is a direct dependant, 2 or more
     /// reached it through something else. The resource itself is never listed.
     public var depth: Int
@@ -95,7 +95,7 @@ public struct BlastRadiusDependant: Codable, Hashable, Sendable {
     public var via: Via?
 
     public init(
-        node: BlastRadiusNode? = nil,
+        node: BlastRadiusNode,
         depth: Int,
         via: Via? = nil
     ) {

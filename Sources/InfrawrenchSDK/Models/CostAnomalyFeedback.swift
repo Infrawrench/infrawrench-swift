@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -16,9 +16,6 @@ import Foundation
 /// Whether somebody marked this finding expected (planned or known) or unexpected
 /// (a real problem), with who and when; null while nobody has. See POST
 /// /costs/anomalies/{anomalyId}/feedback.
-///
-/// The API may send `null` in place of this, which is why references to it are
-/// optional.
 public struct CostAnomalyFeedback: Codable, Hashable, Sendable {
     public enum Verdict: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
         case expected

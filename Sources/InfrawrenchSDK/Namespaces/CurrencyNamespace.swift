@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -41,6 +41,8 @@ public final class CurrencyNamespace: Sendable {
     /// holidays carry the last publication), expressed in `base` (default the
     /// display currency, else EUR), plus the feed's state. Readable whether or
     /// not the organization has automatic rates on.
+    ///
+    /// _Requires permission: `costs:read`._
     ///
     /// GET /api/org/{orgId}/currency/feed
     ///
@@ -101,6 +103,8 @@ public final class CurrencyNamespace: Sendable {
     /// else the automatic feed when on, at the day or month-end rate per
     /// `rateBasis`) and explains the outcome. `to` defaults to the display
     /// currency; `date` defaults to today.
+    ///
+    /// _Requires permission: `costs:read`._
     ///
     /// GET /api/org/{orgId}/currency/lookup
     ///

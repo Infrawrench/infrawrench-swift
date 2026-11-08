@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -44,6 +44,8 @@ public final class OnCallNamespace: Sendable {
     /// rotation. Takes `team:read`: knowing who is on call is something every
     /// member needs and nobody should have to ask an admin for.
     ///
+    /// _Requires permission: `team:read`._
+    ///
     /// GET /api/org/{orgId}/on-call/now
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
@@ -84,17 +86,21 @@ public final class OnCallOverridesNamespace: Sendable {
     /// cover is audit-logged, which is the control that makes the looser
     /// permission safe.
     ///
+    /// _Requires permission: `team:read`._
+    ///
     /// POST /api/org/{orgId}/on-call/overrides
     ///
     /// Raises on 400: Bad request
     ///
     /// Raises on 404: Not found
     ///
+    /// Raises on 409: Conflict
+    ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
     public func create(
         orgId: String? = nil,
-        body: OnCallOverrideCreate? = nil,
+        body: OnCallOverrideCreate,
         options: RequestOptions? = nil
     ) async throws -> OnCallOverride {
         return try await transport.send(
@@ -102,13 +108,15 @@ public final class OnCallOverridesNamespace: Sendable {
                 method: "POST",
                 path: "/api/org/{orgId}/on-call/overrides",
                 pathParameters: ["orgId": orgId?.parameterValue],
-                body: body.map { AnyEncodable($0) }
+                body: AnyEncodable(body)
             ),
             options: options
         )
     }
 
     /// Cancel a cover
+    ///
+    /// _Requires permission: `team:read`._
     ///
     /// DELETE /api/org/{orgId}/on-call/overrides/{overrideId}
     ///
@@ -132,6 +140,8 @@ public final class OnCallOverridesNamespace: Sendable {
     }
 
     /// List covers
+    ///
+    /// _Requires permission: `team:read`._
     ///
     /// GET /api/org/{orgId}/on-call/overrides
     ///
@@ -172,9 +182,13 @@ public final class OnCallSchedulesNamespace: Sendable {
     ///
     /// Writing takes `org:settings:write`: a rotation decides who gets woken up.
     ///
+    /// _Requires permission: `org:settings:write`._
+    ///
     /// POST /api/org/{orgId}/on-call/schedules
     ///
     /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
     ///
     /// Raises on 409: Conflict
     ///
@@ -182,7 +196,7 @@ public final class OnCallSchedulesNamespace: Sendable {
     /// created with.
     public func create(
         orgId: String? = nil,
-        body: OnCallScheduleCreate? = nil,
+        body: OnCallScheduleCreate,
         options: RequestOptions? = nil
     ) async throws -> OnCallSchedule {
         return try await transport.send(
@@ -190,7 +204,7 @@ public final class OnCallSchedulesNamespace: Sendable {
                 method: "POST",
                 path: "/api/org/{orgId}/on-call/schedules",
                 pathParameters: ["orgId": orgId?.parameterValue],
-                body: body.map { AnyEncodable($0) }
+                body: AnyEncodable(body)
             ),
             options: options
         )
@@ -200,6 +214,8 @@ public final class OnCallSchedulesNamespace: Sendable {
     ///
     /// Takes its covers with it. Routing rules naming it resolve to nobody
     /// afterwards.
+    ///
+    /// _Requires permission: `org:settings:write`._
     ///
     /// DELETE /api/org/{orgId}/on-call/schedules/{scheduleId}
     ///
@@ -224,6 +240,8 @@ public final class OnCallSchedulesNamespace: Sendable {
 
     /// List on-call rotations
     ///
+    /// _Requires permission: `team:read`._
+    ///
     /// GET /api/org/{orgId}/on-call/schedules
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
@@ -246,6 +264,8 @@ public final class OnCallSchedulesNamespace: Sendable {
     ///
     /// The same computation the alert path resolves with, so a preview can never
     /// disagree with who actually gets woken up.
+    ///
+    /// _Requires permission: `team:read`._
     ///
     /// GET /api/org/{orgId}/on-call/schedules/{scheduleId}/shifts
     ///
@@ -278,6 +298,8 @@ public final class OnCallSchedulesNamespace: Sendable {
     /// Sending `participantUserIds` replaces the list wholesale; position is
     /// rotation order, so reordering re-plans the future.
     ///
+    /// _Requires permission: `org:settings:write`._
+    ///
     /// PATCH /api/org/{orgId}/on-call/schedules/{scheduleId}
     ///
     /// Raises on 400: Bad request
@@ -291,7 +313,7 @@ public final class OnCallSchedulesNamespace: Sendable {
     public func update(
         orgId: String? = nil,
         scheduleId: String,
-        body: OnCallScheduleUpdate? = nil,
+        body: OnCallScheduleUpdate,
         options: RequestOptions? = nil
     ) async throws -> OnCallSchedule {
         return try await transport.send(
@@ -299,7 +321,7 @@ public final class OnCallSchedulesNamespace: Sendable {
                 method: "PATCH",
                 path: "/api/org/{orgId}/on-call/schedules/{scheduleId}",
                 pathParameters: ["orgId": orgId?.parameterValue, "scheduleId": scheduleId.parameterValue],
-                body: body.map { AnyEncodable($0) }
+                body: AnyEncodable(body)
             ),
             options: options
         )

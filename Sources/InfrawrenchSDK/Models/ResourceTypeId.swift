@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -811,6 +811,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case parsingRuleGroup
     case permission
     case perplexityAgentModel
+    case perplexityAsyncRequest
     case perplexityRouterModel
     case perplexitySkill
     case perplexitySonarModel
@@ -2050,6 +2051,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "parsing-rule-group": self = .parsingRuleGroup
         case "permission": self = .permission
         case "perplexity-agent-model": self = .perplexityAgentModel
+        case "perplexity-async-request": self = .perplexityAsyncRequest
         case "perplexity-router-model": self = .perplexityRouterModel
         case "perplexity-skill": self = .perplexitySkill
         case "perplexity-sonar-model": self = .perplexitySonarModel
@@ -3289,6 +3291,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .parsingRuleGroup: return "parsing-rule-group"
         case .permission: return "permission"
         case .perplexityAgentModel: return "perplexity-agent-model"
+        case .perplexityAsyncRequest: return "perplexity-async-request"
         case .perplexityRouterModel: return "perplexity-router-model"
         case .perplexitySkill: return "perplexity-skill"
         case .perplexitySonarModel: return "perplexity-sonar-model"
@@ -4528,6 +4531,7 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .parsingRuleGroup,
         .permission,
         .perplexityAgentModel,
+        .perplexityAsyncRequest,
         .perplexityRouterModel,
         .perplexitySkill,
         .perplexitySonarModel,

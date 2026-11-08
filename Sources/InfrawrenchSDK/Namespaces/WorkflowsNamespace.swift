@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -28,6 +28,239 @@ public final class WorkflowsNamespace: Sendable {
         self.secrets = WorkflowsSecretsNamespace(transport: transport)
     }
 
+    /// Type-check workflow source
+    ///
+    /// Checks `source` (or the stored source) against the workflow's generated
+    /// typings, the same check the editor runs. Needs `secrets:read` as well,
+    /// since the typings name the assigned secrets.
+    ///
+    /// _Requires permission: `workflows:read`._
+    ///
+    /// POST /api/org/{orgId}/workflows/{id}/check
+    ///
+    /// Raises on 403: Forbidden
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter id: Workflow id.
+    public func check(
+        orgId: String? = nil,
+        id: String,
+        body: WorkflowCheckInput,
+        options: RequestOptions? = nil
+    ) async throws -> WorkflowTypecheckResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/workflows/{id}/check",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+
+    /// Create a workflow
+    ///
+    /// Every field is optional: an empty body creates an enabled, manually
+    /// triggered workflow with no source. Assigning secrets (`secretIds`) also
+    /// needs `secrets:read`.
+    ///
+    /// _Requires permission: `workflows:write`._
+    ///
+    /// POST /api/org/{orgId}/workflows
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 403: Forbidden
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func create(
+        orgId: String? = nil,
+        body: WorkflowInput,
+        options: RequestOptions? = nil
+    ) async throws -> Workflow {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/workflows",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+
+    /// Delete a workflow
+    ///
+    /// _Requires permission: `workflows:write`._
+    ///
+    /// DELETE /api/org/{orgId}/workflows/{id}
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter id: Workflow id.
+    public func delete(
+        orgId: String? = nil,
+        id: String,
+        options: RequestOptions? = nil
+    ) async throws -> Ok {
+        return try await transport.send(
+            RequestSpec(
+                method: "DELETE",
+                path: "/api/org/{orgId}/workflows/{id}",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Get a workflow
+    ///
+    /// _Requires permission: `workflows:read`._
+    ///
+    /// GET /api/org/{orgId}/workflows/{id}
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter id: Workflow id.
+    public func get(
+        orgId: String? = nil,
+        id: String,
+        options: RequestOptions? = nil
+    ) async throws -> Workflow {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/workflows/{id}",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// List workflows
+    ///
+    /// _Requires permission: `workflows:read`._
+    ///
+    /// GET /api/org/{orgId}/workflows
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func list(
+        orgId: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> [Workflow] {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/workflows",
+                pathParameters: ["orgId": orgId?.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// A workflow's metric values
+    ///
+    /// _Requires permission: `workflows:read`._
+    ///
+    /// GET /api/org/{orgId}/workflows/{id}/metrics
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter id: Workflow id.
+    public func metrics(
+        orgId: String? = nil,
+        id: String,
+        options: RequestOptions? = nil
+    ) async throws -> [WorkflowMetric] {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/workflows/{id}/metrics",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Run a workflow now
+    ///
+    /// Runs the workflow to completion with the caller's permissions and answers
+    /// its outcome. Non-interactive: an `infra.prompt` gets no answer.
+    ///
+    /// _Requires permission: `workflows:write`._
+    ///
+    /// POST /api/org/{orgId}/workflows/{id}/run
+    ///
+    /// Raises on 401: Unauthenticated
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter id: Workflow id.
+    public func run(
+        orgId: String? = nil,
+        id: String,
+        options: RequestOptions? = nil
+    ) async throws -> WorkflowRunOutcome {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/workflows/{id}/run",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// A workflow's recent runs
+    ///
+    /// _Requires permission: `workflows:read`._
+    ///
+    /// GET /api/org/{orgId}/workflows/{id}/runs
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter id: Workflow id.
+    public func runs(
+        orgId: String? = nil,
+        id: String,
+        options: RequestOptions? = nil
+    ) async throws -> [WorkflowRun] {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/workflows/{id}/runs",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue]
+            ),
+            options: options
+        )
+    }
+
     /// Generated infra.d.ts for a workflow
     ///
     /// The ambient TypeScript declarations workflow source is written against,
@@ -41,6 +274,8 @@ public final class WorkflowsNamespace: Sendable {
     /// _Requires permission: `workflows:read`._
     ///
     /// GET /api/org/{orgId}/workflows/{id}/typings
+    ///
+    /// Raises on 403: Forbidden
     ///
     /// Raises on 404: Not found
     ///
@@ -68,6 +303,44 @@ public final class WorkflowsNamespace: Sendable {
             options: options
         )
     }
+
+    /// Update a workflow
+    ///
+    /// An omitted field keeps its stored value. Changing the source, trigger or
+    /// assigned secrets makes automated runs act with the caller's permissions
+    /// from then on; when the workflow has secrets assigned, any edit also needs
+    /// `secrets:read`.
+    ///
+    /// _Requires permission: `workflows:write`._
+    ///
+    /// PUT /api/org/{orgId}/workflows/{id}
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 403: Forbidden
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter id: Workflow id.
+    public func update(
+        orgId: String? = nil,
+        id: String,
+        body: WorkflowInput,
+        options: RequestOptions? = nil
+    ) async throws -> Workflow {
+        return try await transport.send(
+            RequestSpec(
+                method: "PUT",
+                path: "/api/org/{orgId}/workflows/{id}",
+                pathParameters: ["orgId": orgId?.parameterValue, "id": id.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
 }
 
 /// `client.workflows.schedule`
@@ -87,6 +360,8 @@ public final class WorkflowsScheduleNamespace: Sendable {
     /// _Requires permission: `workflows:write`._
     ///
     /// DELETE /api/org/{orgId}/workflows/{id}/schedule
+    ///
+    /// Raises on 400: Bad request
     ///
     /// Raises on 404: Not found
     ///
@@ -155,6 +430,8 @@ public final class WorkflowsScheduleNamespace: Sendable {
     /// PUT /api/org/{orgId}/workflows/{id}/schedule
     ///
     /// Raises on 400: Bad request
+    ///
+    /// Raises on 403: Forbidden
     ///
     /// Raises on 404: Not found
     ///
@@ -225,6 +502,8 @@ public final class WorkflowsSecretsNamespace: Sendable {
     /// PUT /api/org/{orgId}/workflows/{id}/secrets
     ///
     /// Raises on 400: Bad request
+    ///
+    /// Raises on 403: Forbidden
     ///
     /// Raises on 404: Not found
     ///

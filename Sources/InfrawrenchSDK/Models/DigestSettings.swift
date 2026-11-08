@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -96,11 +96,6 @@ public struct DigestSettings: Codable, Hashable, Sendable {
     /// first.
     public var attemptCount: Int
     public var lastAttemptAt: String?
-    /// Outcome of the most recent delivery attempt. `partial` (some destinations
-    /// took it, some failed) is deliberately never retried automatically; a retry
-    /// would post the digest twice where it already landed. `failed` (nothing
-    /// landed) is retried a bounded number of times with backoff, then parked
-    /// until the next week.
     public var lastStatus: LastStatus?
     /// Why the last attempt was not a clean success, for display in the settings
     /// UI.

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -75,7 +75,7 @@ public struct PluginSummary: Codable, Hashable, Sendable {
     public var displayName: String
     public var logoSvg: String
     public var credentialFields: [CredentialField]
-    public var preflight: PreflightDeclaration?
+    public var preflight: JSONValue
     public var oauth: PluginOAuthSummary?
     /// Present when the plugin can be reached through an SSH tunnel to a remote
     /// host.
@@ -93,7 +93,7 @@ public struct PluginSummary: Codable, Hashable, Sendable {
         displayName: String,
         logoSvg: String,
         credentialFields: [CredentialField],
-        preflight: PreflightDeclaration? = nil,
+        preflight: JSONValue,
         oauth: PluginOAuthSummary? = nil,
         sshTunnel: SshTunnel? = nil,
         jumpHost: Bool? = nil,

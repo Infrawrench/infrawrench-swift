@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -80,6 +80,7 @@ public struct FileGithubIssueInput: Codable, Hashable, Sendable {
     public var monthlyCost: MonthlyCost?
     /// Shell commands that fix the finding, rendered as a code block to review.
     public var remediation: [String]?
+    /// Override the routed repository.
     public var repo: GithubRepoRef?
     public var labels: [String]?
     public var assignees: [String]?

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -61,10 +61,12 @@ public struct DependencyGraphEdge: Codable, Hashable, Sendable {
         }
     }
 
+    /// The resource holding the reference; it depends on the provider.
     public var consumerResourceId: ResourceId
     /// The consumer field the reference fills. "parent" for containment edges,
     /// where the link is the resource hierarchy itself rather than a field.
     public var consumerFieldKey: String
+    /// The resource being depended on.
     public var providerResourceId: ResourceId
     /// The provider output or identity the reference reads; an output key for
     /// output references, the matched identity ("externalId", "name",

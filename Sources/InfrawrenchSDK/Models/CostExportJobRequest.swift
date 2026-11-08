@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -15,65 +15,6 @@ import Foundation
 
 public struct CostExportJobRequest: Codable, Hashable, Sendable {
     public struct Query: Codable, Hashable, Sendable {
-        public enum Dimension: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
-            case provider
-            case account
-            case service
-            case region
-            case resource
-            case chargeType
-            case commitment
-            /// A value the API added after this SDK was generated. Kept rather
-            /// than rejected, so a new server-side value cannot break decoding.
-            case unrecognized(String)
-
-            public init(rawValue: String) {
-                switch rawValue {
-                case "provider": self = .provider
-                case "account": self = .account
-                case "service": self = .service
-                case "region": self = .region
-                case "resource": self = .resource
-                case "charge_type": self = .chargeType
-                case "commitment": self = .commitment
-                default: self = .unrecognized(rawValue)
-                }
-            }
-
-            public var rawValue: String {
-                switch self {
-                case .provider: return "provider"
-                case .account: return "account"
-                case .service: return "service"
-                case .region: return "region"
-                case .resource: return "resource"
-                case .chargeType: return "charge_type"
-                case .commitment: return "commitment"
-                case .unrecognized(let value): return value
-                }
-            }
-
-            /// Every value the spec declares. `unrecognized` is deliberately absent.
-            public static let allKnownCases: [Dimension] = [
-                .provider,
-                .account,
-                .service,
-                .region,
-                .resource,
-                .chargeType,
-                .commitment,
-            ]
-
-            public init(from decoder: any Decoder) throws {
-                self.init(rawValue: try decoder.singleValueContainer().decode(String.self))
-            }
-
-            public func encode(to encoder: any Encoder) throws {
-                var container = encoder.singleValueContainer()
-                try container.encode(rawValue)
-            }
-        }
-
         public var filters: [CostFilter]?
         /// Cost query language text.
         public var query: String?
@@ -82,7 +23,7 @@ public struct CostExportJobRequest: Codable, Hashable, Sendable {
         public var costBasis: CostBasis?
         /// Row identity for the native layouts. Empty: one row per day and
         /// currency.
-        public var dimensions: [Dimension]?
+        public var dimensions: [String]?
         /// Tag keys written as `tag_<key>` columns.
         public var tagKeys: [String]?
         /// Virtual tag keys written as `vtag_<key>` columns.
@@ -94,7 +35,7 @@ public struct CostExportJobRequest: Codable, Hashable, Sendable {
             savedFilterId: String? = nil,
             chargeTypes: [CostChargeType]? = nil,
             costBasis: CostBasis? = nil,
-            dimensions: [Dimension]? = nil,
+            dimensions: [String]? = nil,
             tagKeys: [String]? = nil,
             virtualTagKeys: [String]? = nil
         ) {

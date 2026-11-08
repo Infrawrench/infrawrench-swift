@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -16,12 +16,12 @@ import Foundation
 public struct CreateResourceResponse: Codable, Hashable, Sendable {
     public var id: ResourceId
     public var displayName: String
-    public var warnings: [String]?
+    public var warnings: [ResourceWarning]?
 
     public init(
         id: ResourceId,
         displayName: String,
-        warnings: [String]? = nil
+        warnings: [ResourceWarning]? = nil
     ) {
         self.id = id
         self.displayName = displayName

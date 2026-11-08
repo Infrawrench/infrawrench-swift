@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -17,73 +17,6 @@ import Foundation
 /// the dashboards, budgets and cost reports store, so a filter means the same
 /// thing everywhere.
 public struct CostExportQuery: Codable, Hashable, Sendable {
-    public enum Dimension: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
-        case provider
-        case account
-        case service
-        case region
-        case resource
-        case tag
-        case chargeType
-        case commitment
-        case virtualTag
-        /// A value the API added after this SDK was generated. Kept rather than
-        /// rejected, so a new server-side value cannot break decoding.
-        case unrecognized(String)
-
-        public init(rawValue: String) {
-            switch rawValue {
-            case "provider": self = .provider
-            case "account": self = .account
-            case "service": self = .service
-            case "region": self = .region
-            case "resource": self = .resource
-            case "tag": self = .tag
-            case "charge_type": self = .chargeType
-            case "commitment": self = .commitment
-            case "virtual_tag": self = .virtualTag
-            default: self = .unrecognized(rawValue)
-            }
-        }
-
-        public var rawValue: String {
-            switch self {
-            case .provider: return "provider"
-            case .account: return "account"
-            case .service: return "service"
-            case .region: return "region"
-            case .resource: return "resource"
-            case .tag: return "tag"
-            case .chargeType: return "charge_type"
-            case .commitment: return "commitment"
-            case .virtualTag: return "virtual_tag"
-            case .unrecognized(let value): return value
-            }
-        }
-
-        /// Every value the spec declares. `unrecognized` is deliberately absent.
-        public static let allKnownCases: [Dimension] = [
-            .provider,
-            .account,
-            .service,
-            .region,
-            .resource,
-            .tag,
-            .chargeType,
-            .commitment,
-            .virtualTag,
-        ]
-
-        public init(from decoder: any Decoder) throws {
-            self.init(rawValue: try decoder.singleValueContainer().decode(String.self))
-        }
-
-        public func encode(to encoder: any Encoder) throws {
-            var container = encoder.singleValueContainer()
-            try container.encode(rawValue)
-        }
-    }
-
     public enum ChargeType: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
         case usage
         case commitmentCoveredUsage
@@ -202,7 +135,7 @@ public struct CostExportQuery: Codable, Hashable, Sendable {
     /// Row-identity columns kept in the output. Dropping one aggregates over it;
     /// an export grouped to provider + service is orders of magnitude smaller
     /// than a per-resource one.
-    public var dimensions: [Dimension]
+    public var dimensions: [CostDimension]
     /// Tag keys emitted as their own `tag_<key>` columns.
     public var tagKeys: [String]
     /// Virtual tag keys emitted as their own `vtag_<key>` columns. A row a split
@@ -215,7 +148,7 @@ public struct CostExportQuery: Codable, Hashable, Sendable {
 
     public init(
         version: Double,
-        dimensions: [Dimension],
+        dimensions: [CostDimension],
         tagKeys: [String],
         virtualTagKeys: [String]? = nil,
         filters: [CostExportFilter],

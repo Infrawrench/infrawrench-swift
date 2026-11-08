@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -39,12 +39,13 @@ public final class AccessRequestsNamespace: Sendable {
     ///
     /// Raises on 400: Bad request
     ///
-    /// Raises on 403: Self-approval, or granting beyond the approver's own
-    /// permissions
+    /// Raises on 401: Unauthenticated
+    ///
+    /// Raises on 403: AccessDecisionForbidden
     ///
     /// Raises on 404: Not found
     ///
-    /// Raises on 409: Already decided, or the request timed out
+    /// Raises on 409: AccessDecisionConflict
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -105,6 +106,8 @@ public final class AccessRequestsNamespace: Sendable {
     ///
     /// Raises on 400: Bad request
     ///
+    /// Raises on 401: Unauthenticated
+    ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
     public func create(
@@ -137,12 +140,13 @@ public final class AccessRequestsNamespace: Sendable {
     ///
     /// Raises on 400: Bad request
     ///
-    /// Raises on 403: Self-approval, or granting beyond the approver's own
-    /// permissions
+    /// Raises on 401: Unauthenticated
+    ///
+    /// Raises on 403: AccessDecisionForbidden
     ///
     /// Raises on 404: Not found
     ///
-    /// Raises on 409: Already decided, or the request timed out
+    /// Raises on 409: AccessDecisionConflict
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -213,9 +217,13 @@ public final class AccessRequestsNamespace: Sendable {
     ///
     /// POST /api/org/{orgId}/access-requests/{requestId}/revoke
     ///
+    /// Raises on 401: Unauthenticated
+    ///
+    /// Raises on 403: Forbidden
+    ///
     /// Raises on 404: Not found
     ///
-    /// Raises on 409: The grant is not active
+    /// Raises on 409: AccessRevokeConflict
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -244,9 +252,11 @@ public final class AccessRequestsNamespace: Sendable {
     ///
     /// POST /api/org/{orgId}/access-requests/{requestId}/withdraw
     ///
+    /// Raises on 401: Unauthenticated
+    ///
     /// Raises on 404: Not found
     ///
-    /// Raises on 409: Already decided or expired
+    /// Raises on 409: AccessWithdrawConflict
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -169,18 +169,12 @@ public final class DeploymentsRunsNamespace: Sendable {
     ///
     /// Raises on 400: Bad request
     ///
+    /// Raises on 403: Forbidden
+    ///
     /// Raises on 404: Not found
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
-    ///
-    /// - Parameter costBasis: Which charge-type basis both windows are read on.
-    /// `cash` (the default) is what the provider charged on the day it charged
-    /// it; `amortized` spreads a commitment's up-front fee across the term it
-    /// buys; `blended` also spreads each commitment's discount evenly over the
-    /// usage it could cover. It is echoed on every response because a delta whose
-    /// basis is unstated is unreadable: an amortized 'after' against a cash
-    /// 'before' looks exactly like a saving.
     public func costImpact(
         orgId: String? = nil,
         id: String,
@@ -446,6 +440,8 @@ public final class DeploymentsTriggersNamespace: Sendable {
     /// _Requires permission: `deployments:write`._
     ///
     /// PATCH /api/org/{orgId}/deployments/triggers/{id}
+    ///
+    /// Raises on 400: Bad request
     ///
     /// Raises on 401: Unauthenticated
     ///

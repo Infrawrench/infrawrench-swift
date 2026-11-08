@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -25,11 +25,20 @@ public struct OrphanedResource: Codable, Hashable, Sendable {
     public var externalId: String?
     /// Plugin-authored explanation of why this resource looks wasted.
     public var reason: String
+    /// Best-effort trailing spend matched from collected per-resource cost rows;
+    /// null when the provider reports no per-resource cost. The flag itself never
+    /// depends on billing data.
     public var cost: OrphanCostAnnotation?
+    /// Who owns this resource, or null when nobody has claimed it. Present only
+    /// when the owner can be named: a resource carrying a purpose but no owner
+    /// reads as null, because the question this answers is who to tell.
     public var owner: ResourceOwnerAnnotation?
     public var lastSyncedAt: String?
     public var remediation: FindingRemediation?
     public var idle: OrphanIdleDetail?
+    /// Monthly figure at the provider's published list price, for idle rows a
+    /// plugin could price. An estimate: show it only when `cost` (billed spend)
+    /// is null.
     public var estimate: IdleSavingsEstimate?
 
     public init(

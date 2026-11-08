@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -35,9 +35,13 @@ public final class RunbooksNamespace: Sendable {
     /// Names are unique within an organization: two runbooks called "Failover" is
     /// how the wrong one gets run.
     ///
+    /// _Requires permission: `org:settings:write`._
+    ///
     /// POST /api/org/{orgId}/runbooks
     ///
     /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
     ///
     /// Raises on 409: Conflict
     ///
@@ -45,7 +49,7 @@ public final class RunbooksNamespace: Sendable {
     /// created with.
     public func create(
         orgId: String? = nil,
-        body: RunbookCreate? = nil,
+        body: RunbookCreate,
         options: RequestOptions? = nil
     ) async throws -> Runbook {
         return try await transport.send(
@@ -53,7 +57,7 @@ public final class RunbooksNamespace: Sendable {
                 method: "POST",
                 path: "/api/org/{orgId}/runbooks",
                 pathParameters: ["orgId": orgId?.parameterValue],
-                body: body.map { AnyEncodable($0) }
+                body: AnyEncodable(body)
             ),
             options: options
         )
@@ -63,6 +67,8 @@ public final class RunbooksNamespace: Sendable {
     ///
     /// Takes its run history with it. To retire a procedure without losing the
     /// record of the runs performed against it, set `enabled` to false instead.
+    ///
+    /// _Requires permission: `org:settings:write`._
     ///
     /// DELETE /api/org/{orgId}/runbooks/{runbookId}
     ///
@@ -92,6 +98,8 @@ public final class RunbooksNamespace: Sendable {
     /// is valid as a whole. A step sent with its `id` keeps its identity, so a
     /// run in progress still matches it.
     ///
+    /// _Requires permission: `org:settings:write`._
+    ///
     /// PATCH /api/org/{orgId}/runbooks/{runbookId}
     ///
     /// Raises on 400: Bad request
@@ -105,7 +113,7 @@ public final class RunbooksNamespace: Sendable {
     public func update(
         orgId: String? = nil,
         runbookId: String,
-        body: RunbookUpdate? = nil,
+        body: RunbookUpdate,
         options: RequestOptions? = nil
     ) async throws -> Runbook {
         return try await transport.send(
@@ -113,7 +121,7 @@ public final class RunbooksNamespace: Sendable {
                 method: "PATCH",
                 path: "/api/org/{orgId}/runbooks/{runbookId}",
                 pathParameters: ["orgId": orgId?.parameterValue, "runbookId": runbookId.parameterValue],
-                body: body.map { AnyEncodable($0) }
+                body: AnyEncodable(body)
             ),
             options: options
         )
@@ -135,6 +143,8 @@ public final class RunbooksGetNamespace: Sendable {
     /// used. Reading takes `resources:read`: the person who can see the
     /// infrastructure is the person who will be woken up about it.
     ///
+    /// _Requires permission: `resources:read`._
+    ///
     /// GET /api/org/{orgId}/runbooks
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
@@ -154,6 +164,8 @@ public final class RunbooksGetNamespace: Sendable {
     }
 
     /// Get one runbook
+    ///
+    /// _Requires permission: `resources:read`._
     ///
     /// GET /api/org/{orgId}/runbooks/{runbookId}
     ///
@@ -196,6 +208,8 @@ public final class RunbooksRunsNamespace: Sendable {
     /// ended before the checklist did) and quietly marking them done would erase
     /// the one thing a postmortem wants to know.
     ///
+    /// _Requires permission: `resources:read`._
+    ///
     /// POST /api/org/{orgId}/runbooks/runs/{runId}/close
     ///
     /// Raises on 400: Bad request
@@ -209,7 +223,7 @@ public final class RunbooksRunsNamespace: Sendable {
     public func close(
         orgId: String? = nil,
         runId: String,
-        body: RunbookRunClose? = nil,
+        body: RunbookRunClose,
         options: RequestOptions? = nil
     ) async throws -> RunbookRun {
         return try await transport.send(
@@ -217,7 +231,7 @@ public final class RunbooksRunsNamespace: Sendable {
                 method: "POST",
                 path: "/api/org/{orgId}/runbooks/runs/{runId}/close",
                 pathParameters: ["orgId": orgId?.parameterValue, "runId": runId.parameterValue],
-                body: body.map { AnyEncodable($0) }
+                body: AnyEncodable(body)
             ),
             options: options
         )
@@ -235,11 +249,15 @@ public final class RunbooksRunsNamespace: Sendable {
     /// and refusing the second would mean it goes unrecorded rather than not
     /// happening.
     ///
+    /// _Requires permission: `resources:read`._
+    ///
     /// POST /api/org/{orgId}/runbooks/{runbookId}/runs
     ///
     /// Raises on 400: Bad request
     ///
     /// Raises on 404: Not found
+    ///
+    /// Raises on 409: Conflict
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -263,6 +281,8 @@ public final class RunbooksRunsNamespace: Sendable {
     /// List runbook runs
     ///
     /// Newest first, optionally narrowed to one runbook or one incident.
+    ///
+    /// _Requires permission: `resources:read`._
     ///
     /// GET /api/org/{orgId}/runbooks/runs
     ///
@@ -289,6 +309,8 @@ public final class RunbooksRunsNamespace: Sendable {
     }
 
     /// Get one runbook run
+    ///
+    /// _Requires permission: `resources:read`._
     ///
     /// GET /api/org/{orgId}/runbooks/runs/{runId}
     ///
@@ -330,11 +352,15 @@ public final class RunbooksRunsStepsNamespace: Sendable {
     /// A closed run refuses updates, and reopening is not offered: a run is a
     /// record of what happened. Start another run to record another attempt.
     ///
+    /// _Requires permission: `resources:read`._
+    ///
     /// PATCH /api/org/{orgId}/runbooks/runs/{runId}/steps/{stepId}
     ///
     /// Raises on 400: Bad request
     ///
     /// Raises on 404: Not found
+    ///
+    /// Raises on 409: Conflict
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -342,7 +368,7 @@ public final class RunbooksRunsStepsNamespace: Sendable {
         orgId: String? = nil,
         runId: String,
         stepId: String,
-        body: RunbookStepUpdate? = nil,
+        body: RunbookStepUpdate,
         options: RequestOptions? = nil
     ) async throws -> RunbookRun {
         return try await transport.send(
@@ -350,7 +376,7 @@ public final class RunbooksRunsStepsNamespace: Sendable {
                 method: "PATCH",
                 path: "/api/org/{orgId}/runbooks/runs/{runId}/steps/{stepId}",
                 pathParameters: ["orgId": orgId?.parameterValue, "runId": runId.parameterValue, "stepId": stepId.parameterValue],
-                body: body.map { AnyEncodable($0) }
+                body: AnyEncodable(body)
             ),
             options: options
         )

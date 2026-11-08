@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -136,6 +136,7 @@ public struct CostQueryRequest: Codable, Hashable, Sendable {
     /// existed, and rows from providers that cannot distinguish them, are
     /// `usage`.
     public var chargeTypes: [CostChargeType]?
+    public var displayCurrency: String?
     /// Apply the organization's billing rules (see /billing-rules); markups,
     /// discounts, reallocations. Omitted (the default, and what every unattended
     /// reader sends) is raw collected spend. Present, the response carries
@@ -153,6 +154,12 @@ public struct CostQueryRequest: Codable, Hashable, Sendable {
     /// Running totals from the start of the range, at any bin size. Omitted is
     /// off. Totals then report the last point rather than the sum.
     public var cumulative: Bool?
+    /// Put this dimension's values on the X axis instead of date bins: one bar
+    /// per value, ranked by spend over the range, the top `topN` then
+    /// `__other__`. `groupBy` then segments each bar (or set `segmentByDate` to
+    /// segment by bin instead). Omitted is the date axis. Refused with a
+    /// forecast, a scenario, a running total, the `count` measure or a unit-cost
+    /// chart, which all need dates.
     public var xAxis: CostDimension?
     /// Required when `xAxis` is `tag` or `virtual_tag`: which key's values go on
     /// the axis.
@@ -176,6 +183,7 @@ public struct CostQueryRequest: Codable, Hashable, Sendable {
         scenarioModelId: String? = nil,
         costBasis: CostBasis? = nil,
         chargeTypes: [CostChargeType]? = nil,
+        displayCurrency: String? = nil,
         adjusted: Bool? = nil,
         measure: CostMeasure? = nil,
         usageUnit: String? = nil,
@@ -198,6 +206,7 @@ public struct CostQueryRequest: Codable, Hashable, Sendable {
         self.scenarioModelId = scenarioModelId
         self.costBasis = costBasis
         self.chargeTypes = chargeTypes
+        self.displayCurrency = displayCurrency
         self.adjusted = adjusted
         self.measure = measure
         self.usageUnit = usageUnit

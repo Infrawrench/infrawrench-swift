@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -38,10 +38,10 @@ public final class GithubIssuesNamespace: Sendable {
     ///
     /// Raises on 400: Bad request
     ///
-    /// Raises on 409: The GitHub App installation needs a permission an owner has
-    /// not approved yet
+    /// Raises on 409: The installation has not accepted the permission this
+    /// needs. An owner of the GitHub account approves it from `manageUrl`.
     ///
-    /// Raises on 502: GitHub refused the request or was unreachable
+    /// Raises on 502: Bad gateway: an upstream service failed
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -72,10 +72,10 @@ public final class GithubIssuesNamespace: Sendable {
     ///
     /// Raises on 400: Bad request
     ///
-    /// Raises on 409: The GitHub App installation needs a permission an owner has
-    /// not approved yet
+    /// Raises on 409: The installation has not accepted the permission this
+    /// needs. An owner of the GitHub account approves it from `manageUrl`.
     ///
-    /// Raises on 502: GitHub refused the request or was unreachable
+    /// Raises on 502: Bad gateway: an upstream service failed
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -130,10 +130,10 @@ public final class GithubIssuesNamespace: Sendable {
     ///
     /// Raises on 400: Bad request
     ///
-    /// Raises on 409: The GitHub App installation needs a permission an owner has
-    /// not approved yet
+    /// Raises on 409: The installation has not accepted the permission this
+    /// needs. An owner of the GitHub account approves it from `manageUrl`.
     ///
-    /// Raises on 502: GitHub refused the request or was unreachable
+    /// Raises on 502: Bad gateway: an upstream service failed
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -163,10 +163,10 @@ public final class GithubIssuesNamespace: Sendable {
     ///
     /// Raises on 400: Bad request
     ///
-    /// Raises on 409: The GitHub App installation needs a permission an owner has
-    /// not approved yet
+    /// Raises on 409: The installation has not accepted the permission this
+    /// needs. An owner of the GitHub account approves it from `manageUrl`.
     ///
-    /// Raises on 502: GitHub refused the request or was unreachable
+    /// Raises on 502: Bad gateway: an upstream service failed
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -221,6 +221,11 @@ public final class GithubIssuesNamespace: Sendable {
     /// PUT /api/org/{orgId}/github-issues/settings
     ///
     /// Raises on 400: Bad request
+    ///
+    /// Raises on 409: The installation has not accepted the permission this
+    /// needs. An owner of the GitHub account approves it from `manageUrl`.
+    ///
+    /// Raises on 502: Bad gateway: an upstream service failed
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -292,10 +297,10 @@ public final class GithubIssuesLinksNamespace: Sendable {
     ///
     /// Raises on 400: Bad request
     ///
-    /// Raises on 409: The GitHub App installation needs a permission an owner has
-    /// not approved yet
+    /// Raises on 409: The installation has not accepted the permission this
+    /// needs. An owner of the GitHub account approves it from `manageUrl`.
     ///
-    /// Raises on 502: GitHub refused the request or was unreachable
+    /// Raises on 502: Bad gateway: an upstream service failed
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -334,10 +339,10 @@ public final class GithubIssuesPullRequestsNamespace: Sendable {
     ///
     /// Raises on 400: Bad request
     ///
-    /// Raises on 409: The GitHub App installation needs a permission an owner has
-    /// not approved yet
+    /// Raises on 409: The installation has not accepted the permission this
+    /// needs. An owner of the GitHub account approves it from `manageUrl`.
     ///
-    /// Raises on 502: GitHub refused the request or was unreachable
+    /// Raises on 502: Bad gateway: an upstream service failed
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -368,10 +373,10 @@ public final class GithubIssuesPullRequestsNamespace: Sendable {
     ///
     /// Raises on 400: Bad request
     ///
-    /// Raises on 409: The GitHub App installation needs a permission an owner has
-    /// not approved yet
+    /// Raises on 409: The installation has not accepted the permission this
+    /// needs. An owner of the GitHub account approves it from `manageUrl`.
     ///
-    /// Raises on 502: GitHub refused the request or was unreachable
+    /// Raises on 502: Bad gateway: an upstream service failed
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.

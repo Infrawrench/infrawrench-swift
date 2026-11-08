@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -203,7 +203,7 @@ public struct AgentSession: Codable, Hashable, Sendable {
     /// (e.g. Tailscale). See GET /resources/ssh-install/accounts.
     public var serviceAccountIds: [String]?
     public var t3Access: T3Access?
-    public var t3Policy: T3CodePolicy?
+    public var t3Policy: JSONValue?
     /// T3 Code sessions: `t3Policy` is installed but T3 Code has not restarted
     /// since, so the server still enforces the policy it started with. Cleared by
     /// a restarting rollout or Authorize server.
@@ -232,7 +232,7 @@ public struct AgentSession: Codable, Hashable, Sendable {
         surface: Surface? = nil,
         serviceAccountIds: [String]? = nil,
         t3Access: T3Access? = nil,
-        t3Policy: T3CodePolicy? = nil,
+        t3Policy: JSONValue? = nil,
         t3PolicyRestartPending: Bool? = nil,
         serviceInstalls: [AgentServiceInstall]? = nil,
         agentLinkId: String? = nil,

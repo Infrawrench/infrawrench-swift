@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -237,7 +237,7 @@ public final class BusinessMetricsNamespace: Sendable {
     ///
     /// Raises on 400: Bad request
     ///
-    /// Raises on 409: A live metric already uses this key.
+    /// Raises on 409: Conflict
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -301,6 +301,8 @@ public final class BusinessMetricsNamespace: Sendable {
     ///
     /// Raises on 400: Bad request
     ///
+    /// Raises on 403: Forbidden
+    ///
     /// Raises on 404: Not found
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
@@ -333,6 +335,8 @@ public final class BusinessMetricsNamespace: Sendable {
     /// POST /api/org/{orgId}/business-metrics/importer-preview
     ///
     /// Raises on 400: Bad request
+    ///
+    /// Raises on 403: Forbidden
     ///
     /// Raises on 404: Not found
     ///
@@ -386,6 +390,8 @@ public final class BusinessMetricsNamespace: Sendable {
     /// (at most 500) and its cost mapping. A mapped label nobody has reported yet
     /// is listed with no values.
     ///
+    /// _Requires permission: `costs:read`._
+    ///
     /// GET /api/org/{orgId}/business-metrics/{id}/labels
     ///
     /// Raises on 404: Not found
@@ -424,7 +430,7 @@ public final class BusinessMetricsNamespace: Sendable {
     ///
     /// Raises on 404: Not found
     ///
-    /// Raises on 409: A live metric already uses this key.
+    /// Raises on 409: Conflict
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -452,6 +458,8 @@ public final class BusinessMetricsNamespace: Sendable {
     /// The provider usage units the organization's cost rows carry over the last
     /// 90 days, most spend first, with a few of the services reporting each.
     /// Backs the per-usage-unit picker.
+    ///
+    /// _Requires permission: `costs:read`._
     ///
     /// GET /api/org/{orgId}/business-metrics/usage-units
     ///
@@ -728,6 +736,8 @@ public final class BusinessMetricsImporterNamespace: Sendable {
     ///
     /// Raises on 400: Bad request
     ///
+    /// Raises on 403: Forbidden
+    ///
     /// Raises on 404: Not found
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
@@ -800,6 +810,8 @@ public final class BusinessMetricsImporterNamespace: Sendable {
     ///
     /// Raises on 400: Bad request
     ///
+    /// Raises on 403: Forbidden
+    ///
     /// Raises on 404: Not found
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
@@ -811,7 +823,7 @@ public final class BusinessMetricsImporterNamespace: Sendable {
         id: String,
         body: BusinessMetricImporterInput,
         options: RequestOptions? = nil
-    ) async throws -> BusinessMetricImporter? {
+    ) async throws -> BusinessMetricImporter {
         return try await transport.send(
             RequestSpec(
                 method: "PUT",
@@ -942,6 +954,8 @@ public final class BusinessMetricsUsageUnitCostsNamespace: Sendable {
     /// (those reported in that unit), so the numerator is exactly the spend that
     /// bought the denominator. A bucket with no usage is a gap (`no_usage`),
     /// never 0. Labels do not apply.
+    ///
+    /// _Requires permission: `costs:read`._
     ///
     /// POST /api/org/{orgId}/business-metrics/usage-unit-costs
     ///

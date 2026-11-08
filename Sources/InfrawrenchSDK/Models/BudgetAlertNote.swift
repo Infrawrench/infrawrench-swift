@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -14,9 +14,6 @@
 import Foundation
 
 /// Somebody's explanation of this firing. Null while there is none.
-///
-/// The API may send `null` in place of this, which is why references to it are
-/// optional.
 public struct BudgetAlertNote: Codable, Hashable, Sendable {
     public var text: String
     /// When the note as it now reads was written; a rewrite restamps it.

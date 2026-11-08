@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -98,19 +98,7 @@ public struct BudgetWithStatus: Codable, Hashable, Sendable {
     public var filters: [BudgetCostFilter]
     public var thresholds: [BudgetThreshold]
     public var costBasis: BudgetCostBasis
-    /// A saved cost filter (see /saved-cost-filters) applied by reference and
-    /// AND-composed with `filters` when the budget is evaluated. Updates are full
-    /// replaces, so omitting it on PUT clears it. A reference that fails to
-    /// resolve errors the budget's evaluation rather than silently measuring all
-    /// spend.
     public var savedFilterId: String?
-    /// A scenario model (see /cost-scenarios) this budget's **forecast**
-    /// thresholds are measured against. Null (the default, and the value for
-    /// every budget nobody deliberately opts in) keeps them on the bare trend.
-    /// Opting in is per-budget on purpose: a hypothesis somebody typed into a
-    /// form must not silently change when real people get paged. `actual`
-    /// thresholds are never affected; they measure money already spent. Updates
-    /// are full replaces, so omitting it on PUT clears the opt-in.
     public var scenarioModelId: String?
     /// The opted-into model's name, so a card can say whose assumptions are in
     /// the number.
@@ -153,17 +141,9 @@ public struct BudgetWithStatus: Codable, Hashable, Sendable {
     public var currentMonthEvents: [CurrentMonthEvent]
     public var placements: [Placement]
     public var measure: BudgetMeasure
-    /// The usage unit a usage budget counts, exactly as the providers report it.
     public var usageUnit: String?
-    /// A usage budget's limit per period, in `usageUnit`.
     public var usageAmount: Double?
     public var period: BudgetPeriod?
-    /// The budget this one rolls up into. A parent's actual and forecast are the
-    /// sum of its children's, each measured over the parent's period; parent and
-    /// children must count the same thing (one currency, or one usage unit).
-    /// Hierarchies are at most 4 levels deep. Deleting a budget moves its
-    /// children up to its own parent. Updates are full replaces, so omitting it
-    /// on PUT makes the budget a root.
     public var parentBudgetId: String?
     /// First day of the period being measured. Null when the budget's periods do
     /// not cover today (a cadence not started yet, a gap in an explicit list):

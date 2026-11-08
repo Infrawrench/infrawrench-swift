@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -146,9 +146,9 @@ public struct SleepSchedule: Codable, Hashable, Sendable {
     public var accountName: String
     /// ISO weekdays the resource is worked on: 1 = Monday … 7 = Sunday.
     public var daysOfWeek: [Int]
-    /// Wall-clock time of day, 24-hour `"HH:MM"`, in the schedule's timezone.
+    /// When the resource is stopped on each selected day.
     public var stopTime: String
-    /// Wall-clock time of day, 24-hour `"HH:MM"`, in the schedule's timezone.
+    /// When the resource is started on each selected day.
     public var startTime: String
     /// IANA timezone the wall-clock times are computed in (DST-safe).
     public var timezone: String
@@ -156,16 +156,9 @@ public struct SleepSchedule: Codable, Hashable, Sendable {
     public var paused: Bool
     /// Next due transition; null while paused.
     public var nextTransitionAt: String?
-    /// A schedule transition: `stop` powers the resource off, `start` powers it
-    /// on.
     public var nextTransitionAction: NextTransitionAction?
     public var lastRunAt: String?
-    /// A schedule transition: `stop` powers the resource off, `start` powers it
-    /// on.
     public var lastRunAction: LastRunAction?
-    /// Outcome of the last executed transition: `ok`, `failed` (see
-    /// `lastRunError`), or `skipped_freeze` (an org change freeze was in effect,
-    /// so the transition was skipped).
     public var lastRunStatus: LastRunStatus?
     /// Failure detail for a failed run.
     public var lastRunError: String?

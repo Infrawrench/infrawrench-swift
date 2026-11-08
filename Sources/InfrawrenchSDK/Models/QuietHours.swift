@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -15,9 +15,6 @@ import Foundation
 
 /// A recurring local-time window during which the rule holds its alerts. Held,
 /// not dropped; a held alert is queued and delivered when the window closes.
-///
-/// The API may send `null` in place of this, which is why references to it are
-/// optional.
 public struct QuietHours: Codable, Hashable, Sendable {
     /// IANA zone, e.g. Europe/Berlin
     public var timezone: String
@@ -27,6 +24,8 @@ public struct QuietHours: Codable, Hashable, Sendable {
     /// ISO weekdays the window applies on, matched against the day the window
     /// opened. Empty means every day.
     public var days: [Int]
+    /// Severity at or above which quiet hours do not apply. Null holds
+    /// everything.
     public var urgentOverride: AlertSeverity?
 
     public init(

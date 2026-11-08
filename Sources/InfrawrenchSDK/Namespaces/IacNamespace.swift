@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -42,6 +42,8 @@ public final class IacNamespace: Sendable {
     /// "Export to Terraform…". Resources no plugin can express are returned in
     /// `unsupported` with a reason, never dropped.
     ///
+    /// _Requires permission: `iac:read`._
+    ///
     /// POST /api/org/{orgId}/iac/import-plan
     ///
     /// Raises on 400: Bad request
@@ -72,6 +74,8 @@ public final class IacNamespace: Sendable {
     /// one uploaded state, plus state entries with no inventory match. Unmanaged
     /// resources carry the ownership and first-seen join that answers "who made
     /// this by hand, and when".
+    ///
+    /// _Requires permission: `iac:read`._
     ///
     /// GET /api/org/{orgId}/iac/reconciliation
     ///
@@ -104,6 +108,8 @@ public final class IacNamespace: Sendable {
     /// uploaded none; absence of a state is not evidence of ClickOps. A query
     /// parameter rather than a path segment because composite resource ids
     /// contain slashes.
+    ///
+    /// _Requires permission: `iac:read`._
     ///
     /// GET /api/org/{orgId}/iac/resource
     ///
@@ -145,6 +151,8 @@ public final class IacStatesNamespace: Sendable {
     /// written. The format version is checked, not assumed: an unsupported
     /// version is a 400 rather than a partial read.
     ///
+    /// _Requires permission: `iac:write`._
+    ///
     /// POST /api/org/{orgId}/iac/states
     ///
     /// Raises on 400: Bad request
@@ -170,6 +178,8 @@ public final class IacStatesNamespace: Sendable {
     }
 
     /// Delete an uploaded state document
+    ///
+    /// _Requires permission: `iac:write`._
     ///
     /// DELETE /api/org/{orgId}/iac/states/{stateId}
     ///
@@ -197,6 +207,8 @@ public final class IacStatesNamespace: Sendable {
     /// Every state document the organization has uploaded, newest first. The
     /// documents themselves are never stored; only the parsed, redacted
     /// projection.
+    ///
+    /// _Requires permission: `iac:read`._
     ///
     /// GET /api/org/{orgId}/iac/states
     ///

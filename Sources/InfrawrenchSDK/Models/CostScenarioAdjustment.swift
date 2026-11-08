@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -129,7 +129,7 @@ public struct CostScenarioAdjustment: Codable, Hashable, Sendable {
     /// it decides whether the adjustment applies to a given chart at all; a GCP
     /// commitment does not belong on a chart filtered to AWS, and one that is
     /// excluded is named in `scenario.outOfScope`.
-    public var scope: [CostScenarioScopeTerm]
+    public var scope: [CostScenarioScopeTerm]?
 
     public init(
         id: String,
@@ -141,7 +141,7 @@ public struct CostScenarioAdjustment: Codable, Hashable, Sendable {
         currency: String? = nil,
         period: Period? = nil,
         percent: Double? = nil,
-        scope: [CostScenarioScopeTerm]
+        scope: [CostScenarioScopeTerm]? = nil
     ) {
         self.id = id
         self.label = label

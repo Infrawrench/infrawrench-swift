@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -29,6 +29,8 @@ public final class PagingIncidentsNamespace: Sendable {
     /// default user. The returned state is the provider's answer, not an
     /// assumption.
     ///
+    /// _Requires permission: `incidents:write`._
+    ///
     /// POST /api/org/{orgId}/paging-incidents/{id}/acknowledge
     ///
     /// Raises on 400: Bad request
@@ -46,10 +48,9 @@ public final class PagingIncidentsNamespace: Sendable {
     ///
     /// Raises on 500: Server error
     ///
-    /// Raises on 503: A backing service this endpoint depends on is not available
+    /// Raises on 502: Bad gateway: an upstream service failed
     ///
-    /// Raises on reauth: Recent sign-in required. Send the user through sign-in
-    /// again and retry; the request itself was well-formed.
+    /// Raises on 503: A backing service this endpoint depends on is not available
     ///
     /// - Parameter orgId: Defaults to the `orgId` the client was created with.
     public func acknowledge(
@@ -73,6 +74,8 @@ public final class PagingIncidentsNamespace: Sendable {
     /// by default; `status=all` includes resolved ones. These are a provider's
     /// pages, distinct from incidents declared in Infrawrench (`/incidents`).
     ///
+    /// _Requires permission: `incidents:read`._
+    ///
     /// GET /api/org/{orgId}/paging-incidents
     ///
     /// Raises on 400: Bad request
@@ -90,10 +93,9 @@ public final class PagingIncidentsNamespace: Sendable {
     ///
     /// Raises on 500: Server error
     ///
-    /// Raises on 503: A backing service this endpoint depends on is not available
+    /// Raises on 502: Bad gateway: an upstream service failed
     ///
-    /// Raises on reauth: Recent sign-in required. Send the user through sign-in
-    /// again and retry; the request itself was well-formed.
+    /// Raises on 503: A backing service this endpoint depends on is not available
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -122,6 +124,8 @@ public final class PagingIncidentsNamespace: Sendable {
     /// default user. The returned state is the provider's answer, not an
     /// assumption.
     ///
+    /// _Requires permission: `incidents:write`._
+    ///
     /// POST /api/org/{orgId}/paging-incidents/{id}/resolve
     ///
     /// Raises on 400: Bad request
@@ -139,10 +143,9 @@ public final class PagingIncidentsNamespace: Sendable {
     ///
     /// Raises on 500: Server error
     ///
-    /// Raises on 503: A backing service this endpoint depends on is not available
+    /// Raises on 502: Bad gateway: an upstream service failed
     ///
-    /// Raises on reauth: Recent sign-in required. Send the user through sign-in
-    /// again and retry; the request itself was well-formed.
+    /// Raises on 503: A backing service this endpoint depends on is not available
     ///
     /// - Parameter orgId: Defaults to the `orgId` the client was created with.
     public func resolve(

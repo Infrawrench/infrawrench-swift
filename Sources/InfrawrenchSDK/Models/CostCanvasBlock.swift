@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -164,17 +164,363 @@ public enum CostCanvasBlock: Codable, Hashable, Sendable {
             }
         }
 
+        public struct Config: Codable, Hashable, Sendable {
+            public enum ChartType: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
+                case stackedBar
+                case multiBar
+                case line
+                case area
+                case pie
+                case donut
+                case table
+                /// A value the API added after this SDK was generated. Kept
+                /// rather than rejected, so a new server-side value cannot break
+                /// decoding.
+                case unrecognized(String)
+
+                public init(rawValue: String) {
+                    switch rawValue {
+                    case "stacked_bar": self = .stackedBar
+                    case "multi_bar": self = .multiBar
+                    case "line": self = .line
+                    case "area": self = .area
+                    case "pie": self = .pie
+                    case "donut": self = .donut
+                    case "table": self = .table
+                    default: self = .unrecognized(rawValue)
+                    }
+                }
+
+                public var rawValue: String {
+                    switch self {
+                    case .stackedBar: return "stacked_bar"
+                    case .multiBar: return "multi_bar"
+                    case .line: return "line"
+                    case .area: return "area"
+                    case .pie: return "pie"
+                    case .donut: return "donut"
+                    case .table: return "table"
+                    case .unrecognized(let value): return value
+                    }
+                }
+
+                /// Every value the spec declares. `unrecognized` is deliberately absent.
+                public static let allKnownCases: [ChartType] = [
+                    .stackedBar,
+                    .multiBar,
+                    .line,
+                    .area,
+                    .pie,
+                    .donut,
+                    .table,
+                ]
+
+                public init(from decoder: any Decoder) throws {
+                    self.init(rawValue: try decoder.singleValueContainer().decode(String.self))
+                }
+
+                public func encode(to encoder: any Encoder) throws {
+                    var container = encoder.singleValueContainer()
+                    try container.encode(rawValue)
+                }
+            }
+
+            public enum GroupBy: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
+                case none
+                case provider
+                case account
+                case service
+                case region
+                case resource
+                case tag
+                case chargeType
+                case commitment
+                case virtualTag
+                /// A value the API added after this SDK was generated. Kept
+                /// rather than rejected, so a new server-side value cannot break
+                /// decoding.
+                case unrecognized(String)
+
+                public init(rawValue: String) {
+                    switch rawValue {
+                    case "none": self = .none
+                    case "provider": self = .provider
+                    case "account": self = .account
+                    case "service": self = .service
+                    case "region": self = .region
+                    case "resource": self = .resource
+                    case "tag": self = .tag
+                    case "charge_type": self = .chargeType
+                    case "commitment": self = .commitment
+                    case "virtual_tag": self = .virtualTag
+                    default: self = .unrecognized(rawValue)
+                    }
+                }
+
+                public var rawValue: String {
+                    switch self {
+                    case .none: return "none"
+                    case .provider: return "provider"
+                    case .account: return "account"
+                    case .service: return "service"
+                    case .region: return "region"
+                    case .resource: return "resource"
+                    case .tag: return "tag"
+                    case .chargeType: return "charge_type"
+                    case .commitment: return "commitment"
+                    case .virtualTag: return "virtual_tag"
+                    case .unrecognized(let value): return value
+                    }
+                }
+
+                /// Every value the spec declares. `unrecognized` is deliberately absent.
+                public static let allKnownCases: [GroupBy] = [
+                    .none,
+                    .provider,
+                    .account,
+                    .service,
+                    .region,
+                    .resource,
+                    .tag,
+                    .chargeType,
+                    .commitment,
+                    .virtualTag,
+                ]
+
+                public init(from decoder: any Decoder) throws {
+                    self.init(rawValue: try decoder.singleValueContainer().decode(String.self))
+                }
+
+                public func encode(to encoder: any Encoder) throws {
+                    var container = encoder.singleValueContainer()
+                    try container.encode(rawValue)
+                }
+            }
+
+            public enum CostBasis2: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
+                case cash
+                case amortized
+                case blended
+                /// A value the API added after this SDK was generated. Kept
+                /// rather than rejected, so a new server-side value cannot break
+                /// decoding.
+                case unrecognized(String)
+
+                public init(rawValue: String) {
+                    switch rawValue {
+                    case "cash": self = .cash
+                    case "amortized": self = .amortized
+                    case "blended": self = .blended
+                    default: self = .unrecognized(rawValue)
+                    }
+                }
+
+                public var rawValue: String {
+                    switch self {
+                    case .cash: return "cash"
+                    case .amortized: return "amortized"
+                    case .blended: return "blended"
+                    case .unrecognized(let value): return value
+                    }
+                }
+
+                /// Every value the spec declares. `unrecognized` is deliberately absent.
+                public static let allKnownCases: [CostBasis2] = [
+                    .cash,
+                    .amortized,
+                    .blended,
+                ]
+
+                public init(from decoder: any Decoder) throws {
+                    self.init(rawValue: try decoder.singleValueContainer().decode(String.self))
+                }
+
+                public func encode(to encoder: any Encoder) throws {
+                    var container = encoder.singleValueContainer()
+                    try container.encode(rawValue)
+                }
+            }
+
+            public enum ComparisonStyle: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
+                case line
+                case bars
+                /// A value the API added after this SDK was generated. Kept
+                /// rather than rejected, so a new server-side value cannot break
+                /// decoding.
+                case unrecognized(String)
+
+                public init(rawValue: String) {
+                    switch rawValue {
+                    case "line": self = .line
+                    case "bars": self = .bars
+                    default: self = .unrecognized(rawValue)
+                    }
+                }
+
+                public var rawValue: String {
+                    switch self {
+                    case .line: return "line"
+                    case .bars: return "bars"
+                    case .unrecognized(let value): return value
+                    }
+                }
+
+                /// Every value the spec declares. `unrecognized` is deliberately absent.
+                public static let allKnownCases: [ComparisonStyle] = [
+                    .line,
+                    .bars,
+                ]
+
+                public init(from decoder: any Decoder) throws {
+                    self.init(rawValue: try decoder.singleValueContainer().decode(String.self))
+                }
+
+                public func encode(to encoder: any Encoder) throws {
+                    var container = encoder.singleValueContainer()
+                    try container.encode(rawValue)
+                }
+            }
+
+            public var version: Double
+            /// How the series are drawn. `pie` and `donut` draw period totals per
+            /// group; `table` lists every bucket as a row with a column per
+            /// series and a total.
+            public var chartType: ChartType
+            public var binning: CostBinning
+            public var dateRange: CostDateRange
+            public var groupBy: GroupBy
+            public var groupByTagKey: String?
+            public var filters: [CostReportFilter]?
+            /// A saved cost filter (see /saved-cost-filters) applied by reference
+            /// and AND-composed with `filters` at query time, server-side.
+            /// Editing the saved filter changes every graph, report and budget
+            /// referencing it; a reference that fails to resolve makes the query
+            /// error rather than silently run unfiltered.
+            public var savedFilterId: String?
+            public var topN: Int?
+            public var comparePreviousPeriod: Bool?
+            public var showForecast: Bool?
+            /// A scenario model (see /cost-scenarios) overlaid on the forecast;
+            /// known future cost the trend cannot see, drawn as a second dashed
+            /// line beside the trend rather than instead of it. Only meaningful
+            /// alongside `showForecast`.
+            public var scenarioModelId: String?
+            public var costBasis: CostBasis2?
+            /// Divide spend by this business metric (an id, so a key rename never
+            /// re-points the graph).
+            public var unitCostMetricId: String?
+            public var unitCostMode: UnitCostMode?
+            /// "Per N units" for a ratio, or the unit a raw metric is shown in.
+            /// Absent is 1.
+            public var unitCostScale: Double?
+            /// `usage_unit_cost` only: the provider usage unit to divide by.
+            public var unitCostUsageUnit: String?
+            /// Keep only metric values carrying these labels.
+            public var unitCostLabelFilters: [UnitCostLabelFilter]?
+            /// One line per value of this metric label.
+            public var unitCostGroupByLabel: String?
+            /// Draw the org's billing rules applied.
+            public var adjusted: Bool?
+            public var measure: CostMeasure?
+            /// The usage unit a `usage` measure sums, exactly as the provider
+            /// spells it (`Hrs`, `GB-Mo`). List them with GET
+            /// /costs/dimensions?dimension=usage-units. Required for `usage`,
+            /// refused for any other measure.
+            public var usageUnit: String?
+            /// Running totals from the start of the range, at any bin size.
+            /// Omitted is off. Totals then report the last point rather than the
+            /// sum.
+            public var cumulative: Bool?
+            /// Put this dimension's values on the X axis instead of date bins:
+            /// one bar per value, ranked by spend over the range, the top `topN`
+            /// then `__other__`. `groupBy` then segments each bar (or set
+            /// `segmentByDate` to segment by bin instead). Omitted is the date
+            /// axis. Refused with a forecast, a scenario, a running total, the
+            /// `count` measure or a unit-cost chart, which all need dates.
+            public var xAxis: CostDimension?
+            /// Required when `xAxis` is `tag` or `virtual_tag`: which key's
+            /// values go on the axis.
+            public var xAxisTagKey: String?
+            /// With `xAxis` and `groupBy: none`: segment each bar by date bin
+            /// (one series per bin). Refused alongside a `groupBy`; ignored
+            /// without `xAxis`.
+            public var segmentByDate: Bool?
+            /// How `comparePreviousPeriod` is drawn: `line` (omitted) is the
+            /// dashed totals line, `bars` a previous-period bar beside each bar
+            /// (bar charts only). Tables always list previous, change and change
+            /// % columns.
+            public var comparisonStyle: ComparisonStyle?
+
+            public init(
+                version: Double,
+                chartType: ChartType,
+                binning: CostBinning,
+                dateRange: CostDateRange,
+                groupBy: GroupBy,
+                groupByTagKey: String? = nil,
+                filters: [CostReportFilter]? = nil,
+                savedFilterId: String? = nil,
+                topN: Int? = nil,
+                comparePreviousPeriod: Bool? = nil,
+                showForecast: Bool? = nil,
+                scenarioModelId: String? = nil,
+                costBasis: CostBasis2? = nil,
+                unitCostMetricId: String? = nil,
+                unitCostMode: UnitCostMode? = nil,
+                unitCostScale: Double? = nil,
+                unitCostUsageUnit: String? = nil,
+                unitCostLabelFilters: [UnitCostLabelFilter]? = nil,
+                unitCostGroupByLabel: String? = nil,
+                adjusted: Bool? = nil,
+                measure: CostMeasure? = nil,
+                usageUnit: String? = nil,
+                cumulative: Bool? = nil,
+                xAxis: CostDimension? = nil,
+                xAxisTagKey: String? = nil,
+                segmentByDate: Bool? = nil,
+                comparisonStyle: ComparisonStyle? = nil
+            ) {
+                self.version = version
+                self.chartType = chartType
+                self.binning = binning
+                self.dateRange = dateRange
+                self.groupBy = groupBy
+                self.groupByTagKey = groupByTagKey
+                self.filters = filters
+                self.savedFilterId = savedFilterId
+                self.topN = topN
+                self.comparePreviousPeriod = comparePreviousPeriod
+                self.showForecast = showForecast
+                self.scenarioModelId = scenarioModelId
+                self.costBasis = costBasis
+                self.unitCostMetricId = unitCostMetricId
+                self.unitCostMode = unitCostMode
+                self.unitCostScale = unitCostScale
+                self.unitCostUsageUnit = unitCostUsageUnit
+                self.unitCostLabelFilters = unitCostLabelFilters
+                self.unitCostGroupByLabel = unitCostGroupByLabel
+                self.adjusted = adjusted
+                self.measure = measure
+                self.usageUnit = usageUnit
+                self.cumulative = cumulative
+                self.xAxis = xAxis
+                self.xAxisTagKey = xAxisTagKey
+                self.segmentByDate = segmentByDate
+                self.comparisonStyle = comparisonStyle
+            }
+        }
+
         /// Stable within the spec; text blocks reference KPI ids as `{{id}}`.
         public var id: String
         public var kind: Kind
         public var title: String
-        public var config: JsonObject
+        public var config: Config
 
         public init(
             id: String,
             kind: Kind,
             title: String,
-            config: JsonObject
+            config: Config
         ) {
             self.id = id
             self.kind = kind

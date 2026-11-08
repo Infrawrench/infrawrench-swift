@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -46,6 +46,8 @@ public final class AlertEmailNamespace: Sendable {
     /// anomaly settings or efficiency alert settings, or an email destination on
     /// an alert routing rule. Requires `costs:read`.
     ///
+    /// _Requires permission: `costs:read`._
+    ///
     /// GET /api/org/{orgId}/alert-email
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
@@ -76,6 +78,8 @@ public final class AlertEmailSettingsNamespace: Sendable {
 
     /// Get the alert email policy and suppression list
     ///
+    /// _Requires permission: `org:settings:write`._
+    ///
     /// GET /api/org/{orgId}/alert-email/settings
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
@@ -99,6 +103,8 @@ public final class AlertEmailSettingsNamespace: Sendable {
     /// Whole object. Tightening the policy does not edit any stored recipient
     /// list: an address that no longer passes is skipped at send time, and
     /// loosening the policy again brings it back.
+    ///
+    /// _Requires permission: `org:settings:write`._
     ///
     /// PUT /api/org/{orgId}/alert-email/settings
     ///
@@ -133,6 +139,8 @@ public final class AlertEmailSuppressionsNamespace: Sendable {
     }
 
     /// Resume alert email to an unsubscribed address
+    ///
+    /// _Requires permission: `org:settings:write`._
     ///
     /// DELETE /api/org/{orgId}/alert-email/suppressions/{id}
     ///

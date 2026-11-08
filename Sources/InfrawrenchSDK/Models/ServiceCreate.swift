@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -21,7 +21,6 @@ public struct ServiceCreate: Codable, Hashable, Sendable {
     public var slug: String?
     /// At most 1000 characters.
     public var description: String?
-    /// Criticality, 1 being the most critical.
     public var tier: Double?
     /// Free-text owning team; display-only, never routed. At most 120 characters.
     public var ownerTeam: String?

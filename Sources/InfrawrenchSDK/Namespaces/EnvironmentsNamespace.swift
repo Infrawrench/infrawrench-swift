@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -12,6 +12,19 @@
  * marked x-internal.
  */
 import Foundation
+
+public struct EnvironmentsSettingsUpdateBody: Codable, Hashable, Sendable {
+    public var maxTtlHours: Int?
+    public var defaultTtlHours: Int?
+
+    public init(
+        maxTtlHours: Int? = nil,
+        defaultTtlHours: Int? = nil
+    ) {
+        self.maxTtlHours = maxTtlHours
+        self.defaultTtlHours = defaultTtlHours
+    }
+}
 
 /// `client.environments`
 public final class EnvironmentsNamespace: Sendable {
@@ -242,11 +255,13 @@ public final class EnvironmentsSettingsNamespace: Sendable {
     ///
     /// PUT /api/org/{orgId}/environments/settings
     ///
+    /// Raises on 400: Bad request
+    ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
     public func update(
         orgId: String? = nil,
-        body: EnvironmentSettings? = nil,
+        body: EnvironmentsSettingsUpdateBody? = nil,
         options: RequestOptions? = nil
     ) async throws -> EnvironmentSettings {
         return try await transport.send(
@@ -430,6 +445,8 @@ public final class EnvironmentsTemplatesNamespace: Sendable {
     /// POST /api/org/{orgId}/environments/templates/{templateId}/instantiate
     ///
     /// Raises on 400: Bad request
+    ///
+    /// Raises on 403: Forbidden
     ///
     /// Raises on 404: Not found
     ///

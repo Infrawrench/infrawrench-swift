@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -24,7 +24,11 @@ public final class ApiKeysNamespace: Sendable {
 
     /// Create an API key (plaintext returned once)
     ///
+    /// _Requires permission: `apikeys:write`._
+    ///
     /// POST /api/org/{orgId}/api-keys
+    ///
+    /// Raises on 400: Bad request
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -46,6 +50,8 @@ public final class ApiKeysNamespace: Sendable {
 
     /// List API keys (no plaintext)
     ///
+    /// _Requires permission: `apikeys:read`._
+    ///
     /// GET /api/org/{orgId}/api-keys
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
@@ -65,6 +71,8 @@ public final class ApiKeysNamespace: Sendable {
     }
 
     /// Revoke an API key
+    ///
+    /// _Requires permission: `apikeys:write`._
     ///
     /// POST /api/org/{orgId}/api-keys/{id}/revoke
     ///
@@ -86,6 +94,8 @@ public final class ApiKeysNamespace: Sendable {
     }
 
     /// Rotate an API key (revokes old, returns new)
+    ///
+    /// _Requires permission: `apikeys:write`._
     ///
     /// POST /api/org/{orgId}/api-keys/{id}/rotate
     ///

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -76,6 +76,8 @@ public final class SlackNamespace: Sendable {
     /// Slack redirects back to /api/slack/oauth/callback. The install only
     /// completes in the browser that opened the link as that user.
     ///
+    /// _Requires permission: `org:settings:write`._
+    ///
     /// GET /api/org/{orgId}/slack/install-url
     ///
     /// Raises on 400: Bad request
@@ -101,6 +103,8 @@ public final class SlackNamespace: Sendable {
     /// Reports whether the server has a Slack app registered, which workspaces
     /// this organization has connected, and which channels alerts are routed to.
     ///
+    /// _Requires permission: `org:settings:write`._
+    ///
     /// GET /api/org/{orgId}/slack/status
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
@@ -124,6 +128,8 @@ public final class SlackNamespace: Sendable {
     /// Ignores routing rules; every channel gets the test. Fails with the Slack
     /// error when nothing could be delivered (`not_in_channel` means the bot
     /// needs inviting to a private channel).
+    ///
+    /// _Requires permission: `org:settings:write`._
     ///
     /// POST /api/org/{orgId}/slack/test
     ///
@@ -163,6 +169,8 @@ public final class SlackChannelsNamespace: Sendable {
     /// drift, everywhere), so a freshly added channel starts receiving alerts
     /// without a second step.
     ///
+    /// _Requires permission: `org:settings:write`._
+    ///
     /// POST /api/org/{orgId}/slack/channels
     ///
     /// Raises on 400: Bad request
@@ -189,6 +197,8 @@ public final class SlackChannelsNamespace: Sendable {
 
     /// Disconnect a channel
     ///
+    /// _Requires permission: `org:settings:write`._
+    ///
     /// DELETE /api/org/{orgId}/slack/channels/{id}
     ///
     /// Raises on 404: Not found
@@ -212,7 +222,11 @@ public final class SlackChannelsNamespace: Sendable {
 
     /// Refresh a channel's cached name
     ///
+    /// _Requires permission: `org:settings:write`._
+    ///
     /// PATCH /api/org/{orgId}/slack/channels/{id}
+    ///
+    /// Raises on 400: Bad request
     ///
     /// Raises on 404: Not found
     ///
@@ -250,6 +264,8 @@ public final class SlackInstallationsNamespace: Sendable {
     /// Live call to Slack's conversations.list, for populating a channel picker.
     /// Returns non-archived public and private channels visible to the bot.
     ///
+    /// _Requires permission: `org:settings:write`._
+    ///
     /// GET
     /// /api/org/{orgId}/slack/installations/{installationId}/available-channels
     ///
@@ -276,6 +292,8 @@ public final class SlackInstallationsNamespace: Sendable {
     ///
     /// Stops all delivery to this workspace. The channel routing is retained, so
     /// re-installing restores it.
+    ///
+    /// _Requires permission: `org:settings:write`._
     ///
     /// DELETE /api/org/{orgId}/slack/installations/{installationId}
     ///

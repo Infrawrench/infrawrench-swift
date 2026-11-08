@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -111,7 +111,7 @@ public final class LinearNamespace: Sendable {
     ///
     /// Raises on 400: Bad request
     ///
-    /// Raises on 502: Linear refused to create the issue, or was unreachable
+    /// Raises on 502: Bad gateway: an upstream service failed
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -142,6 +142,8 @@ public final class LinearNamespace: Sendable {
     ///
     /// Raises on 400: Bad request
     ///
+    /// Raises on 502: Bad gateway: an upstream service failed
+    ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
     public func teams(
@@ -166,13 +168,15 @@ public final class LinearNamespace: Sendable {
     ///
     /// Raises on 400: Bad request
     ///
+    /// Raises on 502: Bad gateway: an upstream service failed
+    ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
     public func update(
         orgId: String? = nil,
         body: LinearIntegrationInput,
         options: RequestOptions? = nil
-    ) async throws -> LinearIntegration? {
+    ) async throws -> LinearIntegration {
         return try await transport.send(
             RequestSpec(
                 method: "PUT",
@@ -196,7 +200,7 @@ public final class LinearNamespace: Sendable {
     ///
     /// Raises on 400: Bad request
     ///
-    /// Raises on 502: Linear rejected the key or was unreachable
+    /// Raises on 502: Bad gateway: an upstream service failed
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -268,7 +272,7 @@ public final class LinearLinksNamespace: Sendable {
     ///
     /// Raises on 400: Bad request
     ///
-    /// Raises on 502: Linear refused or was unreachable
+    /// Raises on 502: Bad gateway: an upstream service failed
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -310,7 +314,7 @@ public final class LinearWebhookNamespace: Sendable {
     ///
     /// Raises on 400: Bad request
     ///
-    /// Raises on 502: Linear refused or was unreachable
+    /// Raises on 502: Bad gateway: an upstream service failed
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -339,9 +343,11 @@ public final class LinearWebhookNamespace: Sendable {
     ///
     /// DELETE /api/org/{orgId}/linear/webhook
     ///
+    /// Raises on 400: Bad request
+    ///
     /// Raises on 404: Not found
     ///
-    /// Raises on 502: Linear refused or was unreachable
+    /// Raises on 502: Bad gateway: an upstream service failed
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -370,6 +376,8 @@ public final class LinearWebhookNamespace: Sendable {
     /// POST /api/org/{orgId}/linear/webhook/url
     ///
     /// Raises on 400: Bad request
+    ///
+    /// Raises on 502: Bad gateway: an upstream service failed
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.

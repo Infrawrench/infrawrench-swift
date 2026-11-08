@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -18,14 +18,14 @@ public struct SqlExecuteRequest: Codable, Hashable, Sendable {
     public var resourceId: ResourceId?
     public var resourceTypeId: String?
     public var sql: String
-    public var params: [JSONValue]?
+    public var params: JSONValue?
 
     public init(
         accountId: String,
         resourceId: ResourceId? = nil,
         resourceTypeId: String? = nil,
         sql: String,
-        params: [JSONValue]? = nil
+        params: JSONValue? = nil
     ) {
         self.accountId = accountId
         self.resourceId = resourceId

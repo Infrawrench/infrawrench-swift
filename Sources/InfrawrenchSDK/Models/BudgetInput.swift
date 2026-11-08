@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -36,6 +36,13 @@ public struct BudgetInput: Codable, Hashable, Sendable {
     /// are full replaces, so omitting it on PUT clears the opt-in.
     public var scenarioModelId: String?
     public var thresholds: [BudgetThreshold]
+    /// Which number the budget tracks. Defaults to `cash`: what the provider
+    /// charged, when it charged it. An organization holding reservations or
+    /// savings plans usually wants `amortized`: a cash budget is blown the month
+    /// a commitment is bought and then reads as under-spent for the rest of the
+    /// term it paid for. `blended` additionally spreads each commitment's
+    /// discount evenly over all the usage it could cover, which is the fair basis
+    /// for a team's budget when commitments are bought centrally.
     public var costBasis: BudgetCostBasis?
     /// Measure this budget against billing-rule-adjusted spend (the internal
     /// figure) instead of what the providers charged. False by default, and for

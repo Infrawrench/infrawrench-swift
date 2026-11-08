@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -67,6 +67,12 @@ public struct BlastRadiusFlowPeer: Codable, Hashable, Sendable {
     public var currency: String
     /// Days in the window this peer appeared on; a spike versus a standing flow.
     public var days: Int
+    /// The peer's Infrawrench resource id when its flow ref resolved to exactly
+    /// one synced resource. Null when it resolved to none (an endpoint outside
+    /// the organization) and also when it resolved to several; a provider id is
+    /// only unique within one plugin and account, and a flow record does not name
+    /// the peer's account, so a contested ref is reported unlinked with the
+    /// reason in `unchecked` rather than attributed to a guess.
     public var resourceId: ResourceId?
 
     public init(

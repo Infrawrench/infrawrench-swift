@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -15,6 +15,8 @@ import Foundation
 
 public struct ResourcesCostEstimateResult: Codable, Hashable, Sendable {
     public var estimate: CostEstimate?
+    /// Estimated monthly CO2e of the same configuration, beside its price. Null
+    /// for a peer resource or when the size catalogue could not be read.
     public var carbon: ResourceCarbonEstimate?
 
     public init(
@@ -131,6 +133,8 @@ public final class ResourcesNamespace: Sendable {
     /// with the `x-tag-policy-override: true` header if you hold
     /// `tag-policy:override`; both blocks and overrides are audit-logged.
     ///
+    /// Raises on 500: Server error
+    ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
     public func create(
@@ -185,6 +189,8 @@ public final class ResourcesNamespace: Sendable {
     /// _Requires permission: `resources:read`._
     ///
     /// POST /api/org/{orgId}/resources/create-pricing
+    ///
+    /// Raises on 404: Not found
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -376,6 +382,8 @@ public final class ResourcesNamespace: Sendable {
     /// Calls the plugin's `executeFieldAction`. Returns `{ value }` to assign to
     /// the field; for `select` fields the optional `option` should be spliced
     /// into the options list so the new value can be displayed.
+    ///
+    /// _Requires permission: `resources:write`._
     ///
     /// POST /api/org/{orgId}/resources/field-action
     ///
@@ -609,6 +617,38 @@ public final class ResourcesNamespace: Sendable {
         )
     }
 
+    /// Serve a host over a Cloudflare Tunnel
+    ///
+    /// Points the tunnel's ingress at the host's service, creates the routing DNS
+    /// record in `zoneId`, then connects to the host over SSH and installs and
+    /// runs cloudflared. A DNS record that could not be created (one may already
+    /// exist) is reported and the setup carries on; any other failed step is the
+    /// last of `steps`, and `connectCommand` is only sent when every step ran.
+    ///
+    /// _Requires permission: `resources:write`._
+    ///
+    /// POST /api/org/{orgId}/resources/tunnel-ssh-attach
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func tunnelSshAttach(
+        orgId: String? = nil,
+        body: TunnelSshAttachRequest,
+        options: RequestOptions? = nil
+    ) async throws -> TunnelSshAttachResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/resources/tunnel-ssh-attach",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+
     /// Update a resource via its plugin
     ///
     /// Applies the supplied field changes upstream and persists the refreshed
@@ -616,6 +656,8 @@ public final class ResourcesNamespace: Sendable {
     /// keys the caller actually changed. Blocked with `423` while an org change
     /// freeze is in effect (this is also the path that applies right-sizing
     /// recommendations); every applied update is audit-logged.
+    ///
+    /// _Requires permission: `resources:write`._
     ///
     /// POST /api/org/{orgId}/resources/update
     ///

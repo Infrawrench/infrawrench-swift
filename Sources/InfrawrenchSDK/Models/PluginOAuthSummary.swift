@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -13,9 +13,6 @@
  */
 import Foundation
 
-/// Present only when this server can connect the plugin through provider OAuth
-/// (the plugin supports it and the server has a client configured). See `POST
-/// /provider-oauth/{pluginId}/authorize`.
 public struct PluginOAuthSummary: Codable, Hashable, Sendable {
     public enum Access: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
         case readOnly

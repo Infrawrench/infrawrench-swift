@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -18,7 +18,7 @@ public struct GithubIacSource: Codable, Hashable, Sendable {
     /// The IaC state scope this maps: the account an uploaded state document
     /// covers, or null for the organization-wide state.
     public var iacAccountId: String?
-    public var repo: GithubRepoRef?
+    public var repo: GithubRepoRef
     /// Branch pull requests target. Null means the repository's default branch.
     public var baseBranch: String?
     /// Directory holding the root module's `.tf` files. Empty for the repository
@@ -28,7 +28,7 @@ public struct GithubIacSource: Codable, Hashable, Sendable {
     public init(
         id: String,
         iacAccountId: String? = nil,
-        repo: GithubRepoRef? = nil,
+        repo: GithubRepoRef,
         baseBranch: String? = nil,
         directory: String
     ) {

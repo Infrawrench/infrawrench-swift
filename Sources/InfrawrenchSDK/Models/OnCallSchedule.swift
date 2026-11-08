@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -25,7 +25,7 @@ public struct OnCallSchedule: Codable, Hashable, Sendable {
     /// boundary is derived from it, so moving this re-anchors the whole rotation.
     public var startDate: String
     /// Rotation order. Reordering re-plans the future, deliberately.
-    public var participants: [OnCallParticipant?]
+    public var participants: [OnCallParticipant]
     /// Off resolves to nobody. A routing destination pointing at a disabled
     /// rotation contributes nobody and the rule's other destinations still
     /// deliver.
@@ -40,7 +40,7 @@ public struct OnCallSchedule: Codable, Hashable, Sendable {
         rotationDays: Int,
         handoffTime: String,
         startDate: String,
-        participants: [OnCallParticipant?],
+        participants: [OnCallParticipant],
         enabled: Bool,
         createdAt: String,
         updatedAt: String

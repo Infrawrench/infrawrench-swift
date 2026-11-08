@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -20,7 +20,7 @@ public struct CostForecastInput: Codable, Hashable, Sendable {
     /// the line the previous ones produced, so an org-wide percentage in a later
     /// model also scales amounts an earlier one added. Deleting a model a
     /// forecast names is refused.
-    public var scenarioModelIds: [String]
+    public var scenarioModelIds: [String]?
     /// A business metric whose forecasted values drive the baseline: projected
     /// unit cost (the report's spend per unit, trended) times the forecasted
     /// value. Null keeps the trend.
@@ -33,7 +33,7 @@ public struct CostForecastInput: Codable, Hashable, Sendable {
     public init(
         name: String,
         description: String? = nil,
-        scenarioModelIds: [String],
+        scenarioModelIds: [String]? = nil,
         driverMetricId: String? = nil,
         isDefault: Bool? = nil
     ) {

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -26,6 +26,8 @@ public final class BudgetsNamespace: Sendable {
     }
 
     /// Create a budget
+    ///
+    /// _Requires permission: `budgets:write`._
     ///
     /// POST /api/org/{orgId}/budgets
     ///
@@ -51,6 +53,8 @@ public final class BudgetsNamespace: Sendable {
 
     /// Delete a budget
     ///
+    /// _Requires permission: `budgets:write`._
+    ///
     /// DELETE /api/org/{orgId}/budgets/{id}
     ///
     /// Raises on 404: Not found
@@ -73,6 +77,8 @@ public final class BudgetsNamespace: Sendable {
     }
 
     /// Get a budget with current-period status
+    ///
+    /// _Requires permission: `budgets:read`._
     ///
     /// GET /api/org/{orgId}/budgets/{id}
     ///
@@ -97,6 +103,8 @@ public final class BudgetsNamespace: Sendable {
 
     /// List budgets with current-period actuals and forecasts
     ///
+    /// _Requires permission: `budgets:read`._
+    ///
     /// GET /api/org/{orgId}/budgets
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
@@ -116,6 +124,8 @@ public final class BudgetsNamespace: Sendable {
     }
 
     /// Update a budget
+    ///
+    /// _Requires permission: `budgets:write`._
     ///
     /// PUT /api/org/{orgId}/budgets/{id}
     ///
@@ -154,6 +164,8 @@ public final class BudgetsEventsNamespace: Sendable {
 
     /// Alert event history for a budget
     ///
+    /// _Requires permission: `budgets:read`._
+    ///
     /// GET /api/org/{orgId}/budgets/{id}/events
     ///
     /// Raises on 404: Not found
@@ -191,6 +203,8 @@ public final class BudgetsEventsNamespace: Sendable {
     /// POST /api/org/{orgId}/budgets/{id}/events/{eventId}/note
     ///
     /// Raises on 400: Bad request
+    ///
+    /// Raises on 403: Forbidden
     ///
     /// Raises on 404: Not found
     ///

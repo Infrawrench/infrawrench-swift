@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.98.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.98.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -13,9 +13,9 @@
  */
 import Foundation
 
-/// The window. Absent follows the source (a report's own range, the last 30 days
-/// for savings); refused for a budget and for commitment coverage and
-/// utilization.
+/// A relative preset resolves against today every time the report runs, so a
+/// saved report keeps meaning 'the last 30 days'; an absolute range pins it to
+/// fixed dates.
 ///
 /// The spec allows several shapes here. Decoding tries the branches in spec
 /// order, so the most specific match wins.
