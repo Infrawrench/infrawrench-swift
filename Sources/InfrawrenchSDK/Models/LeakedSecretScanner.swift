@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.96.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.97.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.96.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.97.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -23,6 +23,9 @@ public struct LeakedSecretScanner: Codable, Hashable, Sendable {
     public var lastScannedAt: String?
     public var lastError: String?
     public var lastCount: Int?
+    /// The last scan read only part of the scanner's findings (more than one scan
+    /// reads, or some could not be read), so a leak may be missing from the list.
+    public var lastPartial: Bool
 
     public init(
         accountId: String,
@@ -33,7 +36,8 @@ public struct LeakedSecretScanner: Codable, Hashable, Sendable {
         returnsSecretValue: Bool,
         lastScannedAt: String? = nil,
         lastError: String? = nil,
-        lastCount: Int? = nil
+        lastCount: Int? = nil,
+        lastPartial: Bool
     ) {
         self.accountId = accountId
         self.accountName = accountName
@@ -44,5 +48,6 @@ public struct LeakedSecretScanner: Codable, Hashable, Sendable {
         self.lastScannedAt = lastScannedAt
         self.lastError = lastError
         self.lastCount = lastCount
+        self.lastPartial = lastPartial
     }
 }
