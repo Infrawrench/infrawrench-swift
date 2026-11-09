@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.100.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.101.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.100.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.101.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -141,6 +141,9 @@ public struct CiJobSummary: Codable, Hashable, Sendable {
     public var status: Status
     public var reason: String?
     public var durationMs: DurationMs?
+    /// The job keys it waited for, as the pipeline's `needs:` expanded them.
+    /// Absent from runs before runner 0.3.1.
+    public var needs: [String]?
 
     public init(
         pipeline: String,
@@ -148,7 +151,8 @@ public struct CiJobSummary: Codable, Hashable, Sendable {
         name: String,
         status: Status,
         reason: String? = nil,
-        durationMs: DurationMs? = nil
+        durationMs: DurationMs? = nil,
+        needs: [String]? = nil
     ) {
         self.pipeline = pipeline
         self.id = id
@@ -156,5 +160,6 @@ public struct CiJobSummary: Codable, Hashable, Sendable {
         self.status = status
         self.reason = reason
         self.durationMs = durationMs
+        self.needs = needs
     }
 }
