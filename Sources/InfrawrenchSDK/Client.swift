@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.100.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.100.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -88,6 +88,8 @@ public final class APIV1Client: Sendable {
     public let changes: ChangesNamespace
     /// `client.chat`
     public let chat: ChatNamespace
+    /// `client.ci`
+    public let ci: CiNamespace
     /// `client.commitments`
     public let commitments: CommitmentsNamespace
     /// `client.compliance`
@@ -156,6 +158,8 @@ public final class APIV1Client: Sendable {
     public let expiring: ExpiringNamespace
     /// `client.extendedSupport`
     public let extendedSupport: ExtendedSupportNamespace
+    /// `client.features`
+    public let features: FeaturesNamespace
     /// `client.github`
     public let github: GithubNamespace
     /// `client.githubIssues`
@@ -341,6 +345,7 @@ public final class APIV1Client: Sendable {
         self.changeFreezes = ChangeFreezesNamespace(transport: transport)
         self.changes = ChangesNamespace(transport: transport)
         self.chat = ChatNamespace(transport: transport)
+        self.ci = CiNamespace(transport: transport)
         self.commitments = CommitmentsNamespace(transport: transport)
         self.compliance = ComplianceNamespace(transport: transport)
         self.config = ConfigNamespace(transport: transport)
@@ -375,6 +380,7 @@ public final class APIV1Client: Sendable {
         self.eventSubscriptions = EventSubscriptionsNamespace(transport: transport)
         self.expiring = ExpiringNamespace(transport: transport)
         self.extendedSupport = ExtendedSupportNamespace(transport: transport)
+        self.features = FeaturesNamespace(transport: transport)
         self.github = GithubNamespace(transport: transport)
         self.githubIssues = GithubIssuesNamespace(transport: transport)
         self.iac = IacNamespace(transport: transport)

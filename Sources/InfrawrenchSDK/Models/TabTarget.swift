@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.100.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.100.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -54,6 +54,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
         case slos
         case services
         case delivery
+        case ci
         case workflows
         case deployments
         case settings
@@ -104,6 +105,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case "slos": self = .slos
             case "services": self = .services
             case "delivery": self = .delivery
+            case "ci": self = .ci
             case "workflows": self = .workflows
             case "deployments": self = .deployments
             case "settings": self = .settings
@@ -154,6 +156,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case .slos: return "slos"
             case .services: return "services"
             case .delivery: return "delivery"
+            case .ci: return "ci"
             case .workflows: return "workflows"
             case .deployments: return "deployments"
             case .settings: return "settings"
@@ -204,6 +207,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             .slos,
             .services,
             .delivery,
+            .ci,
             .workflows,
             .deployments,
             .settings,
@@ -281,6 +285,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
     public var invoiceId: String?
     public var canvasId: String?
     public var sloId: String?
+    public var runId: String?
     public var serviceId: String?
     public var view: View?
     public var framework: String?
@@ -298,6 +303,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
         invoiceId: String? = nil,
         canvasId: String? = nil,
         sloId: String? = nil,
+        runId: String? = nil,
         serviceId: String? = nil,
         view: View? = nil,
         framework: String? = nil,
@@ -314,6 +320,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
         self.invoiceId = invoiceId
         self.canvasId = canvasId
         self.sloId = sloId
+        self.runId = runId
         self.serviceId = serviceId
         self.view = view
         self.framework = framework

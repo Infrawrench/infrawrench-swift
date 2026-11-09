@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.99.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.100.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.99.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.100.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -44,6 +44,9 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
     case freezesRead
     case freezesWrite
     case freezesOverride
+    case ciRead
+    case ciWrite
+    case ciApprove
     case incidentsRead
     case incidentsWrite
     case tagPolicyOverride
@@ -117,6 +120,9 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case "freezes:read": self = .freezesRead
         case "freezes:write": self = .freezesWrite
         case "freezes:override": self = .freezesOverride
+        case "ci:read": self = .ciRead
+        case "ci:write": self = .ciWrite
+        case "ci:approve": self = .ciApprove
         case "incidents:read": self = .incidentsRead
         case "incidents:write": self = .incidentsWrite
         case "tag-policy:override": self = .tagPolicyOverride
@@ -190,6 +196,9 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case .freezesRead: return "freezes:read"
         case .freezesWrite: return "freezes:write"
         case .freezesOverride: return "freezes:override"
+        case .ciRead: return "ci:read"
+        case .ciWrite: return "ci:write"
+        case .ciApprove: return "ci:approve"
         case .incidentsRead: return "incidents:read"
         case .incidentsWrite: return "incidents:write"
         case .tagPolicyOverride: return "tag-policy:override"
@@ -263,6 +272,9 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         .freezesRead,
         .freezesWrite,
         .freezesOverride,
+        .ciRead,
+        .ciWrite,
+        .ciApprove,
         .incidentsRead,
         .incidentsWrite,
         .tagPolicyOverride,
