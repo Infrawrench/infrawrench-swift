@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.101.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.102.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.101.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.102.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -24,16 +24,24 @@ public struct CreateAccountRequest: Codable, Hashable, Sendable {
     public var credentials: [String: String]
     /// Optional bastion id to route this account's cloud API traffic through.
     public var bastionId: String?
+    /// The apps to use this connection for. Each must be one the plugin offers
+    /// (the distinct `product`s of its `preflight.capabilities`, where a
+    /// capability without one follows the convention for its id); an empty list
+    /// is rejected, as is any list for a plugin without preflight. `null`, or the
+    /// plugin's whole offer, means every app and is stored as `null`.
+    public var products: [ProductId]?
 
     public init(
         pluginId: PluginId,
         displayName: String,
         credentials: [String: String],
-        bastionId: String? = nil
+        bastionId: String? = nil,
+        products: [ProductId]? = nil
     ) {
         self.pluginId = pluginId
         self.displayName = displayName
         self.credentials = credentials
         self.bastionId = bastionId
+        self.products = products
     }
 }

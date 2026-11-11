@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.101.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.102.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.101.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.102.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -15,6 +15,7 @@ import Foundation
 
 public struct PreflightCapability: Codable, Hashable, Sendable {
     public var id: String
+    public var product: ProductId?
     public var label: String
     public var description: String?
     public var requiredPermissions: [PreflightPermission]
@@ -22,12 +23,14 @@ public struct PreflightCapability: Codable, Hashable, Sendable {
 
     public init(
         id: String,
+        product: ProductId? = nil,
         label: String,
         description: String? = nil,
         requiredPermissions: [PreflightPermission],
         essential: Bool? = nil
     ) {
         self.id = id
+        self.product = product
         self.label = label
         self.description = description
         self.requiredPermissions = requiredPermissions

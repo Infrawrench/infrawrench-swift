@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.101.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.102.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.101.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.102.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -254,9 +254,15 @@ public final class AccountsNamespace: Sendable {
 
     /// Sync all resource types for an account
     ///
+    /// 400 for an account connected for Costs alone: its resources are not
+    /// synced. Add another app to the connection (`PATCH /accounts/{id}` with
+    /// `products`) first.
+    ///
     /// _Requires permission: `resources:read`._
     ///
     /// POST /api/org/{orgId}/accounts/{id}/sync
+    ///
+    /// Raises on 400: Bad request
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
@@ -275,7 +281,7 @@ public final class AccountsNamespace: Sendable {
         )
     }
 
-    /// Update an account (rename and/or change bastion binding)
+    /// Update an account (rename, change bastion binding, change what it is for)
     ///
     /// _Requires permission: `accounts:write`._
     ///
@@ -536,6 +542,8 @@ public final class AccountsSyncTypeNamespace: Sendable {
     /// _Requires permission: `resources:read`._
     ///
     /// POST /api/org/{orgId}/accounts/{id}/sync-type/{typeId}
+    ///
+    /// Raises on 400: Bad request
     ///
     /// Raises on 404: Not found
     ///

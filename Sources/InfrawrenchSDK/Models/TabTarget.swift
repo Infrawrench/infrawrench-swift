@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.101.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.102.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.101.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.102.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -36,6 +36,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
         case accessReview
         case jitAccess
         case backups
+        case home
         case wallboard
         case calendar
         case runbooks
@@ -87,6 +88,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case "access-review": self = .accessReview
             case "jit-access": self = .jitAccess
             case "backups": self = .backups
+            case "home": self = .home
             case "wallboard": self = .wallboard
             case "calendar": self = .calendar
             case "runbooks": self = .runbooks
@@ -138,6 +140,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case .accessReview: return "access-review"
             case .jitAccess: return "jit-access"
             case .backups: return "backups"
+            case .home: return "home"
             case .wallboard: return "wallboard"
             case .calendar: return "calendar"
             case .runbooks: return "runbooks"
@@ -189,6 +192,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             .accessReview,
             .jitAccess,
             .backups,
+            .home,
             .wallboard,
             .calendar,
             .runbooks,
@@ -289,6 +293,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
     public var serviceId: String?
     public var view: View?
     public var framework: String?
+    public var productId: String?
     public var sessionId: String?
     public var windowId: Int?
     public var appId: String?
@@ -307,6 +312,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
         serviceId: String? = nil,
         view: View? = nil,
         framework: String? = nil,
+        productId: String? = nil,
         sessionId: String? = nil,
         windowId: Int? = nil,
         appId: String? = nil
@@ -324,6 +330,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
         self.serviceId = serviceId
         self.view = view
         self.framework = framework
+        self.productId = productId
         self.sessionId = sessionId
         self.windowId = windowId
         self.appId = appId

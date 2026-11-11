@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.101.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.102.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.101.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.102.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -18,12 +18,18 @@ public struct UpdateAccountRequest: Codable, Hashable, Sendable {
     /// Pass `null` to unbind, a uuid to bind, or omit the field to leave the
     /// binding unchanged.
     public var bastionId: String?
+    /// Change the apps this connection is for; omit the field to leave them
+    /// unchanged. Same rules as on create. Adding an app makes its collection due
+    /// now; the credential must already carry that app's permissions.
+    public var products: [ProductId]?
 
     public init(
         displayName: String? = nil,
-        bastionId: String? = nil
+        bastionId: String? = nil,
+        products: [ProductId]? = nil
     ) {
         self.displayName = displayName
         self.bastionId = bastionId
+        self.products = products
     }
 }

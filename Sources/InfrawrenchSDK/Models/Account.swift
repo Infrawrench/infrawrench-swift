@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.101.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.102.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.101.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.102.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -21,6 +21,12 @@ public struct Account: Codable, Hashable, Sendable {
     /// egress.
     public var bastionId: String?
     public var oauthStatus: AccountOAuthStatus?
+    /// The apps this connection is for, as product ids (`infrastructure`,
+    /// `costs`, `observability`, `incidents`, `security`, `delivery`,
+    /// `automation`). `null` means every app the plugin offers. Collection
+    /// follows it: an account connected for `costs` alone is not resource-synced,
+    /// and one without `costs` has no cost data collected.
+    public var products: [String]?
     public var createdAt: String
 
     public init(
@@ -29,6 +35,7 @@ public struct Account: Codable, Hashable, Sendable {
         displayName: String,
         bastionId: String? = nil,
         oauthStatus: AccountOAuthStatus? = nil,
+        products: [String]? = nil,
         createdAt: String
     ) {
         self.id = id
@@ -36,6 +43,7 @@ public struct Account: Codable, Hashable, Sendable {
         self.displayName = displayName
         self.bastionId = bastionId
         self.oauthStatus = oauthStatus
+        self.products = products
         self.createdAt = createdAt
     }
 }
