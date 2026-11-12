@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.102.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.103.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.102.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.103.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -33,6 +33,18 @@ public struct CiRunsGetResult: Codable, Hashable, Sendable {
     }
 }
 
+public struct CiRunsRetryBody: Codable, Hashable, Sendable {
+    /// Run every `task-cache:` job instead of replaying a passing run's result.
+    /// Results are saved again either way.
+    public var noTaskCache: Bool?
+
+    public init(
+        noTaskCache: Bool? = nil
+    ) {
+        self.noTaskCache = noTaskCache
+    }
+}
+
 public struct CiValuesUpdateBody: Codable, Hashable, Sendable {
     public var value: String
 
@@ -49,6 +61,8 @@ public final class CiNamespace: Sendable {
     let transport: ApiTransport
     /// `client.ci.accounts`
     public let accounts: CiAccountsNamespace
+    /// `client.ci.caches`
+    public let caches: CiCachesNamespace
     /// `client.ci.runs`
     public let runs: CiRunsNamespace
     /// `client.ci.values`
@@ -57,6 +71,7 @@ public final class CiNamespace: Sendable {
     init(transport: ApiTransport) {
         self.transport = transport
         self.accounts = CiAccountsNamespace(transport: transport)
+        self.caches = CiCachesNamespace(transport: transport)
         self.runs = CiRunsNamespace(transport: transport)
         self.values = CiValuesNamespace(transport: transport)
     }
@@ -143,6 +158,74 @@ public final class CiAccountsNamespace: Sendable {
                 path: "/api/org/{orgId}/ci/accounts/{installationId}",
                 pathParameters: ["orgId": orgId?.parameterValue, "installationId": installationId.parameterValue],
                 body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.ci.caches`
+public final class CiCachesNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// Clear a repository's CI caches
+    ///
+    /// Deletes every branch's and pull request's `cache:` and `task-cache:`
+    /// entries of one repository. The next run of each job starts cold and saves
+    /// again.
+    ///
+    /// _Requires permission: `ci:write`._
+    ///
+    /// DELETE /api/org/{orgId}/ci/caches/{installationId}/{repo}
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// Raises on 409: Conflict
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func delete(
+        orgId: String? = nil,
+        installationId: String,
+        repo: String,
+        options: RequestOptions? = nil
+    ) async throws -> CiCacheCleared {
+        return try await transport.send(
+            RequestSpec(
+                method: "DELETE",
+                path: "/api/org/{orgId}/ci/caches/{installationId}/{repo}",
+                pathParameters: ["orgId": orgId?.parameterValue, "installationId": installationId.parameterValue, "repo": repo.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// The caches CI keeps for each repository
+    ///
+    /// _Requires permission: `ci:read`._
+    ///
+    /// GET /api/org/{orgId}/ci/caches
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func get(
+        orgId: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> CiCaches {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/ci/caches",
+                pathParameters: ["orgId": orgId?.parameterValue]
             ),
             options: options
         )
@@ -263,6 +346,39 @@ public final class CiRunsNamespace: Sendable {
                 method: "POST",
                 path: "/api/org/{orgId}/ci/runs/{runId}/reject",
                 pathParameters: ["orgId": orgId?.parameterValue, "runId": runId.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Run a finished CI run again
+    ///
+    /// Queues a new run of the same repository, commit, branch and event, linked
+    /// to this one. A run waiting for approval is approved instead, and a fork's
+    /// pull request still runs without secrets.
+    ///
+    /// _Requires permission: `ci:approve`._
+    ///
+    /// POST /api/org/{orgId}/ci/runs/{runId}/retry
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// Raises on 409: Conflict
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func retry(
+        orgId: String? = nil,
+        runId: String,
+        body: CiRunsRetryBody,
+        options: RequestOptions? = nil
+    ) async throws -> CiRun {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/ci/runs/{runId}/retry",
+                pathParameters: ["orgId": orgId?.parameterValue, "runId": runId.parameterValue],
+                body: AnyEncodable(body)
             ),
             options: options
         )

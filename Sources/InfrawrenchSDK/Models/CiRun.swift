@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.102.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.103.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.102.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.103.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -219,6 +219,13 @@ public struct CiRun: Codable, Hashable, Sendable {
     public var vcpuSeconds: VcpuSeconds?
     public var memoryGibSeconds: MemoryGibSeconds?
     public var githubUrl: String
+    /// The run this one retries: the same repository, commit, branch and event.
+    public var retryOfRunId: String?
+    /// The newest retry of this run.
+    public var retriedAsRunId: String?
+    /// The run did not read the task cache: every `task-cache:` job ran, and
+    /// saved its result again.
+    public var noTaskCache: Bool?
 
     public init(
         id: String,
@@ -238,7 +245,10 @@ public struct CiRun: Codable, Hashable, Sendable {
         jobs: [CiJobSummary]? = nil,
         vcpuSeconds: VcpuSeconds? = nil,
         memoryGibSeconds: MemoryGibSeconds? = nil,
-        githubUrl: String
+        githubUrl: String,
+        retryOfRunId: String? = nil,
+        retriedAsRunId: String? = nil,
+        noTaskCache: Bool? = nil
     ) {
         self.id = id
         self.repoFullName = repoFullName
@@ -258,5 +268,8 @@ public struct CiRun: Codable, Hashable, Sendable {
         self.vcpuSeconds = vcpuSeconds
         self.memoryGibSeconds = memoryGibSeconds
         self.githubUrl = githubUrl
+        self.retryOfRunId = retryOfRunId
+        self.retriedAsRunId = retriedAsRunId
+        self.noTaskCache = noTaskCache
     }
 }
