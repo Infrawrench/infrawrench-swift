@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.104.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.105.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.104.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.105.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -19,6 +19,7 @@ public struct CiJobOutput: Codable, Hashable, Sendable {
         case failed
         case skipped
         case error
+        case cancelled
         /// A value the API added after this SDK was generated. Kept rather than
         /// rejected, so a new server-side value cannot break decoding.
         case unrecognized(String)
@@ -29,6 +30,7 @@ public struct CiJobOutput: Codable, Hashable, Sendable {
             case "failed": self = .failed
             case "skipped": self = .skipped
             case "error": self = .error
+            case "cancelled": self = .cancelled
             default: self = .unrecognized(rawValue)
             }
         }
@@ -39,6 +41,7 @@ public struct CiJobOutput: Codable, Hashable, Sendable {
             case .failed: return "failed"
             case .skipped: return "skipped"
             case .error: return "error"
+            case .cancelled: return "cancelled"
             case .unrecognized(let value): return value
             }
         }
@@ -49,6 +52,7 @@ public struct CiJobOutput: Codable, Hashable, Sendable {
             .failed,
             .skipped,
             .error,
+            .cancelled,
         ]
 
         public init(from decoder: any Decoder) throws {

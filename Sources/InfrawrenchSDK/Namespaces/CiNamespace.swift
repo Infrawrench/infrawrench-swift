@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.104.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.105.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.104.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.105.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -266,6 +266,38 @@ public final class CiRunsNamespace: Sendable {
             RequestSpec(
                 method: "POST",
                 path: "/api/org/{orgId}/ci/runs/{runId}/approve",
+                pathParameters: ["orgId": orgId?.parameterValue, "runId": runId.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Cancel a CI run
+    ///
+    /// A queued run, or one waiting for its concurrency group, ends as cancelled
+    /// at once. A running one is stopped by its runner, its running jobs as a
+    /// timeout would stop them, and ends as cancelled once the runner reports it.
+    /// A run waiting for approval is rejected instead.
+    ///
+    /// _Requires permission: `ci:approve`._
+    ///
+    /// POST /api/org/{orgId}/ci/runs/{runId}/cancel
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// Raises on 409: Conflict
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func cancel(
+        orgId: String? = nil,
+        runId: String,
+        options: RequestOptions? = nil
+    ) async throws -> CiRun {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/ci/runs/{runId}/cancel",
                 pathParameters: ["orgId": orgId?.parameterValue, "runId": runId.parameterValue]
             ),
             options: options

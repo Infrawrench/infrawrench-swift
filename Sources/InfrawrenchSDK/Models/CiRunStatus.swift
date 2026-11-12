@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.104.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.105.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.104.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.105.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -16,11 +16,13 @@ import Foundation
 public enum CiRunStatus: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
     case awaitingApproval
     case queued
+    case pending
     case running
     case passed
     case failed
     case error
     case rejected
+    case cancelled
     /// A value the API added after this SDK was generated. Kept rather than
     /// rejected, so a new server-side value cannot break decoding.
     case unrecognized(String)
@@ -29,11 +31,13 @@ public enum CiRunStatus: RawRepresentable, Codable, Hashable, Sendable, Paramete
         switch rawValue {
         case "awaiting_approval": self = .awaitingApproval
         case "queued": self = .queued
+        case "pending": self = .pending
         case "running": self = .running
         case "passed": self = .passed
         case "failed": self = .failed
         case "error": self = .error
         case "rejected": self = .rejected
+        case "cancelled": self = .cancelled
         default: self = .unrecognized(rawValue)
         }
     }
@@ -42,11 +46,13 @@ public enum CiRunStatus: RawRepresentable, Codable, Hashable, Sendable, Paramete
         switch self {
         case .awaitingApproval: return "awaiting_approval"
         case .queued: return "queued"
+        case .pending: return "pending"
         case .running: return "running"
         case .passed: return "passed"
         case .failed: return "failed"
         case .error: return "error"
         case .rejected: return "rejected"
+        case .cancelled: return "cancelled"
         case .unrecognized(let value): return value
         }
     }
@@ -55,11 +61,13 @@ public enum CiRunStatus: RawRepresentable, Codable, Hashable, Sendable, Paramete
     public static let allKnownCases: [CiRunStatus] = [
         .awaitingApproval,
         .queued,
+        .pending,
         .running,
         .passed,
         .failed,
         .error,
         .rejected,
+        .cancelled,
     ]
 
     public init(from decoder: any Decoder) throws {
