@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.103.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.104.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.103.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.104.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -146,6 +146,8 @@ public struct CiJobOutput: Codable, Hashable, Sendable {
     public var needs: [String]?
     public var stdout: String
     public var stderr: String
+    /// The files the job kept with `downloads:`. Absent when it kept none.
+    public var downloads: [CiDownload]?
 
     public init(
         pipeline: String,
@@ -156,7 +158,8 @@ public struct CiJobOutput: Codable, Hashable, Sendable {
         durationMs: DurationMs? = nil,
         needs: [String]? = nil,
         stdout: String,
-        stderr: String
+        stderr: String,
+        downloads: [CiDownload]? = nil
     ) {
         self.pipeline = pipeline
         self.id = id
@@ -167,5 +170,6 @@ public struct CiJobOutput: Codable, Hashable, Sendable {
         self.needs = needs
         self.stdout = stdout
         self.stderr = stderr
+        self.downloads = downloads
     }
 }

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.103.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.104.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.103.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.104.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -98,7 +98,7 @@ public final class CiNamespace: Sendable {
         )
     }
 
-    /// CI usage in a month: runs, compute and cache storage
+    /// CI usage in a month: runs, compute and storage (caches and downloads)
     ///
     /// _Requires permission: `ci:read`._
     ///
@@ -267,6 +267,43 @@ public final class CiRunsNamespace: Sendable {
                 method: "POST",
                 path: "/api/org/{orgId}/ci/runs/{runId}/approve",
                 pathParameters: ["orgId": orgId?.parameterValue, "runId": runId.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// A short-lived link to a file a job kept for download
+    ///
+    /// The link is signed for this one file for 15 minutes (less when the file
+    /// expires sooner) and is served by the CI proxy, not this API.
+    ///
+    /// _Requires permission: `ci:read`._
+    ///
+    /// GET /api/org/{orgId}/ci/runs/{runId}/download
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// Raises on 409: Conflict
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter job: The job's id, as the run's `jobs` list it.
+    ///
+    /// - Parameter path: The file's `path`, as the job's `downloads` list it.
+    public func download(
+        orgId: String? = nil,
+        runId: String,
+        job: String,
+        path: String,
+        options: RequestOptions? = nil
+    ) async throws -> CiDownloadLink {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/ci/runs/{runId}/download",
+                pathParameters: ["orgId": orgId?.parameterValue, "runId": runId.parameterValue],
+                query: [QueryParameter("job", job), QueryParameter("path", path)]
             ),
             options: options
         )
