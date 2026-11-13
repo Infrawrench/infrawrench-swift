@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.107.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.108.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.107.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.108.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -17,6 +17,7 @@ public struct CiRun: Codable, Hashable, Sendable {
     public enum Event: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
         case push
         case pullRequest
+        case schedule
         /// A value the API added after this SDK was generated. Kept rather than
         /// rejected, so a new server-side value cannot break decoding.
         case unrecognized(String)
@@ -25,6 +26,7 @@ public struct CiRun: Codable, Hashable, Sendable {
             switch rawValue {
             case "push": self = .push
             case "pull-request": self = .pullRequest
+            case "schedule": self = .schedule
             default: self = .unrecognized(rawValue)
             }
         }
@@ -33,6 +35,7 @@ public struct CiRun: Codable, Hashable, Sendable {
             switch self {
             case .push: return "push"
             case .pullRequest: return "pull-request"
+            case .schedule: return "schedule"
             case .unrecognized(let value): return value
             }
         }
@@ -41,6 +44,7 @@ public struct CiRun: Codable, Hashable, Sendable {
         public static let allKnownCases: [Event] = [
             .push,
             .pullRequest,
+            .schedule,
         ]
 
         public init(from decoder: any Decoder) throws {
@@ -203,6 +207,8 @@ public struct CiRun: Codable, Hashable, Sendable {
 
     public var id: String
     public var repoFullName: String
+    /// What started the run. `schedule`: a pipeline's `on.schedule` cron, on the
+    /// default branch's head.
     public var event: Event
     public var headRef: String
     public var sha: String
@@ -226,6 +232,8 @@ public struct CiRun: Codable, Hashable, Sendable {
     /// The run did not read the task cache: every `task-cache:` job ran, and
     /// saved its result again.
     public var noTaskCache: Bool?
+    /// A scheduled run's pipeline file, whose `on.schedule` cron started it.
+    public var pipelineFile: String?
     /// The `concurrency:` groups its pipelines hold or wait for, once the runners
     /// have read them.
     public var concurrencyGroups: [String]?
@@ -254,6 +262,7 @@ public struct CiRun: Codable, Hashable, Sendable {
         retryOfRunId: String? = nil,
         retriedAsRunId: String? = nil,
         noTaskCache: Bool? = nil,
+        pipelineFile: String? = nil,
         concurrencyGroups: [String]? = nil,
         cancelRequested: Bool? = nil
     ) {
@@ -278,6 +287,7 @@ public struct CiRun: Codable, Hashable, Sendable {
         self.retryOfRunId = retryOfRunId
         self.retriedAsRunId = retriedAsRunId
         self.noTaskCache = noTaskCache
+        self.pipelineFile = pipelineFile
         self.concurrencyGroups = concurrencyGroups
         self.cancelRequested = cancelRequested
     }

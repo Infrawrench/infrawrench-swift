@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.107.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.108.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.107.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.108.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -193,6 +193,36 @@ public final class CiNamespace: Sendable {
             RequestSpec(
                 method: "GET",
                 path: "/api/org/{orgId}/ci",
+                pathParameters: ["orgId": orgId?.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Repositories' scheduled pipelines
+    ///
+    /// Each repository's pipelines with `on.schedule` on its default branch, as
+    /// last read, with each pipeline's next run. They are read again on every
+    /// push to the default branch, which is also how a schedule is added, changed
+    /// or removed. Repositories with no scheduled pipeline are left out unless
+    /// their last read failed.
+    ///
+    /// _Requires permission: `ci:read`._
+    ///
+    /// GET /api/org/{orgId}/ci/schedules
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func schedules(
+        orgId: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> CiSchedules {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/ci/schedules",
                 pathParameters: ["orgId": orgId?.parameterValue]
             ),
             options: options
