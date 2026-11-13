@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.105.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.106.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.105.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.106.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -982,7 +982,9 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case s3Bucket
     case sagemakerEndpoint
     case sambanovaModel
+    case sandbox
     case savedQuery
+    case savedSnapshot
     case schedule
     case scheduledFunction
     case schemaRegistry
@@ -2221,7 +2223,9 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "s3-bucket": self = .s3Bucket
         case "sagemaker-endpoint": self = .sagemakerEndpoint
         case "sambanova-model": self = .sambanovaModel
+        case "sandbox": self = .sandbox
         case "saved-query": self = .savedQuery
+        case "saved-snapshot": self = .savedSnapshot
         case "schedule": self = .schedule
         case "scheduled-function": self = .scheduledFunction
         case "schema-registry": self = .schemaRegistry
@@ -3460,7 +3464,9 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .s3Bucket: return "s3-bucket"
         case .sagemakerEndpoint: return "sagemaker-endpoint"
         case .sambanovaModel: return "sambanova-model"
+        case .sandbox: return "sandbox"
         case .savedQuery: return "saved-query"
+        case .savedSnapshot: return "saved-snapshot"
         case .schedule: return "schedule"
         case .scheduledFunction: return "scheduled-function"
         case .schemaRegistry: return "schema-registry"
@@ -4699,7 +4705,9 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .s3Bucket,
         .sagemakerEndpoint,
         .sambanovaModel,
+        .sandbox,
         .savedQuery,
+        .savedSnapshot,
         .schedule,
         .scheduledFunction,
         .schemaRegistry,

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.105.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.106.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.105.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.106.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -29,6 +29,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
     case baseten
     case betterStack
     case bitbucket
+    case boat
     case buildkite
     case bunny
     case cartesia
@@ -187,6 +188,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
         case "baseten": self = .baseten
         case "better-stack": self = .betterStack
         case "bitbucket": self = .bitbucket
+        case "boat": self = .boat
         case "buildkite": self = .buildkite
         case "bunny": self = .bunny
         case "cartesia": self = .cartesia
@@ -345,6 +347,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
         case .baseten: return "baseten"
         case .betterStack: return "better-stack"
         case .bitbucket: return "bitbucket"
+        case .boat: return "boat"
         case .buildkite: return "buildkite"
         case .bunny: return "bunny"
         case .cartesia: return "cartesia"
@@ -503,6 +506,7 @@ public enum PluginId: RawRepresentable, Codable, Hashable, Sendable, ParameterVa
         .baseten,
         .betterStack,
         .bitbucket,
+        .boat,
         .buildkite,
         .bunny,
         .cartesia,
