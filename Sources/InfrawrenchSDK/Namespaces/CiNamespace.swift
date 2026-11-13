@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.106.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.107.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.106.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.107.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -12,6 +12,104 @@
  * marked x-internal.
  */
 import Foundation
+
+public struct CiAccessConnectionsPreflightBody: Codable, Hashable, Sendable {
+    public enum Kind: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
+        case vm
+        case container
+        case build
+        case host
+        case cluster
+        /// A value the API added after this SDK was generated. Kept rather than
+        /// rejected, so a new server-side value cannot break decoding.
+        case unrecognized(String)
+
+        public init(rawValue: String) {
+            switch rawValue {
+            case "vm": self = .vm
+            case "container": self = .container
+            case "build": self = .build
+            case "host": self = .host
+            case "cluster": self = .cluster
+            default: self = .unrecognized(rawValue)
+            }
+        }
+
+        public var rawValue: String {
+            switch self {
+            case .vm: return "vm"
+            case .container: return "container"
+            case .build: return "build"
+            case .host: return "host"
+            case .cluster: return "cluster"
+            case .unrecognized(let value): return value
+            }
+        }
+
+        /// Every value the spec declares. `unrecognized` is deliberately absent.
+        public static let allKnownCases: [Kind] = [
+            .vm,
+            .container,
+            .build,
+            .host,
+            .cluster,
+        ]
+
+        public init(from decoder: any Decoder) throws {
+            self.init(rawValue: try decoder.singleValueContainer().decode(String.self))
+        }
+
+        public func encode(to encoder: any Encoder) throws {
+            var container = encoder.singleValueContainer()
+            try container.encode(rawValue)
+        }
+    }
+
+    public var kind: Kind
+    public var region: String?
+
+    public init(
+        kind: Kind,
+        region: String? = nil
+    ) {
+        self.kind = kind
+        self.region = region
+    }
+}
+
+public struct CiAccessSshKeysUpdateBody: Codable, Hashable, Sendable {
+    public var enabled: Bool
+    /// The name pipelines use in `ssh-keys:`; unique in the organization.
+    public var ciName: String
+    /// Repositories (`owner/name`). Null: every repository the organization runs
+    /// CI for.
+    public var repos: [String]?
+    /// Branches it holds for: globs separated by commas, where `*` stops at `/`
+    /// and `**` does not (`main, release/*`). Null: every branch.
+    public var branchPattern: String?
+
+    public init(
+        enabled: Bool,
+        ciName: String,
+        repos: [String]? = nil,
+        branchPattern: String? = nil
+    ) {
+        self.enabled = enabled
+        self.ciName = ciName
+        self.repos = repos
+        self.branchPattern = branchPattern
+    }
+}
+
+public struct CiAccessSshKeysUpdateResult: Codable, Hashable, Sendable {
+    public var lending: CiSshKeyLending?
+
+    public init(
+        lending: CiSshKeyLending? = nil
+    ) {
+        self.lending = lending
+    }
+}
 
 public struct CiAccountsUpdateBody: Codable, Hashable, Sendable {
     public var enabled: Bool
@@ -59,6 +157,8 @@ public struct CiValuesUpdateBody: Codable, Hashable, Sendable {
 public final class CiNamespace: Sendable {
     /// Shared request plumbing.
     let transport: ApiTransport
+    /// `client.ci.access`
+    public let access: CiAccessNamespace
     /// `client.ci.accounts`
     public let accounts: CiAccountsNamespace
     /// `client.ci.caches`
@@ -70,6 +170,7 @@ public final class CiNamespace: Sendable {
 
     init(transport: ApiTransport) {
         self.transport = transport
+        self.access = CiAccessNamespace(transport: transport)
         self.accounts = CiAccountsNamespace(transport: transport)
         self.caches = CiCachesNamespace(transport: transport)
         self.runs = CiRunsNamespace(transport: transport)
@@ -119,6 +220,333 @@ public final class CiNamespace: Sendable {
                 path: "/api/org/{orgId}/ci/usage",
                 pathParameters: ["orgId": orgId?.parameterValue],
                 query: [QueryParameter("month", month)]
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.ci.access`
+public final class CiAccessNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+    /// `client.ci.access.connections`
+    public let connections: CiAccessConnectionsNamespace
+    /// `client.ci.access.grants`
+    public let grants: CiAccessGrantsNamespace
+    /// `client.ci.access.sshKeys`
+    public let sshKeys: CiAccessSshKeysNamespace
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+        self.connections = CiAccessConnectionsNamespace(transport: transport)
+        self.grants = CiAccessGrantsNamespace(transport: transport)
+        self.sshKeys = CiAccessSshKeysNamespace(transport: transport)
+    }
+
+    /// What CI jobs may use: connections, resources and SSH keys
+    ///
+    /// Every connection whose provider can run CI jobs or lend its credentials,
+    /// with what it is allowed; the resources granted to CI; and the SSH keys
+    /// their owners lend. Nothing secret.
+    ///
+    /// _Requires permission: `ci:read`._
+    ///
+    /// GET /api/org/{orgId}/ci/access
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func get(
+        orgId: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> CiAccessOverview {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/ci/access",
+                pathParameters: ["orgId": orgId?.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// What a resource can be granted to CI
+    ///
+    /// _Requires permission: `ci-access:write`._
+    ///
+    /// GET /api/org/{orgId}/ci/access/resource-outputs
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    ///
+    /// - Parameter resourceId: The resource's id.
+    public func resourceOutputs(
+        orgId: String? = nil,
+        resourceId: String,
+        options: RequestOptions? = nil
+    ) async throws -> CiResourceOutputs {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/ci/access/resource-outputs",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                query: [QueryParameter("resourceId", resourceId)]
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.ci.access.connections`
+public final class CiAccessConnectionsNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// Check whether a connection can run cloud jobs of a kind
+    ///
+    /// Asks the provider without starting anything (a dry run or a permission
+    /// test) and keeps the answer: what is missing and how to grant it. A failing
+    /// check turns that kind off.
+    ///
+    /// _Requires permission: `ci-access:write`._
+    ///
+    /// POST /api/org/{orgId}/ci/access/connections/{accountId}/preflight
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// Raises on 409: Conflict
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func preflight(
+        orgId: String? = nil,
+        accountId: String,
+        body: CiAccessConnectionsPreflightBody,
+        options: RequestOptions? = nil
+    ) async throws -> CiConnectionAccess {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/ci/access/connections/{accountId}/preflight",
+                pathParameters: ["orgId": orgId?.parameterValue, "accountId": accountId.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+
+    /// Set what CI may do with a connection
+    ///
+    /// Run cloud jobs on it (kinds, limits, repositories, branches) and lend its
+    /// credentials to jobs (repositories, branches). Turning cloud jobs on needs
+    /// a passing permission check for every kind.
+    ///
+    /// _Requires permission: `ci-access:write`._
+    ///
+    /// PUT /api/org/{orgId}/ci/access/connections/{accountId}
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// Raises on 409: Conflict
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func update(
+        orgId: String? = nil,
+        accountId: String,
+        body: CiConnectionAccessSettings,
+        options: RequestOptions? = nil
+    ) async throws -> CiConnectionAccess {
+        return try await transport.send(
+            RequestSpec(
+                method: "PUT",
+                path: "/api/org/{orgId}/ci/access/connections/{accountId}",
+                pathParameters: ["orgId": orgId?.parameterValue, "accountId": accountId.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.ci.access.grants`
+public final class CiAccessGrantsNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// Grant CI jobs a resource's outputs
+    ///
+    /// Pipelines read them as `${{ resources.<ciName>.<output> }}` in `env:`, or
+    /// all at once with `env-from: [<ciName>]`, read fresh for every run. Only
+    /// for the listed repositories and branches, and never for a fork's pull
+    /// request.
+    ///
+    /// _Requires permission: `ci-access:write`._
+    ///
+    /// POST /api/org/{orgId}/ci/access/grants
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// Raises on 409: Conflict
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func create(
+        orgId: String? = nil,
+        body: CiResourceGrantInput,
+        options: RequestOptions? = nil
+    ) async throws -> CiResourceGrant {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/ci/access/grants",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+
+    /// Remove a resource grant
+    ///
+    /// _Requires permission: `ci:write`._
+    ///
+    /// DELETE /api/org/{orgId}/ci/access/grants/{grantId}
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func delete(
+        orgId: String? = nil,
+        grantId: String,
+        options: RequestOptions? = nil
+    ) async throws -> Ok {
+        return try await transport.send(
+            RequestSpec(
+                method: "DELETE",
+                path: "/api/org/{orgId}/ci/access/grants/{grantId}",
+                pathParameters: ["orgId": orgId?.parameterValue, "grantId": grantId.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Change a resource grant
+    ///
+    /// _Requires permission: `ci-access:write`._
+    ///
+    /// PUT /api/org/{orgId}/ci/access/grants/{grantId}
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// Raises on 409: Conflict
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func update(
+        orgId: String? = nil,
+        grantId: String,
+        body: CiResourceGrantInput,
+        options: RequestOptions? = nil
+    ) async throws -> CiResourceGrant {
+        return try await transport.send(
+            RequestSpec(
+                method: "PUT",
+                path: "/api/org/{orgId}/ci/access/grants/{grantId}",
+                pathParameters: ["orgId": orgId?.parameterValue, "grantId": grantId.parameterValue],
+                body: AnyEncodable(body)
+            ),
+            options: options
+        )
+    }
+}
+
+/// `client.ci.access.sshKeys`
+public final class CiAccessSshKeysNamespace: Sendable {
+    /// Shared request plumbing.
+    let transport: ApiTransport
+
+    init(transport: ApiTransport) {
+        self.transport = transport
+    }
+
+    /// Stop CI jobs using someone's SSH key
+    ///
+    /// _Requires permission: `ci:write`._
+    ///
+    /// DELETE /api/org/{orgId}/ci/access/ssh-keys/{sshKeyId}
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func delete(
+        orgId: String? = nil,
+        sshKeyId: String,
+        options: RequestOptions? = nil
+    ) async throws -> Ok {
+        return try await transport.send(
+            RequestSpec(
+                method: "DELETE",
+                path: "/api/org/{orgId}/ci/access/ssh-keys/{sshKeyId}",
+                pathParameters: ["orgId": orgId?.parameterValue, "sshKeyId": sshKeyId.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Lend one of your SSH keys to CI jobs, or stop
+    ///
+    /// Only the key's owner can, and only for a key whose private half
+    /// Infrawrench holds. Jobs name it in `ssh-keys:`.
+    ///
+    /// _Requires permission: `ssh-keys:write`._
+    ///
+    /// PUT /api/org/{orgId}/ci/access/ssh-keys/{sshKeyId}
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// Raises on 409: Conflict
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func update(
+        orgId: String? = nil,
+        sshKeyId: String,
+        body: CiAccessSshKeysUpdateBody,
+        options: RequestOptions? = nil
+    ) async throws -> CiAccessSshKeysUpdateResult {
+        return try await transport.send(
+            RequestSpec(
+                method: "PUT",
+                path: "/api/org/{orgId}/ci/access/ssh-keys/{sshKeyId}",
+                pathParameters: ["orgId": orgId?.parameterValue, "sshKeyId": sshKeyId.parameterValue],
+                body: AnyEncodable(body)
             ),
             options: options
         )

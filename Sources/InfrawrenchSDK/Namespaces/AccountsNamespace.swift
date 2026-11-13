@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.106.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.107.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.106.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.107.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -134,6 +134,8 @@ public final class AccountsNamespace: Sendable {
     /// _Requires permission: `accounts:delete`._
     ///
     /// DELETE /api/org/{orgId}/accounts/{id}
+    ///
+    /// Raises on 409: Conflict
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.

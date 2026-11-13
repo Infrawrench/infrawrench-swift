@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.106.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.107.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.106.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.107.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -47,6 +47,7 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
     case ciRead
     case ciWrite
     case ciApprove
+    case ciAccessWrite
     case incidentsRead
     case incidentsWrite
     case tagPolicyOverride
@@ -124,6 +125,7 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case "ci:read": self = .ciRead
         case "ci:write": self = .ciWrite
         case "ci:approve": self = .ciApprove
+        case "ci-access:write": self = .ciAccessWrite
         case "incidents:read": self = .incidentsRead
         case "incidents:write": self = .incidentsWrite
         case "tag-policy:override": self = .tagPolicyOverride
@@ -201,6 +203,7 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case .ciRead: return "ci:read"
         case .ciWrite: return "ci:write"
         case .ciApprove: return "ci:approve"
+        case .ciAccessWrite: return "ci-access:write"
         case .incidentsRead: return "incidents:read"
         case .incidentsWrite: return "incidents:write"
         case .tagPolicyOverride: return "tag-policy:override"
@@ -278,6 +281,7 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         .ciRead,
         .ciWrite,
         .ciApprove,
+        .ciAccessWrite,
         .incidentsRead,
         .incidentsWrite,
         .tagPolicyOverride,
