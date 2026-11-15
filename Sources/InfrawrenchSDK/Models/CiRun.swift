@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.108.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.109.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.108.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.109.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -18,6 +18,7 @@ public struct CiRun: Codable, Hashable, Sendable {
         case push
         case pullRequest
         case schedule
+        case manual
         /// A value the API added after this SDK was generated. Kept rather than
         /// rejected, so a new server-side value cannot break decoding.
         case unrecognized(String)
@@ -27,6 +28,7 @@ public struct CiRun: Codable, Hashable, Sendable {
             case "push": self = .push
             case "pull-request": self = .pullRequest
             case "schedule": self = .schedule
+            case "manual": self = .manual
             default: self = .unrecognized(rawValue)
             }
         }
@@ -36,6 +38,7 @@ public struct CiRun: Codable, Hashable, Sendable {
             case .push: return "push"
             case .pullRequest: return "pull-request"
             case .schedule: return "schedule"
+            case .manual: return "manual"
             case .unrecognized(let value): return value
             }
         }
@@ -45,6 +48,7 @@ public struct CiRun: Codable, Hashable, Sendable {
             .push,
             .pullRequest,
             .schedule,
+            .manual,
         ]
 
         public init(from decoder: any Decoder) throws {
@@ -208,7 +212,8 @@ public struct CiRun: Codable, Hashable, Sendable {
     public var id: String
     public var repoFullName: String
     /// What started the run. `schedule`: a pipeline's `on.schedule` cron, on the
-    /// default branch's head.
+    /// default branch's head. `manual`: a person, for a pipeline with
+    /// `on.manual`, on a branch they chose.
     public var event: Event
     public var headRef: String
     public var sha: String
@@ -232,8 +237,11 @@ public struct CiRun: Codable, Hashable, Sendable {
     /// The run did not read the task cache: every `task-cache:` job ran, and
     /// saved its result again.
     public var noTaskCache: Bool?
-    /// A scheduled run's pipeline file, whose `on.schedule` cron started it.
+    /// A scheduled or manual run's pipeline file: the one it runs.
     public var pipelineFile: String?
+    /// A manual run's inputs as it was started with them, by name, as text
+    /// (`true`, `4`, `staging`). Inputs left out read as the pipeline's defaults.
+    public var inputs: [String: String]?
     /// The `concurrency:` groups its pipelines hold or wait for, once the runners
     /// have read them.
     public var concurrencyGroups: [String]?
@@ -263,6 +271,7 @@ public struct CiRun: Codable, Hashable, Sendable {
         retriedAsRunId: String? = nil,
         noTaskCache: Bool? = nil,
         pipelineFile: String? = nil,
+        inputs: [String: String]? = nil,
         concurrencyGroups: [String]? = nil,
         cancelRequested: Bool? = nil
     ) {
@@ -288,6 +297,7 @@ public struct CiRun: Codable, Hashable, Sendable {
         self.retriedAsRunId = retriedAsRunId
         self.noTaskCache = noTaskCache
         self.pipelineFile = pipelineFile
+        self.inputs = inputs
         self.concurrencyGroups = concurrencyGroups
         self.cancelRequested = cancelRequested
     }

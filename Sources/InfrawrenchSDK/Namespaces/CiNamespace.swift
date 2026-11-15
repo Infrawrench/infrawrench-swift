@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.108.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.109.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.108.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.109.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -193,6 +193,34 @@ public final class CiNamespace: Sendable {
             RequestSpec(
                 method: "GET",
                 path: "/api/org/{orgId}/ci",
+                pathParameters: ["orgId": orgId?.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Pipelines that can be started by hand
+    ///
+    /// Each repository's pipelines with `on.manual` on its default branch, as
+    /// last read, with their inputs. They are read again on every push to the
+    /// default branch.
+    ///
+    /// _Requires permission: `ci:read`._
+    ///
+    /// GET /api/org/{orgId}/ci/manual
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func manual(
+        orgId: String? = nil,
+        options: RequestOptions? = nil
+    ) async throws -> CiManualPipelines {
+        return try await transport.send(
+            RequestSpec(
+                method: "GET",
+                path: "/api/org/{orgId}/ci/manual",
                 pathParameters: ["orgId": orgId?.parameterValue]
             ),
             options: options
@@ -757,6 +785,43 @@ public final class CiRunsNamespace: Sendable {
                 method: "POST",
                 path: "/api/org/{orgId}/ci/runs/{runId}/cancel",
                 pathParameters: ["orgId": orgId?.parameterValue, "runId": runId.parameterValue]
+            ),
+            options: options
+        )
+    }
+
+    /// Start a pipeline by hand
+    ///
+    /// Queues a run of one pipeline with `on.manual`, at the head of a branch of
+    /// the repository itself, with the inputs given. The pipeline must be listed
+    /// by `GET /ci/manual`, and the inputs are checked against its declaration
+    /// there; the runner checks them again against the branch's own file. The run
+    /// is trusted like a push to that branch: it gets the repository's secrets
+    /// and only what is lent to that branch.
+    ///
+    /// _Requires permission: `ci:approve`._
+    ///
+    /// POST /api/org/{orgId}/ci/runs
+    ///
+    /// Raises on 400: Bad request
+    ///
+    /// Raises on 404: Not found
+    ///
+    /// Raises on 409: Conflict
+    ///
+    /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
+    /// created with.
+    public func create(
+        orgId: String? = nil,
+        body: CiStartRun,
+        options: RequestOptions? = nil
+    ) async throws -> CiRun {
+        return try await transport.send(
+            RequestSpec(
+                method: "POST",
+                path: "/api/org/{orgId}/ci/runs",
+                pathParameters: ["orgId": orgId?.parameterValue],
+                body: AnyEncodable(body)
             ),
             options: options
         )
