@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.109.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.110.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.109.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.110.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -446,8 +446,6 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case escalationPolicy
     case eval
     case evaluation
-    case evaluationJob
-    case evaluator
     case eventHook
     case eventbridgeRule
     case events2metrics
@@ -941,7 +939,6 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
     case registryModule
     case registryNamespace
     case registryProvider
-    case reinforcementFineTuningJob
     case release
     case replicationRule
     case repoBlocklist
@@ -1687,8 +1684,6 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "escalation-policy": self = .escalationPolicy
         case "eval": self = .eval
         case "evaluation": self = .evaluation
-        case "evaluation-job": self = .evaluationJob
-        case "evaluator": self = .evaluator
         case "event-hook": self = .eventHook
         case "eventbridge-rule": self = .eventbridgeRule
         case "events2metrics": self = .events2metrics
@@ -2182,7 +2177,6 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case "registry-module": self = .registryModule
         case "registry-namespace": self = .registryNamespace
         case "registry-provider": self = .registryProvider
-        case "reinforcement-fine-tuning-job": self = .reinforcementFineTuningJob
         case "release": self = .release
         case "replication-rule": self = .replicationRule
         case "repo-blocklist": self = .repoBlocklist
@@ -2928,8 +2922,6 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .escalationPolicy: return "escalation-policy"
         case .eval: return "eval"
         case .evaluation: return "evaluation"
-        case .evaluationJob: return "evaluation-job"
-        case .evaluator: return "evaluator"
         case .eventHook: return "event-hook"
         case .eventbridgeRule: return "eventbridge-rule"
         case .events2metrics: return "events2metrics"
@@ -3423,7 +3415,6 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         case .registryModule: return "registry-module"
         case .registryNamespace: return "registry-namespace"
         case .registryProvider: return "registry-provider"
-        case .reinforcementFineTuningJob: return "reinforcement-fine-tuning-job"
         case .release: return "release"
         case .replicationRule: return "replication-rule"
         case .repoBlocklist: return "repo-blocklist"
@@ -4169,8 +4160,6 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .escalationPolicy,
         .eval,
         .evaluation,
-        .evaluationJob,
-        .evaluator,
         .eventHook,
         .eventbridgeRule,
         .events2metrics,
@@ -4664,7 +4653,6 @@ public enum ResourceTypeId: RawRepresentable, Codable, Hashable, Sendable, Param
         .registryModule,
         .registryNamespace,
         .registryProvider,
-        .reinforcementFineTuningJob,
         .release,
         .replicationRule,
         .repoBlocklist,
