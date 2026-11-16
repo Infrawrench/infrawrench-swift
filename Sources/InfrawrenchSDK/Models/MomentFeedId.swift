@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.112.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.113.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.112.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.113.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -19,7 +19,6 @@ public enum MomentFeedId: RawRepresentable, Codable, Hashable, Sendable, Paramet
     case statusIncidents
     case costAnomalies
     case workflowRuns
-    case deployments
     case audit
     case freezes
     case driftAlerts
@@ -34,7 +33,6 @@ public enum MomentFeedId: RawRepresentable, Codable, Hashable, Sendable, Paramet
         case "statusIncidents": self = .statusIncidents
         case "costAnomalies": self = .costAnomalies
         case "workflowRuns": self = .workflowRuns
-        case "deployments": self = .deployments
         case "audit": self = .audit
         case "freezes": self = .freezes
         case "driftAlerts": self = .driftAlerts
@@ -49,7 +47,6 @@ public enum MomentFeedId: RawRepresentable, Codable, Hashable, Sendable, Paramet
         case .statusIncidents: return "statusIncidents"
         case .costAnomalies: return "costAnomalies"
         case .workflowRuns: return "workflowRuns"
-        case .deployments: return "deployments"
         case .audit: return "audit"
         case .freezes: return "freezes"
         case .driftAlerts: return "driftAlerts"
@@ -64,7 +61,6 @@ public enum MomentFeedId: RawRepresentable, Codable, Hashable, Sendable, Paramet
         .statusIncidents,
         .costAnomalies,
         .workflowRuns,
-        .deployments,
         .audit,
         .freezes,
         .driftAlerts,

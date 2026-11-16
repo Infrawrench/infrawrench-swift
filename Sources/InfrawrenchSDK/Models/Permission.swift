@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.112.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.113.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.112.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.113.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -33,7 +33,6 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
     case workflowsWrite
     case workflowsApprove
     case deploymentsRead
-    case deploymentsPlan
     case deploymentsWrite
     case costsRead
     case costsWrite
@@ -111,7 +110,6 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case "workflows:write": self = .workflowsWrite
         case "workflows:approve": self = .workflowsApprove
         case "deployments:read": self = .deploymentsRead
-        case "deployments:plan": self = .deploymentsPlan
         case "deployments:write": self = .deploymentsWrite
         case "costs:read": self = .costsRead
         case "costs:write": self = .costsWrite
@@ -189,7 +187,6 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         case .workflowsWrite: return "workflows:write"
         case .workflowsApprove: return "workflows:approve"
         case .deploymentsRead: return "deployments:read"
-        case .deploymentsPlan: return "deployments:plan"
         case .deploymentsWrite: return "deployments:write"
         case .costsRead: return "costs:read"
         case .costsWrite: return "costs:write"
@@ -267,7 +264,6 @@ public enum Permission: RawRepresentable, Codable, Hashable, Sendable, Parameter
         .workflowsWrite,
         .workflowsApprove,
         .deploymentsRead,
-        .deploymentsPlan,
         .deploymentsWrite,
         .costsRead,
         .costsWrite,

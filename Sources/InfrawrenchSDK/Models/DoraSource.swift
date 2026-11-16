@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.112.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.113.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.112.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.113.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -13,10 +13,9 @@
  */
 import Foundation
 
-/// Where the change was learned from: an Infrafile run, a synced provider deploy,
-/// a GitHub deployment, one recorded over this API, or the change timeline.
+/// Where the change was learned from: a synced provider deploy, a GitHub
+/// deployment, one recorded over this API, or the change timeline.
 public enum DoraSource: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
-    case infrafile
     case plugin
     case github
     case api
@@ -27,7 +26,6 @@ public enum DoraSource: RawRepresentable, Codable, Hashable, Sendable, Parameter
 
     public init(rawValue: String) {
         switch rawValue {
-        case "infrafile": self = .infrafile
         case "plugin": self = .plugin
         case "github": self = .github
         case "api": self = .api
@@ -38,7 +36,6 @@ public enum DoraSource: RawRepresentable, Codable, Hashable, Sendable, Parameter
 
     public var rawValue: String {
         switch self {
-        case .infrafile: return "infrafile"
         case .plugin: return "plugin"
         case .github: return "github"
         case .api: return "api"
@@ -49,7 +46,6 @@ public enum DoraSource: RawRepresentable, Codable, Hashable, Sendable, Parameter
 
     /// Every value the spec declares. `unrecognized` is deliberately absent.
     public static let allKnownCases: [DoraSource] = [
-        .infrafile,
         .plugin,
         .github,
         .api,

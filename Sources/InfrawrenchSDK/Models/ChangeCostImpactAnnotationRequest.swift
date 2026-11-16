@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.112.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.113.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.112.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.113.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -16,7 +16,6 @@ import Foundation
 public struct ChangeCostImpactAnnotationRequest: Codable, Hashable, Sendable {
     public enum SubjectKind: RawRepresentable, Codable, Hashable, Sendable, ParameterValue {
         case change
-        case deployment
         /// A value the API added after this SDK was generated. Kept rather than
         /// rejected, so a new server-side value cannot break decoding.
         case unrecognized(String)
@@ -24,7 +23,6 @@ public struct ChangeCostImpactAnnotationRequest: Codable, Hashable, Sendable {
         public init(rawValue: String) {
             switch rawValue {
             case "change": self = .change
-            case "deployment": self = .deployment
             default: self = .unrecognized(rawValue)
             }
         }
@@ -32,7 +30,6 @@ public struct ChangeCostImpactAnnotationRequest: Codable, Hashable, Sendable {
         public var rawValue: String {
             switch self {
             case .change: return "change"
-            case .deployment: return "deployment"
             case .unrecognized(let value): return value
             }
         }
@@ -40,7 +37,6 @@ public struct ChangeCostImpactAnnotationRequest: Codable, Hashable, Sendable {
         /// Every value the spec declares. `unrecognized` is deliberately absent.
         public static let allKnownCases: [SubjectKind] = [
             .change,
-            .deployment,
         ]
 
         public init(from decoder: any Decoder) throws {

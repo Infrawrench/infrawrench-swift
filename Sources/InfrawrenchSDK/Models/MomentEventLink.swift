@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.112.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.113.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.112.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.113.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -20,7 +20,6 @@ public struct MomentEventLink: Codable, Hashable, Sendable {
         case incident
         case costs
         case workflowRun
-        case deployment
         case audit
         case freeze
         case expiring
@@ -35,7 +34,6 @@ public struct MomentEventLink: Codable, Hashable, Sendable {
             case "incident": self = .incident
             case "costs": self = .costs
             case "workflow-run": self = .workflowRun
-            case "deployment": self = .deployment
             case "audit": self = .audit
             case "freeze": self = .freeze
             case "expiring": self = .expiring
@@ -50,7 +48,6 @@ public struct MomentEventLink: Codable, Hashable, Sendable {
             case .incident: return "incident"
             case .costs: return "costs"
             case .workflowRun: return "workflow-run"
-            case .deployment: return "deployment"
             case .audit: return "audit"
             case .freeze: return "freeze"
             case .expiring: return "expiring"
@@ -65,7 +62,6 @@ public struct MomentEventLink: Codable, Hashable, Sendable {
             .incident,
             .costs,
             .workflowRun,
-            .deployment,
             .audit,
             .freeze,
             .expiring,

@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.112.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.113.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.112.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.113.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -28,11 +28,11 @@ public final class MomentNamespace: Sendable {
     /// everything the platform knows happened in a window: resource changes
     /// (including sleep/wake schedule attribution), provider status incidents
     /// that started/resolved in or overlap the window, cost anomalies, workflow
-    /// runs, deployments, audit-log entries, change freezes, and the drift/expiry
-    /// alert deliveries. Each feed is gated on the same permission its own
-    /// endpoint requires; feeds the caller cannot read are reported as `omitted`,
-    /// and a feed whose query fails is reported as `error` without blanking the
-    /// rest of the response.
+    /// runs, audit-log entries, change freezes, and the drift/expiry alert
+    /// deliveries. Each feed is gated on the same permission its own endpoint
+    /// requires; feeds the caller cannot read are reported as `omitted`, and a
+    /// feed whose query fails is reported as `error` without blanking the rest of
+    /// the response.
     ///
     /// _Requires permission: `resources:read`._
     ///

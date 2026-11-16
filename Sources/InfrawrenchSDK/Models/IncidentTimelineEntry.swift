@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.112.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.113.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.112.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.113.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -119,7 +119,6 @@ public struct IncidentTimelineEntry: Codable, Hashable, Sendable {
             case providerIncident
             case costs
             case workflowRun
-            case deployment
             case audit
             case freeze
             case expiring
@@ -137,7 +136,6 @@ public struct IncidentTimelineEntry: Codable, Hashable, Sendable {
                 case "provider-incident": self = .providerIncident
                 case "costs": self = .costs
                 case "workflow-run": self = .workflowRun
-                case "deployment": self = .deployment
                 case "audit": self = .audit
                 case "freeze": self = .freeze
                 case "expiring": self = .expiring
@@ -155,7 +153,6 @@ public struct IncidentTimelineEntry: Codable, Hashable, Sendable {
                 case .providerIncident: return "provider-incident"
                 case .costs: return "costs"
                 case .workflowRun: return "workflow-run"
-                case .deployment: return "deployment"
                 case .audit: return "audit"
                 case .freeze: return "freeze"
                 case .expiring: return "expiring"
@@ -173,7 +170,6 @@ public struct IncidentTimelineEntry: Codable, Hashable, Sendable {
                 .providerIncident,
                 .costs,
                 .workflowRun,
-                .deployment,
                 .audit,
                 .freeze,
                 .expiring,
@@ -212,10 +208,10 @@ public struct IncidentTimelineEntry: Codable, Hashable, Sendable {
 
     public var id: String
     /// `moment` covers everything the moment union already indexes; resource
-    /// changes, deployments, cost anomalies, provider status incidents, audit
-    /// entries, change freezes and workflow runs. Nothing is copied into the
-    /// incident's own tables; the timeline is a join, so re-reading it reflects
-    /// the record as it stands today.
+    /// changes, cost anomalies, provider status incidents, audit entries, change
+    /// freezes and workflow runs. Nothing is copied into the incident's own
+    /// tables; the timeline is a join, so re-reading it reflects the record as it
+    /// stands today.
     public var source: Source
     /// `<noun>.<verb>`. Open set: render unknown kinds generically.
     public var kind: String
