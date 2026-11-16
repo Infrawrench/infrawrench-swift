@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.111.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.112.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.111.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.112.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -23,6 +23,7 @@ public enum CiRunStatus: RawRepresentable, Codable, Hashable, Sendable, Paramete
     case error
     case rejected
     case cancelled
+    case skipped
     /// A value the API added after this SDK was generated. Kept rather than
     /// rejected, so a new server-side value cannot break decoding.
     case unrecognized(String)
@@ -38,6 +39,7 @@ public enum CiRunStatus: RawRepresentable, Codable, Hashable, Sendable, Paramete
         case "error": self = .error
         case "rejected": self = .rejected
         case "cancelled": self = .cancelled
+        case "skipped": self = .skipped
         default: self = .unrecognized(rawValue)
         }
     }
@@ -53,6 +55,7 @@ public enum CiRunStatus: RawRepresentable, Codable, Hashable, Sendable, Paramete
         case .error: return "error"
         case .rejected: return "rejected"
         case .cancelled: return "cancelled"
+        case .skipped: return "skipped"
         case .unrecognized(let value): return value
         }
     }
@@ -68,6 +71,7 @@ public enum CiRunStatus: RawRepresentable, Codable, Hashable, Sendable, Paramete
         .error,
         .rejected,
         .cancelled,
+        .skipped,
     ]
 
     public init(from decoder: any Decoder) throws {
