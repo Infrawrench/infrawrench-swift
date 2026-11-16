@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.110.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.111.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.110.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.111.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -30,6 +30,8 @@ public struct CiResourceGrant: Codable, Hashable, Sendable {
     /// Branches it holds for: globs separated by commas, where `*` stops at `/`
     /// and `**` does not (`main, release/*`). Null: every branch.
     public var branchPattern: String?
+    /// What the resource is lent as, or null when only its outputs are granted.
+    public var peer: CiResourceGrantPeer?
     public var createdAt: String
 
     public init(
@@ -45,6 +47,7 @@ public struct CiResourceGrant: Codable, Hashable, Sendable {
         secretVersion: String? = nil,
         repos: [String]? = nil,
         branchPattern: String? = nil,
+        peer: CiResourceGrantPeer? = nil,
         createdAt: String
     ) {
         self.id = id
@@ -59,6 +62,7 @@ public struct CiResourceGrant: Codable, Hashable, Sendable {
         self.secretVersion = secretVersion
         self.repos = repos
         self.branchPattern = branchPattern
+        self.peer = peer
         self.createdAt = createdAt
     }
 }

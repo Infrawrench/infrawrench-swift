@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.110.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.111.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.110.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.111.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -48,12 +48,17 @@ public struct CiResourceOutputs: Codable, Hashable, Sendable {
 
     public var outputs: [Output]
     public var secretVersions: [SecretVersion2]?
+    /// The plugins it can be lent to CI as, through its type's peer integrations:
+    /// those that lend a connection or run cloud jobs.
+    public var peers: [CiPeerOption]?
 
     public init(
         outputs: [Output],
-        secretVersions: [SecretVersion2]? = nil
+        secretVersions: [SecretVersion2]? = nil,
+        peers: [CiPeerOption]? = nil
     ) {
         self.outputs = outputs
         self.secretVersions = secretVersions
+        self.peers = peers
     }
 }
