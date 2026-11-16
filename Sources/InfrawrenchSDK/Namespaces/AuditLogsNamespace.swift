@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.114.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.115.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.114.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.115.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -30,6 +30,11 @@ public final class AuditLogsNamespace: Sendable {
     ///
     /// - Parameter orgId: Organization id. Defaults to the `orgId` the client was
     /// created with.
+    ///
+    /// - Parameter page: The page to read, from 1 (the default).
+    ///
+    /// - Parameter pageSize: Entries per page, 25 by default. A value above 200
+    /// reads as 200.
     public func get(
         orgId: String? = nil,
         page: Int? = nil,
