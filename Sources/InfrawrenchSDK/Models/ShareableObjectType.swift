@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.116.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.117.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.116.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.117.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -22,6 +22,7 @@ public enum ShareableObjectType: RawRepresentable, Codable, Hashable, Sendable, 
     case savingsView
     case resourceReport
     case networkFlowReport
+    case commitmentReport
     /// A value the API added after this SDK was generated. Kept rather than
     /// rejected, so a new server-side value cannot break decoding.
     case unrecognized(String)
@@ -36,6 +37,7 @@ public enum ShareableObjectType: RawRepresentable, Codable, Hashable, Sendable, 
         case "savings_view": self = .savingsView
         case "resource_report": self = .resourceReport
         case "network_flow_report": self = .networkFlowReport
+        case "commitment_report": self = .commitmentReport
         default: self = .unrecognized(rawValue)
         }
     }
@@ -50,6 +52,7 @@ public enum ShareableObjectType: RawRepresentable, Codable, Hashable, Sendable, 
         case .savingsView: return "savings_view"
         case .resourceReport: return "resource_report"
         case .networkFlowReport: return "network_flow_report"
+        case .commitmentReport: return "commitment_report"
         case .unrecognized(let value): return value
         }
     }
@@ -64,6 +67,7 @@ public enum ShareableObjectType: RawRepresentable, Codable, Hashable, Sendable, 
         .savingsView,
         .resourceReport,
         .networkFlowReport,
+        .commitmentReport,
     ]
 
     public init(from decoder: any Decoder) throws {
