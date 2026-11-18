@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.117.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.118.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.117.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.118.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -34,6 +34,10 @@ public struct ChildTypeRef: Codable, Hashable, Sendable {
     public var showcase: [Showcase]?
     public var supportsCreate: Bool
     public var fields: [JsonObject]?
+    /// A top-level type shown on the account root's detail view beside its
+    /// children. Its resources have no parent: send no `parentResourceId` when
+    /// creating, editing or deleting one.
+    public var topLevel: Bool?
 
     public init(
         id: String,
@@ -42,7 +46,8 @@ public struct ChildTypeRef: Codable, Hashable, Sendable {
         iconKey: String? = nil,
         showcase: [Showcase]? = nil,
         supportsCreate: Bool,
-        fields: [JsonObject]? = nil
+        fields: [JsonObject]? = nil,
+        topLevel: Bool? = nil
     ) {
         self.id = id
         self.displayName = displayName
@@ -51,5 +56,6 @@ public struct ChildTypeRef: Codable, Hashable, Sendable {
         self.showcase = showcase
         self.supportsCreate = supportsCreate
         self.fields = fields
+        self.topLevel = topLevel
     }
 }
