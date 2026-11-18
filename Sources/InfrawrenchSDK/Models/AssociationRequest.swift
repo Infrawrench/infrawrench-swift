@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.119.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.120.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.119.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.120.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -18,18 +18,21 @@ public struct AssociationRequest: Codable, Hashable, Sendable {
     public var consumerFieldKey: String
     public var providerResourceId: ResourceId
     public var providerOutputKey: String
-    public var providerPluginId: String
-    public var providerResourceTypeId: String
-    public var providerAccountId: String
+    /// Deprecated and ignored: read from the stored provider resource.
+    public var providerPluginId: String?
+    /// Deprecated and ignored: read from the stored provider resource.
+    public var providerResourceTypeId: String?
+    /// Deprecated and ignored: read from the stored provider resource.
+    public var providerAccountId: String?
 
     public init(
         consumerResourceId: ResourceId,
         consumerFieldKey: String,
         providerResourceId: ResourceId,
         providerOutputKey: String,
-        providerPluginId: String,
-        providerResourceTypeId: String,
-        providerAccountId: String
+        providerPluginId: String? = nil,
+        providerResourceTypeId: String? = nil,
+        providerAccountId: String? = nil
     ) {
         self.consumerResourceId = consumerResourceId
         self.consumerFieldKey = consumerFieldKey
