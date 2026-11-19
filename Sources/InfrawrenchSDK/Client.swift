@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.120.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.121.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.120.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.121.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -160,6 +160,8 @@ public final class APIV1Client: Sendable {
     public let github: GithubNamespace
     /// `client.githubIssues`
     public let githubIssues: GithubIssuesNamespace
+    /// `client.heartbeats`
+    public let heartbeats: HeartbeatsNamespace
     /// `client.iac`
     public let iac: IacNamespace
     /// `client.idleFindings`
@@ -216,6 +218,8 @@ public final class APIV1Client: Sendable {
     public let pagingProviders: PagingProvidersNamespace
     /// `client.pagingWebhooks`
     public let pagingWebhooks: PagingWebhooksNamespace
+    /// `client.ping`
+    public let ping: PingNamespace
     /// `client.posture`
     public let posture: PostureNamespace
     /// `client.prChecks`
@@ -379,6 +383,7 @@ public final class APIV1Client: Sendable {
         self.extendedSupport = ExtendedSupportNamespace(transport: transport)
         self.github = GithubNamespace(transport: transport)
         self.githubIssues = GithubIssuesNamespace(transport: transport)
+        self.heartbeats = HeartbeatsNamespace(transport: transport)
         self.iac = IacNamespace(transport: transport)
         self.idleFindings = IdleFindingsNamespace(transport: transport)
         self.incidents = IncidentsNamespace(transport: transport)
@@ -407,6 +412,7 @@ public final class APIV1Client: Sendable {
         self.pagingIncidents = PagingIncidentsNamespace(transport: transport)
         self.pagingProviders = PagingProvidersNamespace(transport: transport)
         self.pagingWebhooks = PagingWebhooksNamespace(transport: transport)
+        self.ping = PingNamespace(transport: transport)
         self.posture = PostureNamespace(transport: transport)
         self.prChecks = PrChecksNamespace(transport: transport)
         self.priceCatalog = PriceCatalogNamespace(transport: transport)

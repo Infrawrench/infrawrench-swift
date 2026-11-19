@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.120.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.121.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.120.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.121.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -56,6 +56,9 @@ public struct ResourceDetail: Codable, Hashable, Sendable {
     /// The type declares lifecycle start/stop actions, so this resource can carry
     /// a sleep/wake schedule.
     public var schedulable: Bool
+    /// The type flags a field as the schedule it runs on, so a heartbeat can
+    /// watch it.
+    public var hasSchedule: Bool?
 
     public init(
         detailSchema: JsonObject,
@@ -96,7 +99,8 @@ public struct ResourceDetail: Codable, Hashable, Sendable {
         databaseName: String,
         storageBucketName: String,
         supportsMetrics: Bool,
-        schedulable: Bool
+        schedulable: Bool,
+        hasSchedule: Bool? = nil
     ) {
         self.detailSchema = detailSchema
         self.childResources = childResources
@@ -137,5 +141,6 @@ public struct ResourceDetail: Codable, Hashable, Sendable {
         self.storageBucketName = storageBucketName
         self.supportsMetrics = supportsMetrics
         self.schedulable = schedulable
+        self.hasSchedule = hasSchedule
     }
 }

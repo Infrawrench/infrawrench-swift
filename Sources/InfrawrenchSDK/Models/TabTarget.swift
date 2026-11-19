@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.120.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.121.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.120.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.121.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -48,6 +48,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
         case sshFanout
         case metricAlerts
         case probes
+        case heartbeats
         case statusPages
         case quotas
         case priceCatalog
@@ -99,6 +100,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case "ssh-fanout": self = .sshFanout
             case "metric-alerts": self = .metricAlerts
             case "probes": self = .probes
+            case "heartbeats": self = .heartbeats
             case "status-pages": self = .statusPages
             case "quotas": self = .quotas
             case "price-catalog": self = .priceCatalog
@@ -150,6 +152,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case .sshFanout: return "ssh-fanout"
             case .metricAlerts: return "metric-alerts"
             case .probes: return "probes"
+            case .heartbeats: return "heartbeats"
             case .statusPages: return "status-pages"
             case .quotas: return "quotas"
             case .priceCatalog: return "price-catalog"
@@ -201,6 +204,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             .sshFanout,
             .metricAlerts,
             .probes,
+            .heartbeats,
             .statusPages,
             .quotas,
             .priceCatalog,

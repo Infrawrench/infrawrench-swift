@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.120.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.121.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.120.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.121.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -33,6 +33,7 @@ public enum AlertTrigger: RawRepresentable, Codable, Hashable, Sendable, Paramet
     case leakedSecretAlerts
     case vulnerabilityAlerts
     case probeAlerts
+    case heartbeatAlerts
     case sloAlerts
     case scorecardAlerts
     case quotaAlerts
@@ -63,6 +64,7 @@ public enum AlertTrigger: RawRepresentable, Codable, Hashable, Sendable, Paramet
         case "leakedSecretAlerts": self = .leakedSecretAlerts
         case "vulnerabilityAlerts": self = .vulnerabilityAlerts
         case "probeAlerts": self = .probeAlerts
+        case "heartbeatAlerts": self = .heartbeatAlerts
         case "sloAlerts": self = .sloAlerts
         case "scorecardAlerts": self = .scorecardAlerts
         case "quotaAlerts": self = .quotaAlerts
@@ -93,6 +95,7 @@ public enum AlertTrigger: RawRepresentable, Codable, Hashable, Sendable, Paramet
         case .leakedSecretAlerts: return "leakedSecretAlerts"
         case .vulnerabilityAlerts: return "vulnerabilityAlerts"
         case .probeAlerts: return "probeAlerts"
+        case .heartbeatAlerts: return "heartbeatAlerts"
         case .sloAlerts: return "sloAlerts"
         case .scorecardAlerts: return "scorecardAlerts"
         case .quotaAlerts: return "quotaAlerts"
@@ -123,6 +126,7 @@ public enum AlertTrigger: RawRepresentable, Codable, Hashable, Sendable, Paramet
         .leakedSecretAlerts,
         .vulnerabilityAlerts,
         .probeAlerts,
+        .heartbeatAlerts,
         .sloAlerts,
         .scorecardAlerts,
         .quotaAlerts,
