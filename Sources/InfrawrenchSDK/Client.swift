@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.121.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.122.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.121.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.122.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -190,6 +190,8 @@ public final class APIV1Client: Sendable {
     public let leases: LeasesNamespace
     /// `client.linear`
     public let linear: LinearNamespace
+    /// `client.live`
+    public let live: LiveNamespace
     /// `client.logWorkspaces`
     public let logWorkspaces: LogWorkspacesNamespace
     /// `client.managedAccounts`
@@ -398,6 +400,7 @@ public final class APIV1Client: Sendable {
         self.leakedSecrets = LeakedSecretsNamespace(transport: transport)
         self.leases = LeasesNamespace(transport: transport)
         self.linear = LinearNamespace(transport: transport)
+        self.live = LiveNamespace(transport: transport)
         self.logWorkspaces = LogWorkspacesNamespace(transport: transport)
         self.managedAccounts = ManagedAccountsNamespace(transport: transport)
         self.metricAlerts = MetricAlertsNamespace(transport: transport)
