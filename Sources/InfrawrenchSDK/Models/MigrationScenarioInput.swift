@@ -1,0 +1,29 @@
+/*
+ * InfrawrenchSDK v1.123.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * https://github.com/Infrawrench/Infrawrench
+ *
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.123.0).
+ *
+ * DO NOT EDIT. Regenerate with:
+ *   pnpm --filter @infrawrench/web generate:sdk
+ *
+ * Internal routes are absent by construction: the generator consumes the same
+ * published spec that /openapi.json serves, which drops every operation
+ * marked x-internal.
+ */
+import Foundation
+
+public struct MigrationScenarioInput: Codable, Hashable, Sendable {
+    /// The day the migration lands: the scenario's recurring change starts here.
+    public var startDate: String
+    /// The scenario model's name. Defaults to the estimate's name and target.
+    public var name: String?
+
+    public init(
+        startDate: String,
+        name: String? = nil
+    ) {
+        self.startDate = startDate
+        self.name = name
+    }
+}

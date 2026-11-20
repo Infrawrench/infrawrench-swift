@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.122.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.123.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.122.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.123.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -52,6 +52,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
         case statusPages
         case quotas
         case priceCatalog
+        case migrationEstimates
         case incidents
         case slos
         case services
@@ -104,6 +105,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case "status-pages": self = .statusPages
             case "quotas": self = .quotas
             case "price-catalog": self = .priceCatalog
+            case "migration-estimates": self = .migrationEstimates
             case "incidents": self = .incidents
             case "slos": self = .slos
             case "services": self = .services
@@ -156,6 +158,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case .statusPages: return "status-pages"
             case .quotas: return "quotas"
             case .priceCatalog: return "price-catalog"
+            case .migrationEstimates: return "migration-estimates"
             case .incidents: return "incidents"
             case .slos: return "slos"
             case .services: return "services"
@@ -208,6 +211,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             .statusPages,
             .quotas,
             .priceCatalog,
+            .migrationEstimates,
             .incidents,
             .slos,
             .services,
@@ -288,6 +292,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
     public var reportId: String?
     public var invoiceId: String?
     public var canvasId: String?
+    public var estimateId: String?
     public var sloId: String?
     public var runId: String?
     public var serviceId: String?
@@ -307,6 +312,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
         reportId: String? = nil,
         invoiceId: String? = nil,
         canvasId: String? = nil,
+        estimateId: String? = nil,
         sloId: String? = nil,
         runId: String? = nil,
         serviceId: String? = nil,
@@ -325,6 +331,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
         self.reportId = reportId
         self.invoiceId = invoiceId
         self.canvasId = canvasId
+        self.estimateId = estimateId
         self.sloId = sloId
         self.runId = runId
         self.serviceId = serviceId
