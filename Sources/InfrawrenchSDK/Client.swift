@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.123.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.124.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.123.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.124.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -146,6 +146,8 @@ public final class APIV1Client: Sendable {
     public let docker: DockerNamespace
     /// `client.dora`
     public let dora: DoraNamespace
+    /// `client.envFiles`
+    public let envFiles: EnvFilesNamespace
     /// `client.environmentDiff`
     public let environmentDiff: EnvironmentDiffNamespace
     /// `client.environments`
@@ -380,6 +382,7 @@ public final class APIV1Client: Sendable {
         self.dns = DnsNamespace(transport: transport)
         self.docker = DockerNamespace(transport: transport)
         self.dora = DoraNamespace(transport: transport)
+        self.envFiles = EnvFilesNamespace(transport: transport)
         self.environmentDiff = EnvironmentDiffNamespace(transport: transport)
         self.environments = EnvironmentsNamespace(transport: transport)
         self.eventSubscriptions = EventSubscriptionsNamespace(transport: transport)

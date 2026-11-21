@@ -1,8 +1,8 @@
 /*
- * InfrawrenchSDK v1.123.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * InfrawrenchSDK v1.124.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
  * https://github.com/Infrawrench/Infrawrench
  *
- * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.123.0).
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.124.0).
  *
  * DO NOT EDIT. Regenerate with:
  *   pnpm --filter @infrawrench/web generate:sdk
@@ -45,6 +45,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
         case iac
         case environmentDiff
         case environments
+        case envFiles
         case sshFanout
         case metricAlerts
         case probes
@@ -98,6 +99,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case "iac": self = .iac
             case "environment-diff": self = .environmentDiff
             case "environments": self = .environments
+            case "env-files": self = .envFiles
             case "ssh-fanout": self = .sshFanout
             case "metric-alerts": self = .metricAlerts
             case "probes": self = .probes
@@ -151,6 +153,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             case .iac: return "iac"
             case .environmentDiff: return "environment-diff"
             case .environments: return "environments"
+            case .envFiles: return "env-files"
             case .sshFanout: return "ssh-fanout"
             case .metricAlerts: return "metric-alerts"
             case .probes: return "probes"
@@ -204,6 +207,7 @@ public struct TabTarget: Codable, Hashable, Sendable {
             .iac,
             .environmentDiff,
             .environments,
+            .envFiles,
             .sshFanout,
             .metricAlerts,
             .probes,

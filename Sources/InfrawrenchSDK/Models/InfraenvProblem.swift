@@ -1,0 +1,31 @@
+/*
+ * InfrawrenchSDK v1.124.0 | MIT | Copyright (c) 2026 Infrawrench Services, Inc.
+ * https://github.com/Infrawrench/Infrawrench
+ *
+ * Generated from the Infrawrench API OpenAPI 3.1 spec (API version 1.124.0).
+ *
+ * DO NOT EDIT. Regenerate with:
+ *   pnpm --filter @infrawrench/web generate:sdk
+ *
+ * Internal routes are absent by construction: the generator consumes the same
+ * published spec that /openapi.json serves, which drops every operation
+ * marked x-internal.
+ */
+import Foundation
+
+public struct InfraenvProblem: Codable, Hashable, Sendable {
+    /// 1-based; 0 for the file as a whole.
+    public var line: Int
+    public var message: String
+    public var key: String?
+
+    public init(
+        line: Int,
+        message: String,
+        key: String? = nil
+    ) {
+        self.line = line
+        self.message = message
+        self.key = key
+    }
+}
